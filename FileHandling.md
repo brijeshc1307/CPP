@@ -59,17 +59,25 @@ file.open("example.txt", ios::in | ios::binary);
 ```cpp
 #include <iostream>
 #include <fstream>
+using namespace std;
 
 int main() {
-    std::ofstream outfile("example.txt");
-    if (outfile.is_open()) {
-        outfile << "Hello, File Handling in C++!" << std::endl;
-        outfile.close();
+    ofstream obj("example.txt"); // file opening with obj
+    // or
+    //ofstream obj;
+    //obj.open("example.txt"); // file opening with open()
+
+    if (obj.is_open()) {
+        obj << "Hello, File Handling in C++!" << endl;
+        obj.close();  // file closing
     } else {
-        std::cout << "Unable to open file for writing!" << std::endl;
+        cout << "Unable to open file for writing!" << endl;
     }
     return 0;
 }
+```
+```txt
+   Hello, File Handling in C++!
 ```
 
 ---
@@ -79,20 +87,24 @@ int main() {
 #include <iostream>
 #include <fstream>
 #include <string>
+using namespace std;
 
 int main() {
-    std::ifstream infile("example.txt");
-    if (infile.is_open()) {
-        std::string line;
-        while (std::getline(infile, line)) {
-            std::cout << line << std::endl;
+    ifstream obj("example.txt"); // Open for reading 
+    if (obj.is_open()) {
+        string line;
+        while (getline(obj, line)) {
+            cout << line << endl;
         }
-        infile.close();
+        obj.close();
     } else {
-        std::cout << "Unable to open file for reading!" << std::endl;
+        cout << "Unable to open file for reading!" << endl;
     }
     return 0;
 }
+```
+```txt
+   Hello, File Handling in C++!
 ```
 
 ---
@@ -101,9 +113,10 @@ int main() {
 ```cpp
 #include <iostream>
 #include <fstream>
+using namespace std;
 
 int main() {
-    std::fstream file("example.txt", std::ios::in | std::ios::out | std::ios::app);
+    fstream file("example.txt", ios::in | ios::out | ios::app);
 
     if (file.is_open()) {
         // Writing to the file
@@ -111,21 +124,53 @@ int main() {
 
         // Reading from the file
         file.seekg(0); // Move file pointer to the beginning
-        std::string line;
-        while (std::getline(file, line)) {
-            std::cout << line << std::endl;
+        string line;
+        while (getline(file, line)) {
+            cout << line << endl;
         }
 
         file.close();
     } else {
-        std::cout << "Unable to open file!" << std::endl;
+        cout << "Unable to open file!" << endl;
     }
 
     return 0;
 }
 ```
+```txt
+   Hello, File Handling in C++!
+   Appending new content.
 
+```
 ---
+
+#### **File Writing**
+```cpp
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    //fstream obj("example.txt"); // file opening with obj
+    // or
+    fstream obj;
+    obj.open("example.txt", ios::app); // file opening with open()
+    char sentence[40]="Hello, This is Brijesh.";
+    int len = strlen(sentence);
+    //obj.write(sentence,len);
+    //or
+    for(int i=0;i<len;i++){
+      obj.put(sentence[i]);  
+    }
+    obj.close();
+    return 0;
+}
+```
+```txt
+   Hello, This is Brijesh.
+
+```
+
 
 #### **Important Points**
 1. Always close files after use with `.close()`.
