@@ -170,7 +170,36 @@ int main() {
    Hello, This is Brijesh.
 
 ```
+---
 
+#### **Check if a File Exists**
+```cpp
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    string filename = "example.txt";
+    
+    // Try opening the file in input mode
+    ifstream file(filename);
+    
+    // Check if the file is open (i.e., it exists)
+    if (file.is_open()) {
+        cout << "File exists!" << endl;
+        file.close();  // Close the file
+    } else {
+        cout << "File does not exist!" << endl;
+    }
+    
+    return 0;
+}
+
+```
+```txt
+   File exists!
+
+```
 
 #### **Important Points**
 1. Always close files after use with `.close()`.
