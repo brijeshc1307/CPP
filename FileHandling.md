@@ -234,7 +234,7 @@ int main() {
 
 | **Advantages**                                                                 | **Disadvantages**                                                              |
 |-------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| **Persistent Storage**: Data remains saved permanently, even after the program ends. | **Complexity**: Requires more boilerplate code compared to higher-level languages. |
+| **Storage**: Data remains saved permanently, even after the program ends. | **Complexity**: Requires more boilerplate code compared to higher-level languages. |
 | **Data Sharing**: Files allow easy sharing of data between different systems and programs. | **Error-Prone**: Improper handling (e.g., forgetting to close files) may lead to issues like memory leaks or corrupted files. |
 | **Scalability**: Handles large volumes of data, exceeding memory limitations.  | **Limited Built-In Parsing**: Parsing complex formats (e.g., JSON, XML) requires additional libraries. |
 | **Flexibility**: Supports various file formats (text, binary) and operations (read, write, append). | **Platform Dependency**: File paths and behaviors can differ across operating systems. |
@@ -250,7 +250,7 @@ int main() {
 | ASCII code data stored  | Data is stored in Machine code / Binary  |
 | It is human readable  | It is not in human readable form (read(), write())   |
 | Portable  | Not Portable  |
-| .txt   | .tat |
+| .txt   | .dat |
 
 ---
 
