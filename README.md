@@ -15,10 +15,10 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 9          | [Constructors and Destructors](constructors-destructors.html) | Special functions for object initialization and cleanup. |
 | 10         | [Inheritance](inheritance.html)        | Types (single, multiple, hierarchical, hybrid) and examples. |
 | 11         | [Polymorphism](polymorphism.html)      | Function overloading, operator overloading, and virtual functions. |
-| 12         | [File Handling](https://github.com/brijeshc1307/CPP/blob/main/FileHandling.md)    | File I/O using `ifstream`, `ofstream`, `fstream`.            |
+| 12         | [File Handling](/FileHandling.md)    | File I/O using `ifstream`, `ofstream`, `fstream`.            |
 | 13         | [Exception Handling](exception-handling.html) | Try-catch blocks, exceptions, and custom exception classes.  |
 | 14         | [Templates](templates.html)            | Function templates, class templates, and STL (Standard Template Library). |
-| 15         | [STL (Standard Template Library)](stl.html) | Containers (vector, list, map), iterators, and algorithms.   |
+| 15         | [STL (Standard Template Library)](https://github.com/brijeshc1307/DSA/blob/main/STL.md) | Containers (vector, list, map), iterators, and algorithms.   |
 | 16         | [Dynamic Memory Allocation](dynamic-memory-allocation.html) | `new`, `delete`, `malloc`, and `free`. |
 | 17         | [Preprocessor Directives](preprocessor-directives.html) | Macros, include guards, and conditional compilation.         |
 | 18         | [Multithreading](https://github.com/brijeshc1307/Multithreading)  | Threads, mutexes, and synchronization.                      |
