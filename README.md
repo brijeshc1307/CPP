@@ -28,7 +28,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 22         | [Friend Functions](friend-functions.html) | Accessing private members of classes through friend functions.|
 | 23         | [Virtual Functions](virtual-functions.html) | Runtime polymorphism and method overriding.                 |
 | 24         | [Operator Overloading](operator-overloading.html) | Customizing operators for user-defined types.               |
-| 25         | [Data Structures in C++](data-structures.html) | Linked lists, stacks, queues, and trees.                    |
+| 25         | [Data Structures in C++](https://github.com/brijeshc1307/DSA) | Linked lists, stacks, queues, and trees.                    |
 
 ---
 
