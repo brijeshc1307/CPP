@@ -46,7 +46,7 @@ int main() {
 ### **Access Modifiers in C++**
 Access modifiers in C++ control the visibility and accessibility of class members (variables and functions). They help in implementing **encapsulation** by restricting direct access to data.
 
-### **1. Types of Access Modifiers**
+### **Types of Access Modifiers**
 C++ provides three types of access modifiers:
 
 | Access Modifier | Scope | Accessible From |
@@ -57,7 +57,7 @@ C++ provides three types of access modifiers:
 
 ---
 
-### ** Getter | Setter**
+### **Getter | Setter**
 Getters and setters are used to access and modify private data members in a class. They help in **data encapsulation** and provide controlled access to variables.
 
 ---
