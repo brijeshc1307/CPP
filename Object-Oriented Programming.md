@@ -46,7 +46,7 @@ int main() {
 ### **Access Modifiers in C++**
 Access modifiers in C++ control the visibility and accessibility of class members (variables and functions). They help in implementing **encapsulation** by restricting direct access to data.
 
-## **1. Types of Access Modifiers**
+### **1. Types of Access Modifiers**
 C++ provides three types of access modifiers:
 
 | Access Modifier | Scope | Accessible From |
@@ -62,14 +62,14 @@ Getters and setters are used to access and modify private data members in a clas
 
 ---
 
-## **1. Why Use Getters and Setters?**
-  -**Encapsulation**: Protects data by restricting direct access.  
-  -**Validation**: Ensures data integrity by applying conditions before setting values.  
-  -**Read-Only or Write-Only Access**: Allows controlled access to data.  
+### **Why Use Getters and Setters?**
+  - **Encapsulation**: Protects data by restricting direct access.  
+  - **Validation**: Ensures data integrity by applying conditions before setting values.  
+  - **Read-Only or Write-Only Access**: Allows controlled access to data.  
 
 ---
 
-## **2. Example of Getters and Setters**
+### **Example of Getters and Setters**
 ### **Without Getters and Setters (Incorrect Approach)**
 ```cpp
 class Student {
@@ -88,7 +88,7 @@ int main() {
 
 ---
 
-## **3. Using Getters and Setters (Correct Approach)**
+### **Using Getters and Setters (Correct Approach)**
 ```cpp
 #include <iostream>
 using namespace std;
@@ -124,14 +124,14 @@ int main() {
 Roll No: 101
 ```
 **Advantages:**  
-✔ Prevents invalid roll numbers.  
-✔ Restricts direct access to private variables.  
+- Prevents invalid roll numbers.  
+- Restricts direct access to private variables.  
 
 ---
 
-## **4. Read-Only and Write-Only Properties**
-  -**Read-Only:** Provide only a getter (no setter).  
-  -**Write-Only:** Provide only a setter (no getter).  
+### **Read-Only and Write-Only Properties**
+  - **Read-Only:** Provide only a getter (no setter).  
+  - **Write-Only:** Provide only a setter (no getter).  
 
 ### **Read-Only Example**
 ```cpp
@@ -174,7 +174,7 @@ int main() {
 
 ---
 
-## **5. Getters and Setters in Inheritance**
+### **Getters and Setters in Inheritance**
 ```cpp
 class Person {
 protected:
