@@ -253,7 +253,7 @@ Student Name: Alice
 ```
 ---
 
-### **C++: Structure vs Class**
+### **Structure vs Class**
 
 1. **Default Access Specifier**:
    - **Struct**: Members are public by default.
@@ -272,3 +272,14 @@ Student Name: Alice
    - Structs in C++ are nearly identical to classes apart from default access and inheritance mode.
 
 ---
+
+
+
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Happy Coding!
+
+
