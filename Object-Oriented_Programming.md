@@ -46,11 +46,12 @@ int main() {
 ### Size of Empty Class
 ```cpp
 #include <iostream>
+using namespace std;
 
 class EmptyClass {}; // No data members
 
 int main() {
-    std::cout << "Size of EmptyClass: " << sizeof(EmptyClass) << " byte" << std::endl;
+    cout << "Size of EmptyClass: " << sizeof(EmptyClass) << " byte" << endl;
     return 0;
 }
 ```
@@ -62,6 +63,7 @@ Size of EmptyClass: 1 byte
 
 ```cpp
 #include <iostream>
+using namespace std;
 
 class Example {
     int a;       // 4 bytes
@@ -70,7 +72,7 @@ class Example {
 };
 
 int main() {
-    std::cout << "Size of class Example: " << sizeof(Example) << " bytes" << std::endl;
+    cout << "Size of class Example: " << sizeof(Example) << " bytes" << endl;
     return 0;
 }
 ```
@@ -94,6 +96,131 @@ C++ provides three types of access modifiers:
 | `private` | Within the class | Only inside the same class |
 | `protected` | Within the class and derived classes | Inside the same class and its subclasses |
 
+---
+
+### Example for `public`
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person{
+// Properties
+public:
+  int age;
+  void show(){
+    cout<<"Age : "<<age<<endl;
+  }
+  
+  
+};
+int main() {
+  // creation of object
+  Person obj;
+  
+  // store input in age of the person
+  cout << "Enter age: "; 
+  cin>>obj.age;
+  
+  // call function 
+  obj.show();
+  
+  return 0;
+}
+```
+```
+Enter age: 21
+Age : 21
+```
+
+### Example for `private`
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person {
+private:
+    int age;  // Private property (not accessible in derived classes)
+
+public:
+    // Constructor (optional)
+    Person() : age(0) {}
+
+    // Setter function to modify age
+    void setAge(int a) {
+        age = a;
+    }
+
+    // Getter function to access age
+    int getAge() {
+        return age;
+    }
+};
+
+class Child : public Person {
+public:
+    void show(int a) {
+        setAge(a);  // Use setter to modify private variable
+        cout << "Age: " << getAge() << endl;  // Use getter to access private variable
+    }
+};
+
+int main() {
+    Child c; // Object of derived class
+
+    // Input age of the person
+    int inputAge;
+    cout << "Enter age: ";
+    cin >> inputAge;
+
+    // Call show() function and pass age as an argument
+    c.show(inputAge);
+
+    return 0;
+}
+```
+```
+Enter age: 25
+Age: 25
+```
+
+### Example for `protected`
+```cpp
+
+#include <iostream>
+using namespace std;
+
+class Person{
+// Properties
+protected:
+  int age;
+};
+
+class Child:public Person{
+  public:
+  void show(int a){
+    age=a;
+    cout<<"Age : "<<age<<endl;
+  }
+};
+int main() {
+  int age;
+  // creation of object
+  Child c;
+  
+  // store input in age of the person
+  cout << "Enter age: "; 
+  cin>>age;
+  
+  // call child class and show function and pass age argument
+  c.show(age);
+  
+  return 0;
+}
+```
+```
+Enter age: 20
+Age : 20
+```
 ---
 
 ### **Getter | Setter**
