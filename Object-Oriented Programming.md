@@ -11,7 +11,7 @@ Object-Oriented Programming (OOP) is a programming paradigm based on objects tha
 
 ### **Class**
 A class is a blueprint for creating objects. It defines properties (data members) and behaviors (member functions).
-```txt "Class is user defined datatype"```
+```"Class is user defined datatype"```
 Size of empty class is 1 byte.
 
 ```cpp
@@ -41,6 +41,45 @@ int main() {
     return 0;
 }
 ```
+--- 
+
+### Size of Empty Class
+```cpp
+#include <iostream>
+
+class EmptyClass {}; // No data members
+
+int main() {
+    std::cout << "Size of EmptyClass: " << sizeof(EmptyClass) << " byte" << std::endl;
+    return 0;
+}
+```
+```
+Size of EmptyClass: 1 byte
+```
+
+### Size of a Class with data members
+
+```cpp
+#include <iostream>
+
+class Example {
+    int a;       // 4 bytes
+    double b;    // 8 bytes
+    char c;      // 1 byte
+};
+
+int main() {
+    std::cout << "Size of class Example: " << sizeof(Example) << " bytes" << std::endl;
+    return 0;
+}
+```
+```
+Size of class Example: 24 bytes
+```
+### Explanation:
+The output may not be exactly `4 + 8 + 1 = 13 bytes` because of **padding and alignment**, which ensures efficient memory access. Depending on the compiler, it could be **16 bytes** (or more).
+
 ---
 
 ### **Access Modifiers in C++**
@@ -58,7 +97,7 @@ C++ provides three types of access modifiers:
 ---
 
 ### **Getter | Setter**
-Getters and setters are used to access and modify private data members in a class. They help in **data encapsulation** and provide controlled access to variables.
+Getters and setters are used to access and modify private data members in a class. They help in **data encapsulation** and provide controlled access to variables. ```कोई भी Value or Data memebr अगर private है तो Getter and Setter की help से acccess कर सकते है```
 
 ---
 
@@ -84,6 +123,10 @@ int main() {
     return 0;
 }
 ```
+```
+Roll No: 101
+```
+
 **Issue:** No control over roll number; it can be changed freely.
 
 ---
@@ -208,4 +251,24 @@ int main() {
 ```
 Student Name: Alice
 ```
+---
+
+### **C++: Structure vs Class**
+
+1. **Default Access Specifier**:
+   - **Struct**: Members are public by default.
+   - **Class**: Members are private by default.
+
+2. **Inheritance**:
+   - **Struct**: Can inherit from other structs or classes, but the default inheritance mode is public.
+   - **Class**: Can inherit from other classes or structs, but the default inheritance mode is private.
+
+3. **Use Case**:
+   - **Struct**: Typically used for simpler data types, such as PODs (Plain Old Data).
+   - **Class**: Used for complex types that include behavior (methods) along with data.
+
+4. **Features**:
+   - Both support constructors, destructors, member functions, and access specifiers.
+   - Structs in C++ are nearly identical to classes apart from default access and inheritance mode.
+
 ---
