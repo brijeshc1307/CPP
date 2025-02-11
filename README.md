@@ -11,7 +11,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 5          | [Functions](functions.html)            | Function declaration, definition, overloading, and recursion.|
 | 6          | [Pointers](pointers.html)              | Basics of pointers, pointer arithmetic, and dynamic memory.  |
 | 7          | [Arrays and Strings](arrays-strings.html) | One-dimensional, multi-dimensional arrays, and C++ strings. |
-| 8          | [Object-Oriented Programming (OOP)](oop.html) | Classes, objects, encapsulation, inheritance, and polymorphism. |
+| 8          | [Object-Oriented Programming (OOP)](/Object-Oriented Programming.md) | Classes, objects, encapsulation, inheritance, and polymorphism. |
 | 9          | [Constructors and Destructors](constructors-destructors.html) | Special functions for object initialization and cleanup. |
 | 10         | [Inheritance](inheritance.html)        | Types (single, multiple, hierarchical, hybrid) and examples. |
 | 11         | [Polymorphism](polymorphism.html)      | Function overloading, operator overloading, and virtual functions. |
