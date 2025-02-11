@@ -398,6 +398,57 @@ Student Name: Alice
    - Both support constructors, destructors, member functions, and access specifiers.
    - Structs in C++ are nearly identical to classes apart from default access and inheritance mode.
 
+### **Example class vs structure**
+```cpp
+#include <iostream>
+using namespace std;
+
+// Using struct (default access is public)
+struct Student {
+    string name;
+    int age;
+
+    void display() { 
+        cout << "Struct - Name: " << name << ", Age: " << age << endl; 
+    }
+};
+
+// Using class (default access is private)
+class Person {
+private:
+    string name;
+    int age;
+
+public:
+    // Constructor to initialize values
+    Person(string n, int a) {
+        name = n;
+        age = a;
+    }
+
+    void display() { 
+        cout << "Class - Name: " << name << ", Age: " << age << endl; 
+    }
+};
+
+int main() {
+    // Struct Example
+    Student s1;
+    s1.name = "Alice";  // Allowed (public by default)
+    s1.age = 20;        // Allowed
+    s1.display();
+
+    // Class Example
+    Person p1("Bob", 25);
+    p1.display();  // Only accessible via a public method
+
+    return 0;
+}
+```
+```
+Struct - Name: Alice, Age: 20
+Class - Name: Bob, Age: 25
+```
 ---
 
 
