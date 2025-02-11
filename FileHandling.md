@@ -255,7 +255,6 @@ int main() {
 ---
 
 
-File handling is crucial for working with external data, such as configuration files, logs, or databases
 
 ## **License**
 This project is licensed under the MIT License.
