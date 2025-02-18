@@ -36,4 +36,4 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 Feel free to contribute to this repository by adding new examples or topics!
 
 ## Contact
-For any queries or suggestions, contact Brijesh Chaudhary mailto: chaudharybrijesh0007@gmail.com.
+For queries or suggestions, reach out via [email](mailto:chaudharybrijesh0007@gmail.com) or [LinkedIn](https://www.linkedin.com/in/brijeshchaudhary13/). 
