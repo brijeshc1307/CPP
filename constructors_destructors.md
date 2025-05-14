@@ -589,7 +589,160 @@ Height: 170 cm
 * Enables data hiding
 * If we want, wecan make class- "Read Only"
 * Use for unit testing
+---
 
+## **4. Abstraction in C++**
+
+**Abstraction** is the process of **hiding the internal implementation** and showing only the **essential features** to the user. It lets you use complex systems easily without knowing how they work inside.
+
+```Abstract means displaying only essential information and hiding the details. OR Implementation hiding and showing only the features.```
+
+---
+
+### **Real-Life Example: Sending an Email**
+
+When you send an email:
+
+* You write the email, enter the recipient, and click **Send**.
+* You **don’t know** how the mail is converted to packets, how servers communicate, or how the message is routed and delivered.
+
+That’s **abstraction** — the complex logic is hidden, and only necessary functions are exposed to the user.
+
+---
+
+### **C++ Code Example:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Abstract class
+class EmailService {
+public:
+    // Pure virtual function (interface)
+    virtual void sendEmail(string to, string message) = 0;
+};
+
+// Concrete class
+class Gmail : public EmailService {
+public:
+    void sendEmail(string to, string message) override {
+        // Internal logic is hidden from the user
+        cout << "Sending email to: " << to << endl;
+        cout << "Message: " << message << endl;
+        cout << "Email sent successfully using Gmail!" << endl;
+    }
+};
+
+int main() {
+    EmailService* email = new Gmail();
+
+    // User only uses exposed interface
+    email->sendEmail("example@gmail.com", "Hello! This is an abstracted email system.");
+
+    delete email;
+    return 0;
+}
+```
+
+---
+
+### **Explanation:**
+
+* `EmailService` is an **abstract class**.
+* `sendEmail()` is a **pure virtual function** — it defines *what* needs to be done.
+* `Gmail` class implements *how* the email is sent — this internal logic is **hidden**.
+* The user just calls `sendEmail()`, without knowing the complex background operations.
+
+---
+
+###  **C++ Code Example (Using Abstract Class):**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Abstract class (contains at least one pure virtual function)
+class Animal {
+public:
+    virtual void makeSound() = 0; // pure virtual function
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() override {
+        cout << "Dog barks " << endl;
+    }
+};
+
+class Cat : public Animal {
+public:
+    void makeSound() override {
+        cout << "Cat meows " << endl;
+    }
+};
+
+int main() {
+    Animal* a1 = new Dog();
+    Animal* a2 = new Cat();
+
+    a1->makeSound();  // Output: Dog barks
+    a2->makeSound();  // Output: Cat meows
+
+    delete a1;
+    delete a2;
+
+    return 0;
+}
+```
+---
+
+###  **Key Concepts:**
+
+* `Animal` is an **abstract class** (cannot be instantiated).
+* `makeSound()` is a **pure virtual function**, which forces derived classes to provide their own implementation.
+* This hides **how** `makeSound()` is implemented and only exposes **what** it does.
+
+---
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+private:
+    int a,b;
+public:
+    void set(int x, int y){
+        a=x;
+        b=y;
+    }
+    void show(){
+        cout<<"a = "<<a<<endl;
+        cout<<"b = "<<b<<endl;
+    }
+};
+
+int main() {
+    A obj;
+    obj.set(10,20);
+    obj.show();
+    return 0;
+}
+
+```
+### **Output:**
+```
+a = 10
+b = 20
+```
+
+###  **Difference Between Abstraction and Encapsulation:**
+
+| Feature      | Abstraction                      | Encapsulation                       |
+| ------------ | -------------------------------- | ----------------------------------- |
+| Focus        | Hides **implementation details** | Hides **data**                      |
+| Achieved via | Abstract classes, interfaces     | Access specifiers (`private`, etc.) |
+| Goal         | Show only necessary features     | Protect internal object state       |
 
 ---
 
