@@ -432,6 +432,166 @@ Destructor called!
 
 ---
 
+## **3.Encapsulation in C++**
+
+---
+
+Encapsulation is the process of wrapping data and functions into a single unit (class) and restricting direct access to some of the object's components. It is used to protect data from unauthorized access and modification by using access specifiers like private, public, and protected.
+
+```Data hiding | Information hiding wraping up data member and function. (Fully encapsulated class - all Data members private होता है)```
+
+---
+
+### **Real-Life Example:**
+
+**Example: Bank Account**
+
+Imagine a **bank account**. You can **deposit** or **withdraw** money using specific methods, but you **cannot directly change** the balance from outside.
+
+* **Balance** is kept **private**
+* **Deposit** and **Withdraw** methods are **public**
+
+This protects the account from invalid operations.
+
+---
+
+### **Code Example:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+private:
+    double balance; // private data member
+
+public:
+    // Constructor
+    BankAccount(double initialBalance) {
+        if (initialBalance >= 0)
+            balance = initialBalance;
+        else
+            balance = 0;
+    }
+
+    // Public method to deposit money
+    void deposit(double amount) {
+        if (amount > 0)
+            balance += amount;
+    }
+
+    // Public method to withdraw money
+    void withdraw(double amount) {
+        if (amount > 0 && amount <= balance)
+            balance -= amount;
+        else
+            cout << "Invalid withdraw amount" << endl;
+    }
+
+    // Public method to check balance
+    double getBalance() {
+        return balance;
+    }
+};
+
+int main() {
+    BankAccount myAccount(1000); // Create an account with ₹1000
+
+    myAccount.deposit(500);      // Add ₹500
+    myAccount.withdraw(200);     // Withdraw ₹200
+
+    cout << "Current balance: ₹" << myAccount.getBalance() << endl;
+
+    // myAccount.balance = 10000; //  Not allowed: balance is private
+
+    return 0;
+}
+```
+### **Output:**
+```
+Current balance: ₹1300
+```
+
+```cpp
+
+#include <iostream>
+using namespace std;
+
+class Student {
+private:
+    string name;
+    int age;
+    int height;
+
+public:
+    // Setter for name
+    void setName(string n) {
+        name = n;
+    }
+
+    // Setter for age
+    void setAge(int a) {
+        if (a >= 0)
+            age = a;
+    }
+
+    // Setter for height
+    void setHeight(int h) {
+        if (h >= 0)
+            height = h;
+    }
+
+    // Getter for name
+    string getName() {
+        return name;
+    }
+
+    // Getter for age
+    int getAge() {
+        return age;
+    }
+
+    // Getter for height
+    int getHeight() {
+        return height;
+    }
+};
+
+int main() {
+    Student first;
+
+    // Set values using setters
+    first.setName("Brijesh");
+    first.setAge(25);
+    first.setHeight(170);
+
+    // Get and display values using getters
+    cout << "Name: " << first.getName() << endl;
+    cout << "Age: " << first.getAge() << endl;
+    cout << "Height: " << first.getHeight() << " cm" << endl;
+
+    return 0;
+}
+```
+### **Output:**
+```
+Name: Brijesh
+Age: 25
+Height: 170 cm
+```
+---
+
+### **Benefits of Encapsulation:**
+
+* Protects internal state of the object
+* Improves security and control
+* Makes the code modular and maintainable
+* Enables data hiding
+* If we want, wecan make class- "Read Only"
+* Use for unit testing
+
+
+---
 
 ## **License**
 This project is licensed under the MIT License.
