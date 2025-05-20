@@ -45,11 +45,11 @@ cout << (a > b);  // Outputs 1 (true)
 
 ### 3. **Logical Operators**
 
-| Operator | Description | Example           |            |         |   |         |
-| -------- | ----------- | ----------------- | ---------- | ------- | - | ------- |
-| `&&`     | Logical AND | `a > 5 && b < 10` |            |         |   |         |
-| \`       |             | \`                | Logical OR | \`a > 5 |   | b < 2\` |
-| `!`      | Logical NOT | `!(a == b)`       |            |         |   |         |
+| Operator | Description | Example           |  
+| -------- | ----------- | ----------------- | 
+| `&&`     | Logical AND | `a > 5 && b < 10` |   
+| `| |`    | Logical OR  | `a > 5 || b < 10` |  
+| `!`      | Logical NOT | `!(a == b)`       |    
 
 **Example**:
 
@@ -93,14 +93,14 @@ cout << x--;  // Outputs 6 (then x becomes 5)
 
 ### 6. **Bitwise Operators**
 
-| Operator | Description | Example    |     |     |
-| -------- | ----------- | ---------- | --- | --- |
-| `&`      | Bitwise AND | `a & b`    |     |     |
-| \`       | \`          | Bitwise OR | \`a | b\` |
-| `^`      | Bitwise XOR | `a ^ b`    |     |     |
-| `~`      | Bitwise NOT | `~a`       |     |     |
-| `<<`     | Left shift  | `a << 1`   |     |     |
-| `>>`     | Right shift | `a >> 1`   |     |     |
+| Operator | Description | Example    |    
+| -------- | ----------- | ---------- | 
+| `&`      | Bitwise AND | `a & b`    |    
+| `|`      | Bitwise OR  | `a | b`    |
+| `^`      | Bitwise XOR | `a ^ b`    |    
+| `~`      | Bitwise NOT | `~a`       |   
+| `<<`     | Left shift  | `a << 1`   |    
+| `>>`     | Right shift | `a >> 1`   |   
 
 ---
 
@@ -166,4 +166,3 @@ This project is licensed under the MIT License.
 ---
 
 Happy Coding!
-
