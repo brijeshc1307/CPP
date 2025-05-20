@@ -44,12 +44,13 @@ cout << (a > b);  // Outputs 1 (true)
 ---
 
 ### 3. **Logical Operators**
-
+```markdown
 | Operator | Description | Example           |  
 | -------- | ----------- | ----------------- | 
 | `&&`     | Logical AND | `a > 5 && b < 10` |   
-| `| |`    | Logical OR  | `a > 5 || b < 10` |  
-| `!`      | Logical NOT | `!(a == b)`       |    
+| `||`     | Logical OR  | `a > 5 || b < 10` |  
+| `!`      | Logical NOT | `!(a == b)`       |
+```
 
 **Example**:
 
@@ -92,7 +93,7 @@ cout << x--;  // Outputs 6 (then x becomes 5)
 ---
 
 ### 6. **Bitwise Operators**
-
+```markdown
 | Operator | Description | Example    |    
 | -------- | ----------- | ---------- | 
 | `&`      | Bitwise AND | `a & b`    |    
@@ -101,7 +102,7 @@ cout << x--;  // Outputs 6 (then x becomes 5)
 | `~`      | Bitwise NOT | `~a`       |   
 | `<<`     | Left shift  | `a << 1`   |    
 | `>>`     | Right shift | `a >> 1`   |   
-
+```
 ---
 
 ### 7. **Conditional (Ternary) Operator**
@@ -166,3 +167,5 @@ This project is licensed under the MIT License.
 ---
 
 Happy Coding!
+
+
