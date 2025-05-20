@@ -127,6 +127,26 @@ C++ is used in a wide range of domains due to its performance, flexibility, and 
 
 ---
 
+### Comparison: C vs C++ vs Python vs Java
+
+| Feature / Language      | **C**                        | **C++**                                   | **Python**                        | **Java**                      |
+| ----------------------- | ---------------------------- | ----------------------------------------- | --------------------------------- | ----------------------------- |
+| **Developed By**        | Dennis Ritchie               | Bjarne Stroustrup                         | Guido van Rossum                  | James Gosling                 |
+| **Year of Creation**    | 1972                         | 1983                                      | 1991                              | 1995                          |
+| **Language Type**       | Procedural                   | Procedural + Object-Oriented              | Object-Oriented + Interpreted     | Pure Object-Oriented (mostly) |
+| **Compilation**         | Compiled                     | Compiled                                  | Interpreted (can be compiled)     | Compiled to bytecode (JVM)    |
+| **Speed**               | Very Fast                    | Fast                                      | Slower than C/C++                 | Slower than C/C++             |
+| **Syntax**              | Complex                      | Slightly complex                          | Very simple and readable          | Verbose (needs more code)     |
+| **Memory Management**   | Manual (via malloc/free)     | Manual or RAII (constructors/destructors) | Automatic (Garbage Collected)     | Automatic (Garbage Collected) |
+| **Platform Dependence** | Platform Dependent           | Platform Dependent                        | Cross-platform                    | Cross-platform                |
+| **Use Cases**           | System programming, Embedded | Games, System/Device software             | Web, AI, Data Science, Automation | Android, Enterprise Apps, Web |
+| **OOP Support**         | ❌ No                         | ✅ Yes                                     | ✅ Yes                             | ✅ Full                        |
+| **Standard Library**    | Small                        | Large (STL)                               | Very rich                         | Rich (Java API)               |
+| **Pointers**            | ✅ Yes                        | ✅ Yes                                     | ❌ No direct use                   | ❌ No direct use               |
+| **Main Extension**      | `.c`                         | `.cpp`                                    | `.py`                             | `.java`                       |
+
+---
+
 ## **License**
 This project is licensed under the MIT License.
 
