@@ -5,7 +5,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | **S. No.** | **Topic**                              | **Description**                                              |
 |------------|----------------------------------------|--------------------------------------------------------------|
 | 1          | [Basics](/basics.md)                  | Introduction, syntax, and first program in C++.              |
-| 2          | [Data Types](data-types.html)          | Primitive, user-defined, and derived data types.             |
+| 2          | [Data Types](/datatypes.md)          | Primitive, user-defined, and derived data types.             |
 | 3          | [Operators](operators.html)            | Arithmetic, logical, bitwise, and relational operators.       |
 | 4          | [Control Structures](control-structures.html) | if-else, switch, loops (for, while, do-while).    |
 | 5          | [Functions](functions.html)            | Function declaration, definition, overloading, and recursion.|
