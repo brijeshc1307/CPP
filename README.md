@@ -7,9 +7,9 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 1          | [Basics](/basics.md)                  | Introduction, syntax, and first program in C++.              |
 | 2          | [Data Types](/datatypes.md)          | Primitive, user-defined, and derived data types.             |
 | 3          | [Operators](/Operators.md)            | Arithmetic, logical, bitwise, and relational operators.       |
-| 4          | [Control Structures](control-structures.html) | if-else, switch, loops (for, while, do-while).    |
-| 5          | [Functions](functions.html)            | Function declaration, definition, overloading, and recursion.|
-| 6          | [Pointers](pointers.html)              | Basics of pointers, pointer arithmetic, and dynamic memory.  |
+| 4          | [Control Structures](/ControlStructures.md) | if-else, switch, loops (for, while, do-while).    |
+| 5          | [Functions](/functions.md)            | Function declaration, definition, overloading, and recursion.|
+| 6          | [Pointers](/Pointers.md)              | Basics of pointers, pointer arithmetic, and dynamic memory.  |
 | 7          | [Arrays and Strings](arrays-strings.html) | One-dimensional, multi-dimensional arrays, and C++ strings. |
 | 8          | [Object-Oriented Programming (OOP)](/Object-Oriented_Programming.md) | Classes, objects, access modifires, getter, setter, struct vs class. |
 | 9          | [Constructors and Destructors, Encapsulations And Abstraction](/constructors_destructors.md) | Special functions for object initialization and cleanup, Encapsulations And Abstraction. |
