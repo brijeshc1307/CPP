@@ -366,6 +366,89 @@ int main()
 ```
 ---
 
+### **Copy Assignment Operator**
+
+The **copy assignment operator** is used to assign the contents of one object to another **already existing** object of the same class.
+
+**Syntax:**
+
+```cpp
+ClassName& operator=(const ClassName& other);
+```
+
+* It **overwrites** the contents of an object.
+* It’s called **when you use `=` between two objects** of the same class **after they have been created**.
+* You should define it **when your class manages dynamic memory** to prevent shallow copy issues.
+* If you don’t define it, the compiler provides a **default copy assignment operator** that performs a **shallow copy** (bitwise copy of all members).
+
+---
+
+### **Example:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Person {
+public:
+    string* name;
+
+    Person(string n) {
+        name = new string(n);
+    }
+
+    // Copy constructor (deep copy)
+    Person(const Person& other) {
+        name = new string(*other.name);
+    }
+
+    // Copy assignment operator (deep copy)
+    Person& operator=(const Person& other) {
+        if (this != &other) {  // Prevent self-assignment
+            delete name;  // Clean up old memory
+            name = new string(*other.name);  // Allocate new memory and copy
+        }
+        return *this;
+    }
+
+    void show() {
+        cout << *name << endl;
+    }
+
+    ~Person() {
+        delete name;
+    }
+};
+
+int main() {
+    Person p1("John");
+    Person p2("David");
+
+    p2 = p1;  // copy assignment operator called
+
+    *p2.name = "Michael";
+
+    p1.show();  // Output: John
+    p2.show();  // Output: Michael
+
+    return 0;
+}
+```
+
+---
+
+### Key Points:
+
+| Aspect                  | Explanation                                  |
+| ----------------------- | -------------------------------------------- |
+| Purpose                 | Assign values from one object to another     |
+| Default behavior        | Shallow copy                                 |
+| When to define manually | When class handles dynamic memory (pointers) |
+| Return type             | Reference to the current object (`*this`)    |
+| Self-assignment check   | `if (this != &other)` is important           |
+
+---
+
 ## **2. Destructor in C++**  
 A **destructor** is a special function that cleans up an object before it is destroyed.  
 
