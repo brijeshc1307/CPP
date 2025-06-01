@@ -10,7 +10,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 4          | [Control Structures](/ControlStructures.md) | if-else, switch, loops (for, while, do-while).    |
 | 5          | [Functions](/functions.md)            | Function declaration, definition, overloading, and recursion.|
 | 6          | [Pointers](/Pointers.md)              | Basics of pointers, pointer arithmetic, and dynamic memory.  |
-| 7          | [Arrays and Strings](arrays-strings.html) | One-dimensional, multi-dimensional arrays, and C++ strings. |
+| 7          | [Arrays and Strings](/arrayString.md) | One-dimensional, multi-dimensional arrays, and C++ strings. |
 | 8          | [Object-Oriented Programming (OOP)](/Object-Oriented_Programming.md) | Classes, objects, access modifires, getter, setter, struct vs class. |
 | 9          | [Constructors and Destructors, Encapsulations And Abstraction](/constructors_destructors.md) | Special functions for object initialization and cleanup, Encapsulations And Abstraction. |
 | 10         | [Inheritance](inheritance.html)        | Types (single, multiple, hierarchical, hybrid) and examples. |
