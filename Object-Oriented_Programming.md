@@ -11,8 +11,7 @@ Object-Oriented Programming (OOP) is a programming paradigm based on objects tha
 
 ### **Class**
 A class is a blueprint for creating objects. It defines properties (data members) and behaviors (member functions).
-```"Class is user defined datatype"```
-Size of empty class is 1 byte.
+>"Class is user defined datatype"
 
 ```cpp
 #include <iostream>
@@ -224,7 +223,8 @@ Age : 20
 ---
 
 ### **Getter | Setter**
-Getters and setters are used to access and modify private data members in a class. They help in **data encapsulation** and provide controlled access to variables. ```कोई भी Value or Data memebr अगर private है तो Getter and Setter की help से acccess कर सकते है```
+Getters and setters are used to access and modify private data members in a class. They help in **data encapsulation** and provide controlled access to variables. 
+>कोई भी Value or Data memebr अगर private है तो Getter and Setter की help से acccess कर सकते है
 
 ---
 
@@ -449,9 +449,21 @@ int main() {
 Struct - Name: Alice, Age: 20
 Class - Name: Bob, Age: 25
 ```
+
 ---
 
+### Normal Variable Vs Object Variable :
 
+| Aspect                 | Normal Variable              | Object Variable                    |
+| ---------------------- | ---------------------------- | ---------------------------------- |
+| Stores                 | Actual data/value            | Reference to an object             |
+| Data type              | Primitive (int, float, char) | Class/struct instance              |
+| Memory location        | Usually stack                | Reference on stack, object in heap |
+| Size                   | Fixed size                   | Size of pointer/reference          |
+| Example                | `int x = 5;`                 | `Person p = new Person();`         |
+| Can hold multiple data | No                           | Yes (attributes + methods)         |
+
+---
 
 ## **License**
 This project is licensed under the MIT License.
