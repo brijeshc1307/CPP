@@ -193,7 +193,7 @@ Copy Constructor - Length: 10.5, Height: 8.6, Area: 90.3
 
 ---
 
-### Shallow Copy Constructor** 
+### Shallow Copy Constructor
 A shallow copy creates a new object, but **does not copy the inner (nested) objects**. Instead, it copies references to them.
 * **Result:** Changes to nested objects in the copy **affect the original**.
 * Only the top-level object is copied.
@@ -271,7 +271,7 @@ int main()
  Height = 16
 ```
 
-### Deep Copy Constructor** 
+### Deep Copy Constructor
 A deep copy creates a new object **and** also copies **all nested objects** recursively.
 * **Result:** Changes to nested objects in the copy **do not affect the original**.
 * Both the top-level and inner objects are fully copied.
