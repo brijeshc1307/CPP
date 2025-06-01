@@ -683,20 +683,28 @@ Height: 170 cm
 * Use for unit testing
 ---
 
-## **4. Abstraction in C++**
+## **4. Abstraction**
 
 **Abstraction** is the process of **hiding the internal implementation** and showing only the **essential features** to the user. It lets you use complex systems easily without knowing how they work inside.
 
-```Abstract means displaying only essential information and hiding the details. OR Implementation hiding and showing only the features.```
+>Abstract means displaying only essential information and hiding the details. OR Implementation hiding and showing only the features.
 
+---
+
+### **Benefits of Encapsulation:**
+
+* Only we can make changes to our data or function, and no one esle can.
+* It makes the application secure by not allowing anyone else to see the background details.
+* Increase the reuseabilty of the code.
+* Avoides duplicate of our code
 ---
 
 ### **Real-Life Example: Sending an Email**
 
-When you send an email:
+When we send an email:
 
-* You write the email, enter the recipient, and click **Send**.
-* You **don’t know** how the mail is converted to packets, how servers communicate, or how the message is routed and delivered.
+* We write the email, enter the recipient, and click **Send**.
+* We **don’t know** how the mail is converted to packets, how servers communicate, or how the message is routed and delivered.
 
 That’s **abstraction** — the complex logic is hidden, and only necessary functions are exposed to the user.
 
@@ -828,6 +836,7 @@ a = 10
 b = 20
 ```
 
+---
 ###  **Difference Between Abstraction and Encapsulation:**
 
 | Feature      | Abstraction                      | Encapsulation                       |
