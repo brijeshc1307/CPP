@@ -4,7 +4,8 @@
 
 ## **1. Constructor in C++**  
 A **constructor** is a special function that initializes an object when it is created.  
-```Object creation time पर Invoke होता है, जब हम Constructor बनाते है तब Deafault Constructor call नहीं होता है वो Delete हो जाता है```
+>Object creation time पर Invoke होता है, जब हम Constructor बनाते है तब Deafault Constructor call नहीं होता है वो Delete हो जाता है
+
 ### **Key Features of a Constructor:**  
 - **Same name as the class.**  
 - **No return type (not even `void`).**  
@@ -190,7 +191,15 @@ Copy Constructor Called
 Copy Constructor - Length: 10.5, Height: 8.6, Area: 90.3
 ```
 
-### **Example: Shallow Copy Constructor**  
+---
+
+### Shallow Copy Constructor** 
+A shallow copy creates a new object, but **does not copy the inner (nested) objects**. Instead, it copies references to them.
+* **Result:** Changes to nested objects in the copy **affect the original**.
+* Only the top-level object is copied.
+* Inner objects are **shared** between original and copy.
+>Default copy constructor also know as Shallow Copy 
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -262,7 +271,12 @@ int main()
  Height = 16
 ```
 
-### **Example: Deep Copy Constructor**  
+### Deep Copy Constructor** 
+A deep copy creates a new object **and** also copies **all nested objects** recursively.
+* **Result:** Changes to nested objects in the copy **do not affect the original**.
+* Both the top-level and inner objects are fully copied.
+* Original and copied objects are **independent**.
+
 ```cpp
 // deep copy
 #include <iostream>
@@ -424,11 +438,6 @@ int main() {
 Constructor called!
 Destructor called!
 ```
-
-** Key Takeaways:**
-  - **Constructor** is called automatically when an object is created.
-  - **Destructor** is called when an object is destroyed.
-  - Useful for **resource allocation and deallocation** (e.g., memory, file handling).  
 
 ---
 
