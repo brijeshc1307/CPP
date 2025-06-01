@@ -210,3 +210,106 @@ void makeSound(Animal* a) {
 
 ---
 
+### Inheritance Ambiguity 
+
+**Ambiguity in inheritance** occurs when the **same member (function or variable)** is inherited into a derived class from **multiple paths**, and the compiler cannot determine which one to choose.
+
+>Syntax: object.class_name::method_name();
+
+---
+
+## When Does Ambiguity Occur?
+
+It typically arises in **Multiple Inheritance** or **Hybrid Inheritance**, especially when **two base classes inherit from a common base**, and the derived class inherits from both.
+
+This is also known as the **Diamond Problem**.
+
+---
+
+## Example: Ambiguity Problem (Diamond Shape)
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    void display() {
+        cout << "Class A display" << endl;
+    }
+};
+
+class B : public A { };
+
+class C : public A { };
+
+class D : public B, public C { };
+
+int main() {
+    D obj;
+    // obj.display();  Ambiguous
+    obj.B::display();  // Resolved using scope
+    obj.C::display();  // Resolved using scope
+    return 0;
+}
+```
+
+---
+
+### Problem:
+
+```cpp
+obj.display();  //  Error: 'display' is ambiguous
+```
+
+Why?
+`D` inherits `display()` from both `B` and `C`, and both get it from `A`. So `D` has **two copies** of `A::display()` — leading to **ambiguity**.
+
+---
+
+## Solution: Use `virtual` inheritance
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    void display() {
+        cout << "Class A display" << endl;
+    }
+};
+
+// Virtual inheritance
+class B : virtual public A { };
+
+class C : virtual public A { };
+
+class D : public B, public C { };
+
+int main() {
+    D obj;
+    obj.display();  //  No ambiguity
+    return 0;
+}
+```
+
+---
+
+### Why virtual inheritance?
+
+* Virtual inheritance ensures **only one copy** of the base class `A` is shared between `B` and `C`.
+* Prevents duplication of members and ambiguity.
+
+---
+
+## Summary
+
+| Issue                         | Solution                         |
+| ----------------------------- | -------------------------------- |
+| Multiple copies of base class | Use `virtual` inheritance        |
+| Ambiguous function calls      | Use scope resolution `B::func()` |
+| Diamond problem               | Solve using `virtual` keyword    |
+
+---
+
