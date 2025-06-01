@@ -36,6 +36,34 @@ Element at index 2 is 30
 Element at index 3 is 40
 Element at index 4 is 50
 ```
+>Note: ```int numbers[n];``` standard C++ में invalid है, क्योंकि C++ को array की size compile-time पर पता होनी चाहिए। Best practice नहीं मानी जाती। अगर आप run-time पर size लेना चाहते हैं, तो: 1. ```new``` और ```delete[]``` use करें (manual memory management) or 2. ```std::vector``` use करें (modern C++ approach)।
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin>>n;
+    int numbers[n] = {10, 20, 30, 40, 50};
+
+    for (int i = 0; i < n; i++) {
+        cout << "Element at index " << i << " is " << numbers[i] << endl;
+    }
+
+    return 0;
+}
+```
+
+### Output:
+
+```
+Element at index 0 is 10
+Element at index 1 is 20
+Element at index 2 is 30
+Element at index 3 is 40
+Element at index 4 is 50
+```
 
 ---
 
