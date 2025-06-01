@@ -14,7 +14,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 8          | [Object-Oriented Programming (OOP)](/Object-Oriented_Programming.md) | Classes, objects, access modifires, getter, setter, struct vs class. |
 | 9          | [Constructors and Destructors, Encapsulations And Abstraction](/constructors_destructors.md) | Special functions for object initialization and cleanup, Encapsulations And Abstraction. |
 | 10         | [Inheritance](/Inheritance.md)        | Types (single, multiple, hierarchical, hybrid) and examples. |
-| 11         | [Polymorphism](polymorphism.html)      | Function overloading, operator overloading, and virtual functions. |
+| 11         | [Polymorphism](/Polymorphism.md)      | Function overloading, operator overloading, and virtual functions. |
 | 12         | [File Handling](/FileHandling.md)    | File I/O using `ifstream`, `ofstream`, `fstream`.            |
 | 13         | [Exception Handling](exception-handling.html) | Try-catch blocks, exceptions, and custom exception classes.  |
 | 14         | [Templates](templates.html)            | Function templates, class templates, and STL (Standard Template Library). |
