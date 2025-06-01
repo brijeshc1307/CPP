@@ -23,7 +23,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 17         | [Preprocessor Directives](preprocessor-directives.html) | Macros, include guards, and conditional compilation.         |
 | 18         | [Multithreading](https://github.com/brijeshc1307/Multithreading)  | Threads, mutexes, and synchronization.                      |
 | 19         | [Lambda Expressions](lambda-expressions.html) | Anonymous functions in C++ for cleaner code.                |
-| 20         | [Smart Pointers](smart-pointers.html)  | `unique_ptr`, `shared_ptr`, and `weak_ptr`.                 |
+| 20         | [Smart Pointers](/smartPointers.md)  | `unique_ptr`, `shared_ptr`, and `weak_ptr`.                 |
 | 21         | [Namespaces](/NameSpace.md)          | Avoiding name conflicts using namespaces.                   |
 | 22         | [Friend Functions](friend-functions.html) | Accessing private members of classes through friend functions.|
 | 23         | [Virtual Functions](virtual-functions.html) | Runtime polymorphism and method overriding.                 |
