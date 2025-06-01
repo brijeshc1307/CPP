@@ -39,7 +39,7 @@ Element at index 4 is 50
 
 ---
 
-## 🔹 Types of Arrays in C++
+## Types of Arrays in C++
 
 | Type              | Description                                  | Example                   |
 | ----------------- | -------------------------------------------- | ------------------------- |
@@ -187,14 +187,14 @@ int main() {
 
 ### Key Functions:
 
-| Function               | Description              |
-| ---------------------- | ------------------------ |
-| `length()` or `size()` | Returns length of string |
-| `append()`             | Appends to the string    |
-| `substr(start, len)`   | Returns substring        |
-| `find()`               | Searches substring       |
-| `compare()`            | Compares two strings     |
-| `c_str()`              | Returns C-style string   |
+| Function              | Description              | Time Complexity                                                        |
+| --------------------- | ------------------------ | ---------------------------------------------------------------------- |
+| `length()` / `size()` | Returns length of string | **O(1)**                                                               |
+| `append()`            | Appends to the string    | **O(n)** *(n = size of appended string)*                               |
+| `substr(start, len)`  | Returns substring        | **O(len)**                                                             |
+| `find()`              | Searches substring       | **O(n \* m)** in worst case *(n = size of main string, m = substring)* |
+| `compare()`           | Compares two strings     | **O(min(n, m))** *(n and m = lengths of strings)*                      |
+| `c_str()`             | Returns C-style string   | **O(1)** *(returns pointer, no copy)*                                  |
 
 ---
 
