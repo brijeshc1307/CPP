@@ -2,7 +2,7 @@
 ## **Polymorphism**
 
 **Polymorphism** means **"many forms."** It allows objects of **different classes** to be treated **as objects of a common base class**, especially when using **inheritance**.
-
+Real life Example: A man at the same time is a father, a husband, and an employee.
 It enables:
 
 * **Same interface, different behavior**
@@ -19,7 +19,7 @@ It enables:
 
 ---
 
-## 1. **Compile-Time Polymorphism (Static Binding)**
+## 1. **Compile-Time Polymorphism (Static Polymorphism)**
 
 ### a) Function Overloading
 
@@ -80,7 +80,7 @@ int main() {
 
 ---
 
-## 2. **Run-Time Polymorphism (Dynamic Binding)**
+## 2. **Run-Time Polymorphism (Dynamic polymorphism or Late Binding)**
 
 ### Using **Virtual Functions** and **Inheritance**
 
