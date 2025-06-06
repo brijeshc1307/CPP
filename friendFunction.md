@@ -129,3 +129,58 @@ int main() {
 
 ---
 
+## **Friend Class**
+
+A **friend class** can access **all private and protected members** of the class in which it is declared as a friend.
+
+### Syntax:
+
+```cpp
+class A {
+    friend class B; // B is a friend of A
+};
+```
+
+### Example:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+private:
+    int secret = 42;
+public:
+    friend class B; // Friend class declaration
+};
+
+class B {
+public:
+    void showSecret(A obj) {
+        cout << "Accessing A's private data: " << obj.secret << endl;
+    }
+};
+
+int main() {
+    A a;
+    B b;
+    b.showSecret(a);
+    return 0;
+}
+```
+
+---
+
+## Key Points:
+
+| Feature               | Friend Function                     | Friend Class                                     |
+| --------------------- | ----------------------------------- | ------------------------------------------------ |
+| Access to             | Specific function gets access       | Entire class gets access                         |
+| Membership            | Not a member of the class           | Not a subclass                                   |
+| Use Case              | When only one function needs access | When many functions in another class need access |
+| Breaks Encapsulation? | Yes, partially (use with care)      | Yes, more broadly                                |
+
+---
+
+
+
