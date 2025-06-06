@@ -25,7 +25,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 19         | [Lambda Expressions](lambda-expressions.html) | Anonymous functions in C++ for cleaner code.                |
 | 20         | [Smart Pointers](/smartPointers.md)  | `unique_ptr`, `shared_ptr`, and `weak_ptr`.                 |
 | 21         | [Namespaces](/NameSpace.md)          | Avoiding name conflicts using namespaces.                   |
-| 22         | [Friend Functions](friend-functions.html) | Accessing private members of classes through friend functions.|
+| 22         | [Friend Functions](/friendFunction.md) | Friend Functions, Accessing private members of classes through friend functions., Friend class|
 | 23         | [Virtual Functions](virtual-functions.html) | Runtime polymorphism and method overriding.                 |
 | 24         | [Operator Overloading](operator-overloading.html) | Customizing operators for user-defined types.               |
 | 25         | [Reference](/refrence.md) | Customizing operators for user-defined types.               |
