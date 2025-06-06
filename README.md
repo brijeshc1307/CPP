@@ -17,7 +17,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 11         | [Polymorphism](/Polymorphism.md)      | Function overloading, operator overloading, and virtual functions. |
 | 12         | [File Handling](/FileHandling.md)    | File I/O using `ifstream`, `ofstream`, `fstream`.            |
 | 13         | [Exception Handling](exception-handling.html) | Try-catch blocks, exceptions, and custom exception classes.  |
-| 14         | [Templates](templates.html)            | Function templates, class templates, and STL (Standard Template Library). |
+| 14         | [Templates](/templates.md)            | Function templates, class templates, and STL (Standard Template Library). |
 | 15         | [STL (Standard Template Library)](https://github.com/brijeshc1307/DSA/blob/main/STL.md) | Containers (vector, list, map), iterators, and algorithms.   |
 | 16         | [Dynamic Memory Allocation](dynamic-memory-allocation.html) | `new`, `delete`, `malloc`, and `free`. |
 | 17         | [Preprocessor Directives](preprocessor-directives.html) | Macros, include guards, and conditional compilation.         |
@@ -26,7 +26,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 20         | [Smart Pointers](/smartPointers.md)  | `unique_ptr`, `shared_ptr`, and `weak_ptr`.                 |
 | 21         | [Namespaces](/NameSpace.md)          | Avoiding name conflicts using namespaces.                   |
 | 22         | [Friend Functions](/friendFunction.md) | Friend Functions, Accessing private members of classes through friend functions., Friend class|
-| 23         | [Virtual Functions](virtual-functions.html) | Runtime polymorphism and method overriding.                 |
+| 23         | [Virtual Functions](/virtualFunctions.md) | Runtime polymorphism and method overriding.                 |
 | 24         | [Operator Overloading](operator-overloading.html) | Customizing operators for user-defined types.               |
 | 25         | [Reference](/refrence.md) | Customizing operators for user-defined types.               |
 | 26         | [Data Structures in C++](https://github.com/brijeshc1307/DSA) | Linked lists, stacks, queues, and trees.                    |
