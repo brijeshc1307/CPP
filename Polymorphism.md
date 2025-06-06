@@ -22,7 +22,7 @@ It enables:
 ## 1. **Compile-Time Polymorphism (Static Polymorphism)**
 
 ### a) Function Overloading
-
+Multiple functions with the same name but different parameters.
 ```cpp
 #include <iostream>
 using namespace std;
@@ -49,7 +49,7 @@ int main() {
 ---
 
 ### b) Operator Overloading
-
+Operator overloading means giving special meaning to an operator (like +, -, *, etc.) when used with user-defined types (like classes)
 ```cpp
 #include <iostream>
 using namespace std;
@@ -77,11 +77,105 @@ int main() {
     return 0;
 }
 ```
+Output
+```
+6 + 8i
+```
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Point {
+public:
+    int x, y;
+
+    // Constructor
+    Point(int a = 0, int b = 0) {
+        x = a;
+        y = b;
+    }
+
+    // Overload '+' operator
+    Point operator + (const Point& p) {
+        Point temp;
+        temp.x = x + p.x;
+        temp.y = y + p.y;
+        return temp;
+    }
+
+    // Display
+    void display() {
+        cout << "(" << x << ", " << y << ")" << endl;
+    }
+};
+
+int main() {
+    Point p1(3, 4);
+    Point p2(1, 2);
+
+    Point p3 = p1 + p2; // Using overloaded '+' operator
+
+    p3.display(); // Output: (4, 6)
+    return 0;
+}
+```
+Output
+```
+(4, 6)
+```
 
 ---
 
-## 2. **Run-Time Polymorphism (Dynamic polymorphism or Late Binding)**
+### c) Constructor Overloading
+It allows multiple constructors in the same class with different parameter lists. The compiler determines which constructor to call at compile time based on the arguments provided.
 
+```cpp
+
+#include <iostream>
+using namespace std;
+
+class Box {
+public:
+    int length, breadth;
+
+    // Default constructor
+    Box() {
+        length = 0;
+        breadth = 0;
+    }
+
+    // Parameterized constructor
+    Box(int l, int b) {
+        length = l;
+        breadth = b;
+    }
+
+    void show() {
+        cout << "Length: " << length << ", Breadth: " << breadth << endl;
+    }
+};
+
+int main() {
+    Box b1;          // Calls default constructor
+    Box b2(10, 5);   // Calls parameterized constructor
+
+    b1.show();
+    b2.show();
+
+    return 0;
+}
+```
+Output
+```
+Length: 0, Breadth: 0
+Length: 10, Breadth: 5
+```
+
+
+## 2. **Run-Time Polymorphism (Dynamic polymorphism or Late Binding)**
+### Function Overriding or Method Overriding
+Parent & Child both contain the same function with different implementation. The parent class function is said to be overridden.
 ### Using **Virtual Functions** and **Inheritance**
 
 ```cpp
@@ -122,6 +216,11 @@ int main() {
 
     return 0;
 }
+```
+Output
+```
+Dog barks
+Cat meows
 ```
 
 ---
