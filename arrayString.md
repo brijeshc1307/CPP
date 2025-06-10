@@ -159,7 +159,7 @@ delete[] arr;  // Free the memory
 
 ### **String**
 
-In C++, a **string** is a sequence of characters. C++ provides **two types of strings**:
+A **string** is a sequence of characters. C++ provides **two types of strings**:
 
 ---
 
@@ -190,6 +190,8 @@ int main() {
 ## **2. C++ Strings (Using `<string>` class)**
 
 C++ Standard Library provides the `std::string` class which is more powerful and easier to use.
+>String in cpp like 1 dimentional char array
+
 
 ### Example:
 
@@ -200,10 +202,17 @@ using namespace std;
 
 int main() {
     string name = "Brijesh";
-    cout << "Name is: " << name << endl;
+    char lastname[20];
+    string address;
+    cin>>lastname>>address;
+    cout << "Name is: " << name <<" "<<lastname<<" "<<address<<endl;
 
     // Operations
-    cout << "Length: " << name.length() << endl;
+    cout << "Length Name: " << name.length() << endl;
+    cout << "Size Name: " << name.size() << endl;
+    //cout << "Length lastname: " << lastname.length() << endl;
+    cout << "Length lastname: " << size(lastname) << endl;
+    cout << "Length address: " << address.length() << endl;
     cout << "First char: " << name[0] << endl;
 
     name += " Chaudhary";  // Concatenation
@@ -211,6 +220,16 @@ int main() {
 
     return 0;
 }
+```
+Output
+```
+Name is: Brijesh chaudhary Ramnagar
+Length Name: 7
+Size Name: 7
+Length lastname: 20
+Length address: 8
+First char: B
+Full Name: Brijesh Chaudhary
 ```
 
 ### Key Functions:
@@ -266,4 +285,4 @@ int main() {
 | Dynamic Size  | ❌                   | ✅                          |
 
 ---
-
+[Go to Top](#top)
