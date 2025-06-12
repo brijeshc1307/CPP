@@ -74,16 +74,33 @@ First char: B
 Full Name: Brijesh Chaudhary
 ```
 
-### Key Functions:
+---
 
-| Function              | Description              | Time Complexity                                                        |
-| --------------------- | ------------------------ | ---------------------------------------------------------------------- |
-| `length()` / `size()` | Returns length of string | **O(1)**                                                               |
-| `append()`            | Appends to the string    | **O(n)** *(n = size of appended string)*                               |
-| `substr(start, len)`  | Returns substring        | **O(len)**                                                             |
-| `find()`              | Searches substring       | **O(n \* m)** in worst case *(n = size of main string, m = substring)* |
-| `compare()`           | Compares two strings     | **O(min(n, m))** *(n and m = lengths of strings)*                      |
-| `c_str()`             | Returns C-style string   | **O(1)** *(returns pointer, no copy)*                                  |
+### **C++ `std::string` Functions**
+
+| **Function**             | **Description**                                     | **Example**                    | **Time Complexity**   |
+| ------------------------ | --------------------------------------------------- | ------------------------------ | --------------------- |
+| `length()` / `size()`    | Returns number of characters in the string          | `str.length()`                 | O(1)                  |
+| `empty()`                | Checks if string is empty                           | `str.empty()`                  | O(1)                  |
+| `at(index)`              | Access character with bounds checking               | `str.at(2)`                    | O(1)                  |
+| `[]`                     | Access character (no bounds check)                  | `str[2]`                       | O(1)                  |
+| `append(str)`            | Adds str to the end of string                       | `str.append("World")`          | O(n) (n = str.size()) |
+| `+`                      | Concatenates two strings                            | `str = str1 + str2`            | O(n + m)              |
+| `substr(pos, len)`       | Returns substring starting at `pos` of length `len` | `str.substr(0, 5)`             | O(len)                |
+| `find(str)`              | Finds first occurrence of `str`                     | `str.find("lo")`               | O(n \* m) worst-case  |
+| `rfind(str)`             | Finds last occurrence of `str`                      | `str.rfind("l")`               | O(n \* m) worst-case  |
+| `erase(pos, len)`        | Removes `len` chars from position `pos`             | `str.erase(2, 3)`              | O(n)                  |
+| `insert(pos, str)`       | Inserts `str` at position `pos`                     | `str.insert(5, "Test")`        | O(n + m)              |
+| `replace(pos, len, str)` | Replaces `len` chars at `pos` with `str`            | `str.replace(2, 3, "xyz")`     | O(n + m)              |
+| `compare(str)`           | Compares two strings lexicographically              | `str.compare("Hello")`         | O(min(n, m))          |
+| `c_str()`                | Returns C-style (null-terminated) char array        | `const char* c = str.c_str();` | O(1)                  |
+| `swap(str2)`             | Swaps content with another string                   | `str1.swap(str2)`              | O(1)                  |
+| `clear()`                | Removes all characters from the string              | `str.clear()`                  | O(1)                  |
+
+### **Legend**
+
+* `n` = length of the original string
+* `m` = length of the string being added or searched
 
 ---
 
