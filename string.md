@@ -144,3 +144,165 @@ int main() {
 | Dynamic Size  | ❌                   | ✅                          |
 
 ---
+Sure! Let's dive into **String Manipulation**, **Pattern Matching**, and **Hashing** in C++ — each explained clearly with **examples** and use-cases.
+
+---
+
+## **1. String Manipulation**
+
+**String manipulation** refers to performing operations like insert, delete, replace, reverse, concatenate, etc., on strings.
+
+### Example: Basic Manipulations in C++
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    string str = "hello";
+
+    // Append
+    str += " world";  // str = "hello world"
+
+    // Insert
+    str.insert(5, " beautiful"); // str = "hello beautiful world"
+
+    // Replace
+    str.replace(6, 9, "awesome"); // str = "hello awesome world"
+
+    // Erase
+    str.erase(5, 8); // str = "hello world"
+
+    // Reverse
+    reverse(str.begin(), str.end()); // str = "dlrow olleh"
+
+    cout << "Final string: " << str << endl;
+    return 0;
+}
+```
+
+### Output:
+
+```
+Final string: dlrow olleh
+```
+
+---
+
+## **2. Pattern Matching**
+
+Used to search for a **substring** (pattern) in a main string (text).
+Let’s explore both naive and efficient ways.
+
+---
+
+### A. Naive Pattern Matching (O(n × m))
+
+Check every position of the text to see if the pattern matches.
+
+```cpp
+bool naiveMatch(string text, string pattern) {
+    int n = text.size(), m = pattern.size();
+    for (int i = 0; i <= n - m; i++) {
+        int j = 0;
+        while (j < m && text[i + j] == pattern[j]) j++;
+        if (j == m) return true; // Pattern found
+    }
+    return false;
+}
+```
+
+---
+
+### B. KMP Algorithm (O(n + m))
+
+Uses an LPS (Longest Prefix Suffix) array to avoid redundant comparisons.
+
+```cpp
+vector<int> buildLPS(string pattern) {
+    int m = pattern.size();
+    vector<int> lps(m, 0);
+    int len = 0;
+
+    for (int i = 1; i < m; ) {
+        if (pattern[i] == pattern[len]) {
+            lps[i++] = ++len;
+        } else {
+            if (len != 0)
+                len = lps[len - 1];
+            else
+                lps[i++] = 0;
+        }
+    }
+    return lps;
+}
+
+bool kmpMatch(string text, string pattern) {
+    vector<int> lps = buildLPS(pattern);
+    int i = 0, j = 0;
+    while (i < text.size()) {
+        if (text[i] == pattern[j]) {
+            i++; j++;
+        }
+        if (j == pattern.size()) return true;
+        else if (i < text.size() && text[i] != pattern[j]) {
+            j = (j != 0) ? lps[j - 1] : 0;
+        }
+    }
+    return false;
+}
+```
+
+---
+
+## **3. Hashing (Rolling Hash / Rabin-Karp)**
+
+Hashing is used to **convert a string to a number**, making comparisons faster.
+
+### Use-case: Detect Substring Fast
+
+### Hash Function Example:
+
+```cpp
+typedef long long ll;
+const int p = 31;         // Prime base
+const int mod = 1e9 + 9;  // Large prime
+
+ll stringHash(string s) {
+    ll hash = 0, pow = 1;
+    for (char c : s) {
+        hash = (hash + (c - 'a' + 1) * pow) % mod;
+        pow = (pow * p) % mod;
+    }
+    return hash;
+}
+```
+
+### Example Use:
+
+```cpp
+string a = "abc";
+string b = "abc";
+
+if (stringHash(a) == stringHash(b)) {
+    cout << "Strings are same" << endl;
+}
+```
+
+> Rolling hash is used in **Rabin-Karp** to search for patterns in O(n) using precomputed hashes.
+
+---
+
+## Summary:
+
+| **Topic**           | **Goal**                   | **Example**            | **Complexity**        |
+| ------------------- | -------------------------- | ---------------------- | --------------------- |
+| String Manipulation | Modify or edit strings     | Insert, erase, reverse | O(n)                  |
+| Naive Matching      | Find pattern in text       | Check at each index    | O(n × m)              |
+| KMP                 | Efficient pattern matching | Uses prefix table      | O(n + m)              |
+| Hashing             | Fast string comparison     | Hash + Compare         | O(n), O(1) comparison |
+
+---
+
