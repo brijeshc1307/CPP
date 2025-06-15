@@ -1,12 +1,365 @@
-Here's a **complete set of 25 C++ Object-Oriented Programming (OOP)** questions in **LeetCode-style**, divided into Easy, Medium, and Hard difficulty levels. Each question emphasizes core OOP concepts like encapsulation, inheritance, polymorphism, abstraction, constructors/destructors, access specifiers, virtual functions, operator overloading, etc.
-
----
-
 ## 🟢 **Easy (10 Questions)**
 
+### **1. Design a Basic Point Class**
+
+*Concepts: Encapsulation, Constructors, Getters/Setters*
+
+**Problem Statement:**
+Implement a class `Point` that represents a 2D point. The class should store `x` and `y` coordinates as private members. Provide a constructor to initialize the coordinates and public getter/setter methods to access and modify them.
+
+**Class Signature:**
+
+```cpp
+class Point {
+public:
+    Point(int x_coord, int y_coord);
+    int getX() const;
+    int getY() const;
+    void setX(int new_x);
+    void setY(int new_y);
+};
+```
+
+**Constraints:**
+
+* `x` and `y` are integers in the range \[-1000, 1000].
+
+**Example:**
+
+```cpp
+Point p(10, 20);
+p.setX(15);
+// p.getX() == 15
+// p.getY() == 20
+```
+
 ---
 
-### **1. Design a Simple Bank Account Class**
+### **2. Implement a Counter Class**
+
+*Concepts: Static Members, Constructors, Destructors*
+
+**Problem Statement:**
+Create a `Counter` class that tracks the number of active instances. Increment a static counter in the constructor and decrement it in the destructor. Provide a static method to retrieve the current count.
+
+**Class Signature:**
+
+```cpp
+class Counter {
+public:
+    Counter();
+    ~Counter();
+    static int getActiveCount();
+};
+```
+
+**Constraints:**
+
+* Destructors are correctly called when objects go out of scope.
+
+**Example:**
+
+```cpp
+// Counter::getActiveCount() == 0
+Counter c1; // == 1
+Counter c2; // == 2
+{
+    Counter c3; // == 3
+} // c3 destroyed => == 2
+```
+
+---
+
+### **3. Simple Rectangle Inheritance**
+
+*Concepts: Inheritance, Protected Members*
+
+**Problem Statement:**
+Create a base class `Shape` with protected members `width` and `height`. Then define a derived class `Rectangle` that uses these members and implements a method to compute area.
+
+**Class Signature:**
+
+```cpp
+class Shape {
+protected:
+    int width;
+    int height;
+public:
+    Shape(int w, int h);
+};
+
+class Rectangle : public Shape {
+public:
+    Rectangle(int w, int h);
+    int getArea() const;
+};
+```
+
+**Constraints:**
+
+* `width`, `height` ∈ \[1, 1000]
+
+**Example:**
+
+```cpp
+Rectangle r(5, 10);
+// r.getArea() == 50
+```
+
+---
+
+### **4. Overload Addition Operator for Point**
+
+*Concepts: Operator Overloading*
+
+**Problem Statement:**
+Extend the `Point` class to support `+` operator. The addition should produce a new `Point` where x and y are the sum of the operands' respective coordinates.
+
+**Class Signature:**
+
+```cpp
+class Point {
+    // Existing members...
+public:
+    Point operator+(const Point& other) const;
+};
+```
+
+**Constraints:**
+
+* Coordinate addition results are within valid integer limits.
+
+**Example:**
+
+```cpp
+Point p1(1, 2), p2(3, 4);
+Point p3 = p1 + p2;
+// p3.getX() == 4
+// p3.getY() == 6
+```
+
+---
+
+### **5. Book Class with const Method**
+
+*Concepts: Const Correctness*
+
+**Problem Statement:**
+Design a class `Book` that contains private `title` and `author`. Provide a constructor and constant getter methods.
+
+**Class Signature:**
+
+```cpp
+#include <string>
+
+class Book {
+private:
+    std::string title;
+    std::string author;
+public:
+    Book(const std::string& title, const std::string& author);
+    std::string getTitle() const;
+    std::string getAuthor() const;
+};
+```
+
+**Constraints:**
+
+* `title` and `author` length ∈ \[1, 50]
+
+**Example:**
+
+```cpp
+Book b("The Great Gatsby", "F. Scott Fitzgerald");
+// b.getTitle() == "The Great Gatsby"
+```
+
+---
+
+### **6. Circle Class with Area Calculation**
+
+*Concepts: Encapsulation, Simple Calculation*
+
+**Problem Statement:**
+Create a `Circle` class with a private `radius` member. Provide a constructor and a method to return the area.
+
+**Class Signature:**
+
+```cpp
+#include <cmath>
+
+class Circle {
+private:
+    double radius;
+public:
+    Circle(double r);
+    double getArea() const;
+};
+```
+
+**Constraints:**
+
+* `radius` ∈ \[0.1, 1000.0]
+
+**Example:**
+
+```cpp
+Circle c(5.0);
+// c.getArea() ≈ 78.5398
+```
+
+---
+
+### **7. Dog and Animal Classes (Overriding)**
+
+*Concepts: Method Overriding (without virtual)*
+
+**Problem Statement:**
+Define a base class `Animal` with method `makeSound()`. Derive a class `Dog` that overrides the method to provide specific output. Do not use `virtual`.
+
+**Class Signature:**
+
+```cpp
+#include <iostream>
+
+class Animal {
+public:
+    void makeSound();
+};
+
+class Dog : public Animal {
+public:
+    void makeSound(); // Overrides Animal’s makeSound
+};
+```
+
+**Constraints:**
+
+* Focus on method hiding due to lack of virtual dispatch.
+
+**Example:**
+
+```cpp
+Animal a;
+Dog d;
+// a.makeSound() prints "Generic animal sound."
+// d.makeSound() prints "Woof!"
+```
+
+---
+
+### **8. Wallet Class with Balance Handling**
+
+*Concepts: Aggregation, Data Validation*
+
+**Problem Statement:**
+Design a `Wallet` class to handle a monetary balance. Implement deposit and withdrawal functions, ensuring withdrawals are allowed only if sufficient funds are available.
+
+**Class Signature:**
+
+```cpp
+class Wallet {
+private:
+    double balance;
+public:
+    Wallet(double initial_balance = 0.0);
+    void deposit(double amount);
+    bool withdraw(double amount);
+    double getBalance() const;
+};
+```
+
+**Constraints:**
+
+* `initial_balance`, `amount` ∈ \[0.0, 10000.0]
+
+**Example:**
+
+```cpp
+Wallet w(100.0);
+w.deposit(50.0);      // balance = 150.0
+w.withdraw(75.0);     // success, balance = 75.0
+w.withdraw(100.0);    // fails, balance = 75.0
+```
+
+---
+
+### **9. Vector2D Class with Copy Constructor**
+
+*Concepts: Constructors, Copy Semantics*
+
+**Problem Statement:**
+Implement a `Vector2D` class with a default constructor, a parameterized constructor, and a copy constructor.
+
+**Class Signature:**
+
+```cpp
+class Vector2D {
+private:
+    double x_comp;
+    double y_comp;
+public:
+    Vector2D();
+    Vector2D(double x, double y);
+    Vector2D(const Vector2D& other);
+
+    double getX() const;
+    double getY() const;
+};
+```
+
+**Constraints:**
+
+* `x`, `y` are double-precision numbers.
+
+**Example:**
+
+```cpp
+Vector2D v1;              // x=0, y=0
+Vector2D v2(3.0, 4.0);    // x=3, y=4
+Vector2D v3 = v2;         // copy constructor
+```
+
+---
+
+### **10. Check if a Custom List is Empty**
+
+*Concepts: Basic Class Design, Aggregation*
+
+**Problem Statement:**
+Create a class `MyList` that can store a small number of integers. Implement `add(int)` and `isEmpty()` methods.
+
+**Class Signature:**
+
+```cpp
+#include <vector>
+
+class MyList {
+private:
+    std::vector<int> data;
+public:
+    MyList();
+    void add(int value);
+    bool isEmpty() const;
+};
+```
+
+**Constraints:**
+
+* Store up to 10 integers internally.
+
+**Example:**
+
+```cpp
+MyList list;
+list.isEmpty(); // true
+list.add(42);
+list.isEmpty(); // false
+```
+
+---
+
+### **11. Design a Simple Bank Account Class**
 
 **Problem:**
 
@@ -31,7 +384,7 @@ public:
 
 ---
 
-### **2. Circle Class with Area and Perimeter**
+### **12. Circle Class with Area and Perimeter**
 
 **Problem:**
 
@@ -50,7 +403,7 @@ public:
 
 ---
 
-### **3. Student Information System**
+### **13. Student Information System**
 
 **Problem:**
 
@@ -70,7 +423,7 @@ public:
 
 ---
 
-### **4. Constructor and Destructor Logging**
+### **14. Constructor and Destructor Logging**
 
 **Problem:**
 
@@ -86,7 +439,7 @@ public:
 
 ---
 
-### **5. Rectangle Class Using Encapsulation**
+### **15. Rectangle Class Using Encapsulation**
 
 **Problem:**
 
@@ -104,7 +457,7 @@ public:
 
 ---
 
-### **6. Default and Parameterized Constructors**
+### **16. Default and Parameterized Constructors**
 
 **Problem:**
 
@@ -121,7 +474,7 @@ public:
 
 ---
 
-### **7. Constant Member Functions**
+### **17. Constant Member Functions**
 
 **Problem:**
 
@@ -137,7 +490,7 @@ public:
 
 ---
 
-### **8. Simple Class with Getter/Setter**
+### **18. Simple Class with Getter/Setter**
 
 **Problem:**
 
@@ -156,7 +509,7 @@ public:
 
 ---
 
-### **9. Class with Static Member**
+### **19. Class with Static Member**
 
 **Problem:**
 
@@ -172,7 +525,7 @@ public:
 
 ---
 
-### **10. Simple Operator Overloading (+)**
+### **20. Simple Operator Overloading (+)**
 
 **Problem:**
 
@@ -190,6 +543,420 @@ public:
 ---
 
 ## 🟡 **Medium (10 Questions)**
+
+---
+Absolutely! Here's a clean, professional, and structured rewrite of **Questions 11–20** in **LeetCode-style format**, suitable for interviews or practice platforms focused on **Object-Oriented Programming in C++**.
+
+---
+
+## 🟡 Medium – C++ OOP Questions
+
+---
+
+### **Question 11: Shape Hierarchy with Polymorphism**
+
+**Concepts:** Virtual Functions, Abstract Class, Polymorphism
+
+**Problem Statement:**
+Design an abstract base class `Shape` with a pure virtual function `getArea()`. Derive two concrete classes: `Circle` and `Rectangle`. Each class should implement `getArea()` using the appropriate formula. Demonstrate runtime polymorphism using a `std::vector<Shape*>`.
+
+**Class Signature:**
+
+```cpp
+#include <cmath>
+
+class Shape {
+public:
+    virtual double getArea() const = 0; // Pure virtual function
+    virtual ~Shape() {} // Virtual destructor
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r);
+    double getArea() const override;
+};
+
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
+public:
+    Rectangle(double w, double h);
+    double getArea() const override;
+};
+```
+
+**Constraints:**
+
+* `radius`, `width`, `height` are positive doubles.
+
+**Example:**
+
+```cpp
+std::vector<Shape*> shapes;
+shapes.push_back(new Circle(5.0));
+shapes.push_back(new Rectangle(4.0, 6.0));
+for (Shape* s : shapes) {
+    std::cout << s->getArea() << std::endl;
+}
+// Don't forget to delete allocated memory.
+```
+
+---
+
+### **Question 12: Custom Exception for BankAccount**
+
+**Concepts:** Exception Handling, Custom Exceptions
+
+**Problem Statement:**
+Create a `BankAccount` class with a `withdraw` method. If the withdrawal amount exceeds the available balance, throw a custom `InsufficientFundsException`.
+
+**Class Signature:**
+
+```cpp
+#include <string>
+#include <stdexcept>
+
+class InsufficientFundsException : public std::runtime_error {
+public:
+    InsufficientFundsException(const std::string& msg);
+};
+
+class BankAccount {
+private:
+    double balance;
+    std::string accountNumber;
+public:
+    BankAccount(const std::string& accNum, double initial_balance);
+    void withdraw(double amount);
+    double getBalance() const;
+};
+```
+
+**Constraints:**
+
+* `balance`, `amount` ≥ 0
+
+**Example:**
+
+```cpp
+BankAccount acc("12345", 100.0);
+try {
+    acc.withdraw(150.0);
+} catch (const InsufficientFundsException& e) {
+    std::cout << e.what() << std::endl;
+}
+```
+
+---
+
+### **Question 13: Overload Output Stream Operator for Point**
+
+**Concepts:** Operator Overloading, Friend Functions
+
+**Problem Statement:**
+Extend the `Point` class to support output streaming by overloading the `<<` operator. Format the output as `(x, y)`.
+
+**Class Signature:**
+
+```cpp
+#include <iostream>
+
+class Point {
+private:
+    int x_coord;
+    int y_coord;
+public:
+    Point(int x = 0, int y = 0);
+    friend std::ostream& operator<<(std::ostream& os, const Point& p);
+};
+```
+
+**Example:**
+
+```cpp
+Point p(10, 20);
+std::cout << p; // Output: (10, 20)
+```
+
+---
+
+### **Question 14: Deep vs. Shallow Copy in Dynamic Array**
+
+**Concepts:** Copy Constructor, Assignment Operator, Deep Copy
+
+**Problem Statement:**
+Implement a `DynamicArray` class that allocates memory on the heap. Provide a destructor, copy constructor, and copy assignment operator to ensure deep copying.
+
+**Class Signature:**
+
+```cpp
+class DynamicArray {
+private:
+    int* data;
+    int size;
+public:
+    DynamicArray(int s);
+    ~DynamicArray();
+    DynamicArray(const DynamicArray& other);
+    DynamicArray& operator=(const DynamicArray& other);
+    int& operator[](int index);
+    int getSize() const;
+};
+```
+
+**Constraints:**
+
+* `size` ∈ \[1, 1000]
+
+**Example:**
+
+```cpp
+DynamicArray arr1(5);
+arr1[0] = 10;
+DynamicArray arr2 = arr1;
+arr2[0] = 20;
+// arr1[0] should still be 10
+```
+
+---
+
+### **Question 15: Employee Hierarchy with Virtual Destructors**
+
+**Concepts:** Virtual Destructors, Inheritance
+
+**Problem Statement:**
+Create a base class `Employee` with a virtual destructor. Derive `Manager` and `Engineer`, each printing a message in their destructor. Show that deleting objects via base class pointers calls correct destructors.
+
+**Class Signature:**
+
+```cpp
+#include <iostream>
+#include <string>
+
+class Employee {
+public:
+    Employee(const std::string& name);
+    virtual ~Employee();
+protected:
+    std::string name_;
+};
+
+class Manager : public Employee {
+public:
+    Manager(const std::string& name);
+    ~Manager();
+};
+
+class Engineer : public Employee {
+public:
+    Engineer(const std::string& name);
+    ~Engineer();
+};
+```
+
+**Example:**
+
+```cpp
+Employee* emp1 = new Manager("Alice");
+Employee* emp2 = new Engineer("Bob");
+delete emp1; // Should call Manager -> Employee
+delete emp2; // Should call Engineer -> Employee
+```
+
+---
+
+### **Question 16: Vehicle and Car with Polymorphism**
+
+**Concepts:** Pure Virtual Functions, Virtual Methods
+
+**Problem Statement:**
+Define an abstract class `Vehicle` with a pure virtual method `startEngine()`. Derive `Car` and override `startEngine()` and a virtual method `drive()`.
+
+**Class Signature:**
+
+```cpp
+class Vehicle {
+public:
+    virtual void startEngine() = 0;
+    virtual void drive();
+    virtual ~Vehicle() {}
+};
+
+class Car : public Vehicle {
+public:
+    void startEngine() override;
+    void drive() override;
+};
+```
+
+**Example:**
+
+```cpp
+Vehicle* myCar = new Car();
+myCar->startEngine(); // Output: Car engine started.
+myCar->drive();       // Output: Car is driving.
+delete myCar;
+```
+
+---
+
+### **Question 17: Singleton Logger**
+
+**Concepts:** Design Pattern - Singleton
+
+**Problem Statement:**
+Implement a thread-safe `Logger` class using the Singleton pattern. Prevent direct instantiation and copying. Provide a `log()` method to write messages.
+
+**Class Signature:**
+
+```cpp
+#include <string>
+#include <iostream>
+
+class Logger {
+private:
+    Logger() {}
+    Logger(const Logger&) = delete;
+    Logger& operator=(const Logger&) = delete;
+
+public:
+    static Logger& getInstance();
+    void log(const std::string& message);
+};
+```
+
+**Example:**
+
+```cpp
+Logger& logger = Logger::getInstance();
+logger.log("App started.");
+```
+
+---
+
+### **Question 18: Operator Overload for Money**
+
+**Concepts:** Operator Overloading (Comparison)
+
+**Problem Statement:**
+Create a class `Money` that stores a double amount. Overload the `==` and `<` operators to compare `Money` objects.
+
+**Class Signature:**
+
+```cpp
+class Money {
+private:
+    double amount;
+public:
+    Money(double val);
+    bool operator==(const Money& other) const;
+    bool operator<(const Money& other) const;
+};
+```
+
+**Example:**
+
+```cpp
+Money m1(100.50), m2(50.25), m3(100.50);
+// (m1 == m3) → true
+// (m2 < m1)  → true
+// (m1 < m2)  → false
+```
+
+---
+
+### **Question 19: Abstract Factory for UI Elements**
+
+**Concepts:** Factory Method Pattern
+
+**Problem Statement:**
+Implement an abstract `Button` class and concrete classes `WindowsButton` and `MacButton`. Define a factory interface `GUIFactory` and implement platform-specific factories.
+
+**Class Signature:**
+
+```cpp
+class Button {
+public:
+    virtual void render() = 0;
+    virtual ~Button() {}
+};
+
+class WindowsButton : public Button {
+public:
+    void render() override;
+};
+
+class MacButton : public Button {
+public:
+    void render() override;
+};
+
+class GUIFactory {
+public:
+    virtual Button* createButton() = 0;
+    virtual ~GUIFactory() {}
+};
+
+class WindowsFactory : public GUIFactory {
+public:
+    Button* createButton() override;
+};
+
+class MacFactory : public GUIFactory {
+public:
+    Button* createButton() override;
+};
+```
+
+**Example:**
+
+```cpp
+GUIFactory* factory = new WindowsFactory();
+Button* btn = factory->createButton();
+btn->render(); // Output: Rendering a Windows button.
+delete btn;
+delete factory;
+```
+
+---
+
+### **Question 20: Checking Account Using Protected Inheritance**
+
+**Concepts:** Protected Access Specifier, Inheritance
+
+**Problem Statement:**
+Create a base class `Account` with a protected balance. Implement deposit and get\_balance methods. Derive `CheckingAccount` that can withdraw funds by accessing balance directly.
+
+**Class Signature:**
+
+```cpp
+class Account {
+protected:
+    double balance;
+public:
+    Account(double initial_balance = 0.0);
+    void deposit(double amount);
+    double get_balance() const;
+};
+
+class CheckingAccount : public Account {
+public:
+    CheckingAccount(double initial_balance = 0.0);
+    void withdraw(double amount);
+};
+```
+
+**Example:**
+
+```cpp
+CheckingAccount acc(200.0);
+acc.withdraw(100.0);    // balance = 150.0
+// acc.get_balance() == 150.0
+```
 
 ---
 
@@ -496,3 +1263,283 @@ class GUIFactory {
 public:
     virtual Button
 ```
+---
+
+## ✅ **Question 21: Implementing a Polymorphic Collection and Iteration**
+
+**Topic**: Polymorphism, Iterators, Memory Management
+**Difficulty**: Medium
+
+### **Problem Statement**
+
+Design a class named `ShapeCollection` that manages a collection of pointers to polymorphic `Shape` objects (assume the classes `Shape`, `Circle`, and `Rectangle` are already defined).
+
+Your task is to implement the following functionalities:
+
+* Add a shape to the collection via `void addShape(Shape* s);`
+* Compute the total area of all shapes using `double getTotalArea() const;`
+* Provide simple iteration through the collection using:
+
+  * `int size() const;`
+  * `Shape* getShapeAt(int index) const;`
+
+Ensure that your implementation handles memory management properly—i.e., all dynamically allocated shapes should be deleted in the destructor.
+
+### **Class Skeleton**
+
+```cpp
+#include <vector>
+
+class ShapeCollection {
+private:
+    std::vector<Shape*> shapes;
+
+public:
+    ShapeCollection();
+    ~ShapeCollection();  // Responsible for memory cleanup
+    void addShape(Shape* s);
+    double getTotalArea() const;
+    int size() const;
+    Shape* getShapeAt(int index) const;
+};
+```
+
+### **Constraints**
+
+* The `Shape` class must be polymorphic (contain at least one virtual function).
+* Ensure safe deallocation of shapes.
+* Avoid raw pointer misuse (RAII encouraged if possible in extensions).
+
+### **Usage Example**
+
+```cpp
+ShapeCollection collection;
+collection.addShape(new Circle(3.0));
+collection.addShape(new Rectangle(2.0, 5.0));
+std::cout << collection.getTotalArea();  // Output: Sum of areas
+
+for (int i = 0; i < collection.size(); ++i) {
+    std::cout << collection.getShapeAt(i)->getArea() << std::endl;
+}
+```
+
+---
+
+## ✅ **Question 22: Advanced Smart Pointer Usage with Custom Deleters**
+
+**Topic**: Smart Pointers, Resource Management, Exception Safety
+**Difficulty**: Medium
+
+### **Problem Statement**
+
+You are provided with a `Resource` class simulating a costly system resource. Your task is to implement a function `void manageResource(int id);` that:
+
+* Acquires a `Resource` object,
+* Performs operations with it, and
+* Ensures safe release using `std::unique_ptr` with a custom deleter.
+
+The custom deleter should:
+
+* Use the default deleter for **even** `id`s.
+* Print a custom message **before** deleting the object for **odd** `id`s.
+
+### **Class Definition**
+
+```cpp
+class Resource {
+public:
+    int id;
+    Resource(int id);
+    ~Resource();
+    void doSomething();
+};
+```
+
+### **Function Signature**
+
+```cpp
+void manageResource(int id);
+```
+
+### **Constraints**
+
+* Must use `std::unique_ptr` with a lambda-based custom deleter.
+* Resource cleanup must be exception-safe.
+
+### **Usage Example**
+
+```cpp
+manageResource(1); // Uses custom deleter with message
+manageResource(2); // Uses default delete
+```
+
+---
+
+## ✅ **Question 23: Implementing the Visitor Pattern for Shapes**
+
+**Topic**: Design Patterns (Visitor), Polymorphism, Encapsulation
+**Difficulty**: Hard
+
+### **Problem Statement**
+
+Extend your `Shape` hierarchy to support the **Visitor Design Pattern**. You will:
+
+1. Define an abstract class `ShapeVisitor` with `visit()` methods for both `Circle` and `Rectangle`.
+2. Implement two visitors:
+
+   * `AreaCalculatorVisitor`: Computes area.
+   * `PerimeterCalculatorVisitor`: Computes perimeter.
+3. Add an `accept()` method to each shape, which will call the appropriate `visit()` method.
+
+### **Core Interface Modifications**
+
+```cpp
+class ShapeVisitor {
+public:
+    virtual void visit(Circle& circle) = 0;
+    virtual void visit(Rectangle& rectangle) = 0;
+    virtual ~ShapeVisitor() = default;
+};
+
+class Shape {
+public:
+    virtual double getArea() const = 0;
+    virtual void accept(ShapeVisitor& visitor) = 0;
+    virtual ~Shape() = default;
+};
+```
+
+### **Example Use Case**
+
+```cpp
+Circle c(5.0);
+Rectangle r(4.0, 6.0);
+
+AreaCalculatorVisitor areaVisitor;
+c.accept(areaVisitor);
+r.accept(areaVisitor);
+std::cout << areaVisitor.getTotalArea();
+
+PerimeterCalculatorVisitor perimeterVisitor;
+c.accept(perimeterVisitor);
+r.accept(perimeterVisitor);
+std::cout << perimeterVisitor.getTotalPerimeter();
+```
+
+---
+
+## ✅ **Question 24: Implementing a Generic Singly Linked List**
+
+**Topic**: Templates, Memory Management, Operator Overloading
+**Difficulty**: Medium
+
+### **Problem Statement**
+
+Create a templated singly linked list class named `LinkedList<T>` that supports:
+
+* Adding a value (`add(T value)`),
+* Removing a value (`remove(T value)`),
+* Accessing a value at a specific index (`get(int index)`),
+* Printing the list using the overloaded `<<` operator.
+
+Ensure safe memory management (no leaks) and throw `std::out_of_range` for invalid indices.
+
+### **Class Structure**
+
+```cpp
+template <typename T>
+struct Node {
+    T data;
+    Node* next;
+    Node(T val) : data(val), next(nullptr) {}
+};
+
+template <typename T>
+class LinkedList {
+private:
+    Node<T>* head;
+    int count;
+
+public:
+    LinkedList();
+    ~LinkedList();
+    void add(T value);
+    bool remove(T value);
+    T get(int index) const;
+    int size() const;
+
+    template <typename U>
+    friend std::ostream& operator<<(std::ostream& os, const LinkedList<U>& list);
+};
+```
+
+### **Example Usage**
+
+```cpp
+LinkedList<int> intList;
+intList.add(10);
+intList.add(20);
+intList.add(30);
+std::cout << intList << std::endl; // Output: [10, 20, 30]
+
+intList.remove(20);
+std::cout << intList << std::endl; // Output: [10, 30]
+
+int val = intList.get(0);          // val = 10
+intList.get(5);                    // Throws std::out_of_range
+```
+
+---
+
+## ✅ **Question 25: Runtime Type Information and Safe Downcasting**
+
+**Topic**: RTTI, `dynamic_cast`, Polymorphism
+**Difficulty**: Medium
+
+### **Problem Statement**
+
+Write a function `void processShape(Shape* s);` that safely downcasts a base pointer `Shape*` to either `Circle*` or `Rectangle*`. Based on the actual type, it should call the appropriate detail-printing method.
+
+If the object is neither type, print a generic message indicating the shape is unknown or unsupported.
+
+### **Required Methods in Derived Classes**
+
+```cpp
+class Circle : public Shape {
+public:
+    void printCircleDetails() const {
+        std::cout << "This is a Circle with radius: " << radius << std::endl;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    void printRectangleDetails() const {
+        std::cout << "This is a Rectangle with width: " << width
+                  << ", height: " << height << std::endl;
+    }
+};
+```
+
+### **Function Implementation**
+
+```cpp
+void processShape(Shape* s);
+```
+
+### **Usage Example**
+
+```cpp
+Shape* c = new Circle(7.0);
+Shape* r = new Rectangle(8.0, 9.0);
+
+processShape(c); // Output: Circle details
+processShape(r); // Output: Rectangle details
+
+delete c;
+delete r;
+```
+
+---
+
+
