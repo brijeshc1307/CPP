@@ -1,4 +1,4 @@
-## 🟢 **Easy (10 Questions)**
+## 🟢 Easy – C++ OOP Questions
 
 ### **1. Design a Basic Point Class**
 
@@ -1155,7 +1155,7 @@ public:
 
 ---
 
-## 🔴 **Hard (5 Questions)**
+## 🔴 Hard – C++ OOP Questions
 
 ---
 
