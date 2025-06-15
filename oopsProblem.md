@@ -542,18 +542,11 @@ public:
 
 ---
 
-## 🟡 **Medium (10 Questions)**
-
----
-Absolutely! Here's a clean, professional, and structured rewrite of **Questions 11–20** in **LeetCode-style format**, suitable for interviews or practice platforms focused on **Object-Oriented Programming in C++**.
-
----
-
 ## 🟡 Medium – C++ OOP Questions
 
 ---
 
-### **Question 11: Shape Hierarchy with Polymorphism**
+### **21. Shape Hierarchy with Polymorphism**
 
 **Concepts:** Virtual Functions, Abstract Class, Polymorphism
 
@@ -607,7 +600,7 @@ for (Shape* s : shapes) {
 
 ---
 
-### **Question 12: Custom Exception for BankAccount**
+### **22. Custom Exception for BankAccount**
 
 **Concepts:** Exception Handling, Custom Exceptions
 
@@ -653,7 +646,7 @@ try {
 
 ---
 
-### **Question 13: Overload Output Stream Operator for Point**
+### **23. Overload Output Stream Operator for Point**
 
 **Concepts:** Operator Overloading, Friend Functions
 
@@ -684,7 +677,7 @@ std::cout << p; // Output: (10, 20)
 
 ---
 
-### **Question 14: Deep vs. Shallow Copy in Dynamic Array**
+### **24. Deep vs. Shallow Copy in Dynamic Array**
 
 **Concepts:** Copy Constructor, Assignment Operator, Deep Copy
 
@@ -724,7 +717,7 @@ arr2[0] = 20;
 
 ---
 
-### **Question 15: Employee Hierarchy with Virtual Destructors**
+### **25. Employee Hierarchy with Virtual Destructors**
 
 **Concepts:** Virtual Destructors, Inheritance
 
@@ -769,7 +762,7 @@ delete emp2; // Should call Engineer -> Employee
 
 ---
 
-### **Question 16: Vehicle and Car with Polymorphism**
+### **26. Vehicle and Car with Polymorphism**
 
 **Concepts:** Pure Virtual Functions, Virtual Methods
 
@@ -804,7 +797,7 @@ delete myCar;
 
 ---
 
-### **Question 17: Singleton Logger**
+### **27. Singleton Logger**
 
 **Concepts:** Design Pattern - Singleton
 
@@ -838,7 +831,7 @@ logger.log("App started.");
 
 ---
 
-### **Question 18: Operator Overload for Money**
+### **28. Operator Overload for Money**
 
 **Concepts:** Operator Overloading (Comparison)
 
@@ -869,7 +862,7 @@ Money m1(100.50), m2(50.25), m3(100.50);
 
 ---
 
-### **Question 19: Abstract Factory for UI Elements**
+### **29. Abstract Factory for UI Elements**
 
 **Concepts:** Factory Method Pattern
 
@@ -924,7 +917,7 @@ delete factory;
 
 ---
 
-### **Question 20: Checking Account Using Protected Inheritance**
+### **30. Checking Account Using Protected Inheritance**
 
 **Concepts:** Protected Access Specifier, Inheritance
 
@@ -960,7 +953,7 @@ acc.withdraw(100.0);    // balance = 150.0
 
 ---
 
-### **11. Abstract Base Class for Shape**
+### **31. Abstract Base Class for Shape**
 
 **Problem:**
 
@@ -977,7 +970,7 @@ public:
 
 ---
 
-### **12. Inheritance - Employee and Manager**
+### **32. Inheritance - Employee and Manager**
 
 **Problem:**
 
@@ -999,7 +992,7 @@ public:
 
 ---
 
-### **13. Copy Constructor**
+### **33. Copy Constructor**
 
 **Problem:**
 
@@ -1016,7 +1009,7 @@ public:
 
 ---
 
-### **14. Virtual Function for Polymorphism**
+### **34. Virtual Function for Polymorphism**
 
 **Problem:**
 
@@ -1042,7 +1035,7 @@ public:
 
 ---
 
-### **15. Operator Overloading (==)**
+### **35. Operator Overloading (==)**
 
 **Problem:**
 
@@ -1058,7 +1051,7 @@ public:
 
 ---
 
-### **16. Dynamic Memory Allocation in Class**
+### **36. Dynamic Memory Allocation in Class**
 
 **Problem:**
 
@@ -1075,7 +1068,7 @@ public:
 
 ---
 
-### **17. Friend Function**
+### **37. Friend Function**
 
 **Problem:**
 
@@ -1093,7 +1086,7 @@ public:
 
 ---
 
-### **18. Private Inheritance**
+### **38. Private Inheritance**
 
 **Problem:**
 
@@ -1115,7 +1108,7 @@ public:
 
 ---
 
-### **19. Multiple Inheritance**
+### **39. Multiple Inheritance**
 
 **Problem:**
 
@@ -1141,7 +1134,7 @@ public:
 
 ---
 
-### **20. Abstract Interface for Logging**
+### **40. Abstract Interface for Logging**
 
 **Problem:**
 
@@ -1166,7 +1159,7 @@ public:
 
 ---
 
-### **21. Deep Copy with Copy Constructor and Assignment Operator**
+### **41. Deep Copy with Copy Constructor and Assignment Operator**
 
 **Problem:**
 
@@ -1185,7 +1178,7 @@ public:
 
 ---
 
-### **22. Overloading << Operator for Custom Class**
+### **42. Overloading << Operator for Custom Class**
 
 **Problem:**
 
@@ -1201,7 +1194,7 @@ public:
 
 ---
 
-### **23. Virtual Destructor in Inheritance Chain**
+### **43. Virtual Destructor in Inheritance Chain**
 
 **Problem:**
 
@@ -1221,7 +1214,7 @@ public:
 
 ---
 
-### **24. CRTP (Curiously Recurring Template Pattern)**
+### **44. CRTP (Curiously Recurring Template Pattern)**
 
 **Problem:**
 
@@ -1242,7 +1235,7 @@ public:
 
 ---
 
-### **25. Abstract Factory Pattern with OOP**
+### **45. Abstract Factory Pattern with OOP**
 
 **Problem:**
 
@@ -1265,7 +1258,7 @@ public:
 ```
 ---
 
-## ✅ **Question 21: Implementing a Polymorphic Collection and Iteration**
+### **46. Implementing a Polymorphic Collection and Iteration**
 
 **Topic**: Polymorphism, Iterators, Memory Management
 **Difficulty**: Medium
@@ -1325,7 +1318,7 @@ for (int i = 0; i < collection.size(); ++i) {
 
 ---
 
-## ✅ **Question 22: Advanced Smart Pointer Usage with Custom Deleters**
+### **47. Advanced Smart Pointer Usage with Custom Deleters**
 
 **Topic**: Smart Pointers, Resource Management, Exception Safety
 **Difficulty**: Medium
@@ -1375,7 +1368,7 @@ manageResource(2); // Uses default delete
 
 ---
 
-## ✅ **Question 23: Implementing the Visitor Pattern for Shapes**
+### **48. Implementing the Visitor Pattern for Shapes**
 
 **Topic**: Design Patterns (Visitor), Polymorphism, Encapsulation
 **Difficulty**: Hard
@@ -1428,7 +1421,7 @@ std::cout << perimeterVisitor.getTotalPerimeter();
 
 ---
 
-## ✅ **Question 24: Implementing a Generic Singly Linked List**
+### **49. Implementing a Generic Singly Linked List**
 
 **Topic**: Templates, Memory Management, Operator Overloading
 **Difficulty**: Medium
@@ -1491,7 +1484,7 @@ intList.get(5);                    // Throws std::out_of_range
 
 ---
 
-## ✅ **Question 25: Runtime Type Information and Safe Downcasting**
+### **50. Runtime Type Information and Safe Downcasting**
 
 **Topic**: RTTI, `dynamic_cast`, Polymorphism
 **Difficulty**: Medium
