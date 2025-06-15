@@ -31,6 +31,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 25         | [Operator Overloading](operator-overloading.html) | Customizing operators for user-defined types.               |
 | 26         | [Reference](/refrence.md) | Customizing operators for user-defined types.               |
 | 27         | [Data Structures in C++](https://github.com/brijeshc1307/DSA) | Linked lists, stacks, queues, and trees.                    |
+| 28         | [OOPS based Problem](/oopsProblem.md) | Class, objects, inheritance, abstraction, polymorphism, etc.                   |
 
 ---
 
