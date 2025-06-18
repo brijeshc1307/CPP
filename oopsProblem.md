@@ -34,6 +34,58 @@ p.setX(15);
 ```
 
 ---
+Solution:
+```cpp
+#include <iostream>
+using namespace std;
+
+class Point {
+private:
+    int x, y;
+
+public:
+    // Constructor
+    Point(int x_coord, int y_coord) {
+        x = x_coord;
+        y = y_coord;
+    }
+
+    // Getters
+    int getX() const {
+        return x;
+    }
+
+    int getY() const {
+        return y;
+    }
+
+    // Setters
+    void setX(int new_x) {
+        x = new_x;
+    }
+
+    void setY(int new_y) {
+        y = new_y;
+    }
+};
+
+int main() {
+    Point p(5, 7);
+    cout << "Initial point: (" << p.getX() << ", " << p.getY() << ")\n";
+
+    p.setX(10);
+    p.setY(15);
+    cout << "Updated point: (" << p.getX() << ", " << p.getY() << ")\n";
+
+    return 0;
+}
+````
+Output:
+```
+Initial point: (5, 7)
+Updated point: (10, 15)
+```
+
 
 ### **2. Implement a Counter Class**
 
@@ -67,7 +119,56 @@ Counter c2; // == 2
     Counter c3; // == 3
 } // c3 destroyed => == 2
 ```
+Solution:
+```cpp
+#include <iostream>
+using namespace std;
 
+class Counter {
+private:
+    static int activeCount;  // Static variable to track active instances
+
+public:
+    Counter() {
+        ++activeCount;  // Increment on construction
+    }
+
+    ~Counter() {
+        --activeCount;  // Decrement on destruction
+    }
+
+    static int getActiveCount() {
+        return activeCount;
+    }
+};
+
+// Initialize static member
+int Counter::activeCount = 0;
+
+int main() {
+    cout << "Active: " << Counter::getActiveCount() << endl;  // 0
+
+    Counter c1;
+    cout << "Active: " << Counter::getActiveCount() << endl;  // 1
+
+    {
+        Counter c2, c3;
+        cout << "Active: " << Counter::getActiveCount() << endl;  // c1 1+ c2 1+ c3 1 =1+1+1=3
+    } // c2 and c3 go out of scope and are destroyed
+
+    cout << "Active: " << Counter::getActiveCount() << endl;  // 3 -1 -1 =1
+
+    return 0;
+}
+
+```
+Output:
+```
+Active: 0
+Active: 1
+Active: 3
+Active: 1
+```
 ---
 
 ### **3. Simple Rectangle Inheritance**
@@ -105,7 +206,42 @@ public:
 Rectangle r(5, 10);
 // r.getArea() == 50
 ```
+Solution:
+```cpp
+#include <iostream>
+using namespace std;
 
+// Base class
+class Shape {
+protected:
+    int width;
+    int height;
+
+public:
+    Shape(int w, int h) : width(w), height(h) {}  // Constructor definition
+};
+
+// Derived class
+class Rectangle : public Shape {
+public:
+    Rectangle(int w, int h) : Shape(w, h) {}  // Constructor calling base class constructor
+
+    int getArea() const {
+        return width * height;  // Accessing protected members from base class
+    }
+};
+
+int main() {
+    Rectangle rect(10, 5);
+    cout << "Area of rectangle: " << rect.getArea() << endl;
+
+    return 0;
+}
+```
+Output
+```
+Area of rectangle: 50
+```
 ---
 
 ### **4. Overload Addition Operator for Point**
@@ -137,7 +273,44 @@ Point p3 = p1 + p2;
 // p3.getX() == 4
 // p3.getY() == 6
 ```
+Solution:
+```cpp
+#include <iostream>
+using namespace std;
 
+class Point {
+private:
+    int x, y;
+
+public:
+    // Constructor
+    Point(int xVal = 0, int yVal = 0) : x(xVal), y(yVal) {}
+
+    // Getter methods
+    int getX() const { return x; }
+    int getY() const { return y; }
+
+    // Overload + operator
+    Point operator+(const Point& other) const {
+        return Point(x + other.x, y + other.y);
+    }
+};
+
+int main() {
+    Point p1(1, 2);
+    Point p2(3, 4);
+
+    Point p3 = p1 + p2;
+
+    cout << "p3.x = " << p3.getX() << ", p3.y = " << p3.getY() << endl;
+
+    return 0;
+}
+```
+Output
+```
+p3.x = 4, p3.y = 6
+```
 ---
 
 ### **5. Book Class with const Method**
@@ -173,6 +346,54 @@ public:
 Book b("The Great Gatsby", "F. Scott Fitzgerald");
 // b.getTitle() == "The Great Gatsby"
 ```
+Solution
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Book {
+private:
+    string title;
+    string author;
+
+public:
+    // Constructor
+    Book(const string& title, const string& author) {
+        if (title.length() < 1 || title.length() > 50 || author.length() < 1 || author.length() > 50) {
+            throw invalid_argument("Title and author must be between 1 and 50 characters.");
+        }
+        this->title = title;
+        this->author = author;
+    }
+
+    // Constant getter methods
+    string getTitle() const {
+        return title;
+    }
+
+    string getAuthor() const {
+        return author;
+    }
+};
+
+int main() {
+    try {
+        Book b("The Great Gatsby", "F. Scott Fitzgerald");
+        cout << "Title: " << b.getTitle() << endl;
+        cout << "Author: " << b.getAuthor() << endl;
+    } catch (const exception& e) {
+        cerr << "Error: " << e.what() << endl;
+    }
+
+    return 0;
+}
+```
+Output
+```
+Title: The Great Gatsby
+Author: F. Scott Fitzgerald
+```
 
 ---
 
@@ -207,7 +428,50 @@ public:
 Circle c(5.0);
 // c.getArea() ≈ 78.5398
 ```
+Solution
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
 
+class Circle {
+private:
+    double radius;
+
+public:
+    // Constructor with basic constraint check
+    Circle(double r) {
+        if (r >= 0.1 && r <= 1000.0) {
+            radius = r;
+        } else {
+            radius = 0.1;  // fallback/default value if invalid input
+            cout << "Invalid radius. Setting to minimum allowed value (0.1)." << endl;
+        }
+    }
+
+    // Method to return area
+    double getArea() const {
+        return M_PI * radius * radius;
+    }
+};
+
+int main() {
+    Circle c(5.0);
+    cout << "Area of circle: " << c.getArea() << endl;
+
+    Circle c2(2000.0);  // Invalid input, fallback will be used
+    cout << "Area of circle with fallback radius: " << c2.getArea() << endl;
+
+    return 0;
+}
+
+```
+Output
+```
+Area of circle: 78.5398
+Invalid radius. Setting to minimum allowed value (0.1).
+Area of circle with fallback radius: 0.0314159
+```
 ---
 
 ### **7. Dog and Animal Classes (Overriding)**
@@ -245,6 +509,47 @@ Dog d;
 // a.makeSound() prints "Generic animal sound."
 // d.makeSound() prints "Woof!"
 ```
+Solution
+```cpp
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+class Animal {
+public:
+    void makeSound() {
+        cout << "Generic animal sound." << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void makeSound() {  // Hides Animal's makeSound
+        cout << "Woof!" << endl;
+    }
+};
+
+int main() {
+    Animal a;
+    Dog d;
+
+    a.makeSound();  // Output: Generic animal sound.
+    d.makeSound();  // Output: Woof!
+
+    Animal* ptr = &d;
+    ptr->makeSound();  // Output: Generic animal sound. (Because no virtual function is used)
+
+    return 0;
+}
+
+```
+Output
+```
+Generic animal sound.
+Woof!
+Generic animal sound.
+```
 
 ---
 
@@ -281,7 +586,81 @@ w.deposit(50.0);      // balance = 150.0
 w.withdraw(75.0);     // success, balance = 75.0
 w.withdraw(100.0);    // fails, balance = 75.0
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Wallet {
+private:
+    double balance;
+
+public:
+    // Constructor with initial balance check
+    Wallet(double initial_balance = 0.0) {
+        if (initial_balance >= 0.0 && initial_balance <= 10000.0)
+            balance = initial_balance;
+        else {
+            balance = 0.0;
+            cout << "Invalid initial balance. Setting to 0.0" << endl;
+        }
+    }
+
+    // Deposit method with constraint check
+    void deposit(double amount) {
+        if (amount >= 0.0 && amount <= 10000.0)
+            balance += amount;
+        else
+            cout << "Invalid deposit amount. Must be between 0.0 and 10000.0" << endl;
+    }
+
+    // Withdraw method with fund and constraint check
+    bool withdraw(double amount) {
+        if (amount < 0.0 || amount > 10000.0) {
+            cout << "Invalid withdrawal amount. Must be between 0.0 and 10000.0" << endl;
+            return false;
+        }
+
+        if (amount <= balance) {
+            balance -= amount;
+            return true;
+        } else {
+            cout << "Withdrawal failed: insufficient funds." << endl;
+            return false;
+        }
+    }
+
+    // Getter for balance
+    double getBalance() const {
+        return balance;
+    }
+};
+
+int main() {
+    Wallet w(100.0);
+    w.deposit(50.0);     // balance = 150.0
+    cout << "Balance: " << w.getBalance() << endl;
+
+    bool success1 = w.withdraw(75.0);  // success
+    cout << "Withdraw 75.0: " << (success1 ? "Success" : "Fail") << endl;
+    cout << "Balance: " << w.getBalance() << endl;
+
+    bool success2 = w.withdraw(100.0); // fail
+    cout << "Withdraw 100.0: " << (success2 ? "Success" : "Fail") << endl;
+    cout << "Balance: " << w.getBalance() << endl;
+
+    return 0;
+}
+
+```
+```
+Balance: 150
+Withdraw 75.0: Success
+Balance: 75
+Withdrawal failed: insufficient funds.
+Withdraw 100.0: Fail
+Balance: 75
+```
 ---
 
 ### **9. Vector2D Class with Copy Constructor**
@@ -318,6 +697,56 @@ public:
 Vector2D v1;              // x=0, y=0
 Vector2D v2(3.0, 4.0);    // x=3, y=4
 Vector2D v3 = v2;         // copy constructor
+```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
+
+class Vector2D {
+private:
+    double x_comp;
+    double y_comp;
+
+public:
+    // Default constructor
+    Vector2D() : x_comp(0.0), y_comp(0.0) {}
+
+    // Parameterized constructor
+    Vector2D(double x, double y) : x_comp(x), y_comp(y) {}
+
+    // Copy constructor
+    Vector2D(const Vector2D& other) : x_comp(other.x_comp), y_comp(other.y_comp) {}
+
+    // Getter for x component
+    double getX() const {
+        return x_comp;
+    }
+
+    // Getter for y component
+    double getY() const {
+        return y_comp;
+    }
+};
+
+int main() {
+    Vector2D v1;                  // Default constructor
+    Vector2D v2(3.0, 4.0);        // Parameterized constructor
+    Vector2D v3 = v2;             // Copy constructor
+
+    cout << "v1: (" << v1.getX() << ", " << v1.getY() << ")" << endl;
+    cout << "v2: (" << v2.getX() << ", " << v2.getY() << ")" << endl;
+    cout << "v3: (" << v3.getX() << ", " << v3.getY() << ")" << endl;
+
+    return 0;
+}
+
+```
+Output
+```
+v1: (0, 0)
+v2: (3, 4)
+v3: (3, 4)
 ```
 
 ---
@@ -356,7 +785,52 @@ list.isEmpty(); // true
 list.add(42);
 list.isEmpty(); // false
 ```
+Solution
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
 
+class MyList {
+private:
+    std::vector<int> data;
+
+public:
+    // Default constructor
+    MyList() {}
+
+    // Add an integer if the size limit is not reached
+    void add(int value) {
+        if (data.size() < 10) {
+            data.push_back(value);
+        } else {
+            cout << "List is full. Cannot add more than 10 elements." << endl;
+        }
+    }
+
+    // Check if the list is empty
+    bool isEmpty() const {
+        return data.empty();
+    }
+};
+
+int main() {
+    MyList list;
+
+    cout << "Is list empty? " << (list.isEmpty() ? "Yes" : "No") << endl;  // true
+
+    list.add(42);
+    cout << "Is list empty? " << (list.isEmpty() ? "Yes" : "No") << endl;  // false
+
+    return 0;
+}
+
+```
+Output
+```
+Is list empty? Yes
+Is list empty? No
+```
 ---
 
 ### **11. Design a Simple Bank Account Class**
