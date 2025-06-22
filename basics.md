@@ -147,6 +147,105 @@ C++ is used in a wide range of domains due to its performance, flexibility, and 
 
 ---
 
+## Compiler
+
+A **compiler** is a program that **translates source code written in a high-level programming language (like C++) into machine code (binary code)** that a computer's processor can execute.
+
+### Example:
+
+Suppose you write this C++ code in a file `hello.cpp`:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello, World!" << endl;
+    return 0;
+}
+```
+
+Now, you compile it using a compiler like **G++**:
+
+```bash
+g++ hello.cpp -o hello
+```
+
+This creates an executable file `hello` that you can run:
+
+```bash
+./hello
+```
+
+Output:
+
+```
+Hello, World!
+```
+
+---
+
+## Compilation Stages in C++
+
+The C++ compilation process has **four main stages**:
+
+### 1. **Preprocessing**
+
+* Handled by the preprocessor (`#include`, `#define`, etc.)
+* Produces a "pure" C++ code without macros and includes.
+
+### 2. **Compilation**
+
+* Translates the preprocessed code into **assembly code**.
+
+### 3. **Assembly**
+
+* Converts assembly code into **object code** (`.o` or `.obj` file).
+
+### 4. **Linking**
+
+* Links all object files and libraries to generate the final **executable**.
+
+---
+
+## Related Topics in C++
+
+### 1. **Interpreter vs Compiler**
+
+| Feature      | Compiler                | Interpreter                      |
+| ------------ | ----------------------- | -------------------------------- |
+| Output       | Machine code            | Line-by-line execution           |
+| Speed        | Faster execution        | Slower execution                 |
+| Example Lang | C, C++, Java (compiled) | Python, JavaScript (interpreted) |
+
+---
+
+### 2. **Header Files**
+
+These files (like `<iostream>`) are included during the **preprocessing** stage. They contain function declarations and macros.
+
+### 3. **Object Files**
+
+Files with `.o` or `.obj` extensions are produced after the compilation stage, but before linking.
+
+---
+
+## Summary Diagram
+
+```text
+hello.cpp
+   |
+[Preprocessor] --> expanded code
+   |
+[Compiler] --> hello.s (Assembly)
+   |
+[Assembler] --> hello.o (Object Code)
+   |
+[Linker] --> hello (Executable)
+```
+
+---
+
 ## **License**
 This project is licensed under the MIT License.
 
