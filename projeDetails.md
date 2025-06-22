@@ -207,21 +207,25 @@ Although the function still performs slight rounding due to some legacy logic, w
 ### **General Project Understanding**
 
 **Q1: What is the CCD tool, and what does it do?**
+
 **A:** CCD stands for *Can Compress Data*. It's a third-party tool developed in Germany in 2010. Its main function is to compress sensor signals like pressure, temperature, and speed into CAN messages and store them in a `.ccd` file. This helps in efficient storage and later retrieval.
 
 ---
 
 **Q2: What was your role in the project?**
+
 **A:** I was responsible for **maintenance and enhancement** of the CCD tool. I worked on improving its functionality, adding support for 64-bit signals, fixing legacy issues, and also prepared its complete technical documentation including Developer Guide, Test Plan, and Test Results.
 
 ---
 
 **Q3: How does the signal compression process work?**
+
 **A:** First, the CCD tool **groups the signals** by their type — for example, pressure signals are grouped together, temperature signals in another group, and so on. Once grouped, these are **compressed into CAN messages** and written to a `.ccd` file.
 
 ---
 
 **Q4: How do you decide which signals to compress and store?**
+
 **A:** The selection is based on whether the signals are required for immediate use. If not, we compress and store them. The tool typically works with bulk signal data, so the grouping and compression logic is applied to whichever signals are available and need archiving.
 
 ---
@@ -229,16 +233,19 @@ Although the function still performs slight rounding due to some legacy logic, w
 ### **Technical Challenges**
 
 **Q5: The tool was initially built for 32-bit data. How did you extend support to 64-bit?**
+
 **A:** We used **function overloading** to extend existing 32-bit functions for 64-bit support. We also modified memory handling logic, especially where `void*` pointers were used to capture data. Since a void pointer behaves differently in 32-bit and 64-bit architectures, we carefully updated pointer arithmetic and ensured memory alignment for 8-byte data.
 
 ---
 
 **Q6: What challenges did you face while dealing with 64-bit data handling?**
+
 **A:** The key challenge was with `void*` pointers — earlier, they were capturing 4 bytes, but with 64-bit data, we needed to safely capture 8 bytes. This required updating the logic so that the memory operations were compatible with 64-bit data types and did not lead to data corruption or crashes.
 
 ---
 
 **Q7: You mentioned compression logic—were there any precision issues?**
+
 **A:** Yes, one of the compression functions was using `float`, which was causing **automatic rounding of values**, resulting in precision loss. Since we needed higher accuracy, we updated that logic to use `double` instead. Although some minor rounding still exists due to legacy behavior, we validated it with the client and they approved it.
 
 ---
@@ -246,11 +253,13 @@ Although the function still performs slight rounding due to some legacy logic, w
 ### **Documentation & Testing**
 
 **Q8: What is included in your Developer Guide?**
+
 **A:** The Developer Guide explains **each function’s purpose**, how it works, its parameters, and return values. It’s designed to help new developers understand the codebase easily and speed up maintenance or enhancements.
 
 ---
 
 **Q9: Can you explain your Test Plan structure?**
+
 **A:** The Test Plan is structured as a table where each row describes:
 
 * The action/step to be performed
@@ -266,6 +275,7 @@ This makes it easy to track whether the feature behaves as expected.
 ---
 
 **Q10: What’s in the Test Results?**
+
 **A:** Once the tests are executed, the tester logs the **actual result** in the Test Results file. This helps verify whether the feature passed or failed and also helps identify bugs if any step doesn’t produce the expected result.
 
 ---
@@ -273,11 +283,13 @@ This makes it easy to track whether the feature behaves as expected.
 ### **Design and Maintenance**
 
 **Q11: How do you ensure backward compatibility while enhancing the tool?**
+
 **A:** We maintained backward compatibility by **overloading functions** rather than replacing them. So, the 32-bit version continues to work as-is, and the new 64-bit logic is handled separately, ensuring older integrations remain unaffected.
 
 ---
 
 **Q12: Did you refactor any part of the code?**
+
 **A:** Yes, while extending support for 64-bit and improving the compression logic, we had to refactor portions of the code to improve readability, maintainability, and type safety — especially around pointer operations and data casting.
 
 ---
@@ -285,11 +297,13 @@ This makes it easy to track whether the feature behaves as expected.
 ### **Client Communication**
 
 **Q13: How did you validate the final output with the client?**
+
 **A:** After implementing the changes, we conducted thorough testing. We shared the test results and compression accuracy reports with the client. For the float-to-double change, we discussed the slight rounding issue, and they confirmed that the behavior was acceptable for their use case.
 
 ---
 
 **Q14: Were there any performance improvements?**
+
 **A:** Yes, by grouping the signals before compression and optimizing the memory alignment logic, we achieved **faster compression speed and reduced file size**, especially with large data sets.
 
 ---
@@ -297,11 +311,13 @@ This makes it easy to track whether the feature behaves as expected.
 ### **High-Level & Behavioral**
 
 **Q15: What did you learn from this project?**
+
 **A:** I learned how to work with legacy systems, understand deep pointer-level memory handling, and how to balance enhancement with backward compatibility. It also improved my technical writing skills through documentation and my testing/debugging skills during validation.
 
 ---
 
 **Q16: How would you explain this project to a non-technical person?**
+
 **A:** Think of CCD like a ZIP tool for sensor data. Instead of saving every sensor reading one by one, we group and compress them, then store the result in one file. It saves space and helps us pull out the data later when we need it.
 
 ---
