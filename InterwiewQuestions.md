@@ -1,3 +1,186 @@
+### **Planystech.com - Interview Questions**
+
+#### **Q1. Vehicle Number Plate Combinations**
+
+> In a vehicle number plate, we have 4 integer digits. How many unique numbers can we make using these digits?
+
+* **Assumption**: Each digit can be from 0 to 9.
+* **If repetition is allowed**:
+  Total combinations = $10 \times 10 \times 10 \times 10 = 10^4 = \boxed{10,000}$
+* **If repetition is *not* allowed**:
+  Total combinations = $10 \times 9 \times 8 \times 7 = \boxed{5,040}$
+
+---
+
+#### **Q2. Solve Linear Equations**
+
+Solve the following system of equations:
+
+```
+2x + y = 1  
+x  - 5y = 4
+```
+
+**Solution**:
+From 2nd equation:
+  $x = 4 + 5y$
+
+Substitute into 1st:
+  $2(4 + 5y) + y = 1$
+  $8 + 10y + y = 1$
+  $11y = -7 \Rightarrow y = -7/11$
+
+Then,
+  $x = 4 + 5(-7/11) = 4 - 35/11 = (44 - 35)/11 = 9/11$
+
+ **Answer**: $\boxed{x = \frac{9}{11},\ y = -\frac{7}{11}}$
+
+---
+
+#### **Q3. Probability of Choosing 2 Queens from a Deck**
+
+> What is the probability of selecting 2 Queens from a standard deck of 52 cards?
+
+* Total ways to choose 2 cards from 52 = $\binom{52}{2} = 1326$
+* Ways to choose 2 Queens = $\binom{4}{2} = 6$
+* Probability = $\frac{6}{1326} = \boxed{\frac{1}{221}} \approx 0.452\%$
+
+---
+
+#### **Q4. C++ Array Program (Fix the Error)**
+
+```cpp
+#include <iostream>
+// Fix the incorrect header
+#include <vector>
+using namespace std;
+
+/*
+1. Define integer array {1,2,3,4,5}
+2. Calculate the size of the array
+3. Print each element on a newline
+*/
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << "Array size: " << n << endl;
+    for (int i = 0; i < n; ++i) {
+        cout << arr[i] << endl;
+    }
+    return 0;
+}
+```
+
+ Fixes:
+
+* `#include <bits/stdc++.h>` (not `<bits/sdtc++>`)
+* Used `sizeof(arr)` instead of `arr.size()`, which works only for vectors.
+
+---
+
+#### **Q5. Insert at Position in Array vs List**
+
+> Insert at position 1 and 3 — which is faster: **array** or **list**?
+
+| Operation              | Array (Dynamic/Static) | Linked List        |
+| ---------------------- | ---------------------- | ------------------ |
+| Insert at 1st position | O(n)                   | O(1)               |
+| Insert at 3rd position | O(n)                   | O(n) (to traverse) |
+
+ **Conclusion**:
+
+* Insert at beginning: List is faster (O(1))
+* Insert at middle: Similar in time (O(n)), but lists avoid shifting.
+
+---
+
+#### **Q6. Binary Search vs Linear Search**
+
+**Linear Search (Unsorted or Sorted List)**:
+
+```cpp
+int linearSearch(int arr[], int n, int key) {
+    for (int i = 0; i < n; ++i)
+        if (arr[i] == key) return i;
+    return -1;
+}
+```
+
+**Binary Search (Sorted List only)**:
+
+```cpp
+int binarySearch(int arr[], int low, int high, int key) {
+    while (low <= high) {
+        int mid = (low + high) / 2;
+        if (arr[mid] == key) return mid;
+        else if (arr[mid] < key) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+```
+
+ **Complexity**:
+
+* Linear Search: O(n)
+* Binary Search: O(log n)
+
+---
+
+#### **Q7. How to Check Connection to Another Computer in Linux**
+
+```bash
+ping <IP_ADDRESS>       # Basic reachability
+telnet <IP> <PORT>      # Check if specific port is open (if installed)
+ssh <user>@<IP_ADDRESS> # Try connecting via SSH
+```
+
+---
+
+#### **Q8. How to Check Your IP in Linux**
+
+```bash
+hostname -I           # Shows all IPs assigned
+ifconfig              # (Old) shows network info
+ip addr show          # (Modern replacement)
+```
+
+---
+
+#### **Q9. How to Insert an Element at 1st and 3rd Position in Array vs List**
+
+| **Operation**              | **Array**                                                              | **Linked List**                                                                      |
+| -------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| **Insert at 1st position** | Shift all elements to the right → Insert at `arr[0]`<br>Time: **O(n)** | Create a new node → Point it to current head → Update head pointer<br>Time: **O(1)** |
+| **Insert at 3rd position** | Shift elements from 3rd onward → Insert at `arr[2]`<br>Time: **O(n)**  | Traverse to 2nd node → Insert after it<br>Time: **O(n)**                             |
+
+ **Conclusion**:
+
+* Inserting at the **beginning** is faster in **Linked List**.
+* Inserting at the **middle** requires traversal in both, but **Array** may have faster cache performance for small sizes.
+
+---
+
+#### **Q10. Access (Print) Element at 1st and 3rd Position in Array vs List — Which One is Fast?**
+
+| **Operation**          | **Array**                 | **Linked List**                   |
+| ---------------------- | ------------------------- | --------------------------------- |
+| **Access 1st element** | `arr[0]` → Time: **O(1)** | `head->data` → Time: **O(1)**     |
+| **Access 3rd element** | `arr[2]` → Time: **O(1)** | Traverse 2 nodes → Time: **O(n)** |
+
+ **Conclusion**:
+
+* Arrays allow **random access**: constant time access to any position.
+* Linked Lists allow only **sequential access**: slower for positions beyond the head.
+* **Array is faster** for accessing elements at any position.
+
+
+---
+
+---
+
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
 
 ---
