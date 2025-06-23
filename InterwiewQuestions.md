@@ -179,6 +179,149 @@ ip addr show          # (Modern replacement)
 
 ---
 
+### **XYZ Company - Interview Questions**
+
+---
+
+#### **Q1. Function Overloading — Write Program**
+
+ **Definition**:
+Function Overloading allows multiple functions with the same name but different parameter types or counts.
+
+### Example:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Print {
+public:
+    void show(int a) {
+        cout << "Integer: " << a << endl;
+    }
+
+    void show(double b) {
+        cout << "Double: " << b << endl;
+    }
+
+    void show(string s) {
+        cout << "String: " << s << endl;
+    }
+};
+
+int main() {
+    Print obj;
+    obj.show(10);
+    obj.show(3.14);
+    obj.show("Hello");
+    return 0;
+}
+```
+
+ **Output**:
+
+```
+Integer: 10  
+Double: 3.14  
+String: Hello
+```
+
+---
+
+#### **Q2. Method Overriding — Write Program**
+
+ **Definition**:
+**Method Overriding** happens in **inheritance**, where a **child class redefines a base class function** using the same signature.
+Requires **virtual** keyword for polymorphism.
+
+### Example:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void sound() {
+        cout << "Animal makes sound" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void sound() override {
+        cout << "Dog barks" << endl;
+    }
+};
+
+int main() {
+    Animal* a;        // Base class pointer
+    Dog d;
+    a = &d;
+    a->sound();       // Calls Dog's version due to virtual function
+    return 0;
+}
+```
+
+ **Output**:
+
+```
+Dog barks
+```
+
+---
+
+#### **Q3. Dynamic Allocation — Explain with Example**
+
+ **Explanation**:
+Dynamic memory allocation allows memory to be allocated during **runtime** using the `new` keyword in C++.
+
+```cpp
+int* p = new int;
+```
+
+* `int* p` → Declares a pointer to an integer.
+* `new int` → Allocates memory for one `int` on the heap and returns its address.
+* `p` now points to that memory.
+
+You can assign value like this:
+
+```cpp
+*p = 42;
+cout << *p << endl;  // Output: 42
+```
+
+ **Important**:
+After usage, free memory using:
+
+```cpp
+delete p;
+```
+
+### Full Example:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int* p = new int;  // Dynamic allocation
+    *p = 42;           // Assign value
+    cout << "Value at p: " << *p << endl;
+
+    delete p;          // Free memory
+    return 0;
+}
+```
+
+ **Output**:
+
+```
+Value at p: 42
+```
+
+---
+
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
