@@ -1,6 +1,6 @@
 ## Data Types in C++
 
-```A Data Type specifies the type of data that a variable can store such as Integer, Float, Charecter, etc.  ```
+>A Data Type specifies the type of data that a variable can store such as Integer, Float, Charecter, etc. 
 In C++, data types are used to define the **type of data** a variable can hold. They are mainly categorized into:
 
 ### 1. **Primitive (Built-in) Data Types**
@@ -106,6 +106,112 @@ int main() {
 * Sizes may differ based on compiler settings and architecture.
 * `void` has no size; it means "no value" and is used for functions that don't return anything.
 
+---
+Here’s a clear and concise explanation of **data types**, **variables**, and **`const`** in **C++**, along with examples.
+
+---
+
+### 🔹 1. **Data Types in C++**
+
+C++ supports various data types grouped into:
+
+#### ✅ **Basic Built-in Data Types:**
+
+| Data Type | Description                     | Example                      |
+| --------- | ------------------------------- | ---------------------------- |
+| `int`     | Integer                         | `int age = 25;`              |
+| `float`   | Floating point (decimal) number | `float pi = 3.14;`           |
+| `double`  | Double precision float          | `double bigPi = 3.14159265;` |
+| `char`    | Character                       | `char grade = 'A';`          |
+| `bool`    | Boolean (true/false)            | `bool isPass = true;`        |
+
+#### ✅ **Derived Data Types:**
+
+* **Arrays**, **Pointers**, **Functions**, **References**
+
+#### ✅ **User-defined Data Types:**
+
+* `struct`, `union`, `class`, `enum`
+
+#### ✅ **Void Type:**
+
+* `void` means **no value** or **no return type**.
+
+  ```cpp
+  void sayHello() {
+      cout << "Hello";
+  }
+  ```
+
+---
+
+### 🔹 2. **Variables in C++**
+
+* A **variable** is a name for a memory location to store a value.
+* It must be declared with a data type before use.
+
+#### Syntax:
+
+```cpp
+<data_type> <variable_name> = <value>;
+```
+
+#### Example:
+
+```cpp
+int age = 25;
+float temperature = 36.6;
+char grade = 'B';
+```
+
+#### Rules for Variable Names:
+
+* Must start with a letter or underscore.
+* Cannot use C++ keywords (like `int`, `return`, etc.)
+* Case-sensitive (`Age` and `age` are different).
+
+---
+
+### 3. **`const` in C++**
+
+* **`const`** is a keyword to declare **constants** (values that cannot change after initialization).
+
+#### Syntax:
+
+```cpp
+const data_type variable_name = value;
+```
+
+#### Example:
+
+```cpp
+const float PI = 3.14;
+```
+
+Attempting to change `PI` later will cause a compile-time error.
+
+---
+
+### Example Code:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int age = 25;              // variable
+    const float PI = 3.14;     // constant
+    char grade = 'A';          // variable
+    bool isAdult = true;       // variable
+
+    cout << "Age: " << age << endl;
+    cout << "PI: " << PI << endl;
+    cout << "Grade: " << grade << endl;
+    cout << "Is Adult: " << isAdult << endl;
+
+    return 0;
+}
+```
 ---
 
 ## **License**
