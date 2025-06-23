@@ -182,6 +182,17 @@ Output:
 ```
 Hello, World!
 ```
+For mac/linux
+```
+g++ -std=c++11 code.cpp && ./a.out
+
+or
+
+g++ -std=c++11 code.cpp -o myprogram && ./myprogram
+
+```
+
+
 
 ---
 
