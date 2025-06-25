@@ -1125,7 +1125,80 @@ public:
     void setWidth(double width);
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Rectangle {
+private:
+    double length;
+    double width;
+
+public:
+    Rectangle(double length, double width) {
+        // Use setters for validation
+        setLength(length);
+        setWidth(width);
+    }
+
+    double getArea() const {
+        return length * width;
+    }
+
+    void setLength(double length) {
+        if (length >= 0)
+            this->length = length;
+        else
+            cout << "Length must be non-negative!" << endl;
+    }
+
+    void setWidth(double width) {
+        if (width >= 0)
+            this->width = width;
+        else
+            cout << "Width must be non-negative!" << endl;
+    }
+
+    double getLength() const {
+        return length;
+    }
+
+    double getWidth() const {
+        return width;
+    }
+};
+
+int main() {
+    Rectangle obj(20, 50);
+    cout << "Initial area (valid values): " << obj.getArea() << endl;
+
+    Rectangle obj1(-20, 50); // Length invalid
+    cout << "Area with invalid length: " << obj1.getArea() << endl;
+
+    obj.setLength(10);
+    cout << "After setting length to 10, area: " << obj.getArea() << endl;
+
+    obj.setWidth(20);
+    cout << "After setting width to 20, area: " << obj.getArea() << endl;
+
+    obj.setLength(-5); // Should be rejected
+    obj.setWidth(-10); // Should be rejected
+
+    return 0;
+}
+
+```
+Output
+```
+Initial area (valid values): 1000
+Length must be non-negative!
+Area with invalid length: 0
+After setting length to 10, area: 500
+After setting width to 20, area: 200
+Length must be non-negative!
+Width must be non-negative!
+```
 ---
 
 ### **16. Default and Parameterized Constructors**
