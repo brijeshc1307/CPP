@@ -12,7 +12,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 6          | [Pointers](/Pointers.md)              | Basics of pointers, pointer arithmetic, and dynamic memory.  |
 | 7          | [Arrays](/array.md)                   | One-dimensional, multi-dimensional arrays, and C++ strings. |
 | 8          | [Strings](/string.md)                 | Strings, and its function.                                   |
-| 9          | [Object-Oriented Programming (OOP)](/Object-Oriented_Programming.md) | Classes, objects, access modifires, getter, setter, struct vs class. |
+| 9          | [Object-Oriented Programming (OOP)](/Object-Oriented_Programming.md) | Classes, objects, access modifires, getter, setter, struct vs class, [OOPS Problem](/oopsProblem.md) |
 | 10          | [Constructors and Destructors, Encapsulations And Abstraction](/constructors_destructors.md) | Special functions for object initialization and cleanup, Encapsulations And Abstraction. |
 | 11         | [Inheritance](/Inheritance.md)        | Types (single, multiple, hierarchical, hybrid) and examples. |
 | 12         | [Polymorphism](/Polymorphism.md)      | Function overloading, operator overloading, and virtual functions. |
