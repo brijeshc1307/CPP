@@ -1573,7 +1573,117 @@ for (Shape* s : shapes) {
 }
 // Don't forget to delete allocated memory.
 ```
+Solution Using Smartpointer
+```cpp
+#include <iostream>
+#include <vector>
+#include <memory>
+#include <cmath>
+using namespace std;
 
+class Shape {
+public:
+    virtual double getArea() const = 0;
+    virtual ~Shape() {}
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    double getArea() const override {
+        return M_PI * radius * radius;
+    }
+};
+
+class Rectangle : public Shape {
+private:
+    double width, height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+    double getArea() const override {
+        return width * height;
+    }
+};
+
+int main() {
+    vector<unique_ptr<Shape>> shapes;
+    shapes.push_back(make_unique<Circle>(5.0));
+    shapes.push_back(make_unique<Rectangle>(4.0, 6.0));
+
+    for (const auto& s : shapes) {
+        cout << s->getArea() << endl;
+    }
+
+    return 0;
+}
+
+```
+Output
+```
+78.5398
+24
+```
+Solution 
+```cpp
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+class Shape {
+public:
+    virtual double getArea() const = 0;  // Pure virtual function
+    virtual ~Shape() {}                  // Virtual destructor
+};
+
+class Circle : public Shape {
+private:
+    double radius;
+public:
+    Circle(double r) : radius(r) {}
+    
+    double getArea() const override {
+        return M_PI * radius * radius;
+    }
+};
+
+class Rectangle : public Shape {
+private:
+    double width;
+    double height;
+public:
+    Rectangle(double w, double h) : width(w), height(h) {}
+
+    double getArea() const override {
+        return width * height;
+    }
+};
+
+int main() {
+    vector<Shape*> shapes;
+    shapes.push_back(new Circle(5.0));
+    shapes.push_back(new Rectangle(4.0, 6.0));
+
+    for (Shape* s : shapes) {
+        cout << s->getArea() << endl;
+    }
+
+    // Clean up memory to avoid leaks
+    for (Shape* s : shapes) {
+        delete s;
+    }
+
+    return 0;
+}
+
+```
+Output
+```
+78.5398
+24
+```
 ---
 
 ### **22. Custom Exception for BankAccount**
