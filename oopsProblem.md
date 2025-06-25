@@ -1065,6 +1065,48 @@ public:
     ~Logger();
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
+
+class Logger {
+public:
+    Logger(){
+        cout<<"Constructor called"<<endl;
+    }
+    ~Logger(){
+        cout<<"Destructor called"<<endl;
+    }
+};
+
+int main() {
+    Logger obj;
+    return 0;
+}
+
+```
+Output
+```
+Constructor called
+Destructor called
+```
+Solution updated only main function, To see the destructor call more clearly (especially in more complex programs), we can add a block scope
+```cpp
+int main() {
+    {
+        Logger obj;
+    } // Destructor called here
+    cout << "Exited block" << endl;
+    return 0;
+}
+````
+Output
+```
+Constructor called
+Destructor called
+Exited block
+```
 
 ---
 
