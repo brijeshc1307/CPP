@@ -856,6 +856,72 @@ public:
 * Balance should never be negative.
 * Deposits and withdrawals must be positive.
 
+
+Solution
+```cpp
+#include <iostream>
+using namespace std;
+
+class BankAccount {
+private:
+    int accountNumber;
+    double balance;
+
+public:
+    BankAccount(int accountNumber, double balance) {
+        this->accountNumber = accountNumber;
+        // Ensure initial balance is not negative
+        this->balance = (balance >= 0) ? balance : 0;
+    }
+
+    void deposit(double amount) {
+        if (amount > 0) {
+            balance += amount;
+        } else {
+            cout << "Deposit amount must be positive!" << endl;
+        }
+    }
+
+    void withdraw(double amount) {
+        if (amount <= 0) {
+            cout << "Withdraw amount must be positive!" << endl;
+        } else if (amount > balance) {
+            cout << "Insufficient balance!" << endl;
+        } else {
+            balance -= amount;
+        }
+    }
+
+    double getBalance() const {
+        return balance;
+    }
+};
+
+int main() {
+    BankAccount obj(100, 200);
+    obj.deposit(300);
+    cout << "After deposit, balance = " << obj.getBalance() << endl;
+
+    obj.withdraw(50);
+    cout << "After withdrawal, balance = " << obj.getBalance() << endl;
+
+    // Try invalid operations
+    obj.deposit(-10);    // Should print warning
+    obj.withdraw(1000);  // Should print insufficient balance
+    obj.withdraw(-30);   // Should print warning
+
+    return 0;
+}
+```
+Output
+```
+After deposit, balance = 500
+After withdrawal, balance = 450
+Deposit amount must be positive!
+Insufficient balance!
+Withdraw amount must be positive!
+```
+
 ---
 
 ### **12. Circle Class with Area and Perimeter**
@@ -873,6 +939,49 @@ public:
     double getArea() const;
     double getPerimeter() const;
 };
+```
+Solution
+```cpp
+#include <iostream>
+#include <cmath>  // for M_PI
+using namespace std;
+
+class Circle {
+private:
+    double radius;
+
+public:
+    Circle(double radius) {
+        if (radius >= 0)
+            this->radius = radius;
+        else {
+            cout << "Invalid radius! Setting to 0." << endl;
+            this->radius = 0;
+        }
+    }
+
+    double getArea() const {
+        return M_PI * radius * radius;
+    }
+
+    double getPerimeter() const {
+        return 2 * M_PI * radius;
+    }
+};
+
+int main() {
+    Circle obj(25);
+    cout << "Area of Circle = " << obj.getArea() << endl;
+    cout << "Perimeter of Circle = " << obj.getPerimeter() << endl;
+
+    return 0;
+}
+
+```
+Output
+```
+Area of Circle = 1963.5
+Perimeter of Circle = 157.08
 ```
 
 ---
@@ -894,7 +1003,53 @@ public:
     char getGrade() const;
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Student {
+private: 
+    string name;
+    int rollNo;
+    char grade;
+
+public:
+    Student(const string& name, int rollNo, char grade) {
+        this->name = name;
+        this->rollNo = rollNo;
+        this->grade = grade;
+    }
+
+    string getName() const {
+        return name;
+    }
+
+    int getRollNo() const {
+        return rollNo;
+    }
+
+    char getGrade() const {
+        return grade;
+    }
+};
+
+int main() {
+    Student obj("Brijesh", 16, 'A');
+    cout << "Name: " << obj.getName() << endl;
+    cout << "Roll No: " << obj.getRollNo() << endl;
+    cout << "Grade: " << obj.getGrade() << endl;
+
+    return 0;
+}
+
+```
+Output
+```
+Name: Brijesh
+Roll No: 16
+Grade: A
+```
 ---
 
 ### **14. Constructor and Destructor Logging**
