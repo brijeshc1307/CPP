@@ -1729,7 +1729,122 @@ try {
     std::cout << e.what() << std::endl;
 }
 ```
+Solution
+```cpp
+#include <iostream>
+#include <string>
+#include <stdexcept>
+using namespace std;
 
+// Custom Exception Class
+class InsufficientFundsException : public runtime_error {
+public:
+    InsufficientFundsException(const string& msg) : runtime_error(msg) {}
+};
+
+// BankAccount Class
+class BankAccount {
+private:
+    double balance;
+    string accountNumber;
+
+public:
+    BankAccount(const string& accNum, double initial_balance)
+        : accountNumber(accNum), balance(initial_balance) {}
+
+    void withdraw(double amount) {
+        if (amount > balance) {
+            throw InsufficientFundsException("Insufficient funds for withdrawal.");
+        }
+        balance -= amount;
+        cout << "Withdrawal successful. New balance: " << balance << endl;
+    }
+
+    double getBalance() const {
+        return balance;
+    }
+};
+
+// Main Function
+int main() {
+    BankAccount acc("12345", 100.0);
+
+    try {
+        acc.withdraw(150.0);
+    } catch (const InsufficientFundsException& e) {
+        cout << "Exception: " << e.what() << endl;
+    }
+
+    return 0;
+}
+
+```
+Output
+```
+Exception: Insufficient funds for withdrawal.
+```
+Solution without inline function
+```cpp
+#include <iostream>
+#include <string>
+#include <stdexcept>
+using namespace std;
+
+// Custom Exception Class
+class InsufficientFundsException : public runtime_error {
+public:
+    InsufficientFundsException(const string& msg);
+};
+
+// BankAccount Class
+class BankAccount {
+private:
+    double balance;
+    string accountNumber;
+
+public:
+    BankAccount(const string& accNum, double initial_balance);
+    void withdraw(double amount);
+    double getBalance() const;
+};
+
+// --- Implementation of InsufficientFundsException ---
+InsufficientFundsException::InsufficientFundsException(const string& msg)
+    : runtime_error(msg) {}
+
+// --- Implementation of BankAccount ---
+
+BankAccount::BankAccount(const string& accNum, double initial_balance) {
+    accountNumber = accNum;
+    balance = initial_balance;
+}
+
+void BankAccount::withdraw(double amount) {
+    if (amount > balance) {
+        throw InsufficientFundsException("Insufficient funds for withdrawal.");
+    }
+    balance -= amount;
+    cout << "Withdrawal successful. New balance: " << balance << endl;
+}
+
+double BankAccount::getBalance() const {
+    return balance;
+}
+
+// --- Main Function ---
+int main() {
+    BankAccount acc("12345", 100.0);
+
+    try {
+        acc.withdraw(150.0);
+    } catch (const InsufficientFundsException& e) {
+        cout << "Exception: " << e.what() << endl;
+    }
+
+    return 0;
+}
+
+```
 ---
 
 ### **23. Overload Output Stream Operator for Point**
