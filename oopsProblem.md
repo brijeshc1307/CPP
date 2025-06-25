@@ -1276,7 +1276,39 @@ public:
     double distanceFromOrigin() const;
 };
 ```
+Solution
+```cpp
+#include <iostream>
+#include <cmath>
+using namespace std;
 
+class Point {
+private:
+    double x;
+    double y;
+
+public:
+    Point(double x, double y) {
+        this->x = x;
+        this->y = y;
+    }
+
+    double distanceFromOrigin() const {
+        return sqrt(x * x + y * y);
+    }
+};
+
+int main() {
+    Point obj(10, 20);
+    cout << "Distance from origin: " << obj.distanceFromOrigin() << endl;
+    return 0;
+}
+
+```
+Output
+```
+Distance from origin: 22.3607
+```
 ---
 
 ### **18. Simple Class with Getter/Setter**
@@ -1295,7 +1327,67 @@ public:
     void setYear(int year);
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Car {
+private:
+    string make;
+    int year;
+
+public:
+    // Constructor
+    Car(string make, int year) {
+        this->make = make;
+        this->year = year;
+    }
+
+    // Getter for make
+    string getMake() const {
+        return make;
+    }
+
+    // Getter for year
+    int getYear() const {
+        return year;
+    }
+
+    // Setter for make
+    void setMake(const string& make) {
+        this->make = make;
+    }
+
+    // Setter for year
+    void setYear(int year) {
+        this->year = year;
+    }
+};
+
+int main() {
+    // Creating object using constructor
+    Car myCar("Toyota", 2015);
+
+    // Display initial details
+    cout << "Make: " << myCar.getMake() << ", Year: " << myCar.getYear() << endl;
+
+    // Update car details
+    myCar.setMake("Honda");
+    myCar.setYear(2020);
+
+    // Display updated details
+    cout << "Updated Make: " << myCar.getMake() << ", Updated Year: " << myCar.getYear() << endl;
+
+    return 0;
+}
+
+```
+Output
+```
+Make: Toyota, Year: 2015
+Updated Make: Honda, Updated Year: 2020
+```
 ---
 
 ### **19. Class with Static Member**
@@ -1311,7 +1403,45 @@ public:
     static int getCount();
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Counter {
+private:
+    static int count;  // Static member to hold number of objects
+
+public:
+    // Constructor increments count whenever an object is created
+    Counter() {
+        count++;
+    }
+
+    // Static method to access the count
+    static int getCount() {
+        return count;
+    }
+};
+
+// Initialize the static member outside the class
+int Counter::count = 0;
+
+int main() {
+    Counter c1;
+    Counter c2;
+    Counter c3;
+
+    cout << "Number of Counter objects created: " << Counter::getCount() << endl;
+
+    return 0;
+}
+
+```
+Output
+```
+Number of Counter objects created: 3
+```
 ---
 
 ### **20. Simple Operator Overloading (+)**
@@ -1328,7 +1458,64 @@ public:
     void display() const;
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Complex {
+private:
+    double real;
+    double imag;
+
+public:
+    // Constructor
+    Complex(double real, double imag) {
+        this->real = real;
+        this->imag = imag;
+    }
+
+    // Overload + operator
+    Complex operator+(const Complex& other) const {
+        return Complex(real + other.real, imag + other.imag);
+    }
+
+    // Display the complex number
+    void display() const {
+        cout << real;
+        if (imag >= 0)
+            cout << " + " << imag << "i";
+        else
+            cout << " - " << -imag << "i";
+        cout << endl;
+    }
+};
+
+int main() {
+    Complex c1(3.5, 2.0);
+    Complex c2(1.5, 4.5);
+
+    Complex c3 = c1 + c2;  // Uses overloaded + operator
+
+    cout << "First Complex number: ";
+    c1.display();
+
+    cout << "Second Complex number: ";
+    c2.display();
+
+    cout << "Sum: ";
+    c3.display();
+
+    return 0;
+}
+
+```
+Output
+```
+First Complex number: 3.5 + 2i
+Second Complex number: 1.5 + 4.5i
+Sum: 5 + 6.5i
+```
 ---
 
 ## 🟡 Medium – C++ OOP Questions
