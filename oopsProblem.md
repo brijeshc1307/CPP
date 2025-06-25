@@ -1215,7 +1215,52 @@ public:
     void display() const;
 };
 ```
+Solution
+```cpp
+#include <iostream>
+using namespace std;
 
+class Book {
+private:
+    string title;
+    string author;
+
+public:
+    // Default constructor
+    Book() {
+        title = "Unknown";
+        author = "Unknown";
+        cout << "Default constructor called" << endl;
+    }
+
+    // Parameterized constructor
+    Book(string title, string author) {
+        this->title = title;
+        this->author = author;
+    }
+
+    void display() const {
+        cout << "Title of Book: " << title << ", Author of Book: " << author << endl;
+    }
+};
+
+int main() {
+    Book obj;             // default constructor called
+    obj.display();        // should now show "Unknown"
+    
+    Book obj1("CPP", "Brijesh");  // parameterized constructor called
+    obj1.display();      
+
+    return 0;
+}
+
+```
+Output
+```
+Default constructor called
+Title of Book: Unknown, Author of Book: Unknown
+Title of Book: CPP, Author of Book: Brijesh
+```
 ---
 
 ### **17. Constant Member Functions**
