@@ -307,7 +307,7 @@ if (stringHash(a) == stringHash(b)) {
 ---
 
 ---
-[⬅️ Strings](/string.md)       | [Constructors and Destructors, Encapsulations And Abstraction ➡️](/constructors_destructors.md)
+[⬅️ Arrays](/array.md)       | [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md)
 ---
 ## **License**
 This project is licensed under the MIT License.
