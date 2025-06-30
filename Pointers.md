@@ -148,7 +148,8 @@ cout << *(int*)ptr;
 | Null Pointer          | `int* p = nullptr;` |
 
 ---
-
+[⬅️ Functions](/functions.md)          |        [Arrays ➡️](/array.md) 
+---
 ## **License**
 This project is licensed under the MIT License.
 
