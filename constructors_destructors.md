@@ -529,7 +529,7 @@ Destructor called!
 
 Encapsulation is the process of wrapping data and functions into a single unit (class) and restricting direct access to some of the object's components. It is used to protect data from unauthorized access and modification by using access specifiers like private, public, and protected.
 
-```Data hiding | Information hiding wraping up data member and function. (Fully encapsulated class - all Data members private होता है)```
+>Data hiding | Information hiding wraping up data member and function. (Fully encapsulated class - all Data members private होता है)
 
 ---
 
