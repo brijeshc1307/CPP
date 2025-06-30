@@ -306,3 +306,13 @@ if (stringHash(a) == stringHash(b)) {
 
 ---
 
+---
+[⬅️ Arrays](/array.md)       |  [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md) 
+---
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Happy Coding!
+
