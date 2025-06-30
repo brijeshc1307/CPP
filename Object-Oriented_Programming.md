@@ -464,6 +464,8 @@ Class - Name: Bob, Age: 25
 | Can hold multiple data | No                           | Yes (attributes + methods)         |
 
 ---
+[⬅️ Arrays](/array.md)       |  [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md) 
+---
 
 ## **License**
 This project is licensed under the MIT License.
