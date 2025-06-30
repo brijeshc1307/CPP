@@ -179,7 +179,7 @@ int main() {
 }
 ```
 ---
-Next : [Operators](/Operators.md) 
+[⬅️ Basics](/basics.md)        |         [Operators ➡️](/Operators.md) 
 ---
 
 ## **License**
