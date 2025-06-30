@@ -111,41 +111,7 @@ Here’s a clear and concise explanation of **data types**, **variables**, and *
 
 ---
 
-### 🔹 1. **Data Types in C++**
-
-C++ supports various data types grouped into:
-
-#### ✅ **Basic Built-in Data Types:**
-
-| Data Type | Description                     | Example                      |
-| --------- | ------------------------------- | ---------------------------- |
-| `int`     | Integer                         | `int age = 25;`              |
-| `float`   | Floating point (decimal) number | `float pi = 3.14;`           |
-| `double`  | Double precision float          | `double bigPi = 3.14159265;` |
-| `char`    | Character                       | `char grade = 'A';`          |
-| `bool`    | Boolean (true/false)            | `bool isPass = true;`        |
-
-#### ✅ **Derived Data Types:**
-
-* **Arrays**, **Pointers**, **Functions**, **References**
-
-#### ✅ **User-defined Data Types:**
-
-* `struct`, `union`, `class`, `enum`
-
-#### ✅ **Void Type:**
-
-* `void` means **no value** or **no return type**.
-
-  ```cpp
-  void sayHello() {
-      cout << "Hello";
-  }
-  ```
-
----
-
-### 🔹 2. **Variables in C++**
+###  2. **Variables in C++**
 
 * A **variable** is a name for a memory location to store a value.
 * It must be declared with a data type before use.
