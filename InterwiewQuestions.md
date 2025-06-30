@@ -321,7 +321,139 @@ Value at p: 42
 ```
 
 ---
+### **63 Moons - Interview Questions**
+---
 
+##  **C++ Core Concepts**
+
+### 1. **Describe `static` and `const` variables in C++.**
+
+* **`static`**: A static variable retains its value between function calls. It is initialized only once.
+* **`const`**: A `const` variable cannot be modified after initialization. It enforces read-only access.
+
+### 2. **What are storage classes in C++ and their types?**
+
+* Storage classes define scope, lifetime, and visibility of variables.
+* Types:
+
+  * `auto`
+  * `register`
+  * `static`
+  * `extern`
+  * `mutable` (special case for class members)
+
+### 3. **What is a copy constructor? Why define it manually in C++?**
+
+* A **copy constructor** initializes an object using another object of the same class.
+* C++ provides a default one, but:
+
+  * You define it manually to handle **deep copies**, especially when your class manages dynamic memory (pointers).
+
+### 4. **What is the use of pointers in C++?**
+
+* Pointers are used to:
+
+  * Access memory directly
+  * Allocate dynamic memory (`new` / `delete`)
+  * Enable function parameters to be passed by reference
+  * Build complex structures like linked lists and trees
+
+### 5. **What is call by value and call by reference?**
+
+* **Call by Value**: A copy of the argument is passed. Changes don’t affect the original variable.
+* **Call by Reference**: The actual variable is passed using references (`&`), so changes affect the original.
+
+### 6. **What is a namespace in C++?**
+
+* A **namespace** groups named entities (like functions, classes) to avoid name conflicts.
+* Example:
+
+  ```cpp
+  namespace MySpace {
+      int val = 10;
+  }
+  ```
+
+---
+
+##  **OOP (Object-Oriented Programming)**
+
+### 7. **What are the basic OOP concepts in C++?**
+
+* **Encapsulation** – Binding data and functions together
+* **Abstraction** – Hiding implementation details
+* **Inheritance** – Reusing code via parent-child relationship
+* **Polymorphism** – Multiple forms (function/method overloading & overriding)
+
+### 8. **Explain method overloading vs overriding.**
+
+* **Overloading**: Same function name, different parameters (compile-time).
+* **Overriding**: Redefining base class function in derived class using `virtual` (runtime).
+
+### 9. **What is an abstract class in C++?**
+
+* A class with at least one **pure virtual function**.
+* Cannot be instantiated, only inherited.
+
+  ```cpp
+  class Shape {
+      virtual void draw() = 0;
+  };
+  ```
+
+---
+
+##  **STL and Multithreading**
+
+### 10. **Basics of STL in C++?**
+
+* STL (Standard Template Library) provides:
+
+  * **Containers**: vector, list, map, etc.
+  * **Algorithms**: sort, find, etc.
+  * **Iterators**: like pointers to navigate containers
+
+### 11. **What is multithreading in C++?**
+
+* Allows concurrent execution of code using threads.
+* Improves performance and responsiveness.
+* Use `<thread>` header in C++11+.
+
+  ```cpp
+  std::thread t1(function_name);
+  ```
+
+---
+
+##  **Advanced Concepts**
+
+### 12. **What is memory leak in C++?**
+
+* Memory that is allocated but never deallocated.
+* Causes:
+
+  * Missing `delete` after `new`
+  * Losing pointer reference to allocated memory
+
+### 13. **How to convert 2 stacks into a heap?**
+
+* **If you mean implementing a heap using two stacks:**
+
+  * This is unconventional; heaps are best implemented with arrays or vectors.
+  * Two stacks are more suited for simulating queues or tracking call stacks.
+  * Clarify this question if it was metaphorical or a misstatement.
+
+---
+
+##  **Miscellaneous**
+
+### 14. **What’s your favorite DSA question?**
+
+* **Example**: "Find the first non-repeating character in a stream of characters."
+
+  * Tests hash maps, queues, and real-time processing.
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
