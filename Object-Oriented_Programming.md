@@ -81,6 +81,45 @@ Size of class Example: 24 bytes
 ### Explanation:
 The output may not be exactly `4 + 8 + 1 = 13 bytes` because of **padding and alignment**, which ensures efficient memory access. Depending on the compiler, it could be **16 bytes** (or more).
 
+**will likely be `24 bytes`**, depending on the platform and compiler you're using (typically on a 64-bit system with standard alignment rules).
+
+
+
+### Why 24 bytes? Let's break it down:
+
+| Member | Type     | Size (bytes) | Alignment requirement |
+| ------ | -------- | ------------ | --------------------- |
+| `a`    | `int`    | 4            | 4 bytes               |
+| `b`    | `double` | 8            | 8 bytes               |
+| `c`    | `char`   | 1            | 1 byte                |
+
+
+
+### Memory layout with alignment and padding:
+
+1. `a` (int): 4 bytes — starts at offset 0.
+2. **Padding (4 bytes)** — to align the next `double` to an 8-byte boundary.
+3. `b` (double): 8 bytes — starts at offset 8.
+4. `c` (char): 1 byte — starts at offset 16.
+5. **Padding (7 bytes)** — to make the total size a multiple of the largest alignment requirement (8 bytes for `double`).
+
+
+
+### Final layout:
+
+| Offset | Field    | Size |
+| ------ | -------- | ---- |
+| 0      | int a    | 4    |
+| 4      | padding  | 4    |
+| 8      | double b | 8    |
+| 16     | char c   | 1    |
+| 17–23  | padding  | 7    |
+
+**Total = 24 bytes**
+
+### Note:
+We can use `#pragma pack(1)` to change alignment, but it may lead to performance penalties due to misaligned access on some architectures.
+
 ---
 
 ### **Access Modifiers in C++**
