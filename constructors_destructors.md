@@ -298,8 +298,7 @@ public:
 
 	// Function to set the dimensions
 	// of the Box
-	void set_dimension(int len, int brea,
-					int heig)
+	void set_dimension(int len, int brea, int heig)
 	{
 		length = len;
 		*breadth = brea;
