@@ -313,7 +313,7 @@ int main() {
 This extended list provides a more comprehensive overview of common bitwise operations and their underlying logic, which are essential tools in a programmer's arsenal.
 
 ---
-Next: [Control Structures](/ControlStructures.md)
+[⬅️ Data Types](/datatypes.md)        |        [Control Structures ➡️](/ControlStructures.md)
 ---
 ## **License**
 This project is licensed under the MIT License.
