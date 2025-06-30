@@ -152,7 +152,8 @@ int main() {
 ```
 
 ---
-
+[⬅️ Control Structures](/ControlStructures.md)         |        [Pointers ➡️](/Pointers.md)
+---
 ## **License**
 This project is licensed under the MIT License.
 
