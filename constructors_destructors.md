@@ -846,7 +846,8 @@ b = 20
 | Goal         | Show only necessary features     | Protect internal object state       |
 
 ---
-
+[⬅️ Object-Oriented Programming (OOP)](/Object-Oriented_Programming.md)     |   [Inheritance ➡️](/Inheritance.md) 
+---
 ## **License**
 This project is licensed under the MIT License.
 
