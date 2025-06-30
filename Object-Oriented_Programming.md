@@ -79,9 +79,12 @@ int main() {
 Size of class Example: 24 bytes
 ```
 ### Explanation:
-The output may not be exactly `4 + 8 + 1 = 13 bytes` because of **padding and alignment**, which ensures efficient memory access. Depending on the compiler, it could be **16 bytes** (or more).
 
-**will likely be `24 bytes`**, depending on the platform and compiler you're using (typically on a 64-bit system with standard alignment rules).
+The output may not be exactly `4 + 8 + 1 = 13` bytes due to padding and alignment, which ensure efficient memory access. Depending on the compiler, the size could be 16 bytes or more.
+
+It will likely be `24 bytes`, depending on the platform and compiler you're using—typically on a 64-bit system with standard alignment rules.
+
+
 
 
 
