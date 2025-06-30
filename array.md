@@ -156,5 +156,12 @@ delete[] arr;  // Free the memory
 * Use `new` and `delete` for dynamic memory allocation
 
 ---
+[⬅️ Pointers](/Pointers.md)        |  [Strings ➡️](/string.md) 
+---
+## **License**
+This project is licensed under the MIT License.
 
-[Go to Top](#top)
+---
+
+Happy Coding!
+
