@@ -257,7 +257,7 @@ cout << "Goto used!";
 ```
 
 ---
-Next: [Functions](/functions.md)
+[⬅️ Operators](/Operators.md)         |        [Functions ➡️](/functions.md)
 ---
 ## **License**
 This project is licensed under the MIT License.
