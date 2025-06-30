@@ -175,6 +175,31 @@ do {
 ```
 
 ---
+## 2. **Range-Based For Loop (C++11 and later)**
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> numbers = {10, 20, 30, 40, 50};
+    // OR
+    // int numbers[] = {10, 20, 30, 40, 50};
+
+    // Range-based for loop
+    for (int num : numbers) {
+        cout << num << " ";
+    }
+
+    return 0;
+}
+
+```
+Output
+```
+10 20 30 40 50 
+```
+---
 
 ## 3. **Branching Statements**
 
@@ -232,8 +257,8 @@ cout << "Goto used!";
 ```
 
 ---
-
-
+Next: [Functions](/functions.md)
+---
 ## **License**
 This project is licensed under the MIT License.
 
