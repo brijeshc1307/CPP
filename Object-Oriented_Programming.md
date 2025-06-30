@@ -464,7 +464,7 @@ Class - Name: Bob, Age: 25
 | Can hold multiple data | No                           | Yes (attributes + methods)         |
 
 ---
-[⬅️ Arrays](/array.md)       |  [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md) 
+[⬅️ Strings](/string.md)      |  [Constructors and Destructors, Encapsulations And Abstraction ➡️](/constructors_destructors.md)
 ---
 
 ## **License**
