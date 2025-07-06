@@ -966,6 +966,258 @@ int a = 5;
 int&& r2 = std::move(a);  // OK: std::move converts lvalue to rvalue
 ```
 ---
+### **Gentrack.com - Interview Questions**
+---
+### ** STL Containers Comparison Table**
+
+| **Container**        | **Header**        | **Underlying Structure** | **Order Maintained** | **Duplicates Allowed** | **Random Access** | **Insertion/Deletion Efficiency** | **Use Case**                          |
+| -------------------- | ----------------- | ------------------------ | -------------------- | ---------------------- | ----------------- | --------------------------------- | ------------------------------------- |
+| `array`              | `<array>`         | Static array             | Yes                  | Yes                    | ✅ Yes             | ❌ Fixed-size, inefficient         | Fixed-size array with bounds checking |
+| `vector`             | `<vector>`        | Dynamic array            | Yes                  | Yes                    | ✅ Yes             | ✅ End: O(1), Middle: O(n)         | Dynamic resizing, fast access         |
+| `deque`              | `<deque>`         | Double-ended array       | Yes                  | Yes                    | ✅ Yes             | ✅ Front/Back: O(1)                | Insert/remove at both ends            |
+| `queue`              | `<queue>`         | Adapter over `deque`     | Yes (FIFO)           | Yes                    | ❌ No              | ✅ Front/Back: O(1)                | FIFO queue                            |
+| `forward_list`       | `<forward_list>`  | Singly linked list       | Yes                  | Yes                    | ❌ No              | ✅ O(1) insert/delete after node   | Lightweight linked list               |
+| `list`               | `<list>`          | Doubly linked list       | Yes                  | Yes                    | ❌ No              | ✅ O(1) insert/delete anywhere     | Frequent insertion/deletion           |
+| `set`                | `<set>`           | Balanced BST (Red-Black) | Yes (sorted)         | ❌ No                   | ❌ No              | ✅ O(log n)                        | Unique sorted elements                |
+| `multiset`           | `<set>`           | Balanced BST             | Yes (sorted)         | ✅ Yes                  | ❌ No              | ✅ O(log n)                        | Sorted with duplicates                |
+| `map`                | `<map>`           | Balanced BST             | Yes (sorted by key)  | ❌ No (unique keys)     | ❌ No              | ✅ O(log n)                        | Key-value pairs, unique keys          |
+| `multimap`           | `<map>`           | Balanced BST             | Yes                  | ✅ Yes (duplicate keys) | ❌ No              | ✅ O(log n)                        | Multiple values per key               |
+| `unordered_set`      | `<unordered_set>` | Hash table               | ❌ No                 | ❌ No                   | ❌ No              | ✅ Avg O(1), Worst O(n)            | Fast lookup, unique elements          |
+| `unordered_multiset` | `<unordered_set>` | Hash table               | ❌ No                 | ✅ Yes                  | ❌ No              | ✅ Avg O(1), Worst O(n)            | Fast lookup with duplicates           |
+| `unordered_map`      | `<unordered_map>` | Hash table               | ❌ No                 | ❌ No (unique keys)     | ❌ No              | ✅ Avg O(1), Worst O(n)            | Key-value with fast access            |
+| `unordered_multimap` | `<unordered_map>` | Hash table               | ❌ No                 | ✅ Yes (duplicate keys) | ❌ No              | ✅ Avg O(1), Worst O(n)            | Key-value pairs with duplicates       |
+
+---
+
+### 📌 Tips for Use
+
+* Use **`vector`** when you need fast random access and dynamic resizing.
+* Use **`list`/`forward_list`** when frequent insertions/deletions happen at arbitrary positions.
+* Use **`set`/`map`** for sorted elements with fast lookup.
+* Use **`unordered_set`/`unordered_map`** for faster average lookups when ordering is not needed.
+* Use **`deque`** if you need to insert/remove from both front and back.
+* Use **`queue`** or **`stack`** when order of processing (FIFO/LIFO) is needed.
+
+---
+
+###  **Q1. Remove duplicate elements while maintaining the order**
+
+**Problem Statement:**
+Write a C++ program to remove duplicate elements from an array while maintaining the original order of appearance.
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <unordered_set>
+using namespace std;
+
+vector<int> removeDuplicates(vector<int>& nums) {
+    unordered_set<int> seen;
+    vector<int> result;
+    for (int num : nums) {
+        if (seen.find(num) == seen.end()) {
+            seen.insert(num);
+            result.push_back(num);
+        }
+    }
+    return result;
+}
+
+int main() {
+    vector<int> nums = {1, 2, 2, 3, 4, 1, 5};
+    vector<int> res = removeDuplicates(nums);
+    for (int num : res) cout << num << " ";
+}
+```
+
+---
+
+### ✅ **Q2. In-place Transpose of a Matrix**
+
+**Problem Statement:**
+Write a C++ function to transpose a square matrix in-place.
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void transpose(int matrix[][3], int n) {
+    for (int i = 0; i < n; i++)
+        for (int j = i + 1; j < n; j++)
+            swap(matrix[i][j], matrix[j][i]);
+}
+
+int main() {
+    int mat[3][3] = {{1,2,3}, {4,5,6}, {7,8,9}};
+    transpose(mat, 3);
+    for (int i = 0; i < 3; i++){
+        for (int j = 0; j < 3; j++)
+            cout << mat[i][j] << " ";
+        cout << endl;
+    }
+}
+```
+
+---
+
+### ✅ **Q3. Find the second highest income in SQL**
+
+```sql
+SELECT MAX(salary) AS SecondHighest
+FROM employees
+WHERE salary < (SELECT MAX(salary) FROM employees);
+```
+
+---
+
+### ✅ **Q4. Generate Fibonacci Sequence (first N terms)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void fibonacci(int n) {
+    int a = 0, b = 1, next;
+    cout << a << " " << b << " ";
+    for (int i = 2; i < n; ++i) {
+        next = a + b;
+        cout << next << " ";
+        a = b;
+        b = next;
+    }
+}
+
+int main() {
+    fibonacci(10);
+}
+```
+
+---
+
+### ✅ **Q5. FizzBuzz Problem**
+
+**Problem Statement:**
+Print numbers from 1 to N. For multiples of 3 print "Fizz", for 5 print "Buzz", and for both print "FizzBuzz".
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void fizzBuzz(int n) {
+    for (int i = 1; i <= n; i++) {
+        if (i % 15 == 0) cout << "FizzBuzz\n";
+        else if (i % 3 == 0) cout << "Fizz\n";
+        else if (i % 5 == 0) cout << "Buzz\n";
+        else cout << i << endl;
+    }
+}
+
+int main() {
+    fizzBuzz(20);
+}
+```
+
+---
+
+### ✅ **Q6. Why should we hire you?**
+
+**Answer (Example):**
+
+> "You should hire me because I have a strong foundation in programming, problem-solving, and experience with real-world projects. I adapt quickly to new technologies and consistently strive for excellence. I'm not only technically sound but also a good team player who believes in contributing to overall project success."
+
+---
+
+### ✅ **Q7. What is the Bin-Packing Problem?**
+
+**Answer:**
+
+> The Bin Packing Problem is an NP-Hard optimization problem where you aim to pack objects of different sizes into a finite number of bins of fixed capacity in a way that minimizes the number of bins used.
+
+---
+
+### ✅ **Q8. Calculate the Fibonacci Sequence (Recursive version)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int fibonacci(int n) {
+    if (n <= 1) return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+int main() {
+    int n = 10;
+    for (int i = 0; i < n; i++)
+        cout << fibonacci(i) << " ";
+}
+```
+
+---
+
+### ✅ **Q9. FizzBuzz Test**
+
+(Already covered in Q5)
+
+---
+
+### ✅ **Q10. Difference between Array and ArrayList**
+
+| Array                     | ArrayList                               |
+| ------------------------- | --------------------------------------- |
+| Fixed size                | Dynamic size                            |
+| Can store primitive types | Stores objects only                     |
+| Faster access             | Slight overhead due to dynamic resizing |
+| No in-built methods       | Rich set of methods (add, remove, etc.) |
+
+(*Note: ArrayList is from Java, not applicable in C++ but similar to `vector` in STL*)
+
+---
+
+### **Q11. Difference between List, Set, and HashMap**
+
+| Feature        | List                      | Set                            | HashMap              |
+| -------------- | ------------------------- | ------------------------------ | -------------------- |
+| Order          | Maintains insertion order | Unordered or insertion ordered | Unordered            |
+| Duplicates     | Allowed                   | Not allowed                    | Keys must be unique  |
+| Example in C++ | `std::vector`             | `std::unordered_set`           | `std::unordered_map` |
+
+---
+
+### **Q12. Describe LinkedList**
+
+**Answer:**
+
+> A LinkedList is a linear data structure where elements are stored in nodes and connected using pointers. Each node contains data and a pointer to the next node. It's dynamic in size and allows efficient insertions/deletions.
+
+---
+
+### **Q13. Implementations of a List in C++**
+
+In C++, common list implementations include:
+
+* `std::vector` – Dynamic array (random access)
+* `std::list` – Doubly linked list
+* `std::forward_list` – Singly linked list
+
+Example of `std::list`:
+
+```cpp
+#include <iostream>
+#include <list>
+using namespace std;
+
+int main() {
+    list<int> l = {10, 20, 30};
+    l.push_back(40);
+    l.push_front(5);
+
+    for (int val : l)
+        cout << val << " ";
+}
+```
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
