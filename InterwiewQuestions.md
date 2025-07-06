@@ -454,6 +454,520 @@ Value at p: 42
   * Tests hash maps, queues, and real-time processing.
 
 ---
+### **HCL - Interview Questions**
+Round 1: 20 MCQ, 1 Program for 1hr
+---
+
+### **1. If A + B means A is the mother of B; A - B means A is the brother of B; A % B means A is the father of B and A x B means A is the sister of B, which of the following shows that P is the maternal uncle of Q?**
+
+**Options:**
+
+* (A) Q - N + M x P
+* (B) P + S x N - Q
+* (C) P - M + N x Q
+* (D) Q - S % P
+
+**Solution:**
+
+We want:
+**P is male (brother) of Q’s mother** ⇒ "maternal uncle"
+
+Check Option (C): `P - M + N x Q`
+→ `P - M`: P is **brother** of M
+→ `M + N`: M is **mother** of N
+→ `N x Q`: N is **sister** of Q
+
+So M is Q's mother, and P is her brother ⇒ **P is maternal uncle of Q**
+
+**Correct Answer: (C) P - M + N x Q**
+
+---
+
+### **2. Reena took a loan of Rs. 1200 with simple interest for as many years as the rate of interest. If she paid Rs. 432 as interest at the end of the loan period, what was the rate of interest?**
+
+**Options:**
+A. 3, B. 6, C. 18, D. Cannot be determined, E. None of these
+
+**Solution:**
+
+Let rate = time = `x` years
+SI = (P × R × T) / 100 = (1200 × x × x) / 100 = 432
+→ 12x² = 432
+→ x² = 36
+→ x = 6
+
+**Correct Answer: 6**
+
+---
+
+### **3. A alone can do a piece of work in 6 days and B alone in 8 days. A and B undertook to do it for Rs. 3200. With the help of C, they completed the work in 3 days. How much is to be paid to C?**
+
+**Options:**
+A. Rs. 375, B. Rs. 400, C. Rs. 600, D. Rs. 800
+
+**Solution:**
+
+* A’s 1-day work = 1/6
+* B’s 1-day work = 1/8
+* Together in 1 day: A + B = (1/6 + 1/8) = 7/24
+* In 3 days: 3 × 7/24 = 7/8
+* So, C did (1 - 7/8) = 1/8 of work
+* C’s share = 1/8 × 3200 = ₹400
+
+**Correct Answer: ₹400**
+
+---
+
+### **4. If a person walks at 14 km/hr instead of 10 km/hr, he would have walked 20 km more. The actual distance travelled by him is:**
+
+**Options:**
+A.50 km,  B.56 km,  C.70 km,  D.80 km
+
+**Solution:**
+
+Let time = t hours
+Distance at 14 km/h = 14t
+Distance at 10 km/h = 10t
+Difference = 14t - 10t = 4t = 20
+→ t = 5
+→ Actual distance = 10 × 5 = **50 km**
+
+**Correct Answer: 50 km**
+
+---
+
+### **5. A train running at the speed of 60 km/hr crosses a pole in 9 seconds. What is the length of the train?**
+
+**Options:**
+A.120 m,  B.180 m,  C.324 m,  D.150 m
+
+**Solution:**
+* Speed = 60 km/hr = (60 × 1000) / 3600 = 16.67 m/s
+* Length = speed × time = 16.67 × 9 ≈ **150 m**
+
+ **Correct Answer: 150 metres**
+
+---
+
+### **6. Three unbiased coins are tossed. What is the probability of getting at most two heads?**
+
+**Options:**
+A.3/4  B.1/4  C.3/8  D.7/8
+ **Solution:**
+Total outcomes = 2³ = 8
+Favorable outcomes for **at most 2 heads** = all except 3 heads = 7 outcomes
+→ Probability = 7/8
+
+**Correct Answer: D. 7/8**
+---
+### **7. Given a sentence, rearrange the words in order of increasing length. The first word in the resulting sentence should be capitalized, and all other words should be in lowercase. Ignore punctuation and the original capitalization of words, except that the first word in the final result must start with a capital letter.
+
+*Input:*
+A sentence: "The quick brown fox jumps over the lazy dog"
+
+*Output:*
+"The fox the dog over lazy quick brown jumps"
+
+ **Solution:**
+ ```cpp
+#include <iostream>
+#include <sstream>
+#include <vector>
+#include <algorithm>
+#include <cctype>
+
+using namespace std;
+
+// Function to convert a string to lowercase
+string toLower(const string& str) {
+    string result = str;
+    for (char& c : result)
+        c = tolower(c);
+    return result;
+}
+
+// Function to capitalize the first character
+string capitalizeFirst(const string& str) {
+    if (str.empty()) return str;
+    string result = toLower(str);
+    result[0] = toupper(result[0]);
+    return result;
+}
+
+int main() {
+    string sentence = "The quick brown fox jumps over the lazy dog";
+    stringstream ss(sentence);
+    string word;
+    vector<string> words;
+
+    // Split sentence into words
+    while (ss >> word) {
+        // Remove punctuation
+        word.erase(remove_if(word.begin(), word.end(), ::ispunct), word.end());
+        words.push_back(toLower(word));
+    }
+
+    // Sort by word length
+    sort(words.begin(), words.end(), [](const string& a, const string& b) {
+        return a.length() < b.length();
+    });
+
+    // Capitalize the first word
+    if (!words.empty()) {
+        words[0] = capitalizeFirst(words[0]);
+    }
+
+    // Print result
+    for (size_t i = 0; i < words.size(); ++i) {
+        cout << words[i];
+        if (i != words.size() - 1) cout << " ";
+    }
+
+    return 0;
+}
+
+```
+Output
+```
+The fox the dog over lazy quick brown jumps
+```
+---
+### **8. Given a string s, return the first character that does not repeat (i.e., appears exactly once) in the string.
+If there is no such character, return -1.
+
+You must return the character as-is (not index), or -1 if no unique character is found.
+
+Function Signature:
+
+char firstUniqueChar(const std::string& s);
+Input:
+
+A single string s consisting of lowercase English letters ('a' to 'z').
+1 <= s.length <= 10^5
+Output:
+
+Return the first non-repeating character in the string.
+If no such character exists, return -1.
+Examples:
+
+Input: "abbacddhh"
+Output: 'c'
+
+Input: "abacdhdh"
+Output: 'b'
+
+Input: "abbaddhh"
+Output: -1
+Constraints:
+
+The input string contains only lowercase English letters.
+Must return the first non-repeating character in order of appearance.
+Return character as char, and return -1 if none found.
+
+ **Solution:**
+```cpp
+#include <iostream>
+#include <unordered_map>
+#include <string>
+
+char firstUniqueChar(const std::string& s) {
+    std::unordered_map<char, int> freq;
+
+    // First pass: Count frequencies
+    for (char ch : s) {
+        freq[ch]++;
+    }
+
+    // Second pass: Find first character with frequency 1
+    for (char ch : s) {
+        if (freq[ch] == 1)
+            return ch;
+    }
+
+    // If no unique character
+    return -1;
+}
+int main() {
+    cout << firstUniqueChar("abbacddhh") << endl; // Output: c
+    cout << firstUniqueChar("abacdhdh") << endl;  // Output: b
+    cout << firstUniqueChar("abbaddhh") << endl;  // Output: -1
+    return 0;
+}
+```
+Output
+```
+c
+b
+-1
+```
+---
+### **9. A faulty watch loses 20 seconds every 3 hours. It was set correctly at 2:00 AM. What is the correct time when the watch shows 6:30 PM the next day?
+
+**A.** 6:28:15 PM
+**B.** 6:34:30 PM
+**C.** 6:36:00 PM
+**D.** 6:32:45 PM
+
+**Correct Answer: B. 6:34:30 PM**
+
+* Watch loses 20 seconds every 3 hours.
+* Total time from 2:00 AM to 6:30 PM next day = 40.5 hours.
+* Number of 3-hour intervals in 40.5 hours = 40.5 ÷ 3 = 13.5.
+* Total loss = 13.5 × 20 seconds = 270 seconds = 4 minutes 30 seconds.
+* When watch shows 6:30 PM, actual time = 6:30 PM + 4 min 30 sec = **6:34:30 PM**.
+
+**Answer: 6:34:30 PM**
+---
+Round 2: 20 MCQ, 1 Program for 1hr
+Sure! Here’s a clean, concise write-up with answers to your questions in a proper format.
+
+---
+
+### Q1. What is OOP? Explain all pillars with examples.
+
+**OOP (Object-Oriented Programming)** is a programming paradigm based on the concept of "objects," which contain data and methods.
+
+**Four pillars of OOP:**
+
+1. **Encapsulation:**
+   Wrapping data and methods that operate on data into a single unit (class).
+   *Example:*
+
+   ```cpp
+   class Car {
+       private:
+         int speed;
+       public:
+         void setSpeed(int s) { speed = s; }
+         int getSpeed() { return speed; }
+   };
+   ```
+
+2. **Abstraction:**
+   Hiding internal details and showing only essential features.
+   *Example:* Using methods like `startEngine()` without showing engine internals.
+
+3. **Inheritance:**
+   Deriving new classes from existing ones to reuse code.
+   *Example:*
+
+   ```cpp
+   class Vehicle {
+     public: void move() {}
+   };
+   class Car : public Vehicle {
+     public: void openDoor() {}
+   };
+   ```
+
+4. **Polymorphism:**
+   Ability of a function to behave differently based on the object.
+   *Example:* Function overriding (runtime polymorphism).
+
+---
+
+### Q2. Explain function overriding and write a program.
+
+**Function Overriding:**
+When a derived class provides its own implementation of a function already defined in its base class.
+
+*Example:*
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void show() {
+        cout << "Base class\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {
+        cout << "Derived class\n";
+    }
+};
+
+int main() {
+    Base* ptr;
+    Derived d;
+    ptr = &d;
+    ptr->show();  // Calls Derived's show()
+    return 0;
+}
+```
+
+---
+
+### Q3. Map, Array vs Map, Vector, Vector vs Array
+
+* **Map:** Associative container storing key-value pairs (sorted by key).
+* **Array:** Fixed-size collection of elements (contiguous memory).
+* **Vector:** Dynamic array (resizable, provides many utility functions).
+
+| Feature  | Array              | Vector               | Map                         |
+| -------- | ------------------ | -------------------- | --------------------------- |
+| Size     | Fixed              | Dynamic              | Dynamic                     |
+| Memory   | Contiguous         | Contiguous           | Node-based (not contiguous) |
+| Access   | Fast (index-based) | Fast (index-based)   | Key-based                   |
+| Use case | When size is known | When size can change | Key-value storage           |
+
+---
+
+### Q4. What does `#include <bits/stdc++.h>` and `using namespace std;` mean?
+
+* `#include <bits/stdc++.h>` is a GCC-specific header that includes almost all standard C++ libraries. Used mainly in competitive programming for convenience.
+* `using namespace std;` avoids writing `std::` before standard functions and objects.
+
+---
+
+### Q5. What does this code do?
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    []{}();
+    return 0;
+}
+```
+
+* Defines and immediately calls an **empty lambda function**. The program does nothing visible and returns 0.
+
+---
+
+### Q6. Is this code valid? Why or why not?
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int a;
+    int &&b = a;
+    return 0;
+}
+```
+* Status :Compilation error
+* **Invalid.**
+* You cannot bind an **rvalue reference** (`int&&`) to an **lvalue** (`a`).
+* Correct usage: `int&& b = 5;` or use `std::move(a)` to cast `a` to an rvalue.
+
+---
+
+### Q7. Print the pattern:
+
+```
+      * * * * 
+    * * * * 
+  * * * * 
+* * * * 
+```
+
+**Corrected (aligned) version:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    for(int i = 4; i >= 1; i--) {
+        for(int j = 1; j < i; j++) cout << "  ";
+        for(int k = 1; k <= 4; k++) cout << "* ";
+        cout << "\n";
+    }
+    return 0;
+}
+```
+Output
+```
+      * * * * 
+    * * * * 
+  * * * * 
+* * * * 
+```
+
+### Q8. pointer vs refrence?
+
+| Feature            | Pointer                                                               | Reference                                                             |
+| ------------------ | --------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Definition**     | A variable that holds the address of another variable.                | An alias for another variable.                                        |
+| **Syntax**         | `int* p;`                                                             | `int& r = x;`                                                         |
+| **Initialization** | Can be initialized to `nullptr` or any address; can be uninitialized. | Must be initialized when declared; cannot be null.                    |
+| **Reassignment**   | Can point to different variables during its lifetime.                 | Cannot be reseated; always refers to the original variable.           |
+| **Dereferencing**  | Requires `*` operator to access value.                                | Acts like the variable itself; no extra syntax needed.                |
+| **Memory**         | Takes its own memory (stores an address).                             | No extra memory; just another name for the variable.                  |
+| **Nullability**    | Can be null (i.e., point to nothing).                                 | Cannot be null.                                                       |
+| **Use cases**      | Dynamic data structures, optional referencing, pointer arithmetic.    | Pass-by-reference in functions, operator overloading, safer aliasing. |
+
+---
+
+### Example:
+
+```cpp
+int x = 10;
+
+// Pointer
+int* p = &x;
+*p = 20;   // Changes x to 20
+
+// Reference
+int& r = x;
+r = 30;    // Changes x to 30
+
+// Reassign pointer
+int y = 40;
+p = &y;    // Now p points to y
+
+// Reference cannot be reassigned
+// r = y;  // This assigns value of y to x, but r still refers to x
+```
+---
+### Q9. Is this code valid? Why or why not?
+```cpp
+#include <iostream>
+
+int main() {
+    int&& r1 = 10;     // OK: rvalue reference binds to a literal (rvalue)
+    std::cout << r1 << "\n";  // prints 10
+
+    // int a = 5;
+    // int&& r2 = a;   // ERROR: cannot bind rvalue reference to lvalue
+
+    return 0;
+}
+```
+Output
+```
+10
+```
+### Explanation:
+
+* `int&& r1 = 10;` is **valid** because `10` is an rvalue (a temporary literal), and rvalue references can bind to rvalues.
+* Uncommenting the lines:
+
+  ```cpp
+  int a = 5;
+  int&& r2 = a;   // ERROR
+  ```
+
+  would produce an error because `a` is an lvalue, and an rvalue reference cannot bind directly to an lvalue.
+
+---
+
+### Additional notes:
+
+* If you want to bind an rvalue reference to an lvalue, you have to explicitly cast it to an rvalue using `std::move` or `std::forward`:
+
+```cpp
+int a = 5;
+int&& r2 = std::move(a);  // OK: std::move converts lvalue to rvalue
+```
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
