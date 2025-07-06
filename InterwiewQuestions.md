@@ -718,9 +718,7 @@ b
 
 **Answer: 6:34:30 PM**
 ---
-Round 2: 20 MCQ, 1 Program for 1hr
-Sure! Here’s a clean, concise write-up with answers to your questions in a proper format.
-
+Round 2: F2F Interview 30 min
 ---
 
 ### Q1. What is OOP? Explain all pillars with examples.
@@ -766,7 +764,7 @@ Sure! Here’s a clean, concise write-up with answers to your questions in a pro
 
 ---
 
-### Q2. Explain function overriding and write a program.
+### Q2. Explain function overriding and write a program and explain code.
 
 **Function Overriding:**
 When a derived class provides its own implementation of a function already defined in its base class.
@@ -814,13 +812,6 @@ int main() {
 | Memory   | Contiguous         | Contiguous           | Node-based (not contiguous) |
 | Access   | Fast (index-based) | Fast (index-based)   | Key-based                   |
 | Use case | When size is known | When size can change | Key-value storage           |
-
----
-
-### Q4. What does `#include <bits/stdc++.h>` and `using namespace std;` mean?
-
-* `#include <bits/stdc++.h>` is a GCC-specific header that includes almost all standard C++ libraries. Used mainly in competitive programming for convenience.
-* `using namespace std;` avoids writing `std::` before standard functions and objects.
 
 ---
 
@@ -880,6 +871,13 @@ int main() {
         for(int k = 1; k <= 4; k++) cout << "* ";
         cout << "\n";
     }
+    /* OR
+    for(int i = 1; i <= 4; i++) {
+        for(int j = i; j < 4; j++) cout << "  ";
+        for(int k = 1; k <= 4; k++) cout << "* ";
+        cout << "\n";
+    }*/
+
     return 0;
 }
 ```
