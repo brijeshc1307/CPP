@@ -13,6 +13,7 @@ A **constructor** is a special function that initializes an object when it is cr
 - Can be **default, parameterized, or copy constructor**.
 
 ### **Example: Constructor**  
+Default Constructor – Takes no arguments.
 ```cpp
 #include <iostream>
 using namespace std;
@@ -37,6 +38,8 @@ Constructor called! a = 10
 ```
 
 ### **Example: Parametrized Constructor**  
+Parameterized Constructor – Takes arguments to initialize data members.
+
 ```cpp
 // C++ program to calculate the area of a wall
 
@@ -78,6 +81,7 @@ Area of Wall 2: 53.55
 ```
 
 ### **Example: Copy Constructor**  
+Copy Constructor – Creates a new object as a copy of an existing object.
 ```cpp
 #include <iostream>
 using namespace std;
