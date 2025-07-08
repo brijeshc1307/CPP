@@ -219,8 +219,7 @@ private:
 
 public:
 	// Function that sets the dimensions
-	void set_dimensions(int length1, int breadth1,
-						int height1)
+	void set_dimensions(int length1, int breadth1, int height1)
 	{
 		length = length1;
 		breadth = breadth1;
