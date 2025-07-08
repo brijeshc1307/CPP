@@ -1,7 +1,3 @@
-### **Constructor and Destructor 
-
----
-
 ## **1. Constructor in C++**  
 A **constructor** is a special function that initializes an object when it is created.  
 >Object creation time पर Invoke होता है, जब हम Constructor बनाते है तब Deafault Constructor call नहीं होता है वो Delete हो जाता है
@@ -11,6 +7,12 @@ A **constructor** is a special function that initializes an object when it is cr
 - **No return type (not even `void`).**  
 - **Automatically invoked when an object is created.**  
 - Can be **default, parameterized, or copy constructor**.
+  
+### **Why use it?** 
+- Auto-initializes members
+- Makes code cleaner and safer
+- Supports overloading for flexibility
+- Required for const or reference members
 
 ### **Example: Constructor**  
 Default Constructor – Takes no arguments.
