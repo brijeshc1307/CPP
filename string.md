@@ -148,7 +148,7 @@ Sure! Let's dive into **String Manipulation**, **Pattern Matching**, and **Hashi
 
 ---
 
-## **1. String Manipulation**
+## **0. String Manipulation**
 
 **String manipulation** refers to performing operations like insert, delete, replace, reverse, concatenate, etc., on strings.
 
@@ -191,121 +191,263 @@ Final string: dlrow olleh
 
 ---
 
-## **2. Pattern Matching**
-
-Used to search for a **substring** (pattern) in a main string (text).
-Let’s explore both naive and efficient ways.
-
----
-
-### A. Naive Pattern Matching (O(n × m))
-
-Check every position of the text to see if the pattern matches.
+### 1. **Reverse a String**
 
 ```cpp
-bool naiveMatch(string text, string pattern) {
-    int n = text.size(), m = pattern.size();
-    for (int i = 0; i <= n - m; i++) {
-        int j = 0;
-        while (j < m && text[i + j] == pattern[j]) j++;
-        if (j == m) return true; // Pattern found
+void reverseString(string &s) {
+    int l = 0, r = s.size() - 1;
+    while (l < r) swap(s[l++], s[r--]);
+}
+```
+
+### 2. **Check Palindrome**
+
+```cpp
+bool isPalindrome(const string &s) {
+    int l = 0, r = s.size() - 1;
+    while (l < r) {
+        if (s[l++] != s[r--]) return false;
     }
-    return false;
+    return true;
 }
 ```
 
 ---
 
-### B. KMP Algorithm (O(n + m))
+## **Searching & Matching Algorithms**
 
-Uses an LPS (Longest Prefix Suffix) array to avoid redundant comparisons.
+### 3. **Naive Pattern Matching**
 
 ```cpp
-vector<int> buildLPS(string pattern) {
-    int m = pattern.size();
-    vector<int> lps(m, 0);
-    int len = 0;
+int naiveSearch(string txt, string pat) {
+    int n = txt.length(), m = pat.length();
+    for (int i = 0; i <= n - m; ++i) {
+        int j = 0;
+        for (; j < m; ++j)
+            if (txt[i + j] != pat[j])
+                break;
+        if (j == m) return i; // pattern found at index i
+    }
+    return -1;
+}
+```
 
-    for (int i = 1; i < m; ) {
-        if (pattern[i] == pattern[len]) {
-            lps[i++] = ++len;
-        } else {
-            if (len != 0)
-                len = lps[len - 1];
-            else
-                lps[i++] = 0;
-        }
+### 4. **KMP (Knuth–Morris–Pratt)**
+
+```cpp
+vector<int> computeLPS(string &pat) {
+    int m = pat.length();
+    vector<int> lps(m, 0);
+    for (int i = 1, len = 0; i < m; ) {
+        if (pat[i] == pat[len]) lps[i++] = ++len;
+        else if (len != 0) len = lps[len - 1];
+        else lps[i++] = 0;
     }
     return lps;
 }
 
-bool kmpMatch(string text, string pattern) {
-    vector<int> lps = buildLPS(pattern);
-    int i = 0, j = 0;
-    while (i < text.size()) {
-        if (text[i] == pattern[j]) {
-            i++; j++;
-        }
-        if (j == pattern.size()) return true;
-        else if (i < text.size() && text[i] != pattern[j]) {
-            j = (j != 0) ? lps[j - 1] : 0;
+int kmpSearch(string txt, string pat) {
+    vector<int> lps = computeLPS(pat);
+    int i = 0, j = 0, n = txt.length(), m = pat.length();
+    while (i < n) {
+        if (txt[i] == pat[j]) ++i, ++j;
+        if (j == m) return i - j; // match found
+        else if (i < n && txt[i] != pat[j]) {
+            if (j != 0) j = lps[j - 1];
+            else ++i;
         }
     }
-    return false;
+    return -1;
+}
+```
+
+### 5. **Rabin-Karp (Hashing)**
+
+```cpp
+const int d = 256;
+const int q = 101; // a prime
+
+int rabinKarp(string txt, string pat) {
+    int n = txt.size(), m = pat.size();
+    int h = 1, p = 0, t = 0;
+
+    for (int i = 0; i < m - 1; i++) h = (h * d) % q;
+
+    for (int i = 0; i < m; i++) {
+        p = (d * p + pat[i]) % q;
+        t = (d * t + txt[i]) % q;
+    }
+
+    for (int i = 0; i <= n - m; i++) {
+        if (p == t) {
+            int j = 0;
+            while (j < m && txt[i + j] == pat[j]) j++;
+            if (j == m) return i;
+        }
+        if (i < n - m)
+            t = (d * (t - txt[i] * h) + txt[i + m]) % q;
+        if (t < 0) t += q;
+    }
+    return -1;
 }
 ```
 
 ---
 
-## **3. Hashing (Rolling Hash / Rabin-Karp)**
+## **Hashing and Frequency**
 
-Hashing is used to **convert a string to a number**, making comparisons faster.
-
-### Use-case: Detect Substring Fast
-
-### Hash Function Example:
+### 6. **Character Frequency Count**
 
 ```cpp
-typedef long long ll;
-const int p = 31;         // Prime base
-const int mod = 1e9 + 9;  // Large prime
+vector<int> countChars(string &s) {
+    vector<int> freq(26, 0);
+    for (char c : s) freq[c - 'a']++;
+    return freq;
+}
+```
 
-ll stringHash(string s) {
-    ll hash = 0, pow = 1;
+### 7. **Check Anagram**
+
+```cpp
+bool isAnagram(string a, string b) {
+    if (a.size() != b.size()) return false;
+    vector<int> freq(26, 0);
+    for (char c : a) freq[c - 'a']++;
+    for (char c : b) freq[c - 'a']--;
+    for (int x : freq) if (x != 0) return false;
+    return true;
+}
+```
+
+---
+
+## **Substring and Subsequence**
+
+### 8. **Longest Common Substring**
+
+```cpp
+int longestCommonSubstring(string s1, string s2) {
+    int n = s1.size(), m = s2.size(), result = 0;
+    vector<vector<int>> dp(n+1, vector<int>(m+1));
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= m; j++)
+            if (s1[i-1] == s2[j-1])
+                result = max(result, dp[i][j] = dp[i-1][j-1] + 1);
+    return result;
+}
+```
+
+### 9. **Longest Common Subsequence**
+
+```cpp
+int longestCommonSubseq(string s1, string s2) {
+    int n = s1.size(), m = s2.size();
+    vector<vector<int>> dp(n+1, vector<int>(m+1));
+    for (int i = 1; i <= n; i++)
+        for (int j = 1; j <= m; j++)
+            if (s1[i-1] == s2[j-1])
+                dp[i][j] = dp[i-1][j-1] + 1;
+            else
+                dp[i][j] = max(dp[i-1][j], dp[i][j-1]);
+    return dp[n][m];
+}
+```
+
+---
+
+## **Prefix, Z-Algorithm, Manacher's**
+
+### 10. **Z-Algorithm for Pattern Search (O(n))**
+
+```cpp
+vector<int> computeZ(string s) {
+    int n = s.length(), l = 0, r = 0;
+    vector<int> Z(n);
+    for (int i = 1; i < n; ++i) {
+        if (i <= r) Z[i] = min(r - i + 1, Z[i - l]);
+        while (i + Z[i] < n && s[Z[i]] == s[i + Z[i]]) Z[i]++;
+        if (i + Z[i] - 1 > r) l = i, r = i + Z[i] - 1;
+    }
+    return Z;
+}
+```
+
+### 11. **Manacher’s Algorithm (Longest Palindromic Substring in O(n))**
+
+```cpp
+string longestPalindromicSubstring(string s) {
+    string t = "@";
     for (char c : s) {
-        hash = (hash + (c - 'a' + 1) * pow) % mod;
-        pow = (pow * p) % mod;
+        t += "#";
+        t += c;
     }
-    return hash;
+    t += "#$";
+
+    int n = t.size(), center = 0, right = 0;
+    vector<int> P(n);
+    for (int i = 1; i < n - 1; ++i) {
+        int mirror = 2 * center - i;
+        if (i < right) P[i] = min(right - i, P[mirror]);
+
+        while (t[i + 1 + P[i]] == t[i - 1 - P[i]]) P[i]++;
+        if (i + P[i] > right) {
+            center = i;
+            right = i + P[i];
+        }
+    }
+
+    int len = 0, idx = 0;
+    for (int i = 1; i < n - 1; i++) {
+        if (P[i] > len) {
+            len = P[i];
+            idx = i;
+        }
+    }
+    return s.substr((idx - len) / 2, len);
 }
 ```
 
-### Example Use:
+---
+
+##  **Other String Algorithms**
+
+### 12. **Remove Consecutive Duplicates**
 
 ```cpp
-string a = "abc";
-string b = "abc";
-
-if (stringHash(a) == stringHash(b)) {
-    cout << "Strings are same" << endl;
+string removeDuplicates(string s) {
+    string res;
+    for (char c : s) {
+        if (res.empty() || res.back() != c)
+            res.push_back(c);
+    }
+    return res;
 }
 ```
 
-> Rolling hash is used in **Rabin-Karp** to search for patterns in O(n) using precomputed hashes.
+### 13. **Lexicographically Smallest Subsequence**
+
+```cpp
+string smallestSubsequence(string s) {
+    vector<int> last(26, 0);
+    for (int i = 0; i < s.size(); ++i) last[s[i] - 'a'] = i;
+
+    vector<bool> seen(26, false);
+    string res;
+    for (int i = 0; i < s.size(); ++i) {
+        char c = s[i];
+        if (seen[c - 'a']) continue;
+        while (!res.empty() && res.back() > c && last[res.back() - 'a'] > i) {
+            seen[res.back() - 'a'] = false;
+            res.pop_back();
+        }
+        res += c;
+        seen[c - 'a'] = true;
+    }
+    return res;
+}
+```
 
 ---
-
-## Summary:
-
-| **Topic**           | **Goal**                   | **Example**            | **Complexity**        |
-| ------------------- | -------------------------- | ---------------------- | --------------------- |
-| String Manipulation | Modify or edit strings     | Insert, erase, reverse | O(n)                  |
-| Naive Matching      | Find pattern in text       | Check at each index    | O(n × m)              |
-| KMP                 | Efficient pattern matching | Uses prefix table      | O(n + m)              |
-| Hashing             | Fast string comparison     | Hash + Compare         | O(n), O(1) comparison |
-
----
-
 ---
 [⬅️ Arrays](/array.md)       | [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md)
 ---
