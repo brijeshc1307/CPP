@@ -125,7 +125,34 @@ for_each(v.begin(), v.end(), [](int x) {
     cout << x << " ";
 });
 ```
+---
+IMP Questions 1.
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
 
+int main() {
+	[]()->{};
+return 0;
+}
+```
+```
+error: expected type-specifier before ‘{’ token
+5 |         []()->{};
+```
+Questions 2.
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+	[](){};
+return 0;
+}
+```
+```
+Status :Successfully executed
+```
 ---
 
 ## Summary
@@ -140,10 +167,6 @@ for_each(v.begin(), v.end(), [](int x) {
 
 ---
 
-### Want:
 
-* Capture default rules?
-* Mutable lambdas?
-* Lambdas with threads?
 
 
