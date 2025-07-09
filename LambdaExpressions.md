@@ -1,6 +1,7 @@
 ### Lambda Expressions in C++ (Anonymous Functions)
 
 **Lambda expressions** are **anonymous functions** (i.e., functions without a name) that can be defined **inline** within C++ code. Introduced in **C++11**, they help write **cleaner**, **shorter**, and more **functional-style code**, especially for STL algorithms.
+>**Lambda expressions** वो ** (एनोनिमस) anonymous functions** होती हैं (यानि ऐसी functions जिनका कोई नाम नहीं होता) जिन्हें हम **C++ code के अंदर inline** define कर सकते हैं। इनकी शुरुआत **C++11** में हुई थी, और इनका उपयोग करने से हम **ज़्यादा साफ़, छोटे और functional-style के कोड** लिख सकते हैं — खासकर जब हम **STL algorithms** जैसे `sort`, `for_each`, `count_if` आदि के साथ काम करते हैं।
 
 ---
 
