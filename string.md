@@ -448,6 +448,45 @@ string smallestSubsequence(string s) {
 ```
 
 ---
+###  Example Code
+
+```cpp
+#include <iostream>
+#include <cstring>
+#include <vector>
+using namespace std;
+
+int main() {
+    string str = "hello";
+    char cstr[] = "hello";
+
+    cout << "str.size(): " << str.size() << endl;
+    cout << "str.length(): " << str.length() << endl;
+    cout << "strlen(cstr): " << strlen(cstr) << endl;
+    cout << "sizeof(cstr): " << sizeof(cstr) << endl;
+}
+```
+
+**Output:**
+
+```
+str.size(): 5
+str.length(): 5
+strlen(cstr): 5
+sizeof(cstr): 6
+```
+---
+
+### Comparison Table
+
+| Function   | Used For             | Returns              | Time | Notes                             |
+| ---------- | -------------------- | -------------------- | ---- | --------------------------------- |
+| `size()`   | `string`, containers | Number of elements   | O(1) | Preferred in modern C++           |
+| `length()` | `string`             | Number of characters | O(1) | Same as `size()`                  |
+| `strlen()` | C-string (`char*`)   | Chars before `\0`    | O(n) | Works only with null-terminated   |
+| `sizeof`   | Any variable         | Size in bytes        | -    | Use with care — compile-time only |
+
+---
 ---
 [⬅️ Arrays](/array.md)       | [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md)
 ---
