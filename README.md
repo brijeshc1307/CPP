@@ -23,7 +23,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 17         | [Dynamic Memory Allocation](dynamic-memory-allocation.html) | `new`, `delete`, `malloc`, and `free`. |
 | 18         | [Preprocessor Directives](preprocessor-directives.html) | Macros, include guards, and conditional compilation.         |
 | 19         | [Multithreading](https://github.com/brijeshc1307/Multithreading)  | Threads, mutexes, and synchronization.                      |
-| 20         | [Lambda Expressions](lambda-expressions.html) | Anonymous functions in C++ for cleaner code.                |
+| 20         | [Lambda Expressions](/LambdaExpressions.md) | Anonymous functions in C++ for cleaner code.                |
 | 21         | [Smart Pointers](/smartPointers.md)  | `unique_ptr`, `shared_ptr`, and `weak_ptr`.                 |
 | 22         | [Namespaces](/NameSpace.md)          | Avoiding name conflicts using namespaces.                   |
 | 23         | [Friend Functions](/friendFunction.md) | Friend Functions, Accessing private members of classes through friend functions., Friend class|
