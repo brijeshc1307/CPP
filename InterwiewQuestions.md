@@ -1227,12 +1227,72 @@ int main() {
 ---
 ### iQuest - Interview Questions**
 Round 1: 1hr
-Here's the complete solution for all **4 C++ interview questions** you asked, well-explained and ready for Onnet Systems interview:
+
+Q1. Lambda Function: In C++, the syntax `[]() {}` is the basic structure of a **lambda function**. Let's break it down:
+
+## Syntax:
+
+```cpp
+[capture](parameter_list) -> return_type { function_body }
+```
+
+Your minimal example:
+
+```cpp
+[]() {}
+```
+
+Means:
+
+* `[]` → Capture list (what variables you want to access from outside)
+* `()` → Parameters (like a normal function)
+* `{}` → Function body (what the lambda does)
 
 ---
 
-## ✅ Q1. Lambda Function in C++
+## Detailed Breakdown
 
+| Part                          | Description                                                                     |
+| ----------------------------- | ------------------------------------------------------------------------------- |
+| `[]`                          | **Capture list** – lets the lambda access variables from the surrounding scope. |
+| `()`                          | **Parameter list** – like arguments to a function.                              |
+| `{}`                          | **Function body** – code to run when lambda is called.                          |
+| `-> return_type` *(optional)* | Specifies return type (can often be omitted if deducible).                      |
+
+
+##  Example 1: Basic Lambda
+
+```cpp
+auto greet = []() {
+    cout << "Hello from lambda!" << endl;
+};
+greet();
+```
+
+**Output:**
+
+```
+Hello from lambda!
+```
+
+##  Example 2: With Parameters
+
+```cpp
+auto add = [](int a, int b) {
+    return a + b;
+};
+cout << add(3, 4);  // Output: 7
+```
+##  Example 3: With Capture List
+
+```cpp
+int x = 10;
+auto show = [x]() {
+    cout << "Captured x = " << x << endl;
+};
+show();
+```
+##  Example 4
 ```cpp
 #include <iostream>
 #include <vector>
@@ -1262,10 +1322,9 @@ int main() {
 ```
 1 2 3 5 8
 ```
-
 ---
 
-## ✅ Q2. Check Palindrome String (Iterative + Recursive)
+## Q2. Check Palindrome String (Iterative + Recursive)
 
 ### Iterative Method
 
@@ -1285,8 +1344,10 @@ bool isPalindromeIter(string s) {
 
 ```cpp
 bool isPalindromeRec(string s, int start, int end) {
-    if (start >= end) return true;
-    if (s[start] != s[end]) return false;
+    if (start >= end)
+        return true;
+    if (s[start] != s[end])
+        return false;
     return isPalindromeRec(s, start + 1, end - 1);
 }
 ```
@@ -1310,7 +1371,7 @@ int main() {
 
 ---
 
-## ✅ Q3. Pass by Value vs Pass by Reference
+## Q3. Pass by Value vs Pass by Reference
 
 ```cpp
 #include <iostream>
@@ -1348,7 +1409,38 @@ After pass by reference: 6
 ---
 
 ## Q4. Count Binary Substrings Starting and Ending with 1
+```cpp
+#include <iostream>
+using namespace std;
 
+int main() {
+    string str;
+    int count = 0;
+    cin >> str;
+
+    int n = str.size();
+
+    // Check all substrings
+    for (int i = 0; i < n; i++) {
+        if (str[i] == '1') {
+            for (int j = i + 1; j < n; j++) {
+                if (str[j] == '1') {
+                    count++;
+                }
+            }
+        }
+    }
+
+    cout << count;
+    return 0;
+}
+```
+```
+Sample Input
+00100101
+Output
+3
+```
 ### Optimized Solution:
 
 ```cpp
@@ -1361,7 +1453,7 @@ int countBinarySubstrings(string str) {
     for (char ch : str) {
         if (ch == '1') ones++;
     }
-
+    // Number of substrings =  nC2 = n * (n - 1) / 2 
     return (ones * (ones - 1)) / 2;
 }
 
@@ -1373,135 +1465,14 @@ int main() {
     return 0;
 }
 ```
-
-### Example Input/Output:
-
-**Input:**
-
 ```
+Sample Input
 00100101
-```
-
-**Output:**
-
-```
+Output
 3
 ```
 
-Great question!
-
-In C++, the syntax `[]() {}` is the basic structure of a **lambda function**. Let's break it down:
-
 ---
-
-## 🔍 Syntax:
-
-```cpp
-[capture](parameter_list) -> return_type { function_body }
-```
-
-Your minimal example:
-
-```cpp
-[]() {}
-```
-
-Means:
-
-* `[]` → Capture list (what variables you want to access from outside)
-* `()` → Parameters (like a normal function)
-* `{}` → Function body (what the lambda does)
-
----
-
-## 🧠 Detailed Breakdown
-
-| Part                          | Description                                                                     |
-| ----------------------------- | ------------------------------------------------------------------------------- |
-| `[]`                          | **Capture list** – lets the lambda access variables from the surrounding scope. |
-| `()`                          | **Parameter list** – like arguments to a function.                              |
-| `{}`                          | **Function body** – code to run when lambda is called.                          |
-| `-> return_type` *(optional)* | Specifies return type (can often be omitted if deducible).                      |
-
----
-
-## ✅ Example 1: Basic Lambda
-
-```cpp
-auto greet = []() {
-    cout << "Hello from lambda!" << endl;
-};
-greet();
-```
-
-**Output:**
-
-```
-Hello from lambda!
-```
-
----
-
-## ✅ Example 2: With Parameters
-
-```cpp
-auto add = [](int a, int b) {
-    return a + b;
-};
-cout << add(3, 4);  // Output: 7
-```
-
----
-
-## ✅ Example 3: With Capture List
-
-```cpp
-int x = 10;
-auto show = [x]() {
-    cout << "Captured x = " << x << endl;
-};
-show();
-```
-
----
-
-## 🎯 Capture List Variants
-
-| Syntax    | Meaning                                    |
-| --------- | ------------------------------------------ |
-| `[]`      | Capture nothing                            |
-| `[x]`     | Capture variable `x` by value              |
-| `[&x]`    | Capture variable `x` by reference          |
-| `[=]`     | Capture all local variables by value       |
-| `[&]`     | Capture all local variables by reference   |
-| `[=, &y]` | Capture all by value, but `y` by reference |
-
----
-
-## ✅ Example with `for_each` and Lambda
-
-```cpp
-#include <iostream>
-#include <vector>
-#include <algorithm>
-using namespace std;
-
-int main() {
-    vector<int> v = {1, 2, 3, 4};
-    int multiplier = 2;
-
-    for_each(v.begin(), v.end(), [multiplier](int x) {
-        cout << x * multiplier << " ";
-    });
-}
-```
-
-**Output:**
-
-```
-2 4 6 8
-```
-
 ---
 
 ### Team और Role को लेकर:
