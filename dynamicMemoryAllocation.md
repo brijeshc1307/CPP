@@ -1,3 +1,107 @@
+### **Dynamic Memory Allocation in C**
+
+In C, **dynamic memory allocation** allows you to allocate memory at runtime (i.e., while the program is running), rather than at compile time. This is essential when the amount of memory required is not known in advance.
+
+---
+
+### **Key Functions for Dynamic Memory Allocation** (in `<stdlib.h>`):
+
+| Function    | Purpose                                                  |
+| ----------- | -------------------------------------------------------- |
+| `malloc()`  | Allocates a specified number of bytes                    |
+| `calloc()`  | Allocates memory for an array and initializes it to zero |
+| `realloc()` | Reallocates memory to change its size                    |
+| `free()`    | Frees dynamically allocated memory                       |
+
+---
+
+### **1. `malloc()` (Memory Allocation)**
+
+* Allocates memory block of given size (in bytes).
+* Does **not initialize** memory (contains garbage values).
+
+```c
+#include <stdlib.h>
+
+int *ptr = (int *) malloc(5 * sizeof(int));  // Allocates memory for 5 integers
+```
+
+---
+
+### **2. `calloc()` (Contiguous Allocation)**
+
+* Allocates memory for an array of elements.
+* Initializes all bytes to **zero**.
+
+```c
+int *ptr = (int *) calloc(5, sizeof(int));  // Allocates memory for 5 integers and initializes to 0
+```
+
+---
+
+### **3. `realloc()` (Reallocation)**
+
+* Changes the size of memory previously allocated.
+* May return a **new memory location**.
+
+```c
+ptr = (int *) realloc(ptr, 10 * sizeof(int));  // Resize to 10 integers
+```
+
+---
+
+###  **4. `free()`**
+
+* Frees memory allocated by `malloc`, `calloc`, or `realloc`.
+* Prevents memory leaks.
+
+```c
+free(ptr);  // Deallocates memory
+```
+
+---
+
+###  **Example:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *arr;
+    int n = 5;
+
+    arr = (int *) malloc(n * sizeof(int));  // Allocate memory
+
+    if (arr == NULL) {
+        printf("Memory not allocated!\n");
+        return 1;
+    }
+
+    for (int i = 0; i < n; i++) {
+        arr[i] = i + 1;
+    }
+
+    printf("Array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    free(arr);  // Deallocate memory
+    return 0;
+}
+```
+
+---
+
+### **Why Use Dynamic Memory?**
+
+* When array size is not known during compilation.
+* For flexible and efficient memory usage.
+* To avoid wastage of stack memory.
+
+---
+
 ### **Dynamic Memory Allocation in C++**
 
 **Dynamic memory allocation** allows you to allocate memory **at runtime** (not at compile time), using **pointers**.
@@ -8,7 +112,7 @@ This is useful when:
 
 ---
 
-## ✅ Operators Used
+## Operators Used
 
 | Operator   | Purpose                   | Syntax                   |
 | ---------- | ------------------------- | ------------------------ |
@@ -19,7 +123,7 @@ This is useful when:
 
 ---
 
-## 🔶 Example 1: Allocate Single Variable
+## Example 1: Allocate Single Variable
 
 ```cpp
 #include <iostream>
@@ -37,7 +141,7 @@ int main() {
 
 ---
 
-## 🔶 Example 2: Allocate Array
+## Example 2: Allocate Array
 
 ```cpp
 #include <iostream>
@@ -59,7 +163,7 @@ int main() {
 
 ---
 
-## 🔷 Important Points
+## Important Points
 
 * Memory allocated with `new`/`new[]` **stays until** you explicitly `delete`/`delete[]` it.
 * Not deallocating memory causes **memory leaks**.
@@ -67,7 +171,7 @@ int main() {
 
 ---
 
-## 🔷 Dynamic Memory for Custom Class
+## Dynamic Memory for Custom Class
 
 ```cpp
 class Student {
@@ -103,19 +207,19 @@ int main() {
 
 ---
 
-### 🔷 `delete` vs `delete[]` in C++
+### `delete` vs `delete[]` in C++
 
 Both `delete` and `delete[]` are used to **deallocate memory** in C++ that was previously allocated using `new` or `new[]`.
 But they are **not interchangeable**.
 
 ---
 
-## ✅ 1. `delete`
+## 1. `delete`
 
 * Used to **free memory** allocated for **a single object**.
 * Matches with `new`.
 
-### 🔹 Example:
+### Example:
 
 ```cpp
 int* ptr = new int;   // allocate memory for 1 int
@@ -126,12 +230,12 @@ delete ptr;           // correct
 
 ---
 
-## ✅ 2. `delete[]`
+## 2. `delete[]`
 
 * Used to **free memory** allocated for **an array of objects**.
 * Matches with `new[]`.
 
-### 🔹 Example:
+### Example:
 
 ```cpp
 int* arr = new int[5];   // allocate memory for array of 5 ints
@@ -141,16 +245,16 @@ delete[] arr;            // correct
 
 ---
 
-## ❌ What if you mix them up?
+## What if you mix them up?
 
-### 🔹 Using `delete` on an array:
+### Using `delete` on an array:
 
 ```cpp
 int* arr = new int[5];
 delete arr;   // ❌ undefined behavior (may cause memory leak or crash)
 ```
 
-### 🔹 Using `delete[]` on a single object:
+### Using `delete[]` on a single object:
 
 ```cpp
 int* ptr = new int;
@@ -159,7 +263,7 @@ delete[] ptr; // ❌ also undefined behavior
 
 ---
 
-## ✅ For Custom Classes
+## For Custom Classes
 
 If your class allocates resources, calling the **destructor properly** for each element matters.
 
@@ -194,7 +298,7 @@ Destructor
 
 ---
 
-## ✅ Summary Table
+## Summary Table
 
 | Keyword    | Use With         | Calls Destructors | Matches With |
 | ---------- | ---------------- | ----------------- | ------------ |
