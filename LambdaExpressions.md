@@ -153,6 +153,32 @@ return 0;
 ```
 Status :Successfully executed
 ```
+Questions 3.
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 5, b = 10;
+
+    // Lambda that captures a and b, takes two parameters x, y, and returns sum
+    auto add = [a, b](int x, int y) -> int {
+        cout << "Captured a: " << a << ", b: " << b << endl;
+        cout << "Passed x: " << x << ", y: " << y << endl;
+        return a + b + x + y;
+    };
+
+    cout << "Total Sum: " << add(3, 7) << endl;
+
+    return 0;
+}
+```
+Output
+```
+Captured a: 5, b: 10
+Passed x: 3, y: 7
+Total Sum: 25
+```
 ---
 
 ## Summary
