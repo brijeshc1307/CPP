@@ -1,6 +1,7 @@
 ### **Friend Function in C++**
 
 A **friend function** in C++ is a special function that is **not a member of a class**, but has **access to its private and protected members**.
+>Friend function in C++ एक ऐसा function होता है जो किसी class का हिस्सा नहीं होता, लेकिन फिर भी उस class के private और protected data को access कर सकता है।
 
 ---
 
