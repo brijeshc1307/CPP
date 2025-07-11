@@ -827,7 +827,7 @@ int main() {
 }
 ```
 
-* Defines and immediately calls an **empty lambda function**. The program does nothing visible and returns 0.
+* Defines and immediately calls an **empty [lambda](/LambdaExpressions.md) function**. The program does nothing visible and returns 0.
 
 ---
 
@@ -1228,7 +1228,7 @@ int main() {
 ### iQuest - Interview Questions**
 Round 1: 1hr
 
-Q1. Lambda Function: In C++, the syntax `[]() {}` is the basic structure of a **lambda function**. Let's break it down:
+Q1. [lambda](/LambdaExpressions.md) Function: In C++, the syntax `[]() {}` is the basic structure of a **lambda function**. Let's break it down:
 
 ## Syntax:
 
