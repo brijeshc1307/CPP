@@ -180,18 +180,165 @@ Passed x: 3, y: 7
 Total Sum: 25
 ```
 ---
+Example:
+### **Q1. What does this mean: `[=]() { return a + b; }`?**
 
-## Summary
+**Answer:**
 
-| Feature       | Description                          |
-| ------------- | ------------------------------------ |
-| Purpose       | Anonymous inline function            |
-| Return Type   | Optional (auto-deduced)              |
-| Useful With   | `sort`, `for_each`, `count_if`, etc. |
-| Captures      | `[ ]` by value, `[&]` by reference   |
-| Introduced in | C++11                                |
+* `[=]` means **capture all external variables by value**.
+* `()` means **no parameters**.
+* `{}` is the **function body**.
+
+So it returns the sum of `a` and `b` **captured by value**.
 
 ---
+### **Q2. Can you pass a lambda to `std::sort()`?**
+
+**Answer: Yes**
+
+```cpp
+vector<int> v = {3, 1, 4, 2};
+sort(v.begin(), v.end(), [](int a, int b) {
+    return a > b;  // Descending
+});
+```
+
+---
+
+### **Q3. What is the difference between `[]`, `[=]`, `[&]`, `[this]`?**
+
+| Syntax   | Meaning                                  |
+| -------- | ---------------------------------------- |
+| `[]`     | Capture nothing                          |
+| `[=]`    | Capture all outer variables by value     |
+| `[&]`    | Capture all outer variables by reference |
+| `[this]` | Capture current object pointer (`this`)  |
+
+
+
+### Example
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+class Demo {
+private:
+    int member = 50;
+
+public:
+    void run() {
+        int a = 10, b = 20;
+
+        // 1. [] - capture nothing
+        auto nothingCapture = []() {
+            cout << "[]: No external variables captured." << endl;
+        };
+        nothingCapture();
+
+        // 2. [=] - capture all by value
+        auto valueCapture = [=]() {
+            cout << "[=]: a = " << a << ", b = " << b << endl;
+            // a++; //  Error: captured by value (read-only without 'mutable')
+        };
+        valueCapture();
+
+        // 3. [&] - capture all by reference
+        auto referenceCapture = [&]() {
+            a += 5;
+            b += 10;
+            cout << "[&]: a = " << a << ", b = " << b << " (modified by reference)" << endl;
+        };
+        referenceCapture();
+
+        // 4. [this] - capture class members
+        auto thisCapture = [this]() {
+            cout << "[this]: member = " << member << endl;
+        };
+        thisCapture();
+
+        cout << "Final a: " << a << ", b: " << b << endl;
+    }
+};
+
+int main() {
+    Demo obj;
+    obj.run();
+    return 0;
+}
+```
+Output
+```
+[]: No external variables captured.
+[=]: a = 10, b = 20
+[&]: a = 15, b = 30 (modified by reference)
+[this]: member = 50
+Final a: 15, b: 30
+```
+---
+
+###  **Q4. Lambda that captures by reference and modifies the variable**
+
+```cpp
+int x = 10;
+auto modify = [&x]() {
+    x += 5;
+};
+modify();
+cout << x;  // Output: 15
+```
+
+---
+
+### **Q5. What does `mutable` do in lambda?**
+
+```cpp
+int x = 10;
+auto f = [x]() mutable {
+    x++;
+    cout << x << endl;  // Prints 11
+};
+f();
+cout << x << endl;  // Still 10 (because captured by value)
+```
+
+**Answer:** `mutable` allows modification of captured-by-value variables inside the lambda body.
+
+---
+
+### **Q6. Can lambdas be recursive?**
+
+**Directly No**, but we can use `std::function`:
+
+```cpp
+std::function<int(int)> factorial = [&](int n) {
+    return n <= 1 ? 1 : n * factorial(n - 1);
+};
+cout << factorial(5);  // Output: 120
+```
+
+---
+
+### **Q7. Lambda with STL - for\_each example**
+
+```cpp
+vector<int> v = {1, 2, 3, 4};
+int sum = 0;
+
+for_each(v.begin(), v.end(), [&sum](int val) {
+    sum += val;
+});
+
+cout << sum;  // Output: 10
+```
+
+---
+
+
+
 
 
 
