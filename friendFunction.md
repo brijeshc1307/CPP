@@ -78,8 +78,14 @@ class B;  // Forward declaration
 class A {
 private:
     int a;
+/* public:
+    A(int x) {
+        a = x;
+    } */
+//OR
 
 public:
+
     A(int x) : a(x) {}
     friend void sum(A, B);
 };
