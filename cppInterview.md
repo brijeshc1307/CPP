@@ -2002,9 +2002,9 @@ std::string removeDuplicates(const std::string &s) {
 
 ---
 
-## ✅ 1. **Print All Substrings of a String**
+## 6. **Print All Substrings of a String**
 
-### 🧠 Pseudocode:
+### Pseudocode:
 
 ```
 Loop over all starting indices i
@@ -2012,7 +2012,7 @@ Loop over ending indices j (from i to n)
 Print substring from i to j
 ```
 
-### 💻 C++ Code:
+### C++ Code:
 
 ```cpp
 void printAllSubstrings(const std::string &s) {
@@ -2025,9 +2025,9 @@ void printAllSubstrings(const std::string &s) {
 
 ---
 
-## ✅ 2. **Longest Common Prefix (LCP) Among Strings**
+## 7. **Longest Common Prefix (LCP) Among Strings**
 
-### 🧠 Pseudocode:
+### Pseudocode:
 
 ```
 Take the first string as base
@@ -2035,7 +2035,7 @@ Compare characters at each position with all strings
 Break if mismatch found
 ```
 
-### 💻 C++ Code:
+### C++ Code:
 
 ```cpp
 #include <vector>
@@ -2056,16 +2056,16 @@ std::string longestCommonPrefix(const std::vector<std::string> &strs) {
 
 ---
 
-## ✅ 3. **Longest Palindromic Substring (Expand Around Center)**
+## 8. **Longest Palindromic Substring (Expand Around Center)**
 
-### 🧠 Pseudocode:
+### Pseudocode:
 
 ```
 For each character, expand around center (odd and even)
 Track max length and start index
 ```
 
-### 💻 C++ Code:
+### C++ Code:
 
 ```cpp
 std::string longestPalindrome(std::string s) {
@@ -2100,7 +2100,7 @@ std::string longestPalindrome(std::string s) {
 
 ---
 
-## ✅ 4. **Implement `strlen`, `strcpy`, `strcat`, `strcmp`**
+## 9. **Implement `strlen`, `strcpy`, `strcat`, `strcmp`**
 
 ### 💻 C++ Code:
 
@@ -2130,9 +2130,9 @@ int myStrcmp(const char *s1, const char *s2) {
 
 ---
 
-## ✅ 5. **Count Vowels, Consonants, Digits, and Spaces**
+## 10. **Count Vowels, Consonants, Digits, and Spaces**
 
-### 🧠 Pseudocode:
+### Pseudocode:
 
 ```
 Loop through each character:
@@ -2142,7 +2142,7 @@ Loop through each character:
     if letter but not vowel → consonant++
 ```
 
-### 💻 C++ Code:
+### C++ Code:
 
 ```cpp
 void countChars(const std::string &s) {
@@ -2168,9 +2168,9 @@ void countChars(const std::string &s) {
 ---
 
 
-## ✅ 1. **Toggle Case of Each Character**
+## 11. **Toggle Case of Each Character**
 
-### 🧠 Pseudocode:
+###  Pseudocode:
 
 ```
 Loop through each character:
@@ -2178,7 +2178,7 @@ Loop through each character:
     if uppercase → convert to lowercase
 ```
 
-### 💻 C++ Code:
+###  C++ Code:
 
 ```cpp
 void toggleCase(std::string &s) {
@@ -2193,9 +2193,9 @@ void toggleCase(std::string &s) {
 
 ---
 
-## ✅ 2. **Convert String to Integer (atoi)**
+## 12. **Convert String to Integer (atoi)**
 
-### 🧠 Pseudocode:
+###  Pseudocode:
 
 ```
 Skip leading whitespaces
@@ -2204,7 +2204,7 @@ Convert digit characters to integer
 Stop if non-digit encountered
 ```
 
-### 💻 C++ Code:
+### C++ Code:
 
 ```cpp
 int myAtoi(const std::string &s) {
@@ -2229,16 +2229,16 @@ int myAtoi(const std::string &s) {
 
 ---
 
-## ✅ 3. **Find the Most Frequent Character**
+## 13. **Find the Most Frequent Character**
 
-### 🧠 Pseudocode:
+###  Pseudocode:
 
 ```
 Create a frequency map
 Track max frequency and character
 ```
 
-### 💻 C++ Code:
+###  C++ Code:
 
 ```cpp
 char mostFrequentChar(const std::string &s) {
@@ -2256,19 +2256,66 @@ char mostFrequentChar(const std::string &s) {
     return result;
 }
 ```
+OR
+```cpp
+#include <iostream>
+using namespace std;
+
+char mostFrequentChar(const string& s) {
+    int freq[26] = {0};
+    for (char ch : s)
+        freq[ch - 'a']++;
+
+    int maxFreq = 0;
+    char result = '\0';
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] > maxFreq) {
+            maxFreq = freq[i];
+            result = 'a' + i;
+        }
+    }
+    return result;
+}
+
+int main() {
+    string str = "examplestring";
+    cout << "Most frequent character: " << mostFrequentChar(str);
+    return 0;
+}
+
+```
+OR
+```cpp
+char mostFrequentChar(string s) {
+    unordered_map<char, int> freq;
+    for (char ch : s)
+        freq[ch]++;
+
+    int maxFreq = 0;
+    char result = '\0';
+    for (auto pair : freq) {
+        if (pair.second > maxFreq) {
+            maxFreq = pair.second;
+            result = pair.first;
+        }
+    }
+    return result;
+}
+
+```
 
 ---
 
-## ✅ 4. **Check if Two Strings Are Rotations of Each Other**
+## 14. **Check if Two Strings Are Rotations of Each Other**
 
-### 🧠 Pseudocode:
+### Pseudocode:
 
 ```
 If lengths differ → false
 Check if str2 is a substring of str1 + str1
 ```
 
-### 💻 C++ Code:
+### C++ Code:
 
 ```cpp
 bool areRotations(const std::string &s1, const std::string &s2) {
@@ -2279,7 +2326,7 @@ bool areRotations(const std::string &s1, const std::string &s2) {
 Pointer
 ---
 
-## ✅ 1. **Swap Two Variables Using Pointers**
+## 1. **Swap Two Variables Using Pointers**
 
 ```cpp
 void swap(int *a, int *b) {
@@ -2291,7 +2338,7 @@ void swap(int *a, int *b) {
 
 ---
 
-## ✅ 2. **Print Array Using Pointer Notation**
+## 2. **Print Array Using Pointer Notation**
 
 ```cpp
 void printArray(int *arr, int n) {
@@ -2302,7 +2349,7 @@ void printArray(int *arr, int n) {
 
 ---
 
-## ✅ 3. **Reverse a String Using Pointers**
+## 3. **Reverse a String Using Pointers**
 
 ```cpp
 void reverseString(char *str) {
@@ -2320,7 +2367,7 @@ void reverseString(char *str) {
 
 ---
 
-## ✅ 4. **Find Length of String Using Pointer**
+## 4. **Find Length of String Using Pointer**
 
 ```cpp
 int stringLength(const char *str) {
@@ -2332,7 +2379,7 @@ int stringLength(const char *str) {
 
 ---
 
-## ✅ 5. **Access 2D Array Using Pointers**
+## 5. **Access 2D Array Using Pointers**
 
 ```cpp
 void print2D(int *arr, int rows, int cols) {
@@ -2344,7 +2391,7 @@ void print2D(int *arr, int rows, int cols) {
 
 ---
 
-## ✅ 6. **Dynamic Memory Allocation Using `malloc`/`calloc`**
+## 6. **Dynamic Memory Allocation Using `malloc`/`calloc`**
 
 ```cpp
 int *arr = (int *)malloc(n * sizeof(int));     // malloc
@@ -2353,7 +2400,7 @@ int *arr = (int *)calloc(n, sizeof(int));      // calloc
 
 ---
 
-## ✅ 7. **Implement `memcpy` Using Pointers**
+## 7. **Implement `memcpy` Using Pointers**
 
 ```cpp
 void *myMemcpy(void *dest, const void *src, size_t n) {
@@ -2366,7 +2413,7 @@ void *myMemcpy(void *dest, const void *src, size_t n) {
 
 ---
 
-## ✅ 8. **Program Using Function Pointer**
+## 8. **Program Using Function Pointer**
 
 ```cpp
 void greet() {
@@ -2381,7 +2428,7 @@ int main() {
 
 ---
 
-## ✅ 9. **Pass Array to Function Using Pointer**
+## 9. **Pass Array to Function Using Pointer**
 
 ```cpp
 void sum(int *arr, int n) {
@@ -2393,7 +2440,7 @@ void sum(int *arr, int n) {
 
 ---
 
-## ✅ 10. **Use Pointer to Struct**
+## 10. **Use Pointer to Struct**
 
 ```cpp
 struct Point {
