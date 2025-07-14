@@ -1,6 +1,4 @@
-
-
-### 🔹 **C++ Core & OOP**
+### **C++ Core & OOP**
 
 ---
 
@@ -1270,7 +1268,8 @@ close(fd);
 ```
 
 ---
-
+---
+ARRAY, STRING, Pointer Questions
 
 ### 1. **Find the Largest and Smallest Element**
 
@@ -1387,6 +1386,36 @@ void leftRotateReversal(int arr[], int n, int k) {
 }
 ```
 
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+void leftRotateByOne(int arr[], int n) {
+    int temp = arr[0];
+    for (int i = 0; i < n - 1; i++)
+        arr[i] = arr[i + 1];
+    arr[n - 1] = temp;
+}
+
+void leftRotate(int arr[], int n, int k) {
+    k = k % n;
+    for (int i = 0; i < k; i++)
+        leftRotateByOne(arr, n);
+
+}
+int main(){
+int arr[] = {1, 2,3,4,5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k=2;
+    leftRotate(arr,n,k);
+    for(int i=0;i<n;i++){
+        cout<<arr[i]<<" ";
+    }
+return 0;
+}
+
+```
+
 
 #### Pseudocode (Right Rotate):
 
@@ -1407,7 +1436,36 @@ void rightRotateEfficient(int arr[], int n, int k) {
     reverse(arr, 0, n - 1);
 }
 ```
+```cpp
+// Rotate array by 1 position to the right
+void rightRotateByOne(int arr[], int n) {
+    int temp = arr[n - 1];
+    for (int i = n - 1; i > 0; i--)
+        arr[i] = arr[i - 1];
+    arr[0] = temp;
+}
 
+// Rotate array by k positions to the right
+void rightRotate(int arr[], int n, int k) {
+    k = k % n;
+    for (int i = 0; i < k; i++)
+        rightRotateByOne(arr, n);
+}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int k = 2;
+
+    rightRotate(arr, n, k);
+
+    for (int i = 0; i < n; i++)
+        cout << arr[i] << " ";
+
+    return 0;
+}
+
+```
 ---
 
 ### 6. **Remove Duplicates from Sorted Array**
