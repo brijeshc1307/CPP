@@ -1373,6 +1373,21 @@ for (int i = 1; i < n; i++) {
 
 ### 5. **Left/Right Rotate by K Positions**
 
+#### C++ Code (Left Rotate):
+```cpp
+void reverse(int arr[], int start, int end) {
+    while (start < end)
+        std::swap(arr[start++], arr[end--]);
+}
+void leftRotateReversal(int arr[], int n, int k) {
+    k = k % n;
+    reverse(arr, 0, k - 1);
+    reverse(arr, k, n - 1);
+    reverse(arr, 0, n - 1);
+}
+```
+
+
 #### Pseudocode (Right Rotate):
 
 ```
@@ -1385,9 +1400,12 @@ Reverse rest
 #### C++ Code (Right Rotate):
 
 ```cpp
-std::reverse(arr, arr + n);
-std::reverse(arr, arr + k);
-std::reverse(arr + k, arr + n);
+void rightRotateEfficient(int arr[], int n, int k) {
+    k = k % n;
+    reverse(arr, n - k, n - 1);
+    reverse(arr, 0, n - k - 1);
+    reverse(arr, 0, n - 1);
+}
 ```
 
 ---
