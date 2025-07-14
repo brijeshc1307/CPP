@@ -1508,8 +1508,8 @@ int total = n * (n + 1) / 2;
 int sum = 0;
 for (int i = 0; i < n - 1; i++) sum += arr[i];
 int missing = total - sum;
-```
 
+```
 ---
 
 ### 8. **Frequency of Each Element**
@@ -1526,6 +1526,45 @@ Loop and increment count
 ```cpp
 std::unordered_map<int, int> freq;
 for (int i = 0; i < n; i++) freq[arr[i]]++;
+```
+OR
+```cpp
+int arr[] = {1, 2,2, 4, 5,6};
+    int n = 6;  // should contain numbers from 1 to 5
+    unordered_map<int, int> freq;
+    for (int i = 0; i < n; i++) 
+        freq[arr[i]]++;
+        
+    for(auto pair:freq){
+        cout << pair.first << " -> " << pair.second << endl;
+    }
+```
+OR
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {1, 2, 2, 4, 5, 5, 5};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    const int MAX = 1000;
+    int freq[MAX] = {0};  // All elements initialized to 0
+
+    // Count frequency
+    for (int i = 0; i < n; i++) {
+        freq[arr[i]]++;
+    }
+
+    // Print frequencies (only non-zero counts)
+    for (int i = 0; i < MAX; i++) {
+        if (freq[i] > 0)
+            cout << i << " -> " << freq[i] << endl;
+    }
+
+    return 0;
+}
+
 ```
 
 ---
@@ -1549,6 +1588,45 @@ while (i < n1 && j < n2) {
 while (i < n1) c[k++] = a[i++];
 while (j < n2) c[k++] = b[j++];
 ```
+OR
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int a[] = {1, 2, 2, 4, 5, 6};
+    int b[] = {4, 5, 6};
+    int n1 = sizeof(a) / sizeof(a[0]);
+    int n2 = sizeof(b) / sizeof(b[0]);
+
+    int c[n1 + n2];  // merged array size
+
+    int i = 0, j = 0, k = 0;
+
+    // Merge two sorted arrays into c[]
+    while (i < n1 && j < n2) {
+        if (a[i] < b[j]) 
+            c[k++] = a[i++];
+        else 
+            c[k++] = b[j++];
+    }
+
+    // Copy remaining elements of a[], if any
+    while (i < n1) 
+        c[k++] = a[i++];
+
+    // Copy remaining elements of b[], if any
+    while (j < n2) 
+        c[k++] = b[j++];
+
+    // Print merged array
+    for (int idx = 0; idx < k; idx++) {
+        cout << c[idx] << " ";
+    }
+
+    return 0;
+}
+```
 
 ---
 
@@ -1568,9 +1646,53 @@ Loop through array:
 ```cpp
 int maxSum = INT_MIN, currSum = 0;
 for (int i = 0; i < n; i++) {
-    currSum = std::max(arr[i], currSum + arr[i]);
-    maxSum = std::max(maxSum, currSum);
+    currSum = max(arr[i], currSum + arr[i]);
+    maxSum = max(maxSum, currSum);
 }
+```
+```cpp
+#include <iostream>
+#include <climits>  // For INT_MIN
+using namespace std;
+
+int maxSubArraySum(int arr[], int n) {
+    int maxSum = INT_MIN;
+    int currentSum = 0;
+
+    for (int i = 0; i < n; i++) {
+        currentSum = currentSum + arr[i];
+        if (currentSum > maxSum)
+            maxSum = currentSum;
+
+        if (currentSum < 0)
+            currentSum = 0;
+    }
+    return maxSum;
+}
+
+int main() {
+    int nums1[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int n1 = sizeof(nums1) / sizeof(nums1[0]);
+    cout << "Max subarray sum for test case 1: " << maxSubArraySum(nums1, n1) << endl;
+
+    int nums2[] = {1};
+    int n2 = sizeof(nums2) / sizeof(nums2[0]);
+    cout << "Max subarray sum for test case 2: " << maxSubArraySum(nums2, n2) << endl;
+
+    int nums3[] = {5, 4, -1, 7, 8};
+    int n3 = sizeof(nums3) / sizeof(nums3[0]);
+    cout << "Max subarray sum for test case 3: " << maxSubArraySum(nums3, n3) << endl;
+
+    return 0;
+}
+
+
+```
+Output
+```
+Max subarray sum for test case 1: 6
+Max subarray sum for test case 2: 1
+Max subarray sum for test case 3: 23
 ```
 
 ---
@@ -1595,13 +1717,17 @@ void sort012(int arr[], int n) {
     int low = 0, mid = 0, high = n - 1;
     while (mid <= high) {
         if (arr[mid] == 0)
-            std::swap(arr[low++], arr[mid++]);
+            swap(arr[low++], arr[mid++]);
         else if (arr[mid] == 1)
             mid++;
         else
-            std::swap(arr[mid], arr[high--]);
+            swap(arr[mid], arr[high--]);
     }
 }
+```
+OR
+```cpp
+sort(arr, arr + n)
 ```
 
 ---
