@@ -1271,3 +1271,942 @@ close(fd);
 
 ---
 
+
+### 1. **Find the Largest and Smallest Element**
+
+#### Pseudocode:
+
+```
+Initialize max = INT_MIN, min = INT_MAX
+Loop through each element:
+    if element > max → update max
+    if element < min → update min
+```
+
+#### C++ Code:
+
+```cpp
+int max = INT_MIN, min = INT_MAX;
+for (int i = 0; i < n; i++) {
+    if (arr[i] > max) max = arr[i];
+    if (arr[i] < min) min = arr[i];
+}
+```
+
+---
+
+### 2. **Find the Second Largest Element**
+
+#### Pseudocode:
+
+```
+Initialize largest = second = INT_MIN
+Loop:
+    if element > largest:
+        second = largest
+        largest = element
+    else if element > second and element != largest:
+        second = element
+```
+
+#### C++ Code:
+
+```cpp
+int largest = INT_MIN, second = INT_MIN;
+for (int i = 0; i < n; i++) {
+    if (arr[i] > largest) {
+        second = largest;
+        largest = arr[i];
+    } else if (arr[i] > second && arr[i] != largest) {
+        second = arr[i];
+    }
+}
+```
+
+---
+
+### 3. **Reverse an Array**
+
+#### Pseudocode:
+
+```
+Use two pointers (start, end)
+Swap elements at start and end until they meet
+```
+
+#### C++ Code:
+
+```cpp
+int start = 0, end = n - 1;
+while (start < end) {
+    std::swap(arr[start], arr[end]);
+    start++;
+    end--;
+}
+```
+
+---
+
+### 4. **Check if Array is Sorted**
+
+#### Pseudocode:
+
+```
+Loop from 1 to n-1:
+    if arr[i] < arr[i-1], return false
+Return true
+```
+
+#### C++ Code:
+
+```cpp
+bool isSorted = true;
+for (int i = 1; i < n; i++) {
+    if (arr[i] < arr[i - 1]) {
+        isSorted = false;
+        break;
+    }
+}
+```
+
+---
+
+### 5. **Left/Right Rotate by K Positions**
+
+#### Pseudocode (Right Rotate):
+
+```
+k = k % n
+Reverse whole array
+Reverse first k elements
+Reverse rest
+```
+
+#### C++ Code (Right Rotate):
+
+```cpp
+std::reverse(arr, arr + n);
+std::reverse(arr, arr + k);
+std::reverse(arr + k, arr + n);
+```
+
+---
+
+### 6. **Remove Duplicates from Sorted Array**
+
+#### Pseudocode:
+
+```
+Use two pointers (i, j)
+If arr[i] != arr[j], copy to next position
+```
+
+#### C++ Code:
+
+```cpp
+int j = 0;
+for (int i = 1; i < n; i++) {
+    if (arr[i] != arr[j]) {
+        j++;
+        arr[j] = arr[i];
+    }
+}
+int newLength = j + 1;
+```
+
+---
+
+### 7. **Find Missing Number (1 to N)**
+
+#### Pseudocode:
+
+```
+Sum of 1 to N = n*(n+1)/2
+Subtract actual sum from expected
+```
+
+#### C++ Code:
+
+```cpp
+int total = n * (n + 1) / 2;
+int sum = 0;
+for (int i = 0; i < n - 1; i++) sum += arr[i];
+int missing = total - sum;
+```
+
+---
+
+### 8. **Frequency of Each Element**
+
+#### Pseudocode:
+
+```
+Use a hashmap (unordered_map)
+Loop and increment count
+```
+
+#### C++ Code:
+
+```cpp
+std::unordered_map<int, int> freq;
+for (int i = 0; i < n; i++) freq[arr[i]]++;
+```
+
+---
+
+### 9. **Merge Two Sorted Arrays**
+
+#### Pseudocode:
+
+```
+Use two pointers to compare and merge into new array
+```
+
+#### C++ Code:
+
+```cpp
+int i = 0, j = 0, k = 0;
+while (i < n1 && j < n2) {
+    if (a[i] < b[j]) c[k++] = a[i++];
+    else c[k++] = b[j++];
+}
+while (i < n1) c[k++] = a[i++];
+while (j < n2) c[k++] = b[j++];
+```
+
+---
+
+###  10. **Kadane's Algorithm (Max Subarray Sum)**
+
+#### Pseudocode:
+
+```
+Initialize current_sum = 0, max_sum = INT_MIN
+Loop through array:
+    current_sum = max(element, current_sum + element)
+    max_sum = max(max_sum, current_sum)
+```
+
+#### C++ Code:
+
+```cpp
+int maxSum = INT_MIN, currSum = 0;
+for (int i = 0; i < n; i++) {
+    currSum = std::max(arr[i], currSum + arr[i]);
+    maxSum = std::max(maxSum, currSum);
+}
+```
+
+---
+
+
+## 11. **Sort 0s, 1s, and 2s** (Dutch National Flag Problem)
+
+### Pseudocode:
+
+```
+Initialize low = 0, mid = 0, high = n - 1
+While mid <= high:
+    if arr[mid] == 0 → swap with arr[low], low++, mid++
+    if arr[mid] == 1 → mid++
+    if arr[mid] == 2 → swap with arr[high], high--
+```
+
+### C++ Code:
+
+```cpp
+void sort012(int arr[], int n) {
+    int low = 0, mid = 0, high = n - 1;
+    while (mid <= high) {
+        if (arr[mid] == 0)
+            std::swap(arr[low++], arr[mid++]);
+        else if (arr[mid] == 1)
+            mid++;
+        else
+            std::swap(arr[mid], arr[high--]);
+    }
+}
+```
+
+---
+
+## 12. **Find All Pairs with a Given Sum**
+
+### Pseudocode:
+
+```
+Initialize an empty hash set
+For each element x:
+    Check if (target - x) exists in set
+    If yes, it's a valid pair
+    Insert x into the set
+```
+
+### C++ Code:
+
+```cpp
+void findPairs(int arr[], int n, int target) {
+    std::unordered_set<int> seen;
+    for (int i = 0; i < n; i++) {
+        int complement = target - arr[i];
+        if (seen.count(complement))
+            std::cout << "(" << arr[i] << ", " << complement << ")\n";
+        seen.insert(arr[i]);
+    }
+}
+```
+
+---
+
+## 13. **Find Leaders in an Array**
+
+*A leader is an element greater than all elements to its right.*
+
+### Pseudocode:
+
+```
+Start from the rightmost element, mark it as current leader
+Loop from n-2 to 0:
+    if arr[i] > current leader → it’s a new leader
+```
+
+### C++ Code:
+
+```cpp
+void printLeaders(int arr[], int n) {
+    int maxRight = arr[n - 1];
+    std::cout << maxRight << " ";
+    for (int i = n - 2; i >= 0; i--) {
+        if (arr[i] > maxRight) {
+            maxRight = arr[i];
+            std::cout << maxRight << " ";
+        }
+    }
+}
+```
+
+---
+
+## 14. **Find Majority Element (Moore’s Voting Algorithm)**
+
+*A majority element appears more than n/2 times.*
+
+### Pseudocode:
+
+```
+Phase 1 (Find candidate):
+    Initialize count = 0, candidate = None
+    Loop:
+        if count == 0 → candidate = current
+        if current == candidate → count++
+        else → count--
+
+Phase 2 (Verify candidate):
+    Count actual frequency of candidate
+```
+
+### C++ Code:
+
+```cpp
+int findMajority(int arr[], int n) {
+    int count = 0, candidate = -1;
+    for (int i = 0; i < n; i++) {
+        if (count == 0)
+            candidate = arr[i];
+        count += (arr[i] == candidate) ? 1 : -1;
+    }
+
+    count = 0;
+    for (int i = 0; i < n; i++)
+        if (arr[i] == candidate)
+            count++;
+
+    return (count > n / 2) ? candidate : -1;
+}
+```
+
+---
+
+## 15. **Subarray with Given Sum** (Positive integers only)
+
+### Pseudocode:
+
+```
+Use sliding window:
+Initialize start = 0, currSum = arr[0]
+Loop i = 1 to n:
+    while currSum > target → subtract arr[start++]
+    if currSum == target → print start to i-1
+    add arr[i] to currSum
+```
+
+### C++ Code:
+
+```cpp
+void subarrayWithSum(int arr[], int n, int target) {
+    int start = 0, currSum = arr[0];
+    for (int end = 1; end <= n; end++) {
+        while (currSum > target && start < end - 1)
+            currSum -= arr[start++];
+
+        if (currSum == target) {
+            std::cout << "Subarray found from index " << start
+                      << " to " << end - 1 << std::endl;
+            return;
+        }
+
+        if (end < n)
+            currSum += arr[end];
+    }
+    std::cout << "No subarray with given sum\n";
+}
+```
+
+---
+String
+---
+
+## 1. **Reverse a String**
+
+### Pseudocode:
+
+```
+Use two pointers: start = 0, end = length - 1
+Swap characters at start and end
+Move start++, end--
+```
+
+### C++ Code:
+
+```cpp
+#include <iostream>
+#include <string>
+#include <algorithm>
+
+void reverseString(std::string &s) {
+    int start = 0, end = s.length() - 1;
+    while (start < end) {
+        std::swap(s[start++], s[end--]);
+    }
+}
+```
+
+---
+
+## 2. **Check if a String is Palindrome**
+
+### Pseudocode:
+
+```
+Compare characters from both ends
+If any mismatch → not a palindrome
+```
+
+### C++ Code:
+
+```cpp
+bool isPalindrome(const std::string &s) {
+    int start = 0, end = s.length() - 1;
+    while (start < end) {
+        if (s[start++] != s[end--])
+            return false;
+    }
+    return true;
+}
+```
+
+---
+
+## 3. **Find Frequency of Characters in a String**
+
+### Pseudocode:
+
+```
+Use an array or map to count frequency of each character
+```
+
+### C++ Code:
+
+```cpp
+#include <unordered_map>
+
+void charFrequency(const std::string &s) {
+    std::unordered_map<char, int> freq;
+    for (char c : s) freq[c]++;
+    
+    for (auto &p : freq)
+        std::cout << p.first << " : " << p.second << std::endl;
+}
+```
+
+---
+
+## 4. **Check for Anagram**
+
+### Pseudocode:
+
+```
+If lengths are different → not anagram
+Sort both strings and compare
+OR
+Count character frequencies and compare
+```
+
+### C++ Code (using frequency):
+
+```cpp
+bool isAnagram(const std::string &a, const std::string &b) {
+    if (a.length() != b.length()) return false;
+    
+    int count[256] = {0};  // assuming ASCII
+
+    for (char c : a) count[c]++;
+    for (char c : b) count[c]--;
+
+    for (int i = 0; i < 256; i++) {
+        if (count[i] != 0) return false;
+    }
+    return true;
+}
+```
+
+---
+
+## 5. **Remove All Duplicates from a String (Preserve Order)**
+
+### Pseudocode:
+
+```
+Use a visited set or boolean array
+Loop through the string, add to result only if not seen
+```
+
+### C++ Code:
+
+```cpp
+std::string removeDuplicates(const std::string &s) {
+    bool seen[256] = {false};
+    std::string result;
+
+    for (char c : s) {
+        if (!seen[c]) {
+            result += c;
+            seen[c] = true;
+        }
+    }
+    return result;
+}
+```
+
+---
+
+## ✅ 1. **Print All Substrings of a String**
+
+### 🧠 Pseudocode:
+
+```
+Loop over all starting indices i
+Loop over ending indices j (from i to n)
+Print substring from i to j
+```
+
+### 💻 C++ Code:
+
+```cpp
+void printAllSubstrings(const std::string &s) {
+    int n = s.length();
+    for (int i = 0; i < n; ++i)
+        for (int j = i; j < n; ++j)
+            std::cout << s.substr(i, j - i + 1) << std::endl;
+}
+```
+
+---
+
+## ✅ 2. **Longest Common Prefix (LCP) Among Strings**
+
+### 🧠 Pseudocode:
+
+```
+Take the first string as base
+Compare characters at each position with all strings
+Break if mismatch found
+```
+
+### 💻 C++ Code:
+
+```cpp
+#include <vector>
+
+std::string longestCommonPrefix(const std::vector<std::string> &strs) {
+    if (strs.empty()) return "";
+
+    for (int i = 0; i < strs[0].size(); ++i) {
+        char c = strs[0][i];
+        for (int j = 1; j < strs.size(); ++j) {
+            if (i >= strs[j].size() || strs[j][i] != c)
+                return strs[0].substr(0, i);
+        }
+    }
+    return strs[0];
+}
+```
+
+---
+
+## ✅ 3. **Longest Palindromic Substring (Expand Around Center)**
+
+### 🧠 Pseudocode:
+
+```
+For each character, expand around center (odd and even)
+Track max length and start index
+```
+
+### 💻 C++ Code:
+
+```cpp
+std::string longestPalindrome(std::string s) {
+    int start = 0, maxLen = 1;
+    int n = s.size();
+
+    for (int i = 0; i < n; ++i) {
+        // Odd length
+        int l = i, r = i;
+        while (l >= 0 && r < n && s[l] == s[r]) {
+            if (r - l + 1 > maxLen) {
+                start = l;
+                maxLen = r - l + 1;
+            }
+            l--; r++;
+        }
+
+        // Even length
+        l = i, r = i + 1;
+        while (l >= 0 && r < n && s[l] == s[r]) {
+            if (r - l + 1 > maxLen) {
+                start = l;
+                maxLen = r - l + 1;
+            }
+            l--; r++;
+        }
+    }
+
+    return s.substr(start, maxLen);
+}
+```
+
+---
+
+## ✅ 4. **Implement `strlen`, `strcpy`, `strcat`, `strcmp`**
+
+### 💻 C++ Code:
+
+```cpp
+int myStrlen(const char *s) {
+    int len = 0;
+    while (*s++) len++;
+    return len;
+}
+
+void myStrcpy(char *dest, const char *src) {
+    while ((*dest++ = *src++));
+}
+
+void myStrcat(char *dest, const char *src) {
+    while (*dest) dest++;  // Move to end
+    while ((*dest++ = *src++));
+}
+
+int myStrcmp(const char *s1, const char *s2) {
+    while (*s1 && (*s1 == *s2)) {
+        s1++; s2++;
+    }
+    return *(unsigned char*)s1 - *(unsigned char*)s2;
+}
+```
+
+---
+
+## ✅ 5. **Count Vowels, Consonants, Digits, and Spaces**
+
+### 🧠 Pseudocode:
+
+```
+Loop through each character:
+    if vowel → count++
+    if digit → digit++
+    if space → space++
+    if letter but not vowel → consonant++
+```
+
+### 💻 C++ Code:
+
+```cpp
+void countChars(const std::string &s) {
+    int vowels = 0, consonants = 0, digits = 0, spaces = 0;
+
+    for (char c : s) {
+        if (std::isdigit(c)) digits++;
+        else if (std::isspace(c)) spaces++;
+        else if (std::isalpha(c)) {
+            char lower = std::tolower(c);
+            if (lower == 'a' || lower == 'e' || lower == 'i' || lower == 'o' || lower == 'u')
+                vowels++;
+            else
+                consonants++;
+        }
+    }
+
+    std::cout << "Vowels: " << vowels << "\nConsonants: " << consonants
+              << "\nDigits: " << digits << "\nSpaces: " << spaces << "\n";
+}
+```
+
+---
+
+
+## ✅ 1. **Toggle Case of Each Character**
+
+### 🧠 Pseudocode:
+
+```
+Loop through each character:
+    if lowercase → convert to uppercase
+    if uppercase → convert to lowercase
+```
+
+### 💻 C++ Code:
+
+```cpp
+void toggleCase(std::string &s) {
+    for (char &c : s) {
+        if (std::islower(c))
+            c = std::toupper(c);
+        else if (std::isupper(c))
+            c = std::tolower(c);
+    }
+}
+```
+
+---
+
+## ✅ 2. **Convert String to Integer (atoi)**
+
+### 🧠 Pseudocode:
+
+```
+Skip leading whitespaces
+Handle optional sign
+Convert digit characters to integer
+Stop if non-digit encountered
+```
+
+### 💻 C++ Code:
+
+```cpp
+int myAtoi(const std::string &s) {
+    int i = 0, result = 0, sign = 1;
+
+    // Skip whitespaces
+    while (i < s.length() && s[i] == ' ') i++;
+
+    // Sign
+    if (s[i] == '-') { sign = -1; i++; }
+    else if (s[i] == '+') { i++; }
+
+    // Convert digits
+    while (i < s.length() && std::isdigit(s[i])) {
+        result = result * 10 + (s[i] - '0');
+        i++;
+    }
+
+    return result * sign;
+}
+```
+
+---
+
+## ✅ 3. **Find the Most Frequent Character**
+
+### 🧠 Pseudocode:
+
+```
+Create a frequency map
+Track max frequency and character
+```
+
+### 💻 C++ Code:
+
+```cpp
+char mostFrequentChar(const std::string &s) {
+    int freq[256] = {0};
+    for (char c : s) freq[(unsigned char)c]++;
+
+    int maxFreq = 0;
+    char result = '\0';
+    for (int i = 0; i < 256; i++) {
+        if (freq[i] > maxFreq) {
+            maxFreq = freq[i];
+            result = i;
+        }
+    }
+    return result;
+}
+```
+
+---
+
+## ✅ 4. **Check if Two Strings Are Rotations of Each Other**
+
+### 🧠 Pseudocode:
+
+```
+If lengths differ → false
+Check if str2 is a substring of str1 + str1
+```
+
+### 💻 C++ Code:
+
+```cpp
+bool areRotations(const std::string &s1, const std::string &s2) {
+    if (s1.length() != s2.length()) return false;
+    return (s1 + s1).find(s2) != std::string::npos;
+}
+```
+Pointer
+---
+
+## ✅ 1. **Swap Two Variables Using Pointers**
+
+```cpp
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+```
+
+---
+
+## ✅ 2. **Print Array Using Pointer Notation**
+
+```cpp
+void printArray(int *arr, int n) {
+    for (int i = 0; i < n; i++)
+        std::cout << *(arr + i) << " ";
+}
+```
+
+---
+
+## ✅ 3. **Reverse a String Using Pointers**
+
+```cpp
+void reverseString(char *str) {
+    char *end = str;
+    while (*end) end++;
+    end--;
+
+    while (str < end) {
+        std::swap(*str, *end);
+        str++;
+        end--;
+    }
+}
+```
+
+---
+
+## ✅ 4. **Find Length of String Using Pointer**
+
+```cpp
+int stringLength(const char *str) {
+    const char *p = str;
+    while (*p) p++;
+    return p - str;
+}
+```
+
+---
+
+## ✅ 5. **Access 2D Array Using Pointers**
+
+```cpp
+void print2D(int *arr, int rows, int cols) {
+    for (int i = 0; i < rows; i++)
+        for (int j = 0; j < cols; j++)
+            std::cout << *(arr + i * cols + j) << " ";
+}
+```
+
+---
+
+## ✅ 6. **Dynamic Memory Allocation Using `malloc`/`calloc`**
+
+```cpp
+int *arr = (int *)malloc(n * sizeof(int));     // malloc
+int *arr = (int *)calloc(n, sizeof(int));      // calloc
+```
+
+---
+
+## ✅ 7. **Implement `memcpy` Using Pointers**
+
+```cpp
+void *myMemcpy(void *dest, const void *src, size_t n) {
+    char *d = (char *)dest;
+    const char *s = (const char *)src;
+    while (n--) *d++ = *s++;
+    return dest;
+}
+```
+
+---
+
+## ✅ 8. **Program Using Function Pointer**
+
+```cpp
+void greet() {
+    std::cout << "Hello, Pointer to Function!\n";
+}
+
+int main() {
+    void (*fp)() = greet;
+    fp();  // call the function via pointer
+}
+```
+
+---
+
+## ✅ 9. **Pass Array to Function Using Pointer**
+
+```cpp
+void sum(int *arr, int n) {
+    int total = 0;
+    for (int i = 0; i < n; i++) total += *(arr + i);
+    std::cout << "Sum: " << total;
+}
+```
+
+---
+
+## ✅ 10. **Use Pointer to Struct**
+
+```cpp
+struct Point {
+    int x, y;
+};
+
+int main() {
+    Point p = {3, 4};
+    Point *ptr = &p;
+    std::cout << ptr->x << " " << ptr->y;
+}
+```
+
+---
+
+
+
+
