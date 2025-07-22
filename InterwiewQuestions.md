@@ -1191,6 +1191,147 @@ int main() {
 
 ### **Q13. Implementations of a List in C++**
 
+### **Q14. **Nearest Floor Request in Given Direction**
+
+### 📝 Problem Description:
+
+A lift (elevator) is currently at a floor and moving in a specific direction (`"Up"` or `"Down"`). It has received exactly 3 floor requests from users waiting on different floors.
+
+Write a function to determine **which one of the requested floors is nearest to the current floor in the same direction as the lift is moving**.
+Return that floor number.
+
+If no floor request is valid in the given direction, return `-1`.
+
+---
+
+### 🔧 Function Signature:
+
+```cpp
+int nearestFloor(int currLocation, string curDir, vector<int>& demandArr);
+```
+
+---
+
+### 🧪 Input:
+
+* `currLocation` (1 ≤ currLocation ≤ 100): current floor of the lift
+* `curDir`: a string `"Up"` or `"Down"` representing the direction
+* `demandArr`: a list of 3 integers (1 ≤ demandArr\[i] ≤ 100) representing requested floors
+
+---
+
+### 📤 Output:
+
+* Return the floor that is closest to `currLocation` in the specified `curDir` direction.
+* If no valid floor in the given direction exists, return `-1`.
+
+---
+
+### ✅ Example 1:
+
+```cpp
+Input: 
+currLocation = 5  
+curDir = "Down"  
+demandArr = [2, 4, 6]
+
+Output: 
+4
+
+Explanation:
+Valid "Down" requests (i.e. less than 5): 2, 4  
+Among these, 4 is the closest to 5.
+```
+
+---
+
+```cpp
+#include <iostream>
+#include <string>
+#include <climits>
+using namespace std;
+
+int main() {
+    int demandArr[3];
+    int currLocation;
+    string curDir;
+
+    cin >> currLocation;
+    cin >> curDir;
+
+    for (int i = 0; i < 3; i++) {
+        cin >> demandArr[i];
+    }
+
+    int nearest = -1;
+    int minDiff = INT_MAX;
+
+    if (curDir == "Up") {
+        for (int i = 0; i < 3; i++) {
+            if (demandArr[i] > currLocation) {
+                int diff = demandArr[i] - currLocation;
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    nearest = demandArr[i];
+                }
+            }
+        }
+    } else if (curDir == "Down") {
+        for (int i = 0; i < 3; i++) {
+            if (demandArr[i] < currLocation) {
+                int diff = currLocation - demandArr[i];
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    nearest = demandArr[i];
+                }
+            }
+        }
+    } else {
+        cout << "Invalid direction\n";
+        return 1;
+    }
+
+    if (nearest != -1) {
+        cout << "Stop at floor: " << nearest << endl;
+    } else {
+        cout << "No valid floor in the given direction.\n";
+    }
+
+    return 0;
+}
+```
+
+---
+#### Input:
+
+```
+5
+Down
+2 4 1
+```
+
+#### Output:
+
+```
+Stop at floor: 4
+```
+
+*(Among 2, 4, 1, only 4 is just below 5 and is the closest.)*
+
+#### Input:
+
+```
+3
+Up
+6 5 9
+```
+
+#### Output:
+
+```
+Stop at floor: 5
+```
+
 ---
 ### iQuest - Interview Questions**
 Round 1: 1hr
