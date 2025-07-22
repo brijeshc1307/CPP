@@ -1473,6 +1473,105 @@ Output
 ```
 
 ---
+### IBM - Interview Questions** : 30 min
+---
+### **Q1: `char *str;` vs `char str[];` in C++**
+
+**Answer:**
+
+| Aspect            | `char *str;`                       | `char str[];`                 |
+| ----------------- | ---------------------------------- | ----------------------------- |
+| Type              | Pointer to char                    | Array of chars                |
+| Memory Allocation | Can point to dynamic/static memory | Size is fixed at compile time |
+| Modifiable        | Pointer can be reassigned          | Array cannot be reassigned    |
+| Example           | `char *str = "Hello";`             | `char str[] = "Hello";`       |
+
+```cpp
+char *str1 = "Hello";       // Pointer to a string literal (read-only)
+char str2[] = "Hello";      // Array initialized with string (modifiable)
+```
+
+---
+
+### **Q2: class vs structure in C++**
+
+**Answer:**
+
+| Feature          | `class`                     | `struct`                    |
+| ---------------- | --------------------------- | --------------------------- |
+| Default Access   | Private                     | Public                      |
+| Inheritance      | Default private inheritance | Default public inheritance  |
+| Usage            | Typically for OOP           | Typically for data grouping |
+| Function Members | Allowed                     | Allowed                     |
+
+```cpp
+class MyClass {
+private:
+    int x;
+public:
+    void setX(int val) { x = val; }
+};
+
+struct MyStruct {
+    int x;
+    void setX(int val) { x = val; }
+};
+```
+
+---
+
+### **Q3: Program for Insertion (`<<`) Operator Overloading**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Point {
+    int x, y;
+public:
+    Point(int a, int b) : x(a), y(b) {}
+
+    // Overload <<
+    friend ostream& operator<<(ostream& out, const Point& p) {
+        out << "(" << p.x << ", " << p.y << ")";
+        return out;
+    }
+};
+
+int main() {
+    Point p(10, 20);
+    cout << "Point is: " << p << endl;
+    return 0;
+}
+```
+
+---
+
+### **Q4: What is OOP (Object-Oriented Programming) explain all pillers**
+
+---
+
+### **Q5: Do you know Linux?**
+
+**Answer:**
+Yes, Linux is a widely used open-source operating system. In development, it's commonly used for:
+
+* Command-line operations
+* Shell scripting
+* System-level programming
+* Managing servers and deployment
+* Tools like `gcc`, `g++`, `gdb`, `make`, etc.
+
+Example Linux commands:
+
+```bash
+ls       # list files
+cd       # change directory
+g++ app.cpp -o app  # compile C++ code
+./app    # run the program
+```
+
+---
 ---
 
 ### Team और Role को लेकर:
