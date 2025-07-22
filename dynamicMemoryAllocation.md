@@ -305,4 +305,169 @@ Destructor
 | `delete`   | Single object    | One               | `new`        |
 | `delete[]` | Array of objects | Multiple          | `new[]`      |
 
+---
+---
+
+###  **1. How is memory freed in C?**
+
+In C, memory allocated dynamically using `malloc()`, `calloc()`, or `realloc()` must be released using the `free()` function to prevent memory leaks.
+
+####  Example:
+
+```c
+int* ptr = (int*)malloc(sizeof(int) * 5);  // allocate memory
+// use ptr...
+free(ptr);  // free allocated memory
+```
+
+---
+
+###  **2. How do you allocate memory for a single object and an array in C++?**
+
+Use the `new` operator for dynamic memory allocation in C++.
+
+####  Single Object:
+
+```cpp
+int* p = new int;   // allocates memory for one int
+*p = 10;
+```
+
+#### � Array:
+
+```cpp
+int* arr = new int[5];  // allocates memory for array of 5 ints
+```
+
+Memory should be released using `delete` or `delete[]`:
+
+```cpp
+delete p;
+delete[] arr;
+```
+
+---
+
+###  **3. What happens if you use `delete` on memory allocated with `malloc()`?**
+
+💥 **Undefined behavior.**
+You **must not mix** C and C++ memory management functions.
+
+* `malloc()` → `free()`
+* `new` → `delete`
+* `new[]` → `delete[]`
+
+Using the wrong deallocator may cause **crashes** or **corruption**.
+
+---
+
+### **4. What is a memory leak? How does it occur in C++?**
+
+A **memory leak** occurs when:
+
+* Memory is allocated dynamically,
+* But is **not deallocated** (no `delete`/`free` called),
+* So it remains **unusable until program exits**.
+
+#### Example:
+
+```cpp
+int* p = new int(10);
+// No delete ⇒ memory leak
+```
+
+In long-running apps (like servers), leaks can lead to **performance degradation or crashes**.
+
+---
+
+### **5. Explain the use of `new[]` and `delete[]` in C++.**
+
+* `new[]` allocates memory for an **array of objects**.
+* `delete[]` deallocates that array.
+
+#### Example:
+
+```cpp
+int* arr = new int[5];   // allocates memory for 5 integers
+// ... use arr
+delete[] arr;            // properly deallocates the array
+```
+
+> ❗ Using `delete` instead of `delete[]` on an array results in **undefined behavior**.
+
+---
+
+### **6. What are the differences between stack and heap memory?**
+
+| Feature          | Stack                            | Heap                            |
+| ---------------- | -------------------------------- | ------------------------------- |
+| Allocation speed | Fast                             | Slower                          |
+| Lifetime         | Automatically managed            | Manually managed                |
+| Size limit       | Limited (depends on OS)          | Much larger (depends on RAM)    |
+| Allocation       | At compile-time or function call | At runtime using `new`/`malloc` |
+| Deallocation     | Automatic (function return)      | Manual (`delete` / `free`)      |
+
+---
+
+### **7. How can tools like Valgrind help with dynamic memory?**
+
+**Valgrind** is a tool that:
+
+* Detects **memory leaks**.
+* Identifies **invalid memory access** (e.g., using after free).
+* Tracks **uninitialized memory reads**.
+* Shows **exact line numbers** causing leaks.
+
+#### Example Usage (Linux):
+
+```bash
+valgrind ./your_program
+```
+
+It reports:
+
+* Blocks of memory that were never freed.
+* Locations of memory mismanagement.
+
+---
+
+###  **8. Is it possible to allocate memory for a 2D array dynamically? How?**
+
+Yes. You can allocate a 2D array using **pointers to pointers**.
+
+####  Example in C/C++:
+
+```cpp
+int rows = 3, cols = 4;
+
+// Step 1: Allocate memory for row pointers
+int** arr = new int*[rows];
+
+// Step 2: Allocate memory for each row
+for (int i = 0; i < rows; i++) {
+    arr[i] = new int[cols];
+}
+
+// ... use arr[i][j]
+
+// Free memory
+for (int i = 0; i < rows; i++) {
+    delete[] arr[i];
+}
+delete[] arr;
+```
+
+This is commonly used when the array dimensions are not known at compile-time.
+
+---
+
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Happy Coding!
+
+
+
 
