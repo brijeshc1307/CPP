@@ -1581,6 +1581,123 @@ g++ app.cpp -o app  # compile C++ code
 ```
 
 ---
+
+ ### **BMW C++ Interview** 
+
+---
+
+### **1. What is Name Mangling in C++?**
+
+**Q:** What is **name mangling**, and why is it used?
+
+**A:**
+Name mangling is the process by which the C++ compiler **modifies function names** (especially overloaded or templated ones) into unique names before compilation.
+This allows the linker to differentiate between functions with the same name but different signatures.
+
+ Example:
+
+```cpp
+void foo(int);     // Might become _Z3fooi
+void foo(float);   // Might become _Z3foof
+```
+
+> You can prevent mangling using `extern "C"` for C linkage.
+
+---
+
+### **2. Size of a Class in C++**
+
+**Q:** What determines the **size of a class**?
+
+**A:**
+Size of a class depends on:
+
+* Data members (int, char, etc.)
+* **Padding** and alignment
+* Presence of **virtual functions** (adds vptr)
+* Inheritance
+
+**Example:**
+
+```cpp
+class A {
+    int x;   // 4 bytes
+    char y;  // 1 byte + 3 bytes padding
+};
+```
+
+ Size = 8 bytes (due to padding)
+
+---
+
+### **3. `size()` vs `capacity()` in `std::vector`**
+
+| `vector.size()`                           | `vector.capacity()`                                 |
+| ----------------------------------------- | --------------------------------------------------- |
+| Number of elements actually in the vector | Number of elements that can be held before resizing |
+| Always ≤ capacity                         | Can be greater than size                            |
+
+```cpp
+vector<int> v;
+v.push_back(1);
+v.push_back(2);
+
+cout << v.size();     // 2
+cout << v.capacity(); // maybe 4 or 8 depending on growth
+```
+
+---
+
+### **4. What is a Template Class in C++?**
+
+A template class allows you to create a **generic class** that works with any data type.
+
+```cpp
+template <typename T>
+class Box {
+    T value;
+public:
+    void set(T v) { value = v; }
+    T get() { return value; }
+};
+```
+
+Use:
+
+```cpp
+Box<int> intBox;
+Box<string> strBox;
+```
+
+---
+
+### **5. Constructor and Vtables**
+
+* A class with at least one **virtual function** will have a **vtable**.
+* Each object will get a hidden **vptr** pointing to the vtable.
+* The **constructor** sets up the `vptr`.
+
+> **Vtable** = Table of function pointers to virtual functions
+> **Vptr** = Pointer inside object that points to the class’s vtable
+
+---
+
+### **6. If a class has a virtual function, what is its size?**
+Even with **no members**, the class will have a **vptr** (usually 4 or 8 bytes depending on platform).
+
+```cpp
+class A {
+    virtual void fun() {}
+};
+
+int main() {
+    cout << sizeof(A); // Output: 8 (on 64-bit), 4 (on 32-bit)
+}
+```
+
+> Size increases if data members or multiple/virtual inheritance is used.
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
