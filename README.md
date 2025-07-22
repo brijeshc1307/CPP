@@ -20,7 +20,7 @@ A comprehensive guide to essential C++ topics. Use this as a roadmap to learn an
 | 14         | [Exception Handling](exception-handling.html) | Try-catch blocks, exceptions, and custom exception classes.  |
 | 15         | [Templates](/templates.md)            | Function templates, class templates, and STL (Standard Template Library). |
 | 16         | [STL (Standard Template Library)](https://github.com/brijeshc1307/DSA/blob/main/STL.md) | Containers (vector, list, map), iterators, and algorithms.   |
-| 17         | [Dynamic Memory Allocation](dynamic-memory-allocation.html) | `new`, `delete`, `malloc`, and `free`. |
+| 17         | [Dynamic Memory Allocation](/dynamicMemoryAllocation.md) | `new`, `delete`, `malloc`, and `free`. |
 | 18         | [Preprocessor Directives](preprocessor-directives.html) | Macros, include guards, and conditional compilation.         |
 | 19         | [Multithreading](https://github.com/brijeshc1307/Multithreading)  | Threads, mutexes, and synchronization.                      |
 | 20         | [Lambda Expressions](/LambdaExpressions.md) | Anonymous functions in C++ for cleaner code.                |
