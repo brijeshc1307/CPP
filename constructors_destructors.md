@@ -204,7 +204,13 @@ A shallow copy creates a new object, but **does not copy the inner (nested) obje
 * **Result:** Changes to nested objects in the copy **affect the original**.
 * Only the top-level object is copied.
 * Inner objects are **shared** between original and copy.
->Default copy constructor also know as Shallow Copy 
+* Default copy constructor also know as Shallow Copy
+
+>Shallow copy एक नया object बनाता है, लेकिन इसके अंदर मौजूद inner (nested) objects की कॉपी नहीं करता। इसके बजाय, वो उनके references (पते) को कॉपी करता है।
+>Copy किए गए nested objects में बदलाव करने पर original object भी प्रभावित होता है।
+>केवल top-level object की कॉपी बनती है।
+>Inner objects original और copy के बीच साझा (shared) रहते हैं।
+>C++ में जो default copy constructor होता है, वो आमतौर पर shallow copy करता है।
 
 ```cpp
 #include <iostream>
@@ -281,6 +287,12 @@ A deep copy creates a new object **and** also copies **all nested objects** recu
 * **Result:** Changes to nested objects in the copy **do not affect the original**.
 * Both the top-level and inner objects are fully copied.
 * Original and copied objects are **independent**.
+
+>Deep copy एक नया object बनाता है और उसमें मौजूद सभी nested objects (अंदर के objects) को भी recursively कॉपी करता है।
+>Copy किए गए nested objects में बदलाव का असर original object पर नहीं पड़ता।
+>Top-level और अंदर के सभी objects की अलग-अलग कॉपी बनती है।
+>Original और copied object एक-दूसरे से पूरी तरह स्वतंत्र (independent) होते हैं।
+
 
 ```cpp
 // deep copy
