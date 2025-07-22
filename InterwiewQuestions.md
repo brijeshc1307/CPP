@@ -1591,14 +1591,27 @@ Output
 | ----------------- | ---------------------------------- | ----------------------------- |
 | Type              | Pointer to char                    | Array of chars                |
 | Memory Allocation | Can point to dynamic/static memory | Size is fixed at compile time |
+| Resizable?  | ✅ Yes (if dynamically allocated)     | ❌ No (cannot resize after declaration) |
 | Modifiable        | Pointer can be reassigned          | Array cannot be reassigned    |
 | Example           | `char *str = "Hello";`             | `char str[] = "Hello";`       |
+
 
 ```cpp
 char *str1 = "Hello";       // Pointer to a string literal (read-only)
 char str2[] = "Hello";      // Array initialized with string (modifiable)
+char str[10] = "Hello";
+// str = new char[20];  // ❌ Error: cannot reassign an array
 ```
+```cpp
+    char* str = new char[10];
+    strcpy(str, "Hi");
 
+    // Resize
+    char* temp = new char[20];
+    strcpy(temp, str);
+    delete[] str;
+    str = temp;
+```
 ---
 
 ### **Q2: class vs structure in C++**
@@ -1666,38 +1679,7 @@ int main() {
 ### **Q4: What is OOP (Object-Oriented Programming) explain all pillers**
 
 ---
-### **Q5: What is Operator and its type in CPP?
-
-Great question! Let's break it down simply:
-
----
-
-## What is an **[Operator](/Operators.md)** in C++?
-
-An **operator** is a **symbol** that performs an operation on one or more operands (variables or values).
-
----
-
-## Types of Operators in C++
-
-
-| Type                           | Example                           | Description                                     |                      |                                   |
-| ------------------------------ | --------------------------------- | ----------------------------------------------- | -------------------- | --------------------------------- |
-| 1. **Arithmetic**              | `+ - * / %`                       | Perform mathematical operations                 |                      |                                   |
-| 2. **Relational (Comparison)** | `== != > < >= <=`                 | Compare values                                  |                      |                                   |
-| 3. **Logical**                 | \`&&                              |                                                 | !\`                  | Combine conditions (AND, OR, NOT) |
-| 4. **Assignment**              | `= += -= *= /=`                   | Assign or update values                         |                      |                                   |
-| 5. **Increment/Decrement**     | `++ --`                           | Increase or decrease a value                    |                      |                                   |
-| 6. **Bitwise**                 | \`&                               | ^ \~ << >>\`                                    | Bit-level operations |                                   |
-| 7. **Conditional (Ternary)**   | `? :`                             | One-line if-else                                |                      |                                   |
-| 8. **Sizeof**                  | `sizeof()`                        | Returns size of data type or variable           |                      |                                   |
-| 9. **Comma**                   | `,`                               | Evaluate multiple expressions                   |                      |                                   |
-| 10. **Pointer/Address**        | `* &`                             | Pointer dereference and address                 |                      |                                   |
-| 11. **Scope Resolution**       | `::`                              | Access global or class members                  |                      |                                   |
-| 12. **Member Access**          | `.` / `->`                        | Access object or pointer members                |                      |                                   |
-| 13. **Type Casting**           | `(int)`                           | Convert from one type to another                |                      |                                   |
-| 14. **Special Operators**      | `new`, `delete`, `this`, `typeid` | Memory and type operations                      |                      |                                   |
-| 15. **Operator Overloading**   | `+ - << >>`                       | Define custom behavior for operators in classes |                      |                                   |
+### **Q5: What is **[Operator](/Operators.md)** and its type in CPP?
 
 ---
 
