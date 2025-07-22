@@ -1034,7 +1034,7 @@ int main() {
 
 ---
 
-### ✅ **Q2. In-place Transpose of a Matrix**
+###  **Q2. In-place Transpose of a Matrix**
 
 **Problem Statement:**
 Write a C++ function to transpose a square matrix in-place.
@@ -1062,7 +1062,7 @@ int main() {
 
 ---
 
-### ✅ **Q3. Find the second highest income in SQL**
+###  **Q3. Find the second highest income in SQL**
 
 ```sql
 SELECT MAX(salary) AS SecondHighest
@@ -1072,7 +1072,7 @@ WHERE salary < (SELECT MAX(salary) FROM employees);
 
 ---
 
-### ✅ **Q4. Generate Fibonacci Sequence (first N terms)**
+###  **Q4. Generate Fibonacci Sequence (first N terms)**
 
 ```cpp
 #include <iostream>
@@ -1096,7 +1096,7 @@ int main() {
 
 ---
 
-### ✅ **Q5. FizzBuzz Problem**
+###  **Q5. FizzBuzz Problem**
 
 **Problem Statement:**
 Print numbers from 1 to N. For multiples of 3 print "Fizz", for 5 print "Buzz", and for both print "FizzBuzz".
@@ -1121,7 +1121,7 @@ int main() {
 
 ---
 
-### ✅ **Q6. Why should we hire you?**
+###  **Q6. Why should we hire you?**
 
 **Answer (Example):**
 
@@ -1129,7 +1129,7 @@ int main() {
 
 ---
 
-### ✅ **Q7. What is the Bin-Packing Problem?**
+###  **Q7. What is the Bin-Packing Problem?**
 
 **Answer:**
 
@@ -1137,7 +1137,7 @@ int main() {
 
 ---
 
-### ✅ **Q8. Calculate the Fibonacci Sequence (Recursive version)**
+###  **Q8. Calculate the Fibonacci Sequence (Recursive version)**
 
 ```cpp
 #include <iostream>
@@ -1157,13 +1157,13 @@ int main() {
 
 ---
 
-### ✅ **Q9. FizzBuzz Test**
+###  **Q9. FizzBuzz Test**
 
 (Already covered in Q5)
 
 ---
 
-### ✅ **Q10. Difference between Array and ArrayList**
+###  **Q10. Difference between Array and ArrayList**
 
 | Array                     | ArrayList                               |
 | ------------------------- | --------------------------------------- |
@@ -1187,44 +1187,9 @@ int main() {
 ---
 
 ### **Q12. Describe LinkedList**
-
-**Answer:**
-
-> A LinkedList is a linear data structure where elements are stored in nodes and connected using pointers. Each node contains data and a pointer to the next node. It's dynamic in size and allows efficient insertions/deletions.
-
 ---
 
 ### **Q13. Implementations of a List in C++**
-
-In C++, common list implementations include:
-
-* `std::vector` – Dynamic array (random access)
-* `std::list` – Doubly linked list
-* `std::forward_list` – Singly linked list
-
-Example of `std::list`:
-
-```cpp
-#include <iostream>
-#include <list>
-using namespace std;
-
-int main() {
-    list<int> l = {10, 20, 30};
-    l.push_back(40);
-    l.push_front(5);
-
-    for (int val : l)
-        cout << val << " ";
-}
-```
-
----
----
-
-इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
-
----
 
 ---
 ### iQuest - Interview Questions**
@@ -1523,37 +1488,79 @@ struct MyStruct {
 ---
 
 ### **Q3: Program for Insertion (`<<`) Operator Overloading**
+  * `<<` = Insertion Operator:  Used with cout to output data to the console.
+  * `>>` = Extraction Operator: Used with cin to input data from the user.
 
+Example:
 ```cpp
 #include <iostream>
 using namespace std;
 
-class Point {
-    int x, y;
-public:
-    Point(int a, int b) : x(a), y(b) {}
+class Student {
+    int id;
+    string name;
 
-    // Overload <<
-    friend ostream& operator<<(ostream& out, const Point& p) {
-        out << "(" << p.x << ", " << p.y << ")";
+public:
+    friend istream& operator>>(istream& in, Student& s) {
+        in >> s.id >> s.name;  // input from user
+        return in;
+    }
+
+    friend ostream& operator<<(ostream& out, const Student& s) {
+        out << "ID: " << s.id << ", Name: " << s.name;  // output to console
         return out;
     }
 };
 
 int main() {
-    Point p(10, 20);
-    cout << "Point is: " << p << endl;
+    Student s;
+    cin >> s;     // calls overloaded >>
+    cout << s;    // calls overloaded <<
     return 0;
 }
-```
 
+```
 ---
 
 ### **Q4: What is OOP (Object-Oriented Programming) explain all pillers**
 
 ---
+### **Q5: What is Operator and its type in CPP?
 
-### **Q5: Do you know Linux?**
+Great question! Let's break it down simply:
+
+---
+
+## What is an **[Operator]()** in C++?
+
+An **operator** is a **symbol** that performs an operation on one or more operands (variables or values).
+
+---
+
+## Types of Operators in C++
+
+
+| Type                           | Example                           | Description                                     |                      |                                   |
+| ------------------------------ | --------------------------------- | ----------------------------------------------- | -------------------- | --------------------------------- |
+| 1. **Arithmetic**              | `+ - * / %`                       | Perform mathematical operations                 |                      |                                   |
+| 2. **Relational (Comparison)** | `== != > < >= <=`                 | Compare values                                  |                      |                                   |
+| 3. **Logical**                 | \`&&                              |                                                 | !\`                  | Combine conditions (AND, OR, NOT) |
+| 4. **Assignment**              | `= += -= *= /=`                   | Assign or update values                         |                      |                                   |
+| 5. **Increment/Decrement**     | `++ --`                           | Increase or decrease a value                    |                      |                                   |
+| 6. **Bitwise**                 | \`&                               | ^ \~ << >>\`                                    | Bit-level operations |                                   |
+| 7. **Conditional (Ternary)**   | `? :`                             | One-line if-else                                |                      |                                   |
+| 8. **Sizeof**                  | `sizeof()`                        | Returns size of data type or variable           |                      |                                   |
+| 9. **Comma**                   | `,`                               | Evaluate multiple expressions                   |                      |                                   |
+| 10. **Pointer/Address**        | `* &`                             | Pointer dereference and address                 |                      |                                   |
+| 11. **Scope Resolution**       | `::`                              | Access global or class members                  |                      |                                   |
+| 12. **Member Access**          | `.` / `->`                        | Access object or pointer members                |                      |                                   |
+| 13. **Type Casting**           | `(int)`                           | Convert from one type to another                |                      |                                   |
+| 14. **Special Operators**      | `new`, `delete`, `this`, `typeid` | Memory and type operations                      |                      |                                   |
+| 15. **Operator Overloading**   | `+ - << >>`                       | Define custom behavior for operators in classes |                      |                                   |
+
+---
+
+### **Q6: Do you know Linux?**
 
 **Answer:**
 Yes, Linux is a widely used open-source operating system. In development, it's commonly used for:
@@ -1576,6 +1583,9 @@ g++ app.cpp -o app  # compile C++ code
 ---
 ---
 
+इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
+
+---
 ### Team और Role को लेकर:
 
 1. **Can you tell me more about the day-to-day responsibilities of this role?**
