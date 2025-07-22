@@ -380,15 +380,7 @@ Value at p: 42
 
 ### 7. **What are the basic OOP concepts in C++?**
 
-* **Encapsulation** – Binding data and functions together
-* **Abstraction** – Hiding implementation details
-* **Inheritance** – Reusing code via parent-child relationship
-* **Polymorphism** – Multiple forms (function/method overloading & overriding)
-
 ### 8. **Explain method overloading vs overriding.**
-
-* **Overloading**: Same function name, different parameters (compile-time).
-* **Overriding**: Redefining base class function in derived class using `virtual` (runtime).
 
 ### 9. **What is an abstract class in C++?**
 
@@ -415,14 +407,6 @@ Value at p: 42
 
 ### 11. **What is multithreading in C++?**
 
-* Allows concurrent execution of code using threads.
-* Improves performance and responsiveness.
-* Use `<thread>` header in C++11+.
-
-  ```cpp
-  std::thread t1(function_name);
-  ```
-
 ---
 
 ##  **Advanced Concepts**
@@ -448,10 +432,6 @@ Value at p: 42
 ##  **Miscellaneous**
 
 ### 14. **What’s your favorite DSA question?**
-
-* **Example**: "Find the first non-repeating character in a stream of characters."
-
-  * Tests hash maps, queues, and real-time processing.
 
 ---
 ### **HCL - Interview Questions**
@@ -723,81 +703,9 @@ Round 2: F2F Interview 30 min
 
 ### Q1. What is OOP? Explain all pillars with examples.
 
-**OOP (Object-Oriented Programming)** is a programming paradigm based on the concept of "objects," which contain data and methods.
-
-**Four pillars of OOP:**
-
-1. **Encapsulation:**
-   Wrapping data and methods that operate on data into a single unit (class).
-   *Example:*
-
-   ```cpp
-   class Car {
-       private:
-         int speed;
-       public:
-         void setSpeed(int s) { speed = s; }
-         int getSpeed() { return speed; }
-   };
-   ```
-
-2. **Abstraction:**
-   Hiding internal details and showing only essential features.
-   *Example:* Using methods like `startEngine()` without showing engine internals.
-
-3. **Inheritance:**
-   Deriving new classes from existing ones to reuse code.
-   *Example:*
-
-   ```cpp
-   class Vehicle {
-     public: void move() {}
-   };
-   class Car : public Vehicle {
-     public: void openDoor() {}
-   };
-   ```
-
-4. **Polymorphism:**
-   Ability of a function to behave differently based on the object.
-   *Example:* Function overriding (runtime polymorphism).
-
 ---
 
 ### Q2. Explain function overriding and write a program and explain code.
-
-**Function Overriding:**
-When a derived class provides its own implementation of a function already defined in its base class.
-
-*Example:*
-
-```cpp
-#include <iostream>
-using namespace std;
-
-class Base {
-public:
-    virtual void show() {
-        cout << "Base class\n";
-    }
-};
-
-class Derived : public Base {
-public:
-    void show() override {
-        cout << "Derived class\n";
-    }
-};
-
-int main() {
-    Base* ptr;
-    Derived d;
-    ptr = &d;
-    ptr->show();  // Calls Derived's show()
-    return 0;
-}
-```
-
 ---
 
 ### Q3. Map, Array vs Map, Vector, Vector vs Array
@@ -847,6 +755,100 @@ int main() {
 * **Invalid.**
 * You cannot bind an **rvalue reference** (`int&&`) to an **lvalue** (`a`).
 * Correct usage: `int&& b = 5;` or use `std::move(a)` to cast `a` to an rvalue.
+---
+### **Lvalue**
+
+* An **Lvalue** refers to an **object that has a name and a memory address**.
+* You can take the address of an lvalue.
+* Can appear on the **left-hand side** of an assignment.
+
+**Example:**
+
+```cpp
+int x = 10;   // x is an lvalue
+x = 20;       // OK: lvalue can be assigned
+```
+
+### **Lvalue Reference** (`&`) 
+* An lvalue reference in C++ is a reference (alias) to an lvalue — that is, a variable or object that has a persistent memory address.
+* It is declared using a single ampersand &.
+
+**Example:**
+```cpp
+int x = 10;
+int& ref = x;   // ref is an lvalue reference to x
+```
+---
+
+### **Rvalue**
+
+* An **Rvalue** is a **temporary object** or literal with **no persistent memory address**.
+* Can only appear on the **right-hand side** of an assignment.
+* **Cannot take its address**.
+
+**Example:**
+
+```cpp
+int y = x + 5;   // (x + 5) is an rvalue
+```
+
+---
+
+### **Rvalue Reference** (`&&`)
+
+* Introduced in C++11.
+* Allows binding to **rvalues (temporaries)**.
+* Enables **move semantics** and optimization by avoiding deep copies.
+
+**Syntax:**
+
+```cpp
+void process(int&& r) {
+    std::cout << "Rvalue reference: " << r << std::endl;
+}
+```
+
+---
+
+###  **Rvalue Reference vs Lvalue Reference:**
+
+| Feature  | Lvalue Reference (`&`)   | Rvalue Reference (`&&`)      |
+| -------- | ------------------------ | ---------------------------- |
+| Binds to | Named objects (lvalues)  | Temporary objects (rvalues)  |
+| Use case | Normal parameter passing | Move semantics, optimization |
+| Example  | `int& a = x;`            | `int&& b = 5;`               |
+
+---
+
+### **Code Example**: Lvalue vs Rvalue Reference
+
+```cpp
+#include <iostream>
+#include <utility>
+
+void foo(int& x) {
+    std::cout << "Lvalue reference called: " << x << "\n";
+}
+
+void foo(int&& x) {
+    std::cout << "Rvalue reference called: " << x << "\n";
+}
+
+int main() {
+    int a = 10;
+    foo(a);        // Calls lvalue version
+    foo(20);       // Calls rvalue version
+    foo(std::move(a)); // Forces rvalue, calls rvalue version
+}
+```
+
+**Output:**
+
+```
+Lvalue reference called: 10
+Rvalue reference called: 20
+Rvalue reference called: 10
+```
 
 ---
 
