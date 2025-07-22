@@ -1531,7 +1531,7 @@ Great question! Let's break it down simply:
 
 ---
 
-## What is an **[Operator]()** in C++?
+## What is an **[Operator](/Operators.md)** in C++?
 
 An **operator** is a **symbol** that performs an operation on one or more operands (variables or values).
 
