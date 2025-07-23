@@ -1464,31 +1464,42 @@ using namespace std;
 
 // Pass by Value
 void incrementByValue(int x) {
-    x++;
+    x++; // Only modifies local copy
 }
 
-// Pass by Reference
-void incrementByRef(int &x) {
-    x++;
+// Pass by Reference using &
+void incrementByRef1(int &x) {
+    x++; // Modifies original variable
+}
+
+// Pass by Reference using *
+void incrementByRef2(int *x) {
+    (*x)++; // Modifies original variable via pointer
 }
 
 int main() {
     int a = 5;
-    incrementByValue(a);
-    cout << "After pass by value: " << a << endl;
 
-    incrementByRef(a);
-    cout << "After pass by reference: " << a << endl;
+    incrementByValue(a);
+    cout << "After pass by value: " << a << endl; // Outputs 5
+
+    incrementByRef1(a);
+    cout << "After pass by reference (&): " << a << endl; // Outputs 6
+
+    incrementByRef2(&a);
+    cout << "After pass by reference (*): " << a << endl; // Outputs 7
 
     return 0;
 }
+
 ```
 
 **Output:**
 
 ```
 After pass by value: 5
-After pass by reference: 6
+After pass by reference (&): 6
+After pass by reference (*): 7
 ```
 
 ---
