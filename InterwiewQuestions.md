@@ -1569,6 +1569,122 @@ Output
 ```
 
 ---
+### Expleo - Interview Questions** : 30 min
+---
+### **Q1: Find the Most Frequently Occurring Character in a Word
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+int main() {
+    string str;
+    cin >> str;
+
+    int freq[26] = {0};  // For 'a' to 'z'
+
+    // Count frequency of each lowercase character
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            freq[str[i] - 'a']++;
+        }
+    }
+
+    // Find the most frequent character
+    int maxFreq = 0;
+    char maxChar = '\0';
+
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] > maxFreq) {
+            maxFreq = freq[i];
+            maxChar = 'a' + i;
+        }
+    }
+
+    cout <<maxChar<< " -> " << maxFreq  << endl;
+
+    return 0;
+}
+```
+Output
+```cpp
+Sample Input
+banana
+Your Output
+a -> 3
+```
+OR using STL
+```cpp
+#include <iostream>
+#include <unordered_map>
+using namespace std;
+
+int main() {
+    string word;
+    cin >> word;
+
+    unordered_map<char, int> freq;
+
+    // Count frequency of each character
+    for (char ch : word) {
+        freq[ch]++;
+    }
+
+    // Find the most frequent character
+    char maxChar = '\0';
+    int maxFreq = 0;
+
+    for (auto pair : freq) {
+        if (pair.second > maxFreq) {
+            maxFreq = pair.second;
+            maxChar = pair.first;
+        }
+    }
+
+    cout << maxChar<< "-> " << maxFreq << endl;
+
+    return 0;
+}
+
+```
+---
+### **Q1: Frequency of Each Character in a word
+```cpp
+#include <iostream>
+#include <map>
+#include <string>
+using namespace std;
+
+void countCharFrequency(string word) {
+    map<char, int> freq;
+
+    // Count frequency of each character
+    for (char ch : word) {
+        freq[ch]++;
+    }
+
+    // Display frequencies
+    cout << "Character Frequencies:\n";
+    for (auto pair : freq) {
+        cout << pair.first << " : " << pair.second << endl;
+    }
+}
+
+int main() {
+    string word;
+
+    cout << "Enter a word: ";
+    cin >> word;
+
+    countCharFrequency(word);
+
+    return 0;
+}
+
+
+```
+
+---
 ### IBM - Interview Questions** : 30 min
 ---
 ### **Q1: `char *str;` vs `char str[];` in C++**
