@@ -1681,9 +1681,46 @@ int main() {
     return 0;
 }
 
-
 ```
+OR 
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
 
+int main() {
+    string str;
+    cin >> str;
+
+    int freq[26] = {0};  // For 'a' to 'z'
+
+    // Count frequency of each lowercase character
+    for (int i = 0; i < str.length(); i++) {
+        if (str[i] >= 'a' && str[i] <= 'z') {
+            freq[str[i] - 'a']++;
+        }
+    }
+
+    // Display frequency of each character
+    for (int i = 0; i < 26; i++) {
+        if (freq[i] > 0) {
+            char ch = 'a' + i;
+            cout << ch << " : " << freq[i] << endl;
+        }
+    }
+
+    return 0;
+}
+```
+Output
+```cpp
+Sample Input
+banana
+Your Output
+a : 3
+b : 1
+n : 2
+```
 ---
 ### IBM - Interview Questions** : 30 min
 ---
