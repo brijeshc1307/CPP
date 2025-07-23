@@ -304,3 +304,15 @@ int main() {
 * It makes your code **scalable**, **flexible**, and **easy to extend**.
 
 ---
+
+---
+[⬅️ Inheritance](/Inheritance.md)        |        [File Handling ➡️](/FileHandling.md)
+---
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Happy Coding!
+
+
