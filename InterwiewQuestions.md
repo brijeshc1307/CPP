@@ -81,18 +81,25 @@ int main() {
 ---
 
 #### **Q5. Insert at Position in Array vs List**
+#### **Q5.1. How to Insert, access, delete an Element at 1st and 3rd Position in Array vs Linked List also tell me time complexty
 
-> Insert at position 1 and 3 — which is faster: **array** or **list**?
 
-| Operation              | Array (Dynamic/Static) | Linked List        |
-| ---------------------- | ---------------------- | ------------------ |
-| Insert at 1st position | O(n)                   | O(1)               |
-| Insert at 3rd position | O(n)                   | O(n) (to traverse) |
+| **Operation**              | **Array**                                                 | **Time** | **Linked List**                                                    | **Time** |
+| -------------------------- | --------------------------------------------------------- | -------- | ------------------------------------------------------------------ | -------- |
+| **Insert at 1st position** | Shift all elements to the right → Insert at `arr[0]`      | O(n)     | Create a new node → Point it to current head → Update head pointer | O(1)     |
+| **Insert at 3rd position** | Shift elements from index 2 onward → Insert at `arr[2]`   | O(n)     | Traverse to 2nd node → Insert after it                             | O(n)     |
+| **Access 1st element**     | Access `arr[0]`                                           | O(1)     | Access `head`                                                      | O(1)     |
+| **Access 3rd element**     | Access `arr[2]`                                           | O(1)     | Traverse two nodes from `head`                                     | O(n)     |
+| **Delete 1st element**     | Shift all elements left from index 1 → Remove `arr[0]`    | O(n)     | Update `head` to point to next node                                | O(1)     |
+| **Delete 3rd element**     | Shift elements left from index 3 onward → Remove `arr[2]` | O(n)     | Traverse to 2nd node → Change pointer to skip 3rd node             | O(n)     |
 
- **Conclusion**:
+---
 
-* Insert at beginning: List is faster (O(1))
-* Insert at middle: Similar in time (O(n)), but lists avoid shifting.
+### 🔍 Summary:
+
+* **Arrays** provide **fast random access** but are **expensive for insert/delete** at arbitrary positions.
+* **Linked Lists** allow **efficient insert/delete at the beginning**, but **slow access and insert** at arbitrary positions due to traversal.
+
 
 ---
 
@@ -146,36 +153,6 @@ hostname -I           # Shows all IPs assigned
 ifconfig              # (Old) shows network info
 ip addr show          # (Modern replacement)
 ```
-
----
-
-#### **Q9. How to Insert an Element at 1st and 3rd Position in Array vs List**
-
-| **Operation**              | **Array**                                                              | **Linked List**                                                                      |
-| -------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| **Insert at 1st position** | Shift all elements to the right → Insert at `arr[0]`<br>Time: **O(n)** | Create a new node → Point it to current head → Update head pointer<br>Time: **O(1)** |
-| **Insert at 3rd position** | Shift elements from 3rd onward → Insert at `arr[2]`<br>Time: **O(n)**  | Traverse to 2nd node → Insert after it<br>Time: **O(n)**                             |
-
- **Conclusion**:
-
-* Inserting at the **beginning** is faster in **Linked List**.
-* Inserting at the **middle** requires traversal in both, but **Array** may have faster cache performance for small sizes.
-
----
-
-#### **Q10. Access (Print) Element at 1st and 3rd Position in Array vs List — Which One is Fast?**
-
-| **Operation**          | **Array**                 | **Linked List**                   |
-| ---------------------- | ------------------------- | --------------------------------- |
-| **Access 1st element** | `arr[0]` → Time: **O(1)** | `head->data` → Time: **O(1)**     |
-| **Access 3rd element** | `arr[2]` → Time: **O(1)** | Traverse 2 nodes → Time: **O(n)** |
-
- **Conclusion**:
-
-* Arrays allow **random access**: constant time access to any position.
-* Linked Lists allow only **sequential access**: slower for positions beyond the head.
-* **Array is faster** for accessing elements at any position.
-
 
 ---
 
