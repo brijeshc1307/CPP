@@ -1966,7 +1966,11 @@ Here’s a list of **interview questions** based on what you mentioned (like Cyi
 
 ---
 
-## **Cyient - Technical Round Interview **
+### **Cyient - Technical Round Interview**
+---
+Round 1: 20 Questions C++ MCQ 20 min
+Round 2: 20 Questions C++ MCQ 20 min + Virtual Interview 30 min
+---
 
 ---
 
