@@ -2043,6 +2043,8 @@ int main() {
 * Program to terminate before child thread finishes.
 * Undefined behavior or crash, depending on compiler/system.
 
+---
+### 6. Do you use desgine pattern in your project?
 
 ---
 ---
