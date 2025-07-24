@@ -1962,6 +1962,89 @@ int main() {
 > Size increases if data members or multiple/virtual inheritance is used.
 
 ---
+Here’s a list of **interview questions** based on what you mentioned (like Cyient interviews), along with **brief answers and code examples** to help you prepare thoroughly.
+
+---
+
+## **Cyient - Technical Round Interview **
+
+---
+
+### 1. What is your role and responsibility?
+
+---
+
+### 2. What is a Virtual Constructor?
+* In C++, constructors cannot be declared `virtual`. But we can use **virtual clone() methods** or factory patterns to simulate behavior similar to virtual constructors.
+* It's used when we want to create an object of derived class using a base class pointer.
+
+**Example using `clone()`:**
+
+```cpp
+class Base {
+public:
+    virtual Base* clone() {
+        return new Base(*this);
+    }
+    virtual void show() {
+        std::cout << "Base class\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    Derived* clone() override {
+        return new Derived(*this);
+    }
+    void show() override {
+        std::cout << "Derived class\n";
+    }
+};
+```
+
+---
+
+### 3. What is Multithreading?
+
+---
+
+### 4. Write a Multithreading Example in C++
+
+```cpp
+#include <iostream>
+#include <thread>
+
+void function1() {
+    cout << "Function 1 running\n";
+}
+
+void function2() {
+    cout << "Function 2 running\n";
+}
+
+int main() {
+    thread t1(function1);
+    thread t2(function2);
+
+    t1.join(); // Wait for t1 to finish
+    t2.join(); // Wait for t2 to finish
+
+    cout << "Main thread done\n";
+    return 0;
+}
+```
+
+---
+
+### 5. What is `join()` in threads? What happens if we don’t use `join()`?
+* `join()` is used to make the main thread **wait for the child thread to finish execution**.
+* If we don't call `join()` and the main thread ends before the child thread, it can cause:
+
+* Program to terminate before child thread finishes.
+* Undefined behavior or crash, depending on compiler/system.
+
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
