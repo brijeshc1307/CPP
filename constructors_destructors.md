@@ -38,6 +38,28 @@ int main() {
 ```
 Constructor called! a = 10
 ```
+### **Example: Default Constructor** 
+Default Constructor – Takes no arguments.
+```cpp
+#include <iostream>
+using namespace std;
+
+class Example {
+    int a;
+
+public:
+    // Default constructor
+    Example() {
+        a = 0;
+        cout << "Default constructor called! a = " << a << endl;
+    }
+};
+
+int main() {
+    Example obj1;          // Default constructor
+    return 0;
+}
+```
 
 ### **Example: Parametrized Constructor**  
 Parameterized Constructor – Takes arguments to initialize data members.
@@ -197,6 +219,65 @@ Copy Constructor Called
 Copy Constructor - Length: 10.5, Height: 8.6, Area: 90.3
 ```
 
+OR
+```cpp
+#include <iostream>
+using namespace std;
+
+class Example {
+    int a;
+
+public:
+    // Default constructor
+    Example() {
+        a = 0;
+        cout << "Default constructor called! a = " << a << endl;
+    }
+
+    // Parameterized constructor
+    Example(int x) {
+        a = x;
+        cout << "Parameterized constructor called! a = " << a << endl;
+    }
+
+    // Copy constructor
+    Example(const Example &obj) {
+        a = obj.a;
+        cout << "Copy constructor called! a = " << a << endl;
+    }
+
+    // Optional: Function to display value of 'a'
+    void display() {
+        cout << "Value of a = " << a << endl;
+    }
+};
+
+int main() {
+    Example obj1;          // Default constructor
+    Example obj2(10);      // Parameterized constructor
+    Example obj3 = obj2;   // Copy constructor
+
+    // Optional: Displaying values
+    cout << "\nDisplaying values:\n";
+    obj1.display();
+    obj2.display();
+    obj3.display();
+
+    return 0;
+}
+
+```
+Output
+```
+Default constructor called! a = 0
+Parameterized constructor called! a = 10
+Copy constructor called! a = 10
+
+Displaying values:
+Value of a = 0
+Value of a = 10
+Value of a = 10
+```
 ---
 
 ### Shallow Copy Constructor
