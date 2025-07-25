@@ -334,8 +334,10 @@ unique_ptr<int> up2 = std::move(up1); // up1 is now null
 | `lock()`      | `weak_ptr`                 | Converts to `shared_ptr` if not expired         |
 | `move()`      | All                        | Transfers ownership                             |
 
----
 
+---
+[⬅️ Pointers](/Pointers.md)         | [Arrays ➡️](/array.md) 
+---
 ## **License**
 This project is licensed under the MIT License.
 
