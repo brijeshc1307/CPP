@@ -444,7 +444,7 @@ int main() {
 ```
 
 ---
-[⬅️ Functions](/functions.md)         | [Smart Pointers](/smartPointers.md) |        [Arrays ➡️](/array.md) 
+[⬅️ Functions](/functions.md)         | [Smart Pointers ➡️](/smartPointers.md) 
 ---
 ## **License**
 This project is licensed under the MIT License.
