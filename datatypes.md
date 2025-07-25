@@ -3,6 +3,15 @@
 >A Data Type specifies the type of data that a variable can store such as Integer, Float, Charecter, etc. 
 In C++, data types are used to define the **type of data** a variable can hold. They are mainly categorized into:
 
+### 1. **Primitive (Built-in) Data Types**
+>These are basic types provided by the language.
+
+### 2. **Derived Data Types**
+>These are built from primitive types.
+
+### 3. **User-Defined Data Types**
+>These are created by the programmer for specific needs.
+
 ### Data Types
 
 | **Primitive (Built-in) Data Types** | **Derived Data Types** | **User-Defined Data Types** |
@@ -15,48 +24,6 @@ In C++, data types are used to define the **type of data** a variable can hold. 
 | `wchar_t` (wide character)          |                        | `using`                     |
 
 ---
-### 1. **Primitive (Built-in) Data Types**
-
-These are basic types provided by the language.
-
-| Type     | Description                  | Example             |
-| -------- | ---------------------------- | ------------------- |
-| `int`    | Integer values               | `int a = 10;`       |
-| `float`  | Single precision decimal     | `float b = 3.14f;`  |
-| `double` | Double precision decimal     | `double c = 5.123;` |
-| `char`   | Single character             | `char d = 'A';`     |
-| `bool`   | Boolean (true or false)      | `bool e = true;`    |
-| `void`   | No value (used in functions) | `void show();`      |
-
----
-
-### 2. **Derived Data Types**
-
-These are built from primitive types.
-
-| Type        | Description                | Example                         |
-| ----------- | -------------------------- | ------------------------------- |
-| `Array`     | Collection of elements     | `int arr[5] = {1, 2, 3, 4, 5};` |
-| `Pointer`   | Stores memory address      | `int *ptr = &a;`                |
-| `Reference` | Alias for another variable | `int &ref = a;`                 |
-| `Function`  | Block of reusable code     | `int add(int x, int y);`        |
-
----
-
-### 3. **User-Defined Data Types**
-
-These are created by the programmer for specific needs.
-
-| Type      | Description                         | Example                             |
-| --------- | ----------------------------------- | ----------------------------------- |
-| `struct`  | Group of variables                  | `struct Person { int age; };`       |
-| `union`   | Similar to struct but shared memory | `union Data { int i; float f; };`   |
-| `enum`    | Enumerated constant values          | `enum Color { RED, GREEN, BLUE };`  |
-| `class`   | Blueprint for objects (OOP)         | `class Car { public: int speed; };` |
-| `typedef` | Alias name for data types           | `typedef unsigned int uint;`        |
-| `using`   | Modern type alias (C++11+)          | `using uint = unsigned int;`        |
-
----
 
 ## Example Program:
 
@@ -64,30 +31,109 @@ These are created by the programmer for specific needs.
 #include <iostream>
 using namespace std;
 
+// User-defined: struct
 struct Person {
     int age;
     char name[50];
 };
 
+// User-defined: union
+union Data {
+    int intValue;
+    float floatValue;
+};
+
+// User-defined: class
+class Rectangle {
+public:
+    int length;
+    int width;
+    int area() { return length * width; }
+};
+
+// User-defined: enum
+enum Color { RED, GREEN, BLUE };
+
+// User-defined: typedef
+typedef unsigned int uint;
+
+void greet() {  // Function (Derived)
+    cout << "Hello from a function!" << endl;
+}
+
 int main() {
-    // Primitive
+    // Primitive types
     int a = 5;
     float b = 3.14f;
+    double d = 2.71828;
     char c = 'X';
     bool isActive = true;
+    wchar_t w = L'✓';
 
-    // Derived
-    int arr[3] = {1, 2, 3};
-    int *ptr = &a;
+    // Derived types
+    int arr[3] = {1, 2, 3};     // Array
+    int* ptr = &a;              // Pointer
+    int& ref = a;               // Reference
 
-    // User-defined
+    // Function call
+    greet();
+
+    // User-defined: struct
     Person p1 = {25, "John"};
 
-    cout << "Age: " << p1.age << ", Name: " << p1.name << endl;
-    cout << "Value of a: " << a << ", via pointer: " << *ptr << endl;
+    // User-defined: union
+    Data data;
+    data.intValue = 100;
+
+    // User-defined: class
+    Rectangle rect;
+    rect.length = 10;
+    rect.width = 5;
+
+    // User-defined: enum
+    Color myColor = GREEN;
+
+    // User-defined: typedef
+    uint score = 95;
+
+    // Output all data
+    cout << "Primitive types:\n";
+    cout << "int: " << a << ", float: " << b << ", double: " << d << ", char: " << c << ", bool: " << isActive << endl;
+    wcout << L"wchar_t: " << w << endl;
+
+    cout << "\nDerived types:\n";
+    cout << "Array: [" << arr[0] << ", " << arr[1] << ", " << arr[2] << "]\n";
+    cout << "Pointer to a: " << *ptr << "\n";
+    cout << "Reference to a: " << ref << "\n";
+
+    cout << "\nUser-defined types:\n";
+    cout << "Struct - Age: " << p1.age << ", Name: " << p1.name << endl;
+    cout << "Union - intValue: " << data.intValue << endl;
+    cout << "Class - Rectangle Area: " << rect.area() << endl;
+    cout << "Enum - Color: " << myColor << " (GREEN = 1)\n";
+    cout << "Typedef (uint) - Score: " << score << endl;
 
     return 0;
 }
+```
+Output
+```
+Hello from a function!
+Primitive types:
+int: 5, float: 3.14, double: 2.71828, char: X, bool: 1
+wchar_t: 
+
+Derived types:
+Array: [1, 2, 3]
+Pointer to a: 5
+Reference to a: 5
+
+User-defined types:
+Struct - Age: 25, Name: John
+Union - intValue: 100
+Class - Rectangle Area: 50
+Enum - Color: 1 (GREEN = 1)
+Typedef (uint) - Score: 95
 ```
 
 ---
