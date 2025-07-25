@@ -2051,6 +2051,124 @@ int main() {
 ### 6. Do you use desgine pattern in your project?
 
 ---
+### 7. What will come output of following Program?
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class A 
+    { public: 
+        A() 
+        { 
+            cout << "A constructor"<<endl;
+            
+        } 
+        ~A() {
+            cout << "A Destructor"<<endl;
+            
+        }
+    };
+    
+class B : public A{ 
+    public:
+    B(){
+    cout << "B constructor"<<endl;
+    
+    } 
+    ~B() {
+    cout << "B Destructor"<<endl;
+        
+    } 
+}; 
+
+int main() {
+	// your code goes here
+	A *p = new B();
+	delete p;
+	return 0;
+
+}
+
+```
+Output
+```
+A constructor
+B constructor
+A Destructor
+```
+---
+### 8. What make you changes that `B Destructor` will call ?
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class A {
+public:
+    A() { cout << "A constructor" << endl; }
+    virtual ~A() { cout << "A Destructor" << endl; } // use vitaul destructor
+};
+
+class B : public A {
+public:
+    B() { cout << "B constructor" << endl; }
+    ~B() { cout << "B Destructor" << endl; }
+};
+
+int main() {
+    A *p = new B();  // dynamic allocation
+    delete p;        // deleting via base class pointer
+    return 0;
+}
+```
+
+### Key Concept:
+
+* `A *p = new B();` means we are creating an object of class `B` but pointing to it using a base class (`A`) pointer.
+* When we call `delete p;`, **only the base class destructor (`~A`) will be called**, unless the base class destructor is declared `virtual`.
+
+### Output Explanation:
+
+1. During `new B();`
+
+   * First, `A`'s constructor runs → prints `A constructor`
+   * Then, `B`'s constructor runs → prints `B constructor`
+
+2. During `delete p;`
+
+   * Only `A`'s destructor runs → prints `A Destructor`
+   * `B`'s destructor **does not run** because `~A()` is **not virtual**
+
+### **Incorrect behavior** (memory/resource leak) due to missing `virtual` destructor.
+
+### Final Output:
+
+```
+A constructor
+B constructor
+A Destructor
+```
+
+### Correct Fix:
+
+To ensure proper destruction, declare the base class destructor as `virtual`:
+
+```cpp
+virtual ~A() {
+    cout << "A Destructor" << endl;
+}
+```
+
+Then output would be:
+
+```
+A constructor
+B constructor
+B Destructor
+A Destructor
+```
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
