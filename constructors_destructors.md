@@ -15,7 +15,7 @@ A **constructor** is a special function that initializes an object when it is cr
 - Required for const or reference members
 
 ### **Example: Constructor**  
-Default Constructor – Takes no arguments.
+
 ```cpp
 #include <iostream>
 using namespace std;
