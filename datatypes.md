@@ -237,6 +237,67 @@ int main() {
 }
 ```
 ---
+### ASCII Code
+* **ASCII (American Standard Code for Information Interchange)** assigns a numeric value (0–127) to each character.
+* It includes:
+
+  * **Control characters** (0–31, 127): e.g., `\n`, `\t`, backspace — mostly non-printable.
+  * **Printable characters** (32–126): letters, digits, punctuation, symbols, and space.
+* **Common ASCII Values:**
+
+  * `'A'` to `'Z'` → 65 to 90
+  * `'a'` to `'z'` → 97 to 122
+  * `'0'` to `'9'` → 48 to 57
+  * `Space` → 32
+  * `Enter (newline)` → 10 (`\n`)
+  * `Tab` → 9 (`\t`)
+* In **C++**, you can:
+
+  * Convert a **char to ASCII** using: `int code = (int)ch;`
+  * Convert an **ASCII code to char** using: `char ch = (char)code;`
+
+---
+
+### **ASCII Table (Decimal, Char)**
+
+| Dec | Char  | Dec | Char | Dec | Char | Dec | Char |
+| --- | ----- | --- | ---- | --- | ---- | --- | ---- |
+| 32  | Space | 41  | `)`  | 50  | `2`  | 59  | `;`  |
+| 33  | `!`   | 42  | `*`  | 51  | `3`  | 60  | `<`  |
+| 34  | `"`   | 43  | `+`  | 52  | `4`  | 61  | `=`  |
+| 35  | `#`   | 44  | `,`  | 53  | `5`  | 62  | `>`  |
+| 36  | `$`   | 45  | `-`  | 54  | `6`  | 63  | `?`  |
+| 37  | `%`   | 46  | `.`  | 55  | `7`  | 64  | `@`  |
+| 38  | `&`   | 47  | `/`  | 56  | `8`  | 65  | `A`  |
+| 39  | `'`   | 48  | `0`  | 57  | `9`  | 66  | `B`  |
+| 40  | `(`   | 49  | `1`  | 58  | `:`  | 67  | `C`  |
+
+| Dec | Char | Dec | Char | Dec | Char | Dec | Char    |
+| --- | ---- | --- | ---- | --- | ---- | --- | ------- |
+| 68  | `D`  | 77  | `M`  | 86  | `V`  | 95  | `_`     |
+| 69  | `E`  | 78  | `N`  | 87  | `W`  | 96  | `` ` `` |
+| 70  | `F`  | 79  | `O`  | 88  | `X`  | 97  | `a`     |
+| 71  | `G`  | 80  | `P`  | 89  | `Y`  | 98  | `b`     |
+| 72  | `H`  | 81  | `Q`  | 90  | `Z`  | 99  | `c`     |
+| 73  | `I`  | 82  | `R`  | 91  | `[`  | 100 | `d`     |
+| 74  | `J`  | 83  | `S`  | 92  | `\`  | 101 | `e`     |
+| 75  | `K`  | 84  | `T`  | 93  | `]`  | 102 | `f`     |
+| 76  | `L`  | 85  | `U`  | 94  | `^`  | 103 | `g`     |
+
+| Dec | Char | Dec | Char | Dec | Char | Dec | Char |    |
+| --- | ---- | --- | ---- | --- | ---- | --- | ---- | -- |
+| 104 | `h`  | 109 | `m`  | 114 | `r`  | 119 | `w`  |    |
+| 105 | `i`  | 110 | `n`  | 115 | `s`  | 120 | `x`  |    |
+| 106 | `j`  | 111 | `o`  | 116 | `t`  | 121 | `y`  |    |
+| 107 | `k`  | 112 | `p`  | 117 | `u`  | 122 | `z`  |    |
+| 108 | `l`  | 113 | `q`  | 118 | `v`  | 123 | `{`  |    |
+|     |      |     |      |     |      | 124 | \`   | \` |
+|     |      |     |      |     |      | 125 | `}`  |    |
+|     |      |     |      |     |      | 126 | `~`  |    |
+
+---
+
+---
 [⬅️ Basics](/basics.md)        |         [Operators ➡️](/Operators.md) 
 ---
 
