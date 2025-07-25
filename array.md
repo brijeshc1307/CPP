@@ -299,7 +299,7 @@ for (int i = 0; i < n; ++i) {
 ```
 
 ---
-[⬅️ Pointers](/Pointers.md)        |  [Strings ➡️](/string.md) 
+[⬅️ Smart Pointers](/smartPointers.md)        |  [Strings ➡️](/string.md) 
 ---
 ## **License**
 This project is licensed under the MIT License.
