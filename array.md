@@ -156,6 +156,149 @@ delete[] arr;  // Free the memory
 * Use `new` and `delete` for dynamic memory allocation
 
 ---
+
+### Common Matrix Formulas
+
+| **Operation**             | **Formula (Math Notation)**                                                 | **Description**                                        |
+| ------------------------- | --------------------------------------------------------------------------- | ------------------------------------------------------ |
+| **Transpose**             | $A^T$                                                                       | Flip matrix $A$ over its diagonal                      |
+| **Addition**              | $C = A + B$                                                                 | Add corresponding elements: $c_{ij} = a_{ij} + b_{ij}$ |
+| **Subtraction**           | $C = A - B$                                                                 | Subtract corresponding elements                        |
+| **Scalar Multiplication** | $B = kA$                                                                    | Multiply each element by scalar $k$                    |
+| **Matrix Multiplication** | $C = AB$                                                                    | $c_{ij} = \sum_{k=1}^n a_{ik} \cdot b_{kj}$            |
+| **Determinant (2×2)**     | $\det(A) = ad - bc$, for $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$ | Scalar value representing the area/volume scale        |
+| **Inverse (2×2)**         | $A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$ | Exists only if $\det(A) \neq 0$                        |
+| **Identity Matrix**       | $I$, such that $AI = IA = A$                                                | Diagonal matrix with 1’s on diagonal                   |
+| **Symmetric Matrix**      | $A = A^T$                                                                   | Equal to its own transpose                             |
+| **Orthogonal Matrix**     | $A^T A = AA^T = I$                                                          | Inverse equals transpose                               |
+| **Trace**                 | $\text{Tr}(A) = \sum_{i=1}^n a_{ii}$                                        | Sum of diagonal elements                               |
+| **Rank**                  | $\text{rank}(A)$                                                            | Number of linearly independent rows/columns            |
+
+---
+
+###  1. **Matrix Transpose**
+
+```cpp
+for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+        transpose[j][i] = matrix[i][j];
+    }
+}
+```
+
+---
+
+###  2. **Matrix Addition**
+
+```cpp
+for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+        result[i][j] = A[i][j] + B[i][j];
+    }
+}
+```
+
+---
+
+###  3. **Matrix Subtraction**
+
+```cpp
+for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+        result[i][j] = A[i][j] - B[i][j];
+    }
+}
+```
+
+---
+
+###  4. **Scalar Multiplication**
+
+```cpp
+for (int i = 0; i < rows; ++i) {
+    for (int j = 0; j < cols; ++j) {
+        result[i][j] = k * A[i][j];
+    }
+}
+```
+
+---
+
+###  5. **Matrix Multiplication**
+
+```cpp
+for (int i = 0; i < rowsA; ++i) {
+    for (int j = 0; j < colsB; ++j) {
+        result[i][j] = 0;
+        for (int k = 0; k < colsA; ++k) {
+            result[i][j] += A[i][k] * B[k][j];
+        }
+    }
+}
+```
+
+---
+
+###  6. **Determinant (2x2 Matrix)**
+
+```cpp
+int det = (A[0][0] * A[1][1]) - (A[0][1] * A[1][0]);
+```
+
+---
+
+###  7. **Inverse (2x2 Matrix)**
+
+```cpp
+float det = A[0][0] * A[1][1] - A[0][1] * A[1][0];
+if (det != 0) {
+    inverse[0][0] =  A[1][1] / det;
+    inverse[0][1] = -A[0][1] / det;
+    inverse[1][0] = -A[1][0] / det;
+    inverse[1][1] =  A[0][0] / det;
+}
+```
+
+---
+
+###  8. **Identity Matrix (n x n)**
+
+```cpp
+for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+        I[i][j] = (i == j) ? 1 : 0;
+    }
+}
+```
+
+---
+
+###  9. **Trace of a Square Matrix**
+
+```cpp
+int trace = 0;
+for (int i = 0; i < n; ++i) {
+    trace += matrix[i][i];
+}
+```
+
+---
+
+###  10. **Check Symmetric Matrix**
+
+```cpp
+bool isSymmetric = true;
+for (int i = 0; i < n; ++i) {
+    for (int j = 0; j < n; ++j) {
+        if (matrix[i][j] != matrix[j][i]) {
+            isSymmetric = false;
+            break;
+        }
+    }
+}
+```
+
+---
 [⬅️ Pointers](/Pointers.md)        |  [Strings ➡️](/string.md) 
 ---
 ## **License**
