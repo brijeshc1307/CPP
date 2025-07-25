@@ -3,6 +3,18 @@
 >A Data Type specifies the type of data that a variable can store such as Integer, Float, Charecter, etc. 
 In C++, data types are used to define the **type of data** a variable can hold. They are mainly categorized into:
 
+### Data Types
+
+| **Primitive (Built-in) Data Types** | **Derived Data Types** | **User-Defined Data Types** |
+| ----------------------------------- | ---------------------- | --------------------------- |
+| `int`                               | Array                  | `struct`                    |
+| `float`,                            | Pointer                | `union`                     |
+| `double`                            | Function               | `class`                     |
+| `char`                              | Reference              | `enum`                      |
+| `bool`                              |                        | `typedef`                   |
+| `wchar_t` (wide character)          |                        | `using`                     |
+
+---
 ### 1. **Primitive (Built-in) Data Types**
 
 These are basic types provided by the language.
