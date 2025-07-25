@@ -152,6 +152,34 @@ int main() {
 ```
 
 ---
+
+### **1. Pass by Value**
+* A **copy** of the actual parameter is passed.
+* Changes made inside the function do **not affect** the original variable.
+
+**Example:**
+
+```cpp
+void modify(int x) {
+    x = 10;  // Only modifies the copy
+}
+```
+
+---
+
+### **2. Pass by Reference**
+* The **actual variable itself** is passed using a reference (`&`).
+* Changes made inside the function **do affect** the original variable.
+
+**Example:**
+
+```cpp
+void modify(int &x) {
+    x = 10;  // Modifies the original
+}
+```
+
+---
 [⬅️ Control Structures](/ControlStructures.md)         |        [Pointers ➡️](/Pointers.md)
 ---
 ## **License**
