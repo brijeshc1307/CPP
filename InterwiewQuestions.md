@@ -2178,32 +2178,38 @@ Round 1: 45 min
 ### **Q2. WAP in C++ to Reverse a Line Word by Word**
 
 ```cpp
-#include <iostream>
-#include <sstream>
-#include <stack>
+#include <bits/stdc++.h>
 using namespace std;
 
 int main() {
-    string line;
-    cout << "Enter a line: ";
-    getline(cin, line);
+	// your code goes here
+	string str;
+	getline(cin, str);
+	//cin>>str; //do not use
+    string ans = "";
+    int n = str.size();
 
-    stack<string> words;
-    stringstream ss(line);
-    string word;
+    reverse(str.begin(), str.end()); // fix spelling: revrse -> reverse
 
-    while (ss >> word) {
-        words.push(word);
+    for (int i = 0; i < n; i++) {
+        string word = "";
+        // collect characters of a word
+        while (i < n && str[i] != ' ') {
+            word += str[i];
+            i++;
+        }
+        reverse(word.begin(), word.end()); // reverse individual word
+        if (word.length() > 0) {
+            ans += word + " ";
+        }
     }
-
-    cout << "Reversed line: ";
-    while (!words.empty()) {
-        cout << words.top() << " ";
-        words.pop();
-    }
+    cout << ans << endl;
 
     return 0;
+
+
 }
+
 ```
 
 ---
