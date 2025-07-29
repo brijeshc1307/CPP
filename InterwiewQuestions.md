@@ -2176,6 +2176,13 @@ Round 1: 45 min
 ### **Q1. Roles and Responsibilities and do u have testing**
 
 ### **Q2. WAP in C++ to Reverse a Line Word by Word**
+* Step 1: Input String
+  	string str;
+	getline(cin, str);
+* Step 2: Reverse whole string
+  	Using 2 pointer approach
+	Or revrse function
+* Step 3: reverse word by word
 
 ```cpp
 #include <bits/stdc++.h>
@@ -2206,8 +2213,6 @@ int main() {
     cout << ans << endl;
 
     return 0;
-
-
 }
 
 ```
