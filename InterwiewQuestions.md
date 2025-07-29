@@ -2169,6 +2169,191 @@ B Destructor
 A Destructor
 ```
 ---
+### **Zwayam.com - Technical Round Interview**
+Round 1: 45 min
+---
+
+### **Q1. Roles and Responsibilities and do u have testing**
+
+### **Q2. WAP in C++ to Reverse a Line Word by Word**
+
+```cpp
+#include <iostream>
+#include <sstream>
+#include <stack>
+using namespace std;
+
+int main() {
+    string line;
+    cout << "Enter a line: ";
+    getline(cin, line);
+
+    stack<string> words;
+    stringstream ss(line);
+    string word;
+
+    while (ss >> word) {
+        words.push(word);
+    }
+
+    cout << "Reversed line: ";
+    while (!words.empty()) {
+        cout << words.top() << " ";
+        words.pop();
+    }
+
+    return 0;
+}
+```
+
+---
+
+### **Q3. Dangling Pointer with Example**
+
+A **dangling pointer** is a pointer that points to a memory location that has been **freed/deallocated**.
+
+#### **Example:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int* createPointer() {
+    int x = 10;
+    return &x; // returns address of local variable
+}
+
+int main() {
+    int* ptr = createPointer(); // dangling pointer
+    cout << *ptr << endl;       // undefined behavior
+    return 0;
+}
+```
+
+> The variable `x` goes out of scope after `createPointer()` finishes, so `ptr` points to an invalid location.
+
+---
+
+### **Q4. Shallow Copy vs Deep Copy**
+
+#### **Shallow Copy:**
+
+* Copies object **without duplicating referenced memory**.
+* Changes to the original affect the copy.
+
+#### **Deep Copy:**
+
+* Copies **all fields** and duplicates any **dynamically allocated memory**.
+
+#### **Example in C++:**
+
+```cpp
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+class Sample {
+public:
+    char* name;
+
+    // Constructor
+    Sample(const char* n) {
+        name = new char[strlen(n) + 1];
+        strcpy(name, n);
+    }
+
+    // Shallow copy constructor
+    Sample(const Sample& s) {
+        name = s.name;
+    }
+
+    // Deep copy constructor
+    Sample deepCopy() {
+        return Sample(name); // creates new memory
+    }
+
+    void show() {
+        cout << "Name: " << name << endl;
+    }
+
+    ~Sample() {
+        delete[] name;
+    }
+};
+
+int main() {
+    Sample s1("Alice");
+    Sample s2 = s1;        // Shallow copy (dangerous)
+    Sample s3 = s1.deepCopy(); // Deep copy (safe)
+
+    s1.show();
+    s2.show();
+    s3.show();
+
+    return 0;
+}
+```
+
+---
+
+### **Q5.** Memory Leak with Example & How to Prevent It**
+A **memory leak** happens when a program **allocates memory on the heap** but **fails to release (deallocate) it** after it's no longer needed. This causes a **gradual increase in memory usage**, leading to performance issues or crashes.
+
+---
+
+### **Example of a Memory Leak in C++**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void memoryLeakExample() {
+    int* ptr = new int(10);  // Dynamically allocate memory
+    cout << *ptr << endl;
+    // Forgot to delete the allocated memory -> memory leak
+}
+
+int main() {
+    for (int i = 0; i < 1000; ++i) {
+        memoryLeakExample(); // Each call leaks memory
+    }
+    return 0;
+}
+```
+
+---
+
+### **Q6.** How to Prevent Memory Leaks
+
+1. **Always deallocate memory** using `delete` or `delete[]` after `new` or `new[]`.
+
+   ```cpp
+   int* ptr = new int(20);
+   // Use the pointer
+   delete ptr; // Free memory
+   ```
+
+2. **Use smart pointers (C++11 and above)**:
+
+   * `std::unique_ptr`
+   * `std::shared_ptr`
+   * Automatically manage memory and prevent leaks.
+
+   ```cpp
+   #include <memory>
+   std::unique_ptr<int> ptr = std::make_unique<int>(10);
+   // Automatically deleted when ptr goes out of scope
+   ```
+
+3. **Avoid raw pointers** when possible; use containers like `std::vector`, `std::string`, etc.
+
+4. **Use tools to detect memory leaks:**
+
+   * Valgrind (Linux)
+   * Visual Studio Diagnostic Tools (Windows)
+   * AddressSanitizer
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
