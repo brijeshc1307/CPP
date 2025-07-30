@@ -639,11 +639,23 @@ These are guidelines about when and how to define special member functions in **
 ### Example:
 
 ```cpp
-struct Person {
+#include <iostream>
+#include <string>
+
+class Person {
+private:
     std::string name;
     int age;
-    // No need to define destructor, copy/move constructors
+
+public:
+    Person(const std::string& name, int age)
+        : name(name), age(age) {}
+
+    void introduce() const {
+        std::cout << "Hi, I'm " << name << " and I'm " << age << " years old." << std::endl;
+    }
 };
+
 ```
 
 ---
