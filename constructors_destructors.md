@@ -620,6 +620,159 @@ Destructor called!
 ```
 
 ---
+### **Rule of 0, 3, and 5 in C++**
+
+These are guidelines about when and how to define special member functions in **C++ classes** that manage **resources** (like memory, file handles, etc.).
+
+---
+
+## 1. **Rule of 0**
+
+* **You don’t need to define any special functions manually.**
+* Let the **compiler generate** everything: constructor, destructor, copy/move constructor, assignment operators.
+
+### When to use:
+
+* Your class **doesn't own any raw resources** (like raw pointers).
+* You use **standard containers** (like `std::string`, `std::vector`, `std::unique_ptr`, etc.).
+
+### Example:
+
+```cpp
+struct Person {
+    std::string name;
+    int age;
+    // No need to define destructor, copy/move constructors
+};
+```
+
+---
+
+## 2. **Rule of 3**
+
+If you define **any one** of the following:
+
+* Copy constructor
+* Copy assignment operator
+* Destructor
+
+**Then you should define all three.**
+
+### When to use:
+
+* Your class **manages a raw resource** (e.g., raw pointers, dynamic memory).
+
+### Example:
+
+```cpp
+class MyClass {
+    int* data;
+
+public:
+    MyClass() {
+        data = new int[10];
+    }
+
+    // 1. Destructor
+    ~MyClass() {
+        delete[] data;
+    }
+
+    // 2. Copy Constructor
+    MyClass(const MyClass& other) {
+        data = new int[10];
+        std::copy(other.data, other.data + 10, data);
+    }
+
+    // 3. Copy Assignment
+    MyClass& operator=(const MyClass& other) {
+        if (this != &other) {
+            delete[] data;
+            data = new int[10];
+            std::copy(other.data, other.data + 10, data);
+        }
+        return *this;
+    }
+};
+```
+
+---
+
+##  3. **Rule of 5** (C++11 and later)
+
+If your class manages resources and you define:
+
+* Copy constructor
+* Copy assignment operator
+* Destructor
+
+Then also define:
+
+* **Move constructor**
+* **Move assignment operator**
+
+###  When to use:
+
+* To **optimize performance** by allowing move semantics instead of always copying.
+
+###  Example (with move):
+
+```cpp
+class MyClass {
+    int* data;
+
+public:
+    MyClass() {
+        data = new int[10];
+    }
+
+    ~MyClass() {
+        delete[] data;
+    }
+
+    MyClass(const MyClass& other) {
+        data = new int[10];
+        std::copy(other.data, other.data + 10, data);
+    }
+
+    MyClass& operator=(const MyClass& other) {
+        if (this != &other) {
+            delete[] data;
+            data = new int[10];
+            std::copy(other.data, other.data + 10, data);
+        }
+        return *this;
+    }
+
+    // Move Constructor
+    MyClass(MyClass&& other) noexcept {
+        data = other.data;
+        other.data = nullptr;
+    }
+
+    // Move Assignment
+    MyClass& operator=(MyClass&& other) noexcept {
+        if (this != &other) {
+            delete[] data;
+            data = other.data;
+            other.data = nullptr;
+        }
+        return *this;
+    }
+};
+```
+
+---
+
+## Summary Table:
+
+| Rule      | You Define...                    | When              | Purpose                            |
+| --------- | -------------------------------- | ----------------- | ---------------------------------- |
+| Rule of 0 | Nothing                          | No raw resources  | Rely on compiler-generated members |
+| Rule of 3 | Copy ctor, copy assignment, dtor | Raw resource mgmt | Correct copying & destruction      |
+| Rule of 5 | + Move ctor, move assignment     | C++11+            | Avoid unnecessary deep copies      |
+
+---
 
 ## **3.Encapsulation in C++**
 
