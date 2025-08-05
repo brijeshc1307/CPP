@@ -2365,6 +2365,132 @@ int main() {
    * AddressSanitizer
 
 ---
+### ** Siemens.com - Technical Round Interview**
+Round 1: 30 min
+
+## 1. **What is C++ (CPP)?**
+
+**C++** is a general-purpose, object-oriented programming language developed by **Bjarne Stroustrup** as an extension of the C language.
+It supports both **procedural** and **object-oriented** programming (multi-paradigm), offering features like:
+
+* Classes & Objects
+* Inheritance
+* Polymorphism
+* Encapsulation
+* Abstraction
+* Templates
+* Exception handling
+* STL (Standard Template Library)
+
+---
+
+## 2. **Difference between Class and Object**
+
+| Feature    | Class                               | Object                             |
+| ---------- | ----------------------------------- | ---------------------------------- |
+| Definition | A blueprint or template for objects | An instance of a class             |
+| Memory     | No memory is allocated              | Memory is allocated at runtime     |
+| Example    | `class Car { };`                    | `Car myCar;`                       |
+| Purpose    | Defines behavior and properties     | Implements behavior and holds data |
+
+---
+
+## 3. **Explain OOPs Pillars One by One**
+
+1. **Encapsulation**
+
+   * Wrapping data and methods into a single unit (class).
+   * Protects data using access specifiers (`private`, `public`, etc.).
+
+2. **Abstraction**
+
+   * Hiding internal details and showing only essential features.
+   * Achieved using abstract classes or interfaces.
+
+3. **Inheritance**
+
+   * One class (child) can inherit properties and behavior from another class (parent).
+   * Promotes code reuse.
+
+4. **Polymorphism**
+
+   * Same function or operator behaves differently in different contexts.
+   * Types: Compile-time (Function Overloading) and Runtime (Virtual Functions).
+
+---
+
+## 4. **C++ Program: Insert an Element into a Sorted Array**
+
+** Problem:**
+Given a sorted array, insert an element and maintain the sorted order.
+
+** Input:**
+
+```cpp
+int arr[] = {1, 3, 5, 7};
+int n = 6;
+```
+
+** Output:**
+
+```
+1, 3, 5, 6, 7
+```
+
+---
+
+### C++ Code:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void insertAndPrintSorted(int arr[], int size, int element) {
+    int newArr[size + 1];
+    int i = 0, j = 0;
+
+    // Insert while maintaining sorted order
+    while (i < size && arr[i] < element) {
+        newArr[j++] = arr[i++];
+    }
+
+    // Insert the new element
+    newArr[j++] = element;
+
+    // Copy the rest of the original array
+    while (i < size) {
+        newArr[j++] = arr[i++];
+    }
+
+    // Print the updated array
+    cout << "Updated array: ";
+    for (int k = 0; k < size + 1; k++) {
+        cout << newArr[k];
+        if (k < size) cout << ", ";
+    }
+    cout << endl;
+}
+
+int main() {
+    int arr[] = {1, 3, 5, 7};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int element = 6;
+
+    insertAndPrintSorted(arr, n, element);
+
+    return 0;
+}
+```
+
+---
+
+### Output:
+
+```
+Updated array: 1, 3, 5, 6, 7
+```
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
