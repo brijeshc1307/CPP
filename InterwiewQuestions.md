@@ -2437,51 +2437,39 @@ int n = 6;
 1, 3, 5, 6, 7
 ```
 
----
-
-### C++ Code:
+### C++ Code (In-place Insertion):
 
 ```cpp
 #include <iostream>
 using namespace std;
 
-void insertAndPrintSorted(int arr[], int size, int element) {
-    int newArr[size + 1];
-    int i = 0, j = 0;
+int main() {
+    int arr[100] = {1, 3, 5, 7}; // allocate extra space
+    int n = 4;                   // current number of elements
+    int element = 6;
 
-    // Insert while maintaining sorted order
-    while (i < size && arr[i] < element) {
-        newArr[j++] = arr[i++];
+    // Find the position to insert
+    int i = n - 1;
+    while (i >= 0 && arr[i] > element) {
+        arr[i + 1] = arr[i]; // shift elements right
+        i--;
     }
 
     // Insert the new element
-    newArr[j++] = element;
-
-    // Copy the rest of the original array
-    while (i < size) {
-        newArr[j++] = arr[i++];
-    }
+    arr[i + 1] = element;
+    n++; // increment size after insertion
 
     // Print the updated array
     cout << "Updated array: ";
-    for (int k = 0; k < size + 1; k++) {
-        cout << newArr[k];
-        if (k < size) cout << ", ";
+    for (int j = 0; j < n; j++) {
+        cout << arr[j];
+        if (j < n - 1) cout << ", ";
     }
     cout << endl;
-}
-
-int main() {
-    int arr[] = {1, 3, 5, 7};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int element = 6;
-
-    insertAndPrintSorted(arr, n, element);
 
     return 0;
 }
 ```
-
 ---
 
 ### Output:
