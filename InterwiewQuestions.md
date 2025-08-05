@@ -2479,6 +2479,210 @@ Updated array: 1, 3, 5, 6, 7
 ```
 
 ---
+### ** Intelizign - Technical Round Interview**
+Round 1: 30 min
+
+---
+### **Q1. What is OOPs? Explain.**
+---
+
+### **Q3. Pattern:**
+
+```
+1
+1 2
+1 2 3
+```
+
+**Code in C++:**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    for (int i = 1; i <= 3; ++i) {
+        for (int j = 1; j <= i; ++j) {
+            cout << j << " ";
+        }
+        cout << endl;
+    }
+    return 0;
+}
+```
+
+---
+
+### **Q4. What is `shared_ptr`?**
+
+`shared_ptr` is a **smart pointer** in C++ that manages shared ownership of a dynamically allocated object.
+
+* Multiple `shared_ptr`s can point to the same object.
+* When the last `shared_ptr` is destroyed or reset, the object is deleted.
+
+**Example:**
+
+```cpp
+#include <memory>
+#include <iostream>
+using namespace std;
+
+int main() {
+    shared_ptr<int> p1 = make_shared<int>(10);
+    shared_ptr<int> p2 = p1; // shared ownership
+
+    cout << *p1 << " " << *p2 << endl; // 10 10
+    return 0;
+}
+```
+
+---
+
+### **Q5. Move Constructor, Default Constructor, Default Destructor**
+
+* **Default Constructor**: A constructor with no arguments.
+
+```cpp
+class A {
+public:
+    A() {}  // default constructor
+};
+```
+
+* **Move Constructor**: Transfers resources from one object to another without copying.
+
+```cpp
+class A {
+    int* data;
+public:
+    A(A&& other) {
+        data = other.data;
+        other.data = nullptr;
+    }
+};
+```
+
+* **Default Destructor**: Automatically deletes/cleans up when object goes out of scope.
+
+```cpp
+class A {
+public:
+    ~A() {}  // default destructor
+};
+```
+
+---
+
+### **Q6. STL: Array vs Vector vs List**
+
+| Feature   | `array` (std::array) | `vector`             | `list` (std::list)      |
+| --------- | -------------------- | -------------------- | ----------------------- |
+| Size      | Fixed                | Dynamic              | Dynamic                 |
+| Memory    | Contiguous           | Contiguous           | Non-contiguous (nodes)  |
+| Insertion | Costly at middle     | Costly at middle     | Fast at any position    |
+| Access    | Fast (random access) | Fast (random access) | Slow (no random access) |
+| Use Case  | Known size, speed    | Dynamic arrays       | Frequent insert/delete  |
+
+---
+
+### **Q7. Pass by Reference vs Pass by Value**
+
+* **Pass by Value**: A copy is passed. Changes do **not** reflect outside.
+
+```cpp
+void func(int x) { x = 10; }
+```
+
+* **Pass by Reference**: Reference is passed. Changes reflect outside.
+
+```cpp
+void func(int &x) { x = 10; }
+```
+
+---
+
+### **Q7 (code): Pointer behavior**
+
+```cpp
+  
+int* p1;
+int m = 100;
+
+p1 = &m;
+*p1++;  // increment pointer, not value. Equivalent to p1 = p1 + 1
+++m;    // m = 101
+printf("%d\n", *p1); // Undefined behavior
+printf("%d\n", m);   // 101
+```
+Output
+```
+-122846152
+101
+
+```
+But 
+```cpp
+int m = 100;
+int* p1;
+p1 = &m;
+(*p1)++;  // increment pointer, not value. Equivalent to p1 = p1 + 1
+++m;    // m = 101
+printf("%d\n", *p1); //102
+printf("%d\n", m);   // 102
+```
+Output
+```
+102
+102
+
+```
+
+
+---
+
+### **Q8: Call dosomething function i main() **
+
+#### Case 1:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void dosomething(int *p) {
+    cout << "Inside function: " << *p << endl;  // prints the value pointed by p
+}
+
+int main() {
+    int P = 10;
+    int *ptr = &P;       // create pointer to P
+    dosomething(ptr);    // pass pointer to function
+    return 0;
+}
+
+```
+Output
+```
+Inside function: 10
+```
+And
+
+```cpp
+void dosomething(int &p) {
+    cout << "Inside function: " << p << endl;  // no dereferencing needed
+}
+
+int main() {
+    int P = 10;
+    dosomething(P);  // pass variable by reference
+}
+
+```
+Output
+```
+Inside function: 10
+```
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
