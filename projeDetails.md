@@ -201,6 +201,95 @@ After investigating, we realized the function internally used `float`, which was
 Although the function still performs slight rounding due to some legacy logic, we aligned with the client on this behavior — and they confirmed that it’s acceptable for their needs.
 
 ---
+OR
+---
+
+### **CCD (Can Compress Data) Tool**
+
+We have a third-party tool called **CCD (Can Compress Data)**, which was developed in Germany in 2010. My primary responsibility is maintaining this tool and implementing feature enhancements.
+
+#### **Purpose of the Tool**
+
+The main function of this tool is to **compress various types of signals** such as pressure, temperature, and speed.
+For example, suppose we have 1000 signals that need to be compressed. CCD first groups these signals based on their type:
+
+* Pressure signals in one group
+* Temperature signals in another
+* Speed signals in a separate group
+
+After grouping, the CCD tool compresses these signals into CAN messages and stores them in a file with the `.ccd` extension.
+
+This process not only helps in efficient data storage but also makes it easier to identify and retrieve the data later.
+
+---
+
+### **My Contributions**
+
+I prepared the complete documentation for this tool, including:
+
+* **Developer Guide**
+* **Test Plan**
+* **Test Results**
+
+---
+
+### **Enhancement – 64-bit Signal Support**
+
+Initially, the tool was designed to handle only **32-bit signals**. However, based on new requirements, we needed to make it compatible with **64-bit signals**. To achieve this, we:
+
+* Extended existing 32-bit functions using **function overloading**
+* Modified the compression logic to support 64-bit signals
+
+After this enhancement, the CCD tool is now capable of compressing and storing 64-bit signals in `.ccd` files.
+
+---
+
+### **Documentation Details**
+
+#### **Developer Guide**
+
+This guide includes definitions for each function — explaining its purpose, usage, and how to call it. As we continue to maintain and improve the tool, the Developer Guide is regularly updated to make it easier for future developers to understand the codebase.
+
+#### **Test Plan**
+
+The Test Plan is a structured document outlining:
+
+* What functionalities are to be tested
+* The step-by-step process to test them
+
+Typically, it’s in a table format. For example:
+
+| Step            | Expected Result    |
+| --------------- | ------------------ |
+| Press Space Key | Screen should open |
+
+#### **Test Results**
+
+After executing the test plan, testers record actual results in the Test Results document. This helps identify pass/fail status and supports debugging.
+
+---
+
+### **Key Challenges Faced**
+
+#### **Challenge 1: Migration from 32-bit to 64-bit**
+
+The first challenge was to make existing functions (which worked only with 32-bit data) compatible with 64-bit data. In some critical places, we used `void*` (void pointers), which behave differently depending on system architecture — 4 bytes on 32-bit systems and 8 bytes on 64-bit systems.
+
+In the original design, only 4-byte data was needed, so the `void*` behaved as expected. But for 64-bit signals (8 bytes), we had to:
+
+* Carefully analyze the code
+* Modify pointer arithmetic and memory alignment
+* Update functions to be **64-bit safe** so they could correctly handle 8-byte data using void pointers
+
+---
+
+#### **Challenge 2: Precision Loss in Compression Function**
+
+The second challenge was related to one of the three compression functions that was **rounding off float values**, which wasn't acceptable for the new requirements.
+
+Upon investigation, we found the function was internally using `float`, which caused **precision loss**. We resolved this by converting the logic to use `double`, ensuring higher precision.
+
+Although due to some legacy logic it still performs rounding in specific cases, we discussed it with the client and received confirmation that the current behavior is acceptable.
 
 ---
 
