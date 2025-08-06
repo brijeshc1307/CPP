@@ -2682,7 +2682,106 @@ Output
 Inside function: 10
 ```
 ---
-### **Q9: Solid Principal
+### **Q9: Static
+
+In C++, the `static` keyword has **different meanings depending on the context** (variables, functions, class members). Here's a clear breakdown:
+
+---
+
+##  1. **Static Variables (Inside a Function)**
+
+```cpp
+void demo() {
+    static int count = 0;
+    count++;
+    std::cout << count << std::endl;
+}
+```
+
+* **Lifetime:** Exists for the entire program (not destroyed when the function ends).
+* **Scope:** Local to the function.
+* **Use case:** To retain the value between function calls.
+
+**Output:**
+
+```cpp
+demo(); // 1
+demo(); // 2
+demo(); // 3
+```
+
+---
+
+##  2. **Static Variables (Global/Namespace Scope)**
+
+```cpp
+static int globalVar = 5;
+```
+
+* **Limits visibility to the current translation unit (.cpp file).**
+* Useful in large projects to avoid name collisions.
+
+---
+
+##  3. **Static Member Variables in Class**
+
+```cpp
+class MyClass {
+public:
+    static int count;
+};
+int MyClass::count = 0;  // Must be defined outside the class
+
+MyClass::count++;  // Access without object
+```
+
+* Shared among all objects (only **one copy** exists).
+* Can be accessed using the class name (`MyClass::count`).
+* Must be **defined outside** the class.
+
+---
+
+##  4. **Static Member Functions in Class**
+
+```cpp
+class MyClass {
+public:
+    static void show() {
+        std::cout << "Static function\n";
+    }
+};
+```
+
+* Can be called without an object.
+* Cannot access non-static members (no `this` pointer).
+
+---
+
+##  5. **Static Inside a Class (Private Helper)**
+
+```cpp
+class Helper {
+private:
+    static int secret;  // Hidden from outside
+};
+```
+
+* Encapsulation: Hide implementation details.
+
+---
+
+## Summary Table:
+
+| Context          | Meaning of `static`                             |
+| ---------------- | ----------------------------------------------- |
+| Inside function  | Retains value across function calls             |
+| Global/namespace | Limits scope to file                            |
+| Class variable   | Shared across all instances                     |
+| Class function   | Can be called without object; no `this` pointer |
+
+---
+
+### **Q10: Solid Principal
 
 ### SOLID Principles in Object-Oriented Programming
 
