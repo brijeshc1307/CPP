@@ -611,6 +611,407 @@ int main() {
 ```
 
 ---
+###  **Basic Level Pointer Questions**
+---
+
+1. **Declaration confusion:**
+
+   ```cpp
+   int* p, q;
+   ```
+
+   * `p` is a pointer to int.
+   * `q` is a regular `int` (not a pointer).
+     ❗ Common mistake: `int* p, q;` makes only `p` a pointer.
+
+2. **Output:**
+
+   ```cpp
+   int a = 5;
+   int *p = &a;
+   printf("%d", *p);
+   ```
+
+    **Output:** `5`
+
+3. **Difference:**
+
+   ```cpp
+   *p++      // increments pointer, not value
+   (*p)++    // increments value, not pointer
+   ```
+
+---
+
+###  **Intermediate Level Pointer Questions**
+
+4. **Array pointer:**
+
+   ```cpp
+   int arr[] = {10, 20, 30};
+   int *p = arr;
+   printf("%d\n", *(p + 1));
+   ```
+
+    **Output:** `20`
+
+5. **Simple dereference and update:**
+
+   ```cpp
+   int a = 10;
+   int *p = &a;
+   *p = *p + 5;
+   printf("%d", a);
+   ```
+
+ **Output:** `15`
+
+6. **Pointer increment:**
+
+   ```cpp
+   int a = 100;
+   int *p = &a;
+   *p++;
+   printf("%d", *p);
+   ```
+
+    **Output:** **Undefined Behavior**
+
+   * `*p++` increments the pointer, not the value.
+   * `p` now points to garbage → dereferencing it is UB.
+
+7. **Double pointer:**
+
+   ```cpp
+   int x = 10;
+   int *p = &x;
+   int **pp = &p;
+   printf("%d", **pp);
+   ```
+
+    **Output:** `10`
+
+---
+
+### **Advanced Pointer Questions**
+
+8. **Uninitialized pointer:**
+
+   ```cpp
+   int *p;
+   *p = 100;
+   ```
+
+    **Output:** **Segmentation fault or crash**
+
+   * `p` is not initialized before dereferencing.
+
+9. **Out-of-bounds:**
+
+   ```cpp
+   int a = 100;
+   int *p = &a;
+   int *q = p + 5;
+   printf("%d", *q);
+   ```
+
+    **Output:** **Undefined Behavior**
+
+   * `q` points outside valid memory.
+
+10. **Tricky increment:**
+
+    ```cpp
+    int m = 10;
+    int *p = &m;
+    *p++;
+    ++m;
+    printf("%d\n", *p);
+    ```
+
+     **Output:** **Undefined Behavior**
+
+    * `*p++` increments pointer, `p` now invalid.
+
+11. **Double pointer set:**
+
+    ```cpp
+    int x = 5;
+    int *p = &x;
+    int **pp = &p;
+    **pp = 10;
+    printf("%d", x);
+    ```
+
+ **Output:** `10`
+
+12. **Value increment:**
+
+    ```cpp
+    int a = 50;
+    int *ptr = &a;
+    (*ptr)++;
+    printf("%d", a);
+    ```
+
+ **Output:** `51`
+
+---
+
+### **Tricky Pointer Questions**
+
+13. **What’s printed?**
+
+    ```cpp
+    int a = 10;
+    int *p = &a;
+    *p++ = 20;
+    printf("%d %d", a, *p);
+    ```
+
+     **Output:** `20 <garbage or crash>`
+
+    * `*p++ = 20` assigns 20 to `*p`, then moves `p` to next address (garbage).
+    * `a` becomes 20.
+
+14. **Memory safety:**
+
+    ```cpp
+    int *p = (int*)malloc(sizeof(int) * 5);
+    *(p + 5) = 100;
+    ```
+
+     **Output:** **Undefined Behavior**
+
+    * Valid indices: `p[0]` to `p[4]`
+    * Accessing `p[5]` is out-of-bounds.
+
+15. **NULL pointer:**
+
+    ```cpp
+    int *p = NULL;
+    *p = 5;
+    ```
+
+     **Output:** **Segmentation fault**
+
+16. **Again tricky `*p++`:**
+
+    ```cpp
+    int m = 10;
+    int *p = &m;
+    *p++ = 20;
+    printf("%d\n", *p);
+    ```
+
+     **Output:** `<garbage>`
+
+    * `m` becomes 20
+    * `p` now points to garbage → UB when dereferenced
+
+---
+##  Debugging Questions (Find the Issue)
+---
+
+### **Q1. Find the bug:**
+
+```cpp
+int *p;
+*p = 10;
+printf("%d", *p);
+```
+
+🛠 **Issue:** `p` is uninitialized before dereferencing → **undefined behavior / crash**
+
+💡 **Fix:** Initialize pointer before using:
+
+```cpp
+int x = 10;
+int *p = &x;
+```
+
+---
+
+### **Q2. Analyze the output:**
+
+```cpp
+int a = 10;
+int *p = &a;
+*p++;
+printf("%d", *p);
+```
+
+🛠 **Issue:** `*p++` increments pointer, not value.
+
+💡 **Fix (if value increment intended):**
+
+```cpp
+(*p)++;
+```
+
+---
+
+### **Q3. What’s wrong here?**
+
+```cpp
+int arr[3] = {1, 2, 3};
+int *p = arr;
+printf("%d", p[3]);
+```
+
+🛠 **Issue:** Accessing `p[3]` (out of bounds)
+
+Valid indices: `p[0]`, `p[1]`, `p[2]`
+
+---
+
+### **Q4. What happens?**
+
+```cpp
+int *ptr = (int*)malloc(sizeof(int) * 5);
+ptr[5] = 50;
+```
+
+🛠 **Issue:**
+Out-of-bounds memory access. Valid indices are `0` to `4`. Accessing `ptr[5]` causes **undefined behavior** (may crash or corrupt memory).
+
+**Fix:**
+If you want to access 6 elements, allocate space for 6:
+
+```cpp
+int *ptr = (int*)malloc(sizeof(int) * 6);
+```
+
+---
+
+### **Q5. Spot the issue:**
+
+```cpp
+int x = 100;
+int *p = &x;
+free(p);  // <== Error
+```
+
+🛠 **Issue:**
+You're trying to `free()` memory that was **not dynamically allocated** using `malloc()` or `new`.
+
+**Fix:**
+Only use `free()` on memory allocated using `malloc()`:
+
+```cpp
+int *p = (int*)malloc(sizeof(int));
+*p = 100;
+free(p);  // Now valid
+```
+
+---
+
+### **Q6. What will this print?**
+
+```cpp
+int x = 5;
+int *p = &x;
+int **pp = &p;
+printf("%d", *pp);
+```
+
+🛠 **Issue:**
+`*pp` is a pointer, not a value → printing pointer as `%d` → **undefined or garbage**
+
+**Fix:**
+To print the value of `x`, use `**pp`:
+
+```cpp
+printf("%d", **pp);  // Output: 5
+```
+
+---
+
+### **Q7. Dangerous dereference:**
+
+```cpp
+int *arr = (int*)malloc(sizeof(int) * 3);
+arr = NULL;
+arr[0] = 1;
+```
+
+🛠 **Issue:**
+You’re allocating memory, but then immediately assigning `arr = NULL`, which **leaks memory** and causes a **null dereference** in `arr[0] = 1`.
+
+**Fix:**
+Remove `arr = NULL;` unless intentional:
+
+```cpp
+int *arr = (int*)malloc(sizeof(int) * 3);
+arr[0] = 1;
+```
+
+---
+
+### **Q8. What’s the issue?**
+
+```cpp
+int a = 10;
+int *p = &a;
+*p = *p++;
+printf("%d", a);
+```
+
+🛠 **Issue:**
+`*p++` increments the pointer `p`, not the value at `*p`. This causes **undefined behavior** if `p` points to a single variable (`a`), not an array.
+
+**Fix:**
+If intention was to leave `p` as is, write:
+
+```cpp
+*p = *p;
+```
+
+Or if value increment:
+
+```cpp
+(*p)++;
+```
+
+---
+
+### **Q9. Memory leak scenario:**
+
+```cpp
+int *p = (int*)malloc(sizeof(int) * 10);
+// Forgot to free memory
+```
+
+🛠 **Issue:**
+Memory leak — you allocated memory but didn’t release it.
+
+ **Fix:**
+
+```cpp
+free(p);
+```
+
+---
+
+### **Q10. Find the crash:**
+
+```cpp
+int *p;
+scanf("%d", p);
+```
+
+🛠 **Issue:**
+`p` is uninitialized — writing input to unknown memory → segmentation fault.
+
+ **Fix:**
+
+```cpp
+int x;
+int *p = &x;
+scanf("%d", p);
+```
+
+---
 [⬅️ Functions](/functions.md)         | [Smart Pointers ➡️](/smartPointers.md) 
 ---
 ## **License**
