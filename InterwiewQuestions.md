@@ -2681,6 +2681,169 @@ Output
 ```
 Inside function: 10
 ```
+---
+### **Q9: Solid Principal
+
+### SOLID Principles in Object-Oriented Programming
+
+The **SOLID** principles are five key design principles intended to make software designs more understandable, flexible, and maintainable. These are especially important in **Object-Oriented Programming (OOP)** like C++, Java, C#, etc.
+
+---
+
+### What does SOLID stand for?
+
+| Principle                                     | Description                                                                                                                                |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| **S – Single Responsibility Principle (SRP)** | A class should have **only one reason to change**. It should do **one job only**.                                                          |
+| **O – Open/Closed Principle (OCP)**           | A class should be **open for extension** but **closed for modification**. You can extend behavior without changing existing code.          |
+| **L – Liskov Substitution Principle (LSP)**   | Subclasses should be able to **replace** their parent classes without breaking the functionality.                                          |
+| **I – Interface Segregation Principle (ISP)** | Don’t force a class to implement **interfaces it doesn’t use**. Break large interfaces into smaller ones.                                  |
+| **D – Dependency Inversion Principle (DIP)**  | Depend on **abstractions, not concretions**. High-level modules shouldn’t depend on low-level modules; both should depend on abstractions. |
+
+---
+
+### Simple Example: (in C++)
+
+---
+
+### 1. **Single Responsibility Principle (SRP)**
+
+**Each class should have one and only one responsibility.**
+
+```cpp
+class FileReader {
+public:
+    void readFile(const std::string& filename) {
+        // logic to read file
+    }
+};
+
+class FileWriter {
+public:
+    void writeFile(const std::string& filename) {
+        // logic to write file
+    }
+};
+```
+
+*Each class has a single reason to change — reading or writing.*
+
+---
+
+### 2. **Open/Closed Principle (OCP)**
+
+**Software entities should be open for extension, but closed for modification.**
+
+```cpp
+class Shape {
+public:
+    virtual double area() = 0;
+};
+
+class Circle : public Shape {
+public:
+    double radius;
+    Circle(double r) : radius(r) {}
+    double area() override {
+        return 3.14 * radius * radius;
+    }
+};
+
+class Rectangle : public Shape {
+public:
+    double width, height;
+    Rectangle(double w, double h) : width(w), height(h) {}
+    double area() override {
+        return width * height;
+    }
+};
+```
+
+*You can add new shapes without modifying existing code.*
+
+---
+
+### 3. **Liskov Substitution Principle (LSP)**
+
+**Derived classes must be substitutable for their base classes.**
+
+```cpp
+class Bird {
+public:
+    virtual void fly() {
+        std::cout << "Flying\n";
+    }
+};
+
+class Sparrow : public Bird {};
+
+void letBirdFly(Bird* bird) {
+    bird->fly();
+}
+```
+
+*Sparrow can be used in place of Bird without breaking code.*
+
+---
+
+### 4. **Interface Segregation Principle (ISP)**
+
+**Clients should not be forced to depend on methods they don’t use.**
+
+```cpp
+class IPrinter {
+public:
+    virtual void print() = 0;
+};
+
+class IScanner {
+public:
+    virtual void scan() = 0;
+};
+
+class AllInOnePrinter : public IPrinter, public IScanner {
+public:
+    void print() override {
+        std::cout << "Printing\n";
+    }
+    void scan() override {
+        std::cout << "Scanning\n";
+    }
+};
+```
+
+*Separate interfaces keep implementation clean and focused.*
+
+---
+
+### 5. **Dependency Inversion Principle (DIP)**
+
+**Depend on abstractions, not concrete classes.**
+
+```cpp
+class IMessage {
+public:
+    virtual void send(const std::string& msg) = 0;
+};
+
+class Email : public IMessage {
+public:
+    void send(const std::string& msg) override {
+        std::cout << "Sending Email: " << msg << "\n";
+    }
+};
+
+class Notification {
+    IMessage* message;
+public:
+    Notification(IMessage* msg) : message(msg) {}
+    void notify(const std::string& text) {
+        message->send(text);
+    }
+};
+```
+
+*Notification depends on abstraction (IMessage), not on a specific Email class.*
 
 ---
 ---
