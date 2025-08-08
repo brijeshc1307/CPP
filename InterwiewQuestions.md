@@ -2945,6 +2945,284 @@ public:
 *Notification depends on abstraction (IMessage), not on a specific Email class.*
 
 ---
+### **Tietoevry.com - Technical Round Interview**
+Round 1: 30 min
+---
+
+### **Q1: Create a class with const, reference, char pointer, static data member**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    const int a;       // constant data member
+    int &r;            // reference data member
+    char *ch;          // pointer to char
+    static int n;      // static data member
+
+    // Constructor to initialize const and reference
+    A(int val, int &ref, const char* str) 
+        : a(val), r(ref) {
+        ch = new char[strlen(str) + 1];
+        strcpy(ch, str);
+    }
+
+    ~A() {
+        delete[] ch;  // Free allocated memory
+    }
+};
+
+// Define static member outside class
+int A::n = 0;
+
+int main() {
+    int x = 100;
+    A obj(10, x, "Hello");
+    cout << "Const a: " << obj.a << ", Reference r: " << obj.r << ", Char*: " << obj.ch << ", Static n: " << A::n << endl;
+    return 0;
+}
+```
+
+---
+
+### **Q2: Create all types of constructors + destructor. Why use them?**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class B {
+    int x;
+public:
+    // Default constructor
+    B() {
+        x = 0;
+        cout << "Default Constructor" << endl;
+    }
+
+    // Parameterized constructor
+    B(int val) {
+        x = val;
+        cout << "Parameterized Constructor" << endl;
+    }
+
+    // Copy constructor
+    B(const B &obj) {
+        x = obj.x;
+        cout << "Copy Constructor" << endl;
+    }
+
+    // Destructor
+    ~B() {
+        cout << "Destructor called" << endl;
+    }
+};
+
+int main() {
+    B b1;         // default
+    B b2(10);     // parameterized
+    B b3 = b2;    // copy
+
+    return 0;
+}
+```
+
+**Why use them?**
+
+* **Constructor** initializes objects when created.
+* **Destructor** cleans up resources when the object goes out of scope.
+* **Copy constructor** used when copying objects (e.g., passing by value).
+
+---
+
+###  **Q3: Write output**
+
+```cpp
+int arr[] = {10, 20, 30, 40, 50};
+int *p = arr;
+
+cout << *p;        // Output: 10
+cout << *p++;      // Output: 10 (p now points to arr[1])
+cout << (*p)++;    // Output: 20 (then arr[1] becomes 21)
+```
+
+ **Final Output:**
+
+```
+1020
+```
+
+� `*p++` increments the pointer (not the value). `(*p)++` increments the value at that pointer.
+
+---
+
+### **Q4: Write output & explain**
+
+```cpp
+int x = 10, y = 20;
+const int* p1 = &x; // Pointer to const int (data is const, pointer not)
+int* const p2 = &x; // Constant pointer to int (pointer const, data not)
+
+*p1 = 20;    // Error: can't modify value through pointer to const
+p1 = &y;     // OK: pointer itself can point elsewhere
+
+*p2 = 30;    // OK: data can be modified
+p2 = &y;     // Error: can't change address held by const pointer
+```
+
+**Explanation:**
+
+* `const int* p1` → **data is const**, pointer is not.
+* `int* const p2` → **pointer is const**, data is not.
+
+---
+
+###  **Q5: Insert pairs in `map` and print using iterator**
+
+```cpp
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+    map<int, int> mp;
+
+    // Insert values
+    mp.insert({1, 1});
+    mp.insert({2, 2});
+    mp.insert({3, 3});
+    mp.insert({4, 4});
+    mp.insert({5, 5});
+
+    // Print using iterator
+    for (auto it = mp.begin(); it != mp.end(); ++it) {
+        cout << it->first << " => " << it->second << endl;
+    }
+
+    return 0;
+}
+```
+
+ **Output:**
+
+```
+1 => 1
+2 => 2
+3 => 3
+4 => 4
+5 => 5
+```
+
+---
+
+### **Q6: What is VPtr and VTable?**
+
+**VTable (Virtual Table)** and **VPtr (Virtual Pointer)** are mechanisms used in **runtime polymorphism** (when using virtual functions).
+
+* **VTable:**
+
+  * A lookup table used to resolve function calls to virtual functions at runtime.
+  * Each class with virtual functions has its own vtable.
+
+* **VPtr:**
+
+  * A hidden pointer in each object of a class having virtual functions.
+  * Points to the class’s VTable.
+
+Example:
+
+```cpp
+class Base {
+public:
+    virtual void show() { cout << "Base" << endl; }
+};
+
+class Derived : public Base {
+public:
+    void show() override { cout << "Derived" << endl; }
+};
+```
+
+* When you call `show()` via a `Base*` pointer pointing to a `Derived` object, VTable is used to dynamically resolve the correct function.
+
+---
+
+### **Q7: If we do not create a constructor, how is it handled in C++?**
+
+###  **Compiler-Generated Default Constructor**
+
+If you write:
+
+```cpp
+class A {
+public:
+    int x;
+};
+```
+
+Then C++ automatically generates a constructor like this:
+
+```cpp
+A() { }  // Implicit default constructor
+```
+
+You can still create objects:
+
+```cpp
+A obj;    // Works fine — compiler provides a default constructor
+```
+
+---
+
+### **Important Notes:**
+
+####  **Case 1: No constructor defined**
+
+* Compiler provides **default constructor**.
+* Members like `int`, `float` are **not initialized** automatically (they hold garbage values unless initialized).
+
+```cpp
+class B {
+public:
+    int x;
+};
+
+int main() {
+    B obj;
+    cout << obj.x << endl;  // Garbage value
+}
+```
+
+---
+
+####  \*\*Case 2: You define **any** constructor, but **not the default one**
+
+```cpp
+class C {
+public:
+    C(int a) {}  // Parameterized constructor only
+};
+
+int main() {
+    C obj;       //  Error: No default constructor
+}
+```
+
+* If **you define a parameterized constructor**, the compiler **does NOT generate** a default one.
+* You must manually define it if needed.
+
+```cpp
+class C {
+public:
+    C() {}         // Default constructor
+    C(int a) {}    // Parameterized
+};
+```
+
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
