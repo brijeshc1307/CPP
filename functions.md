@@ -178,7 +178,44 @@ void modify(int &x) {
     x = 10;  // Modifies the original
 }
 ```
+**Example:**
+## **1. Pass by Reference using `&`**
 
+```cpp
+#include <iostream>
+using namespace std;
+
+void modify(int &x) { // x is an alias to the original variable
+    x = 10;  // This changes the original variable
+}
+
+int main() {
+    int num = 5;
+    modify(num); // Passes reference
+    cout << "After modify(): " << num << endl; // Output: 10
+    return 0;
+}
+```
+
+---
+
+## **2. Pass by Reference using `*` (Pointer)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void modify(int *x) { // x is a pointer to the original variable
+    *x = 20;  // Dereferencing changes the original variable
+}
+
+int main() {
+    int num = 5;
+    modify(&num); // Pass address of num
+    cout << "After modify(): " << num << endl; // Output: 20
+    return 0;
+}
+```
 ---
 [⬅️ Control Structures](/ControlStructures.md)         |        [Pointers ➡️](/Pointers.md)
 ---
