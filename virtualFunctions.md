@@ -1,3 +1,245 @@
+## **1. What is the `virtual` keyword?**
+
+In C++, the `virtual` keyword is used in a **base class** to tell the compiler:
+
+> “If this function is called through a base class pointer or reference, determine which function to execute at **runtime** (dynamic dispatch), not at compile-time.”
+
+It enables **runtime polymorphism** by creating a **virtual table (vtable)** mechanism.
+
+---
+
+## **2. Syntax**
+
+```cpp
+class Base {
+public:
+    virtual void show() {
+        cout << "Base class show()" << endl;
+    }
+};
+```
+
+---
+
+## **3. Rules for `virtual` Keyword**
+
+1. Can only be used with **member functions**.
+2. Can’t be used with:
+
+   * Static functions
+   * Constructors
+   * Friend functions
+3. If a function is declared virtual in a base class, it **remains virtual** in all derived classes.
+4. If not overridden in derived class, the **base version** is called.
+5. If used with destructors, ensures correct destructor call sequence.
+
+---
+
+## **4. Where Can We Use `virtual`?**
+
+Alright Brijesh — let’s go deep into **Virtual Functions in C++** so you understand not just *what* they are, but *why* they exist, *how* they work internally, and *where* to use them effectively.
+
+## **a. Virtual Function**
+
+A **virtual function** in C++ is a member function in a base class that you expect to be **overridden** in derived classes.
+It enables **runtime polymorphism** — meaning, the call to the function is resolved **at runtime**, not at compile-time.
+
+It’s declared using the `virtual` keyword in the base class.
+
+---
+
+### **Why do we need Virtual Functions?**
+
+Without virtual functions, C++ uses **static binding**:
+
+```cpp
+class Base {
+public:
+    void show() { cout << "Base class" << endl; }
+};
+
+class Derived : public Base {
+public:
+    void show() { cout << "Derived class" << endl; }
+};
+
+int main() {
+    Base* b = new Derived();
+    b->show(); // Output: Base class (not what we want)
+}
+```
+
+Even though `b` points to a `Derived` object, it calls `Base::show()` because **binding happens at compile time**.
+
+With virtual functions:
+
+```cpp
+class Base {
+public:
+    virtual void show() { cout << "Base class" << endl; }
+};
+
+class Derived : public Base {
+public:
+    void show() override { cout << "Derived class" << endl; }
+};
+
+int main() {
+    Base* b = new Derived();
+    b->show(); // Output: Derived class ✅
+}
+```
+
+Now it’s **dynamic binding** — resolved at runtime using the **V-Table mechanism**.
+
+---
+
+## **3. How Virtual Functions Work Internally (V-Table & V-Pointer)**
+
+When a class has a virtual function:
+
+1. **V-Table (Virtual Table)** is created:
+
+   * A lookup table storing function pointers for the class's virtual functions.
+2. **V-Ptr (Virtual Pointer)** is added to each object:
+
+   * Points to the class’s V-Table.
+
+Execution:
+
+* When a virtual function is called through a base pointer, the compiler uses the V-Pointer → V-Table → correct function address → executes it.
+
+---
+
+### **Rules & Properties of Virtual Functions**
+
+* Must be a **member function** of a class.
+* Can’t be **static** or **constructor**.
+* Can be overridden in the derived class.
+* If not overridden, base class version is called.
+* You can call them through:
+
+  * Base class pointer/reference to derived object.
+* If declared in base, it remains virtual in all derived classes (even if `virtual` keyword not repeated).
+* Virtual functions can be **pure virtual** (`= 0`) → makes class **abstract**.
+
+---
+
+### **Example: Normal Virtual Function**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+public:
+    virtual void display() {
+        cout << "Display from Base" << endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void display() override {
+        cout << "Display from Derived" << endl;
+    }
+};
+
+int main() {
+    Base* ptr = new Derived();
+    ptr->display(); // Runtime: Derived
+    delete ptr;
+}
+```
+
+---
+
+### **b. Pure Virtual Functions (Abstract Classes)**
+
+```cpp
+class Shape {
+public:
+    virtual void draw() = 0; // Pure virtual function
+};
+
+class Circle : public Shape {
+public:
+    void draw() override {
+        cout << "Drawing Circle" << endl;
+    }
+};
+
+int main() {
+    Shape* s = new Circle();
+    s->draw();
+    delete s;
+}
+```
+
+If a class has **at least one** pure virtual function, it becomes **abstract** and cannot be instantiated.
+
+---
+
+### **c. Virtual Destructor**
+
+If a base class has virtual functions, **always** make its destructor virtual to ensure proper cleanup.
+
+```cpp
+class Base {
+public:
+    virtual ~Base() { cout << "Base destructor\n"; }
+};
+
+class Derived : public Base {
+public:
+    ~Derived() { cout << "Derived destructor\n"; }
+};
+
+int main() {
+    Base* ptr = new Derived();
+    delete ptr; 
+    // Output:
+    // Derived destructor
+    // Base destructor
+}
+```
+
+Without a virtual destructor, deleting through a base pointer will cause **undefined behavior**.
+
+---
+
+### **5. Performance Impact**
+
+* Virtual functions add **one level of indirection** (V-Table lookup).
+* Slightly slower than non-virtual calls.
+* Object size increases due to V-Pointer.
+* Negligible in most real-world cases compared to flexibility gained.
+
+---
+
+### **6. When to Use**
+
+✅ Use when:
+
+* You need **polymorphic behavior**.
+* Base class defines a common interface, but implementations differ.
+
+❌ Avoid when:
+
+* Class is not meant to be inherited.
+* Performance in tight loops is extremely critical.
+
+---
+
+## **7. Static vs Dynamic Binding**
+
+* **Without `virtual`** → static binding (decided at compile-time).
+* **With `virtual`** → dynamic binding (decided at runtime using vtable).
+
+---
+---
+
+
 ### Virtual Functions
 
 A **virtual function** in C++ is a **member function in a base class** that you expect to **override in derived classes**. It allows **runtime polymorphism** — i.e., the correct function is chosen at **run time**, based on the object type.
