@@ -488,6 +488,447 @@ sizeof(cstr): 6
 
 ---
 ---
+Interview Question
+
+## **1. Reverse a String**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+// Using two pointer approach
+
+string reverseStr(string s) {
+    int left = 0, right = s.size() - 1;
+    while (left < right) {
+        swap(s[left], s[right]);
+        left++;
+        right--;
+    }
+    return s;
+}
+
+//Or
+string reverseStr(string s) {
+    int n = s.size();
+    for (int i = 0; i < n / 2; i++) {
+        char temp = s[i];
+        s[i] = s[n - i - 1];
+        s[n - i - 1] = temp;
+    }
+    return s;
+}
+
+int main() {
+    string s = "hello";
+    cout << reverseStr(s);
+}
+```
+
+---
+
+## **2. Check Palindrome**
+
+```cpp
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+bool isPalindrome(string s) {
+    int l = 0, r = s.size() - 1;
+    while (l < r) {
+        while (l < r && !isalnum(s[l])) l++;
+        while (l < r && !isalnum(s[r])) r--;
+        if (tolower(s[l]) != tolower(s[r])) return false;
+        l++; r--;
+    }
+    return true;
+}
+// OR
+bool isPalindrome(string s) {
+    string cleaned = "";
+    for (char c : s) {
+        if (isalnum(c)) {
+            cleaned += tolower(c);
+        }
+    }
+
+    string reversed = string(cleaned.rbegin(), cleaned.rend());
+    return cleaned == reversed;
+}
+
+
+int main() {
+    string s = "A man, a plan, a canal: Panama";
+    cout << (isPalindrome(s) ? "Yes" : "No");
+}
+```
+
+---
+## **2.1. Palindrome String
+```cpp
+#include <iostream>
+using namespace std;
+
+bool isPalindrome(string str) {
+    int start = 0;
+    int end = str.length() - 1;
+
+    while (start < end) {
+        if (str[start] != str[end]) {
+            return false;
+        }
+        start++;
+        end--;
+    }
+    return true;
+}
+
+int main() {
+    string input;
+    cout << "Enter a string: ";
+    cin >> input;
+
+    if (isPalindrome(input)) {
+        cout << "Yes, it's a palindrome.\n";
+    } else {
+        cout << "No, it's not a palindrome.\n";
+    }
+
+    return 0;
+}
+
+```
+---
+
+## **3. Count Vowels and Consonants**
+
+```cpp
+#include <iostream>
+#include <cctype>
+using namespace std;
+
+int main() {
+    string s = "Hello World";
+    int vowels = 0, consonants = 0;
+    for (char c : s) {
+        if (isalpha(c)) {
+            char ch = tolower(c);
+            if (ch=='a'||ch=='e'||ch=='i'||ch=='o'||ch=='u')
+                vowels++;
+            else
+                consonants++;
+        }
+    }
+    cout << "Vowels: " << vowels << ", Consonants: " << consonants;
+}
+// OR
+
+int main() {
+    string s = "Hello World";
+    int vowels = 0, consonants = 0;
+
+    for (int i = 0; i < s.length(); i++) {
+        char c = s[i];
+        if (isalpha(c)) {
+            char ch = tolower(c);
+            if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u')
+                vowels++;
+            else
+                consonants++;
+        }
+    }
+
+    cout << "Vowels: " << vowels << ", Consonants: " << consonants;
+    return 0;
+}
+```
+
+---
+
+## **4. Remove All Spaces**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+string removeSpaces(string s) {
+    int j = 0;
+    for (int i = 0; i < s.size(); i++)
+        if (s[i] != ' ')
+            s[j++] = s[i];
+    s.resize(j);
+    return s;
+}
+//OR
+string removeSpaces(string s) {
+    string result = "";
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] != ' ')
+            result += s[i];
+    }
+    return result;
+}
+
+
+int main() {
+    string s = "Hello   World";
+    cout << removeSpaces(s);
+}
+```
+
+---
+
+## **5. Character Frequency**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s = "hello";
+    int freq[256] = {0};
+    for (char c : s) freq[(unsigned char)c]++;
+    for (int i = 0; i < 256; i++)
+        if (freq[i] > 0)
+            cout << (char)i << " -> " << freq[i] << "\n";
+}
+```
+
+---
+
+## **6. Remove Duplicates**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+string removeDuplicates(string s) {
+    bool seen[256] = {0};
+    int j = 0;
+    for (int i = 0; i < s.size(); i++) {
+        if (!seen[(unsigned char)s[i]]) {
+            seen[(unsigned char)s[i]] = true;
+            s[j++] = s[i];
+        }
+    }
+    s.resize(j);
+    return s;
+}
+
+int main() {
+    string s = "banana";
+    cout << removeDuplicates(s);
+}
+```
+
+---
+
+## **7. First Non-Repeating Character**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s = "swiss";
+    int freq[256] = {0};
+    for (char c : s) freq[(unsigned char)c]++;
+    for (char c : s) {
+        if (freq[(unsigned char)c] == 1) {
+            cout << c;
+            return 0;
+        }
+    }
+    cout << "None";
+}
+```
+
+---
+
+## **8. Check Anagram**
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool isAnagram(string a, string b) {
+    if (a.size() != b.size()) return false;
+    sort(a.begin(), a.end());
+    sort(b.begin(), b.end());
+    return a == b;
+}
+
+int main() {
+    cout << (isAnagram("listen", "silent") ? "Yes" : "No");
+}
+```
+
+---
+
+## **9. Implement `atoi()`**
+
+```cpp
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int myAtoi(string s) {
+    int i = 0, sign = 1, res = 0;
+    while (s[i] == ' ') i++;
+    if (s[i] == '+' || s[i] == '-') sign = (s[i++] == '-') ? -1 : 1;
+    while (isdigit(s[i])) {
+        if (res > (INT_MAX - (s[i] - '0')) / 10)
+            return (sign == 1) ? INT_MAX : INT_MIN;
+        res = res * 10 + (s[i] - '0');
+        i++;
+    }
+    return res * sign;
+}
+
+int main() {
+    cout << myAtoi("   -42");
+}
+```
+
+---
+
+## **10. All Substrings**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s = "abc";
+    for (int i = 0; i < s.size(); i++) {
+        for (int len = 1; len <= s.size() - i; len++) {
+            cout << s.substr(i, len) << "\n";
+        }
+    }
+}
+```
+
+---
+
+## **11. Pattern Matching (Naive Search)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    string text = "abcabcabc", pattern = "cab";
+    int n = text.size(), m = pattern.size();
+    for (int i = 0; i <= n - m; i++) {
+        int j = 0;
+        while (j < m && text[i + j] == pattern[j]) j++;
+        if (j == m) cout << "Pattern found at index " << i << "\n";
+    }
+}
+```
+
+---
+
+## **12. Longest Palindromic Substring (Expand Around Center)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+string longestPalindrome(string s) {
+    int start = 0, maxLen = 1, n = s.size();
+    auto expand = [&](int l, int r) {
+        while (l >= 0 && r < n && s[l] == s[r]) {
+            if (r - l + 1 > maxLen) {
+                start = l;
+                maxLen = r - l + 1;
+            }
+            l--; r++;
+        }
+    };
+    for (int i = 0; i < n; i++) {
+        expand(i, i);     // odd
+        expand(i, i + 1); // even
+    }
+    return s.substr(start, maxLen);
+}
+
+int main() {
+    cout << longestPalindrome("babad");
+}
+```
+
+---
+
+## **13. String Compression**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+string compress(string s) {
+    string res = "";
+    int count = 1;
+    for (int i = 1; i <= s.size(); i++) {
+        if (i < s.size() && s[i] == s[i - 1])
+            count++;
+        else {
+            res += s[i - 1];
+            res += to_string(count);
+            count = 1;
+        }
+    }
+    return res;
+}
+
+int main() {
+    cout << compress("aaabbc");
+}
+```
+
+---
+
+## **14. Digits Only Check**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+bool isDigits(string s) {
+    for (char c : s)
+        if (c < '0' || c > '9')
+            return false;
+    return true;
+}
+
+int main() {
+    cout << (isDigits("12345") ? "Yes" : "No");
+}
+```
+
+---
+
+## **15. Rotate String by K**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+string rotateRight(string s, int k) {
+    int n = s.size();
+    k %= n;
+    return s.substr(n - k) + s.substr(0, n - k);
+}
+
+int main() {
+    cout << rotateRight("abcdef", 2); // efabcd
+}
+```
+
+---
+---
 [⬅️ Arrays](/array.md)       | [Object-Oriented Programming (OOP) ➡️](/Object-Oriented_Programming.md)
 ---
 ## **License**
