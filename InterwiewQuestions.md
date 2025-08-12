@@ -3221,6 +3221,110 @@ public:
 };
 ```
 
+---
+
+### **Calsoft Inc - Technical Round Interview**
+Round 1: 30 min
+### **Q1: Eliminate duplicate characters from "Hello World!!!" without using STL
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string str;
+    getline(cin, str); // take full line with spaces
+
+    int freq[256] = {0}; // all ASCII chars
+    string result;
+
+    for (char ch : str) {
+        if (freq[(unsigned char)ch] == 0) { // first occurrence
+            result.push_back(ch);
+        }
+        freq[(unsigned char)ch]++;
+    }
+
+    cout << result;
+    return 0;
+}
+
+
+```
+```
+Input:
+hello world!!!
+
+Output:
+helo wrd!
+```
+
+Without STL
+```
+#include <iostream>
+#include <cstdio>  // for getchar()
+using namespace std;
+
+int main() {
+    char str[1000]; // input buffer (max 999 chars + '\0')
+    int len = 0;
+
+    // Read input manually (including spaces)
+    char ch;
+    while ((ch = getchar()) != '\n' && ch != EOF) {
+        str[len++] = ch;
+    }
+    str[len] = '\0'; // null-terminate
+
+    int freq[256] = {0}; // ASCII frequency
+    int index = 0;       // position to place unique chars
+
+    for (int i = 0; i < len; i++) {
+        unsigned char c = str[i];
+        if (freq[c] == 0) { // first occurrence
+            str[index++] = c;
+        }
+        freq[c]++;
+    }
+
+    str[index] = '\0'; // terminate final string
+
+    // Output result
+    cout << str;
+    return 0;
+}
+
+```
+Remove Duplicate in a word
+```cpp
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+void removeDuplicates(char str[]) {
+    int freq[256] = {0}; // frequency of ASCII chars
+    int len = strlen(str);
+    int index = 0;
+
+    for (int i = 0; i < len; i++) {
+        unsigned char ch = str[i];
+        if (freq[ch] == 0) { // first occurrence
+            str[index++] = ch;
+        }
+        freq[ch]++; // increment frequency
+    }
+    str[index] = '\0'; // terminate string
+}
+
+int main() {
+    char str[] = "programming";
+    cout << "Original: " << str << endl;
+    removeDuplicates(str);
+    cout << "Without duplicates: " << str << endl;
+    return 0;
+}
+
+
+```
 
 ---
 ---
