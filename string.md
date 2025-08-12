@@ -808,6 +808,23 @@ int main() {
         }
     }
 }
+//OR
+#include <iostream>
+using namespace std;
+
+int main() {
+    string s = "abc";
+    for (int i = 0; i < s.size(); i++) {
+        string temp = "";
+        for (int j = i; j < s.size(); j++) {
+            temp += s[j];      // append one character at a time
+            cout << temp << "\n";
+        }
+    }
+    return 0;
+}
+
+
 ```
 
 ---
