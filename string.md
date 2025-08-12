@@ -830,6 +830,64 @@ int main() {
 ---
 
 ## **11. Pattern Matching (Naive Search)**
+Here’s a clear **algorithm** for the **naive pattern matching** approach used in your code:
+
+---
+
+## **Naive Pattern Matching Algorithm**
+### **Steps:**
+
+1. **Initialize:**
+
+   * Let `n = length of text`
+   * Let `m = length of pattern`
+
+2. **Loop through text:**
+
+   * For `i` from `0` to `n - m`:
+
+     * Initialize `j = 0`
+
+3. **Compare characters:**
+
+   * While `j < m` and `text[i + j] == pattern[j]`, do:
+
+     * Increment `j`
+
+4. **Check for full match:**
+
+   * If `j == m`, then:
+
+     * Report or store index `i` (pattern found)
+
+5. **Continue loop until all positions are checked**
+
+---
+
+### **Pseudocode:**
+
+```plaintext
+function naivePatternMatch(text, pattern):
+    n ← length(text)
+    m ← length(pattern)
+
+    for i from 0 to n - m:
+        j ← 0
+        while j < m and text[i + j] == pattern[j]:
+            j ← j + 1
+
+        if j == m:
+            print("Pattern found at index", i)
+```
+
+---
+
+### **Time Complexity:**
+
+* **Worst case:** O(n × m)
+* **Best case:** O(n), if mismatches occur early
+
+
 
 ```cpp
 #include <iostream>
@@ -845,6 +903,8 @@ int main() {
     }
 }
 ```
+
+
 
 ---
 
