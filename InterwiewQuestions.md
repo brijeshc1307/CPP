@@ -3327,6 +3327,131 @@ int main() {
 ```
 
 ---
+
+### **Apexon - Technical Round Interview**
+Round 1: 30 min
+
+## **1. What is a Race Condition? How to Prevent it?**
+
+**Definition:**
+A **race condition** occurs when multiple threads access and modify shared data **concurrently**, and the final result depends on the timing of their execution.
+
+###  How to prevent it?
+
+Use **mutual exclusion** mechanisms like:
+
+* `std::mutex`
+* `std::lock_guard`
+* `std::atomic`
+
+### **C++ Example (Using `std::mutex`):**
+
+```cpp
+#include <iostream>
+#include <thread>
+#include <mutex>
+
+int counter = 0;
+std::mutex mtx;
+
+void increment() {
+    for (int i = 0; i < 1000; ++i) {
+        std::lock_guard<std::mutex> lock(mtx);
+        ++counter;
+    }
+}
+
+int main() {
+    std::thread t1(increment);
+    std::thread t2(increment);
+    t1.join();
+    t2.join();
+    std::cout << "Counter: " << counter << std::endl;
+    return 0;
+}
+```
+
+---
+
+## **2. What is Mutual Exclusion?**
+
+---
+
+## **3. What is Multithreading?**
+---
+
+## **4. OOPs Pillars in C++**
+
+---
+
+## **5. Explain Function Overloading  Overriding**
+
+---
+
+## **6. First Non Repeating Character in a String**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    string str;
+    cin >> str;
+    int found = 0;
+
+    for (int i = 0; str[i] != '\0'; i++) {
+        found = 0;
+        for (int j = 0; str[j] != '\0'; j++) {
+            if (str[i] == str[j] && i != j) {
+                found = 1;
+                break;
+            }
+        }
+        if (!found) {
+            cout << "First non-repeating character: " << str[i] << endl;
+            return 0;
+        }
+    }
+
+    cout << "No non-repeating character found." << endl;
+    return 0;
+}
+
+```
+```
+Sample Input
+aabcd
+Your Output
+First non-repeating character: b
+```
+
+---
+
+## **7. Check if a String is a Palindrome**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+bool isPalindrome(string s) {
+    int i = 0, j = s.length() - 1;
+    while (i < j) {
+        if (s[i] != s[j]) return false;
+        i++; j--;
+    }
+    return true;
+}
+
+int main() {
+    string str = "madam";
+    if (isPalindrome(str))
+        cout << str << " is a palindrome." << endl;
+    else
+        cout << str << " is not a palindrome." << endl;
+}
+```
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
