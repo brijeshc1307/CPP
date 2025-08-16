@@ -493,6 +493,77 @@ Class - Name: Bob, Age: 25
 ```
 
 ---
+### **Normal Variable vs Object Variable**
+
+## 1. **Normal Variable (Primitive or Simple Variable)**
+
+### **Definition**:
+
+A normal variable holds **simple data types** or **primitive values** such as integers, floats, booleans, or characters.
+
+### **Example**:
+
+```cpp
+int x = 5;        
+string name = "John"; 
+float pi = 3.14;    
+```
+
+### **Characteristics**:
+
+* Stores **single pieces of data**.
+* Stored **directly** in memory.
+* Not part of any class or object by default.
+* Operations on them are typically **value-based**.
+
+---
+
+## 2. **Object Variable (Instance Variable / Reference Variable)**
+
+### **Definition**:
+
+An object variable is a **reference to an instance of a class**. It holds **objects**, not simple values.
+
+### **Example**:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Person {
+public:
+    string name;
+
+    // Constructor
+    Person(string n) {
+        name = n;
+    }
+
+    void greet() {
+        cout << "Hello, my name is " << name << endl;
+    }
+};
+
+int main() {
+    Person p1("Alice");   // Object variable (instance of class Person)
+    p1.greet();
+
+    int x = 10;           // Normal variable (primitive type)
+
+    return 0;
+}
+
+```
+
+### **Characteristics**:
+
+* Stores **reference to an object**, not the object itself.
+* Can access methods and attributes of the class.
+* Can hold **complex data** (multiple fields, behaviors).
+* Often used to **model real-world entities**.
+
+---
 
 ### Normal Variable Vs Object Variable :
 
