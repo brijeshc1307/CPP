@@ -38,8 +38,14 @@ int main() {
 ```
 Constructor called! a = 10
 ```
-### **Example: Default Constructor** 
-Default Constructor – Takes no arguments.
+---
+## Types of Constructors
+
+### 1. **Default Constructor**
+
+* Takes no parameters.
+* Automatically generated if no constructor is defined.
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -61,8 +67,11 @@ int main() {
 }
 ```
 
-### **Example: Parametrized Constructor**  
-Parameterized Constructor – Takes arguments to initialize data members.
+---
+
+### 2. **Parameterized Constructor**
+
+* Takes parameters to initialize member variables.
 
 ```cpp
 // C++ program to calculate the area of a wall
@@ -104,8 +113,14 @@ Area of Wall 1: 90.3
 Area of Wall 2: 53.55
 ```
 
-### **Example: Copy Constructor**  
-Copy Constructor – Creates a new object as a copy of an existing object.
+
+---
+
+### 3. **Copy Constructor**
+
+* Used to create a new object as a copy of an existing object.
+* Syntax: `ClassName(const ClassName &other)`
+
 ```cpp
 #include <iostream>
 using namespace std;
@@ -156,6 +171,7 @@ Area of Wall 1: 90.3
 Area of Wall 2: 90.3
 ```
 
+---
 ### **Example: Default, Parametrized, Copy Constructor**  
 ```cpp
 #include <iostream>
@@ -219,66 +235,182 @@ Copy Constructor Called
 Copy Constructor - Length: 10.5, Height: 8.6, Area: 90.3
 ```
 
-OR
+---
+
+### 4. **Move Constructor** (C++11 and above)
+
+* Transfers resources from one object to another.
+* Syntax: `ClassName(ClassName &&other)`
+
+```cpp
+class Person {
+public:
+    string name;
+
+    Person(string n) : name(n) {}
+
+    Person(Person&& p) {
+        name = std::move(p.name);
+        cout << "Move constructor called" << endl;
+    }
+};
+```
+
+---
+
+### 5. **Constructor with Default Arguments**
+
+* Combines default and parameterized behavior.
+
+```cpp
+class Person {
+public:
+    string name;
+    int age;
+
+    Person(string n = "Unknown", int a = 0) {
+        name = n;
+        age = a;
+    }
+};
+```
+
+---
+
+### 6. **Delegating Constructor** (C++11+)
+
+* One constructor calls another constructor in the same class.
+
+```cpp
+class Person {
+public:
+    string name;
+    int age;
+
+    Person() : Person("Unknown", 0) {}  // Delegates to parameterized constructor
+
+    Person(string n, int a) {
+        name = n;
+        age = a;
+    }
+};
+```
+
+---
+### **Example: Default, Parametrized, Copy Constructor, move constructor, Constructor with Default Arguments,Delegating Constructor**  
+---
 ```cpp
 #include <iostream>
+#include <string>
+#include <utility>  // for std::move
+
 using namespace std;
 
-class Example {
-    int a;
+class Person {
+private:
+    string name;
+    int age;
 
 public:
-    // Default constructor
-    Example() {
-        a = 0;
-        cout << "Default constructor called! a = " << a << endl;
+    // 1. Default Constructor
+    Person() {
+        name = "Default";
+        age = 0;
+        cout << "[Default Constructor] Name: " << name << ", Age: " << age << endl;
     }
 
-    // Parameterized constructor
-    Example(int x) {
-        a = x;
-        cout << "Parameterized constructor called! a = " << a << endl;
+    // 2. Parameterized Constructor
+    Person(string n, int a) {
+        name = n;
+        age = a;
+        cout << "[Parameterized Constructor] Name: " << name << ", Age: " << age << endl;
     }
 
-    // Copy constructor
-    Example(const Example &obj) {
-        a = obj.a;
-        cout << "Copy constructor called! a = " << a << endl;
+    // 3. Copy Constructor
+    Person(const Person &p) {
+        name = p.name;
+        age = p.age;
+        cout << "[Copy Constructor] Name: " << name << ", Age: " << age << endl;
     }
 
-    // Optional: Function to display value of 'a'
-    void display() {
-        cout << "Value of a = " << a << endl;
+    // 4. Move Constructor
+    Person(Person &&p) noexcept {
+        name = std::move(p.name);
+        age = p.age;
+        cout << "[Move Constructor] Name: " << name << ", Age: " << age << endl;
+    }
+
+    // 5. Constructor with Default Arguments
+    Person(string n = "John Doe") {
+        name = n;
+        age = 100;
+        cout << "[Constructor with Default Argument] Name: " << name << ", Age: " << age << endl;
+    }
+
+    // 6. Delegating Constructor
+    Person(int id) : Person("Delegated", id) {
+        cout << "[Delegating Constructor] ID used as age: " << id << endl;
+    }
+
+    // Print details method
+    void display() const {
+        cout << ">> Person Info: Name = " << name << ", Age = " << age << endl;
     }
 };
 
 int main() {
-    Example obj1;          // Default constructor
-    Example obj2(10);      // Parameterized constructor
-    Example obj3 = obj2;   // Copy constructor
+    cout << "\n--- Default Constructor ---" << endl;
+    Person p1;
 
-    // Optional: Displaying values
-    cout << "\nDisplaying values:\n";
-    obj1.display();
-    obj2.display();
-    obj3.display();
+    cout << "\n--- Parameterized Constructor ---" << endl;
+    Person p2("Alice", 25);
+
+    cout << "\n--- Copy Constructor ---" << endl;
+    Person p3 = p2; // invokes copy constructor
+
+    cout << "\n--- Move Constructor ---" << endl;
+    Person p4 = std::move(p3); // invokes move constructor
+
+    cout << "\n--- Constructor with Default Arguments ---" << endl;
+    Person p5; // calls constructor with default argument
+
+    cout << "\n--- Delegating Constructor ---" << endl;
+    Person p6(42); // calls delegating constructor
 
     return 0;
 }
-
 ```
 Output
 ```
-Default constructor called! a = 0
-Parameterized constructor called! a = 10
-Copy constructor called! a = 10
+--- Default Constructor ---
+[Default Constructor] Name: Default, Age: 0
 
-Displaying values:
-Value of a = 0
-Value of a = 10
-Value of a = 10
+--- Parameterized Constructor ---
+[Parameterized Constructor] Name: Alice, Age: 25
+
+--- Copy Constructor ---
+[Copy Constructor] Name: Alice, Age: 25
+
+--- Move Constructor ---
+[Move Constructor] Name: Alice, Age: 25
+
+--- Constructor with Default Arguments ---
+[Constructor with Default Argument] Name: John Doe, Age: 100
+
+--- Delegating Constructor ---
+[Parameterized Constructor] Name: Delegated, Age: 42
+[Delegating Constructor] ID used as age: 42
 ```
 ---
+
+## Notes
+
+* If **no constructors** are defined, the compiler provides a **default constructor**.
+* If you define **any constructor**, the compiler **won’t** generate a default one unless you explicitly declare it.
+* Constructors **can be overloaded** (you can have multiple with different parameters).
+
+---
+## **Types of Copy (Behavior, not constructor type)**
 
 ### Shallow Copy Constructor
 A shallow copy creates a new object, but **does not copy the inner (nested) objects**. Instead, it copies references to them.
