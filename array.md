@@ -176,6 +176,231 @@ delete[] arr;  // Free the memory
 
 ---
 
+## **2. Static Arrays**
+
+### Definition:
+
+Fixed-size arrays where the size is known at compile-time.
+
+### Use:
+
+Efficient for small data sets with known size.
+
+### Example:
+
+```cpp
+int arr[100]; // Static array of size 100
+```
+
+---
+
+## **3. Prefix Sums**
+
+### Definition:
+
+An array where each element at index `i` stores the sum of the array elements from index `0` to `i`.
+
+### Use:
+
+Used to quickly calculate sum of subarrays in O(1) after O(n) preprocessing.
+
+### Example:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+    int n = 5;
+    int prefix[n];
+    prefix[0] = arr[0];
+    for (int i = 1; i < n; i++) {
+        prefix[i] = prefix[i - 1] + arr[i];
+    }
+    int l = 1, r = 3; // sum from index 1 to 3
+    int sum = prefix[r] - (l > 0 ? prefix[l - 1] : 0);
+    cout << "Sum from " << l << " to " << r << " is " << sum;
+    return 0;
+}
+```
+
+---
+
+## **4. Kadane’s Algorithm (Maximum Subarray Sum)**
+
+### Definition:
+
+Algorithm to find the maximum sum of a contiguous subarray in O(n) time.
+
+### Use:
+
+Useful in dynamic programming and stock market-related problems.
+
+### Example:
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int arr[] = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    int maxSoFar = arr[0], maxEndingHere = arr[0];
+    
+    for (int i = 1; i < n; i++) {
+        maxEndingHere = max(arr[i], maxEndingHere + arr[i]);
+        maxSoFar = max(maxSoFar, maxEndingHere);
+    }
+    cout << "Maximum subarray sum is " << maxSoFar;
+    return 0;
+}
+```
+
+---
+
+## **5. Dutch National Flag Algorithm**
+
+### Definition:
+
+An algorithm to sort an array of 0s, 1s, and 2s in a single pass.
+
+### Use:
+
+Optimized sorting for three types of elements.
+
+### Example:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void sortColors(int arr[], int n) {
+    int low = 0, mid = 0, high = n - 1;
+    while (mid <= high) {
+        if (arr[mid] == 0)
+            swap(arr[low++], arr[mid++]);
+        else if (arr[mid] == 1)
+            mid++;
+        else
+            swap(arr[mid], arr[high--]);
+    }
+}
+
+int main() {
+    int arr[] = {2, 0, 2, 1, 1, 0};
+    int n = 6;
+    sortColors(arr, n);
+    for (int i = 0; i < n; i++) cout << arr[i] << " ";
+    return 0;
+}
+```
+
+---
+
+## **6. Two Pointer Technique**
+
+### Definition:
+
+Using two pointers (indices) to scan the array from different directions.
+
+### Use:
+
+Useful in problems involving pairs or triplets, especially in sorted arrays.
+
+### Example:
+
+**Find if a pair exists with a given sum**
+
+```cpp
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+bool hasPairWithSum(int arr[], int n, int target) {
+    sort(arr, arr + n);
+    int left = 0, right = n - 1;
+    while (left < right) {
+        int sum = arr[left] + arr[right];
+        if (sum == target) return true;
+        else if (sum < target) left++;
+        else right--;
+    }
+    return false;
+}
+
+int main() {
+    int arr[] = {1, 4, 45, 6, 10, -8};
+    int target = 16;
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << (hasPairWithSum(arr, n, target) ? "Yes" : "No");
+    return 0;
+}
+```
+
+---
+
+## **7. Sliding Window Technique**
+
+### Definition:
+
+A technique to maintain a "window" of elements and slide it over the array to optimize time complexity.
+
+### Use:
+
+Efficient for problems involving subarrays like max sum, averages, or distinct elements.
+
+### Example:
+
+**Find max sum of subarray of size k**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int maxSum(int arr[], int n, int k) {
+    int maxSum = 0, windowSum = 0;
+
+    for (int i = 0; i < k; i++)
+        windowSum += arr[i];
+    
+    maxSum = windowSum;
+
+    for (int i = k; i < n; i++) {
+        windowSum += arr[i] - arr[i - k];
+        maxSum = max(maxSum, windowSum);
+    }
+
+    return maxSum;
+}
+
+int main() {
+    int arr[] = {100, 200, 300, 400};
+    int k = 2;
+    int n = sizeof(arr) / sizeof(arr[0]);
+    cout << "Maximum sum of subarray of size " << k << " is " << maxSum(arr, n, k);
+    return 0;
+}
+```
+
+---
+
+## Common Problems Involving Arrays:
+
+1. **Reverse an array**
+2. **Find the missing number in array**
+3. **Check if array is a palindrome**
+4. **Find the majority element (Moore's Voting)**
+5. **Merge two sorted arrays**
+6. **Find the first repeating element**
+7. **Longest subarray with given sum**
+8. **Find all subarrays with 0 sum**
+9. **Move all zeroes to end**
+10. **Rotate array by k positions**
+
+---
+
 ###  1. **Matrix Transpose**
 
 ```cpp
