@@ -453,5 +453,54 @@ Memory layout (simplified):
 | Access     | Not directly accessible from C++ code                   |
 
 ---
+---
+### 2. **VTable (Virtual Table)**
 
+* Created by **compiler at compile time** for any class with virtual functions (or derived from such a class).
+* **One VTable per class** (shared by all objects of that class).
+* Stores **function pointers** to virtual functions.
+* If derived class overrides a function → VTable entry points to derived version.
+* If not overridden → VTable entry points to base version.
+
+---
+
+### 3. **vptr (Virtual Pointer)**
+
+* A **hidden data member** in every object of a class having virtual functions.
+* Added automatically by compiler.
+* Each object’s constructor initializes its vptr → points to the class’s VTable.
+* **Object-dependent**, unlike VTable (which is class-dependent).
+
+---
+
+### 4. **How Runtime Polymorphism Works**
+
+1. Compiler sees virtual function → creates VTable.
+2. Each object stores a **vptr**, set during construction.
+3. When a virtual function is called:
+
+   * Program follows: **object → vptr → VTable → function pointer → actual function**.
+4. Hence, correct function runs depending on the **object type**, not pointer type.
+
+---
+
+### 5. **Key Points / Interview Traps**
+
+* **VTable → per class** (static array).
+* **vptr → per object** (hidden pointer).
+* Virtual functions **cannot be static** (they belong to objects, not class).
+* Size of a class increases when you add a virtual function (due to vptr).
+* Example: `Employee` base class, `Engineer` derived class →
+
+  * If `raiseSalary` is virtual & overridden → Engineer object’s vptr ensures derived `raiseSalary` is called.
+  * Non-overridden functions (like `promote`) still point to base class implementation.
+
+---
+
+✅ **In one line:**
+VTable = lookup table per class (function addresses).
+vptr = hidden pointer per object (points to correct VTable).
+Together they make **runtime polymorphism** possible.
+
+---
 
