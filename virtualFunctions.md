@@ -97,38 +97,6 @@ int main() {
 Now it’s **dynamic binding** — resolved at runtime using the **V-Table mechanism**.
 
 ---
-
-## **3. How Virtual Functions Work Internally (V-Table & V-Pointer)**
-
-When a class has a virtual function:
-
-1. **V-Table (Virtual Table)** is created:
-
-   * A lookup table storing function pointers for the class's virtual functions.
-2. **V-Ptr (Virtual Pointer)** is added to each object:
-
-   * Points to the class’s V-Table.
-
-Execution:
-
-* When a virtual function is called through a base pointer, the compiler uses the V-Pointer → V-Table → correct function address → executes it.
-
----
-
-### **Rules & Properties of Virtual Functions**
-
-* Must be a **member function** of a class.
-* Can’t be **static** or **constructor**.
-* Can be overridden in the derived class.
-* If not overridden, base class version is called.
-* You can call them through:
-
-  * Base class pointer/reference to derived object.
-* If declared in base, it remains virtual in all derived classes (even if `virtual` keyword not repeated).
-* Virtual functions can be **pure virtual** (`= 0`) → makes class **abstract**.
-
----
-
 ### **Example: Normal Virtual Function**
 
 ```cpp
@@ -214,195 +182,12 @@ int main() {
 Without a virtual destructor, deleting through a base pointer will cause **undefined behavior**.
 
 ---
-
-### **5. Performance Impact**
-
-* Virtual functions add **one level of indirection** (V-Table lookup).
-* Slightly slower than non-virtual calls.
-* Object size increases due to V-Pointer.
-* Negligible in most real-world cases compared to flexibility gained.
-
----
-
-### **6. When to Use**
-
-✅ Use when:
-
-* You need **polymorphic behavior**.
-* Base class defines a common interface, but implementations differ.
-
-❌ Avoid when:
-
-* Class is not meant to be inherited.
-* Performance in tight loops is extremely critical.
-
 ---
 
 ## **7. Static vs Dynamic Binding**
 
 * **Without `virtual`** → static binding (decided at compile-time).
 * **With `virtual`** → dynamic binding (decided at runtime using vtable).
-
----
----
-
-
-### Virtual Functions
-
-A **virtual function** in C++ is a **member function in a base class** that you expect to **override in derived classes**. It allows **runtime polymorphism** — i.e., the correct function is chosen at **run time**, based on the object type.
-
----
-
-## Why Use Virtual Functions?
-
-They allow you to:
-
-* Call **derived class functions using base class pointers/references**.
-* Achieve **dynamic dispatch** (runtime function resolution).
-* Support **runtime polymorphism** — one interface, multiple behaviors.
-
----
-
-## Syntax
-
-```cpp
-class Base {
-public:
-    virtual void show() {
-        cout << "Base class" << endl;
-    }
-};
-```
-
----
-
-## Example: Without Virtual Function (Static Binding)
-
-```cpp
-#include <iostream>
-using namespace std;
-
-class Base {
-public:
-    void show() {
-        cout << "Base class" << endl;
-    }
-};
-
-class Derived : public Base {
-public:
-    void show() {
-        cout << "Derived class" << endl;
-    }
-};
-
-int main() {
-    Base* bptr;
-    Derived d;
-    bptr = &d;
-
-    bptr->show();  // Output: Base class (not what you expected)
-    return 0;
-}
-```
-
----
-
-## Example: With Virtual Function (Dynamic Binding)
-
-```cpp
-#include <iostream>
-using namespace std;
-
-class Base {
-public:
-    virtual void show() {  //  virtual keyword
-        cout << "Base class" << endl;
-    }
-};
-
-class Derived : public Base {
-public:
-    void show() override {  // optional 'override' for clarity
-        cout << "Derived class" << endl;
-    }
-};
-
-int main() {
-    Base* bptr;
-    Derived d;
-    bptr = &d;
-
-    bptr->show();  // Output: Derived class
-    return 0;
-}
-```
-
----
-
-## Key Concepts
-
-| Feature                  | Description                         |
-| ------------------------ | ----------------------------------- |
-| Resolved at              | **Runtime**                         |
-| Enables                  | **Polymorphism**                    |
-| Requires                 | `virtual` keyword in base class     |
-| Works via                | Pointers or references              |
-| Overriding Function      | Must have **same signature**        |
-| Virtual Table (`vtable`) | Internal mechanism used by compiler |
-
----
-
-## Real-Life Analogy
-
-* **Base class**: `Shape` with `draw()`
-* **Derived classes**: `Circle`, `Rectangle` override `draw()`
-* You can store different shapes in a `Shape*` array and call `draw()` without knowing the exact type.
-
-```cpp
-class Shape {
-public:
-    virtual void draw() {
-        cout << "Drawing shape" << endl;
-    }
-};
-
-class Circle : public Shape {
-public:
-    void draw() {
-        cout << "Drawing circle" << endl;
-    }
-};
-
-class Rectangle : public Shape {
-public:
-    void draw() {
-        cout << "Drawing rectangle" << endl;
-    }
-};
-
-int main() {
-    Shape* s1 = new Circle();
-    Shape* s2 = new Rectangle();
-
-    s1->draw();  // Output: Drawing circle
-    s2->draw();  // Output: Drawing rectangle
-
-    delete s1;
-    delete s2;
-}
-```
-
----
-
-## Summary
-
-| Term                 | Meaning                                     |
-| -------------------- | ------------------------------------------- |
-| `virtual`            | Declares a function as overridable          |
-| Overriding           | Redefining a base function in derived class |
-| Runtime Polymorphism | Function resolved at runtime                |
-| Used with            | Base class pointers or references           |
 
 ---
 
@@ -459,72 +244,214 @@ int main() {
 
 ---
 
-## 2. **Virtual Destructors**
-
-### Why Use a Virtual Destructor?
-
-If you delete a derived class object using a **base class pointer**, the base class destructor should be **virtual** to ensure **proper cleanup**.
-
----
-
-### Without virtual destructor:
-
-```cpp
-class Base {
-public:
-    ~Base() { cout << "Base Destructor\n"; }
-};
-
-class Derived : public Base {
-public:
-    ~Derived() { cout << "Derived Destructor\n"; }
-};
-
-int main() {
-    Base* b = new Derived();
-    delete b;  // Only Base Destructor will be called
-}
-```
-
-### With virtual destructor:
-
-```cpp
-class Base {
-public:
-    virtual ~Base() { cout << "Base Destructor\n"; }
-};
-
-class Derived : public Base {
-public:
-    ~Derived() { cout << "Derived Destructor\n"; }
-};
-
-int main() {
-    Base* b = new Derived();
-    delete b;  // Both destructors will be called
-}
-```
-
----
-
 ## 3. **vtable and vptr (Conceptual)**
-
-* **vtable (virtual table)**: A hidden table created by the compiler to manage virtual functions.
-* **vptr (virtual pointer)**: A hidden pointer in each object pointing to the class's vtable.
-* When a virtual function is called, the vptr uses the vtable to call the correct function at runtime.
-
-> You don’t need to manage this manually; the compiler handles it for you.
+In C++, **`vtable` (virtual table)** and **`vptr` (virtual pointer)** are mechanisms used to implement **runtime polymorphism** through **virtual functions**. These are essential components of the **dynamic dispatch** system in C++.
 
 ---
 
-## Summary Table
+## Why `vtable` and `vptr` are needed
 
-| Concept               | Purpose                                          |
-| --------------------- | ------------------------------------------------ |
-| Pure Virtual Function | Forces derived classes to implement the function |
-| Abstract Class        | Cannot be instantiated; used as base only        |
-| Virtual Destructor    | Ensures proper cleanup of derived objects        |
-| vtable / vptr         | Mechanism for runtime function dispatch          |
+C++ supports **polymorphism**, which allows calling **derived class methods using base class pointers or references**. But this only works if those functions are declared **`virtual`** in the base class.
+
+Example:
+
+```cpp
+class Base {
+public:
+    virtual void show() {
+        std::cout << "Base show\n";
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {
+        std::cout << "Derived show\n";
+    }
+};
+```
+
+Now:
+
+```cpp
+Base* ptr = new Derived();
+ptr->show();  // Which function is called? Base::show or Derived::show?
+```
+
+Answer: `Derived::show()` — thanks to the **vtable** and **vptr**.
 
 ---
+
+## What is `vtable`?
+
+A **`vtable` (virtual table)** is a **compiler-generated** lookup table of function pointers. There is **one vtable per class** (if it has virtual functions).
+
+The vtable holds addresses of the **virtual functions** that are available for a class.
+
+### Example:
+
+Suppose we have:
+
+```cpp
+class Base {
+public:
+    virtual void show() { std::cout << "Base\n"; }
+    virtual void print() { std::cout << "Print Base\n"; }
+};
+
+class Derived : public Base {
+public:
+    void show() override { std::cout << "Derived\n"; }
+};
+```
+
+Now:
+
+* `Base`'s vtable:
+
+  ```
+  &Base::show
+  &Base::print
+  ```
+
+* `Derived`'s vtable:
+
+  ```
+  &Derived::show   // overrides Base::show
+  &Base::print     // inherited
+  ```
+
+So each class that has virtual functions gets its own **vtable**, with pointers to the appropriate function implementations.
+
+---
+
+## What is `vptr`?
+
+Each **object of a class with virtual functions** contains a hidden pointer called a **`vptr`** (virtual pointer), which **points to the vtable of its class**.
+
+* Set **automatically by the compiler** during object construction.
+* Ensures that the correct virtual functions are called at runtime.
+
+### Memory layout (simplified):
+
+```cpp
+class Base {
+public:
+    virtual void show();
+};
+
+Base obj;
+```
+
+Internally:
+
+```
++--------+
+|  vptr  |  ---> points to Base's vtable
++--------+
+|  data  |
++--------+
+```
+
+Now, when a virtual function is called, like `obj.show()`, the compiler translates it roughly to:
+
+```cpp
+obj.vptr[0](/* obj as this */);
+```
+
+So it's dynamically resolved at runtime using the vptr.
+
+---
+
+## How polymorphism works with `vtable` and `vptr`
+
+Example:
+
+```cpp
+Base* ptr = new Derived();
+ptr->show();  // What happens?
+```
+
+Internally:
+
+1. `Derived` object is created.
+2. Its constructor sets the `vptr` to point to `Derived`'s vtable.
+3. `ptr->show()` is called.
+4. The compiler looks up `vptr->vtable[0]` and calls the function pointer.
+5. That function pointer points to `Derived::show()` → it is called.
+
+Thus, **runtime polymorphism is achieved**.
+
+---
+
+## Some Key Points
+
+| Concept                  | Description                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------ |
+| **vtable**               | Table of function pointers per class with virtual functions                          |
+| **vptr**                 | Pointer inside object, pointing to class’s vtable                                    |
+| **Overriding**           | Derived class replaces base class function pointer in its vtable                     |
+| **Virtual Destructor**   | Ensures base class vtable cleanup if deleted via base pointer                        |
+| **Multiple Inheritance** | May have multiple `vptr`s per object if multiple base classes with virtual functions |
+| **No virtual functions** | No vtable or vptr is generated by compiler                                           |
+| **Size increase**        | Object size increases by size of pointer (usually 4/8 bytes) due to `vptr`           |
+
+---
+
+## Realistic Memory Example
+
+```cpp
+class A {
+public:
+    int x;
+    virtual void foo() {}
+};
+
+class B : public A {
+public:
+    int y;
+    void foo() override {}
+};
+```
+
+Now:
+
+```cpp
+B b;
+```
+
+Memory layout (simplified):
+
+```
++-------+------------+
+| vptr  | points to B’s vtable
++-------+
+| x     |
++-------+
+| y     |
++-------+
+```
+
+---
+
+## Caveats and Notes
+
+* You **cannot see** the vtable/vptr directly in standard C++.
+* It's **implementation-defined** — i.e., the exact details may vary between compilers (GCC, MSVC, Clang).
+* You can often explore them using **debuggers**, or tools like **`objdump`**, or reading assembly.
+
+---
+
+## Summary
+
+| Term       | Meaning                                                 |
+| ---------- | ------------------------------------------------------- |
+| `vtable`   | Class-level table storing virtual function addresses    |
+| `vptr`     | Object-level pointer pointing to its class’s vtable     |
+| Purpose    | Enable dynamic dispatch and polymorphism                |
+| Created by | Compiler, automatically when virtual functions are used |
+| Access     | Not directly accessible from C++ code                   |
+
+---
+
 
