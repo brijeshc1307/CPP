@@ -503,4 +503,34 @@ vptr = hidden pointer per object (points to correct VTable).
 Together they make **runtime polymorphism** possible.
 
 ---
+Here’s a **short, focused summary only on VTable & vptr**:
+
+---
+
+### 🔹 VTable (Virtual Table)
+
+* Created **once per class** (at compile time).
+* Exists for classes with at least one virtual function (or derived from such a class).
+* It is a **static lookup table** containing **function pointers** to virtual functions.
+* If a function is overridden in a derived class → entry points to derived version.
+* If not overridden → entry points to base version.
+
+---
+
+### 🔹 vptr (Virtual Pointer)
+
+* A **hidden pointer** added by the compiler inside every object of such a class.
+* **Per object**, unlike VTable which is per class.
+* Initialized in the **constructor**, pointing the object’s vptr to its class’s VTable.
+* During a virtual function call: object → vptr → VTable → function pointer → actual function.
+
+---
+
+✅ **In short:**
+
+* **VTable** = per-class table of virtual function addresses.
+* **vptr** = per-object hidden pointer to the correct VTable.
+
+---
+
 
