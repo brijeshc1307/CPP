@@ -19,6 +19,14 @@ public:
 };
 ```
 ---
+## **Virtual Function**
+A **virtual function** in C++ is a member function in a base class that you expect to be **overridden** in derived classes.
+It enables **runtime polymorphism** — meaning, the call to the function is resolved **at runtime**, not at compile-time.
+
+It’s declared using the `virtual` keyword in the base class.
+
+---
+
 ## **1. Why to use Virtual Function**
 * To achieve dynamic polymorphism. Which is the ability to call Derived class function using Base class pointer or reference.
 
@@ -41,13 +49,6 @@ public:
 3. If a function is declared virtual in a base class, it **remains virtual** in all derived classes.
 4. If not overridden in derived class, the **base version** is called.
 5. If used with destructors, ensures correct destructor call sequence.
-
----
-
-A **virtual function** in C++ is a member function in a base class that you expect to be **overridden** in derived classes.
-It enables **runtime polymorphism** — meaning, the call to the function is resolved **at runtime**, not at compile-time.
-
-It’s declared using the `virtual` keyword in the base class.
 
 ---
 
