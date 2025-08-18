@@ -293,7 +293,27 @@ int main() {
     return 0;
 }
 ```
+#### Note: If we want to call Class C's display() without using scope resolution (obj.C::display()), but we're inside main() and using obj of type D, then we cannot do it directly unless we:
 
+* Option 1: Upcast obj to a pointer or reference of type C
+  This avoids scope resolution and uses polymorphism-style behavior (even though the methods aren’t virtual):
+```cpp
+int main() {
+    D obj;
+    C* ptr = &obj;  // Upcasting D* to C*
+    ptr->display(); // Calls C::display()
+    return 0;
+}
+```
+* Option 2: Using reference instead of pointer (also works)
+```cpp
+int main() {
+    D obj;
+    C& ref = obj;  // Upcast to reference
+    ref.display(); // Calls C::display()
+    return 0;
+}
+```
 ---
 
 ### Why virtual inheritance?
