@@ -18,6 +18,15 @@ public:
     }
 };
 ```
+---
+## **1. Why to use Virtual Function**
+* To achieve dynamic polymorphism. Which is the ability to call Derived class function using Base class pointer or reference.
+
+## **2. How to use Virtual Function**
+* By declaring function as virtual in Base class and overriding that function in Derived class.
+(Function signature should be same in Base and Dervied class)
+* Declaring a function as virtual in Base class is enough, Derived class function need not to be declared virtual.
+* Virtual functions should be accessed using pointer(*) or reference(&) of Base class type to achieve run time polymorphism.
 
 ---
 
@@ -34,12 +43,6 @@ public:
 5. If used with destructors, ensures correct destructor call sequence.
 
 ---
-
-## **4. Where Can We Use `virtual`?**
-
-Alright Brijesh — let’s go deep into **Virtual Functions in C++** so you understand not just *what* they are, but *why* they exist, *how* they work internally, and *where* to use them effectively.
-
-## **a. Virtual Function**
 
 A **virtual function** in C++ is a member function in a base class that you expect to be **overridden** in derived classes.
 It enables **runtime polymorphism** — meaning, the call to the function is resolved **at runtime**, not at compile-time.
