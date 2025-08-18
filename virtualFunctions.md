@@ -185,8 +185,11 @@ If a class has **at least one** pure virtual function, it becomes **abstract** a
 ---
 
 ### **c. Virtual Destructor**
+* If we delete child class object through a pointer of parent class then it is undefined behaviour,
+    if parent class doesn't have virtual destructor.
+* If we fail to declare destructor as virtual in parent class then we endup having memory leak.
 
-If a base class has virtual functions, **always** make its destructor virtual to ensure proper cleanup.
+* "If a base class has virtual functions, **always** make its destructor virtual to ensure proper cleanup."
 
 ```cpp
 class Base {
