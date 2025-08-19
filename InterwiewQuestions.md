@@ -3481,6 +3481,121 @@ int main() {
         cout << str << " is not a palindrome." << endl;
 }
 ```
+---
+
+### **FlexTrade Interview – Technical Round Interview**
+Round 1: 30 min
+
+---
+
+## **1. Write a C++ program to store integers 1–10 in a vector and remove element 5 from vector then print vector?
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v;
+
+    // store numbers 1 to 10
+    for(int i = 1; i <= 10; i++) {
+        v.push_back(i);
+    }
+
+    // manually remove element 5
+    int n = v.size();
+    for(int i = 0; i < n; i++) {
+        if(v[i] == 5) {
+            // shift elements to the left
+            for(int j = i; j < n - 1; j++) {
+                v[j] = v[j + 1];
+            }
+            v.pop_back(); // remove last duplicate
+            break; // stop after removing first 5
+        }
+    }
+
+    // print vector after removal
+    cout << "Vector after removing 5: ";
+    for(int num : v) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
+Output:
+
+```
+Vector after removing 5: 1 2 3 4 6 7 8 9 10
+```
+
+---
+
+## **2. Explain the major differences between C++98, C++11, C++14, C++17, and C++20. Which features have you used most, which version have u used?
+
+### C++ Versions
+
+* **C++98/03** → First standardized, OOP + STL.
+* **C++11** → Smart pointers, auto, lambda, nullptr, move semantics.
+* **C++14** → Small fixes, generic lambdas.
+* **C++17** → `optional`, `variant`, structured binding.
+* **C++20** → Concepts, ranges, coroutines.
+* **C++23** → `std::expected`, better constexpr, ranges updates.
+
+---
+
+## **3. What is the difference between arrays and vectors in C++? When would you prefer one over the other?
+
+| Array                | Vector                       |
+| -------------------- | ---------------------------- |
+| Fixed size           | Dynamic size                 |
+| Stack/heap           | Heap                         |
+| No inbuilt utilities | STL container with functions |
+| Faster (no overhead) | Safer & flexible             |
+
+---
+
+## **4. What is Virtual Function, Explain how virtual functions work internally. Why use virtual functions?
+
+* Declared with `virtual` in base class.
+* Enables **runtime polymorphism**.
+* Uses **vtable + vptr** mechanism.
+
+---
+
+## **5. What is a pure virtual function? Why do we use them?
+
+---
+
+## **6. Can we make an instance of abstract class?
+
+❌ No, because at least one pure virtual function is not implemented.
+
+---
+
+## **7.  Virtual Abstract Class or What is an abstract class in C++? Give an example.
+
+* A class having **at least one pure virtual function** = abstract class.
+* Used as **base class** for polymorphism.
+
+---
+
+## **8. Pointer vs Object
+
+| Pointer                                   | Object                          |
+| ----------------------------------------- | ------------------------------- |
+| Stores address of object                  | Actual object                   |
+| Can point to derived class (polymorphism) | Cannot change type dynamically  |
+| Needed for dynamic allocation             | Object created on stack or heap |
+
+## **9. Why not use object instead of pointer?
+
+* Because objects use **compile-time binding**.
+* For polymorphism (runtime binding), we need **base class pointer/reference**.
 
 ---
 ---
