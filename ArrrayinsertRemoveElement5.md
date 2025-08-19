@@ -93,6 +93,36 @@ int main() {
     return 0;
 }
 ```
+OR
+```cpp
+vector<int> vec(10);
+    cout << "Enter 10 integers: ";
+    for (int i = 0; i < 10; ++i)
+        cin >> vec[i];
+
+    // Manual removal
+    int newSize = 0;
+    for (int i = 0; i < vec.size(); ++i){
+        if (vec[i] != 5){
+            vec[newSize] = vec[i];
+            newSize++;
+            }
+        }
+
+    cout << "Vector after removing 5: ";
+    for (int i = 0; i < newSize; ++i)
+        cout << vec[i] << " ";
+    cout << "\n";
+    return 0;
+```
+Output
+```
+Input: 1 5 3 4 5 6 7 5 8 9
+Output: 1, 3, 4, 6, 7, 8, 9
+
+Input: 1 2 3 4 5 6 7 8 9 10 
+Output: 1 2 3 4 6 7 8 9 10 
+```
 
 ---
 
