@@ -27,6 +27,43 @@ int main() {
     return 0;
 }
 ```
+Or
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int arr[10];
+    int n = 10;
+
+    // store numbers 1 to 10
+    for(int i = 0; i < n; i++) {
+        arr[i] = i + 1;
+    }
+
+    // manually remove element 5
+    for(int i = 0; i < n; i++) {
+        if(arr[i] == 5) {
+            // shift elements left
+            for(int j = i; j < n - 1; j++) {
+                arr[j] = arr[j + 1];
+            }
+            n--; // reduce size after removal
+            break; // stop after first removal
+        }
+    }
+
+    // print array after removal
+    cout << "Array after removing 5: ";
+    for(int i = 0; i < n; i++) {
+        cout << arr[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+```
+
 
 ---
 
