@@ -75,27 +75,7 @@ int main() {
 using namespace std;
 
 int main() {
-    vector<int> vec(10);
-    cout << "Enter 10 integers: ";
-    for (int i = 0; i < 10; ++i)
-        cin >> vec[i];
-
-    // Manual removal
-    int newSize = 0;
-    for (int i = 0; i < vec.size(); ++i)
-        if (vec[i] != 5)
-            vec[newSize++] = vec[i];
-
-    cout << "Vector after removing 5: ";
-    for (int i = 0; i < newSize; ++i)
-        cout << vec[i] << " ";
-    cout << "\n";
-    return 0;
-}
-```
-OR
-```cpp
-vector<int> vec(10);
+   vector<int> vec(10);
     cout << "Enter 10 integers: ";
     for (int i = 0; i < 10; ++i)
         cin >> vec[i];
@@ -114,6 +94,7 @@ vector<int> vec(10);
         cout << vec[i] << " ";
     cout << "\n";
     return 0;
+}
 ```
 Output
 ```
