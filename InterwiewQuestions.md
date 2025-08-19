@@ -3488,7 +3488,7 @@ Round 1: 30 min
 
 ---
 
-## **1. Write a C++ program to store integers 1–10 in a vector and remove element 5 from vector then print vector?
+## **1. Write a C++ program to store integers 1–10 in a vector and remove element 5 from vector then print vector?**
 
 ```cpp
 #include <iostream>
@@ -3535,7 +3535,7 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 
 ---
 
-## **2. Explain the major differences between C++98, C++11, C++14, C++17, and C++20. Which features have you used most, which version have u used?
+## **2. Explain the major differences between C++98, C++11, C++14, C++17, and C++20. Which features have you used most, which version have u used?**
 
 ### C++ Versions
 
@@ -3548,7 +3548,7 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 
 ---
 
-## **3. What is the difference between arrays and vectors in C++? When would you prefer one over the other?
+## **3. What is the difference between arrays and vectors in C++? When would you prefer one over the other?**
 
 | Array                | Vector                       |
 | -------------------- | ---------------------------- |
@@ -3559,7 +3559,7 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 
 ---
 
-## **4. What is Virtual Function, Explain how virtual functions work internally. Why use virtual functions?
+## **4. What is Virtual Function, Explain how virtual functions work internally. Why use virtual functions?**
 
 * Declared with `virtual` in base class.
 * Enables **runtime polymorphism**.
@@ -3567,24 +3567,24 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 
 ---
 
-## **5. What is a pure virtual function? Why do we use them?
+## **5. What is a pure virtual function? Why do we use them?**
 
 ---
 
-## **6. Can we make an instance of abstract class?
+## **6. Can we make an instance of abstract class?**
 
 ❌ No, because at least one pure virtual function is not implemented.
 
 ---
 
-## **7.  Virtual Abstract Class or What is an abstract class in C++? Give an example.
+## **7.  Virtual Abstract Class or What is an abstract class in C++? Give an example.**
 
 * A class having **at least one pure virtual function** = abstract class.
 * Used as **base class** for polymorphism.
 
 ---
 
-## **8. Pointer vs Object
+## **8. Pointer vs Object**
 
 | Pointer                                   | Object                          |
 | ----------------------------------------- | ------------------------------- |
@@ -3592,7 +3592,7 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 | Can point to derived class (polymorphism) | Cannot change type dynamically  |
 | Needed for dynamic allocation             | Object created on stack or heap |
 
-## **9. Why not use object instead of pointer?
+## **9. Why not use object instead of pointer?**
 
 * Because objects use **compile-time binding**.
 * For polymorphism (runtime binding), we need **base class pointer/reference**.
