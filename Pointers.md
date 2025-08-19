@@ -1012,7 +1012,7 @@ scanf("%d", p);
 ```
 
 ---
-[⬅️ Functions](/functions.md)         | [Smart Pointers ➡️](/smartPointers.md) 
+[⬅️ Functions](/functions.md)    |    [Refrence](/refrence.md)    | [Smart Pointers ➡️](/smartPointers.md) 
 ---
 ## **License**
 This project is licensed under the MIT License.
