@@ -105,4 +105,12 @@ int main() {
 * Used heavily in **function arguments**, **return types**, and **operator overloading**.
 
 ---
+[⬅️ Pointers](/Pointers.md)    | [Smart Pointers ➡️](/smartPointers.md) 
+---
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Happy Coding!
 
