@@ -306,7 +306,7 @@ int main() {
 ---
 
 ---
-[⬅️ Inheritance](/Inheritance.md)        |        [File Handling ➡️](/FileHandling.md)
+[⬅️ Inheritance](/Inheritance.md)        |        [Virtual Functions ➡️](/virtualFunctions.md)
 ---
 ## **License**
 This project is licensed under the MIT License.
