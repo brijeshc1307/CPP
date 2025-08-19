@@ -533,4 +533,13 @@ Here’s a **short, focused summary only on VTable & vptr**:
 
 ---
 
+[⬅️ Polymorphism](/Polymorphism.md)        |        [Friend Function ➡️](/friendFunction.md)
+
+---
+## **License**
+This project is licensed under the MIT License.
+
+---
+
+Happy Coding!
 
