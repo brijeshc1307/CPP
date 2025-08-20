@@ -3598,6 +3598,258 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 * For polymorphism (runtime binding), we need **base class pointer/reference**.
 
 ---
+### **Akkodis Interview – Technical Round Interview**
+Round 1: 30 min
+---
+
+## Q1. OOPs Concepts (C++)
+
+**Core OOP concepts**:
+
+| Concept           | Meaning                                                     |
+| ----------------- | ----------------------------------------------------------- |
+| **Encapsulation** | Wrapping data and functions into a single unit (class).     |
+| **Abstraction**   | Hiding implementation details, showing only interface.      |
+| **Inheritance**   | Acquiring properties from a base class.                     |
+| **Polymorphism**  | Same function behaves differently (overriding/overloading). |
+
+---
+
+##  Q2. Smart Pointer
+
+Smart pointers in C++ manage memory automatically and help avoid leaks.
+
+Example with `unique_ptr`:
+
+```cpp
+#include <iostream>
+#include <memory>
+using namespace std;
+
+int main() {
+    unique_ptr<int> ptr(new int(10));
+    cout << *ptr << endl;  // prints 10
+    return 0;
+}
+```
+
+Types:
+
+* `unique_ptr` – sole ownership
+* `shared_ptr` – shared ownership
+* `weak_ptr` – non-owning reference
+
+---
+
+##  Q3. Template
+
+Templates allow **generic programming** (type-independent code):
+
+```cpp
+template <typename T>
+T add(T a, T b) {
+    return a + b;
+}
+
+int main() {
+    cout << add<int>(5, 3) << endl;
+    cout << add<float>(5.5, 3.3) << endl;
+}
+```
+
+---
+
+##  Q4. Function Overloading vs Overriding
+
+### ▶ Function Overloading (same name, different params)
+
+```cpp
+class Demo {
+public:
+    void show(int x) { cout << "Int: " << x << endl; }
+    void show(float y) { cout << "Float: " << y << endl; }
+};
+```
+
+### ▶ Function Overriding (base vs derived class)
+
+```cpp
+class Base {
+public:
+    virtual void display() { cout << "Base" << endl; }
+};
+
+class Derived : public Base {
+public:
+    void display() override { cout << "Derived" << endl; }
+};
+```
+
+---
+
+##  Q5. Lambda Function – Why Use?
+
+Lambda = Anonymous function (quick, inline function)
+
+### Example:
+
+```cpp
+auto add = [](int a, int b) { return a + b; };
+cout << add(5, 3);  // Output: 8
+```
+
+ Use when:
+
+* Short functions
+* One-time callbacks (e.g., sort, filter)
+
+---
+
+## Q6. Lambda vs Normal Function
+
+| Feature  | Lambda Function          | Normal Function       |
+| -------- | ------------------------ | --------------------- |
+| Name     | Anonymous                | Has a name            |
+| Scope    | Defined inside functions | Global or class scope |
+| Use case | Short, inline use        | Reusable logic        |
+| Syntax   | `[](){}`                 | `return_type name()`  |
+
+---
+
+##  Q7. Fix and Explain This Code
+
+### ❌ Original Code (Problematic):
+
+```cpp
+B obj;
+obj & =A obj;  // ❌ Invalid syntax
+obj->sum(15,10);  // ❌ obj is not a pointer
+```
+
+---
+
+### Corrected Version:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    virtual int sum(int a, int b) {
+        return a + b;
+    }
+    void sum(float a, float b) {
+        cout << "Float sum: " << a + b << endl;
+    }
+};
+
+class B : public A {
+public:
+    int sum(int a, int b) override {
+        int c = a + b;
+        cout << "B::sum(int, int): " << c << endl;
+        return c;
+    }
+};
+
+int main() {
+    // Make object dynamically
+    B* obj = new B();
+
+    // Make another reference as base class
+    A* ref = obj;
+
+    // Call overridden function
+    ref->sum(15, 10);  // Will call B's version (runtime polymorphism)
+
+    // Clean up
+    delete obj;
+
+    return 0;
+}
+```
+
+---
+
+##  Q8. Replace Second Occurrence With "l.k"
+
+### Input: `apple`
+
+### Output: `al.kle`
+
+### Solution:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    char input[100];
+    cin >> input;
+
+    char output[200];
+    int count[256] = {0};
+    int i = 0, j = 0;
+
+    while (input[i] != '\0') {
+        char ch = input[i];
+        count[(int)ch]++;
+
+        if (count[(int)ch] == 2) {
+            output[j++] = 'l';
+            output[j++] = '.';
+            output[j++] = 'k';
+        } else if (count[(int)ch] < 2) {
+            output[j++] = ch;
+        }
+        i++;
+    }
+
+    output[j] = '\0';
+    cout << "Modified: " << output << endl;
+
+    return 0;
+}
+```
+
+✅ Input: `apple` → `al.kle`
+✅ Input: `balloon` → `bal.kon`
+
+---
+Great! Let's add answers to both questions:
+
+---
+
+## Q9. What is a **Dangling Pointer** in C++?
+
+A **dangling pointer** is a pointer that **points to a memory location that has been freed or deleted**. Using it leads to **undefined behavior**.
+
+---
+
+##  Q10. How to Delete Memory in C++
+
+### Case 1: **Single value**
+
+```cpp
+int* ptr = new int(5);
+delete ptr;       // ✅ Deallocates memory
+ptr = nullptr;    // ✅ Safe to nullify
+```
+
+### Case 2: **Array**
+
+```cpp
+int* arr = new int[5];
+delete[] arr;     // ✅ Important: use delete[] for arrays!
+arr = nullptr;
+```
+
+---
+##  Q11. What is Multithreading?
+
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
