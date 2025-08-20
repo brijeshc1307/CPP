@@ -3577,7 +3577,7 @@ Vector after removing 5: 1 2 3 4 6 7 8 9 10
 
 ---
 
-## **7.  Virtual Abstract Class or What is an abstract class in C++? Give an example.**
+## **7. What is an abstract class in C++? Give an example.**
 
 * A class having **at least one pure virtual function** = abstract class.
 * Used as **base class** for polymorphism.
