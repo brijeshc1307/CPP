@@ -122,7 +122,50 @@ It will likely be `24 bytes`, depending on the platform and compiler you're usin
 
 ### Note:
 We can use `#pragma pack(1)` to change alignment, but it may lead to performance penalties due to misaligned access on some architectures.
+---
+example:
+```cpp
+#include <iostream>
+using namespace std;
 
+class Example {
+    int* a;     // pointer: 4 bytes on 32-bit, 8 bytes on 64-bit
+    double b;   // 8 bytes
+    char c;     // 1 byte
+};
+
+int main() {
+    cout << "Size of class Example: " << sizeof(Example) << " bytes" << endl;
+    return 0;
+}
+```
+Output
+```
+// 8+ 8+ 8 = 24
+```
+
+exapmle:
+```cpp
+#include <iostream>
+using namespace std;
+
+class Example {
+    static int a;       // 4 bytes **4 bytes, but not counted in object size**
+// static int a belongs to the class, not to any object of the class. So it is stored separately in static storage, and not part of the instance's memory layout. Therefore, sizeof(Example) only includes non-static data members (b and c) + padding.
+
+    double b;           // 8 bytes //8
+    char c;             // 1 byte // 8 
+};
+
+int main() {
+    cout << "Size of class Example: " << sizeof(Example) << " bytes" << endl;
+    return 0;
+}
+```
+Output
+```
+8+8=16 bytes
+```
 ---
 
 ### **Access Modifiers in C++**
