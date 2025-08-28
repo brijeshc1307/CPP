@@ -589,6 +589,53 @@ Output
 The fox the dog over lazy quick brown jumps
 ```
 ---
+### **7.1. Reads a string and prints each word along with its frequency.
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    string str;
+    getline(cin, str);  // Read full input line
+
+    unordered_map<string, int> freq;
+    string word = "";
+
+    for (char ch : str) {
+        if (ch == ' ') {
+            if (!word.empty()) {
+                freq[word]++;
+                word = "";
+            }
+        } else {
+            word += ch;
+        }
+    }
+
+    // Don't forget the last word
+    if (!word.empty()) {
+        freq[word]++;
+    }
+
+    // Print word frequencies
+    for (auto& pair : freq) {
+        cout << pair.first << ": " << pair.second << endl;
+    }
+
+    return 0;
+}
+```
+Input:
+```
+"apple banana apple orange"
+```
+Output
+```
+apple: 2
+banana: 1
+orange: 1
+```
+---
 ### **8. Given a string s, return the first character that does not repeat (i.e., appears exactly once) in the string.
 If there is no such character, return -1.
 
