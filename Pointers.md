@@ -404,8 +404,8 @@ if (!ptr) {
 ---
 
 ###  **6. What is the difference between a pointer and a reference in C++?**
->Reference is an alias for a variable. It cannot be NULL and must be initialized.
->Pointer is a variable storing address. It can be reassigned and can be NULL.
+* Reference is an alias for a variable. It cannot be NULL and must be initialized.
+* Pointer is a variable storing address. It can be reassigned and can be NULL.
 
 | Feature            | Pointer                  | Reference                      |
 | ------------------ | ------------------------ | ------------------------------ |
