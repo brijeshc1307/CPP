@@ -217,6 +217,18 @@ int main() {
 }
 ```
 ---
+Here is your comparison in a neatly formatted table:
+
+| **Aspect**                      | **Pass by Value**                                                          | **Pass by Reference**                                                        |
+| ------------------------------- | -------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **What is passed**              | A copy of a variable is passed.                                            | Either the address of the variable or a reference to the variable is passed. |
+| **Effect on original variable** | Changes made inside the function do **not** affect the original variable.  | Changes made inside the function **do** affect the original variable.        |
+| **Memory location**             | Actual and formal parameters are stored in **different** memory locations. | Actual and formal parameters share the **same** memory location.             |
+| **Memory efficiency**           | Slightly **less memory efficient** due to duplication.                     | Slightly **more memory efficient** as no duplication of data occurs.         |
+
+
+
+---
 [⬅️ Control Structures](/ControlStructures.md)         |        [Pointers ➡️](/Pointers.md)
 ---
 ## **License**
