@@ -292,6 +292,76 @@ Upon investigation, we found the function was internally using `float`, which ca
 Although due to some legacy logic it still performs rounding in specific cases, we discussed it with the client and received confirmation that the current behavior is acceptable.
 
 ---
+In short
+---
+
+We use a third-party tool called **CCD (Can Compress Data)**, which was originally developed in Germany in 2010. My main responsibility is to maintain this tool and implement new feature enhancements as needed.
+
+CCD's core function is to compress different types of signal data—such as **pressure**, **temperature**, and **speed**. For example, when dealing with a large dataset, say **1,000 signals**, the tool first groups the signals by type:
+
+* All pressure signals are grouped together
+* All temperature signals in another group
+* And speed signals in their own group
+
+Once grouped, CCD compresses the signals into **CAN messages** and stores the output in a file with the **.ccd** extension.
+
+This approach not only improves **data storage efficiency** but also makes it easier to **identify and retrieve specific data** later.
+
+As part of my work, I created **comprehensive documentation** for CCD, including:
+
+* A **Developer Guide**
+* A detailed **Test Plan**
+* Complete **Test Results**
+
+Originally, CCD supported only **32-bit signals**. However, due to new requirements, we needed to extend its functionality to handle **64-bit signals**. To accomplish this, we:
+
+* Used **function overloading** to extend the existing 32-bit logic
+* Updated the **compression algorithm** to support 64-bit data
+
+With these enhancements, CCD is now fully capable of compressing and storing both **32-bit and 64-bit signals** in `.ccd` files.
+
+---
+
+### Example: Function Overloading for Compressing Signals
+
+Let’s say we’re writing a `compressSignal` function in CCD that works with both 32-bit and 64-bit signals.
+
+```cpp
+#include <iostream>
+
+// Compress function for 32-bit signals
+void compressSignal(uint32_t signal) {
+    std::cout << "Compressing 32-bit signal: " << signal << std::endl;
+    // Compression logic for 32-bit signal
+}
+
+// Overloaded compress function for 64-bit signals
+void compressSignal(uint64_t signal) {
+    std::cout << "Compressing 64-bit signal: " << signal << std::endl;
+    // Compression logic for 64-bit signal
+}
+
+int main() {
+    uint32_t signal32 = 123456;
+    uint64_t signal64 = 9876543210123;
+
+    compressSignal(signal32);  // Calls the 32-bit version
+    compressSignal(signal64);  // Calls the 64-bit version
+
+    return 0;
+}
+```
+
+### 💡 What's happening here?
+
+* Both functions are named `compressSignal`.
+* The compiler determines which one to use **based on the argument type**:
+
+  * If you pass a `uint32_t`, it calls the 32-bit version.
+  * If you pass a `uint64_t`, it calls the 64-bit version.
+
+---
+
 
 ### **General Project Understanding**
 
