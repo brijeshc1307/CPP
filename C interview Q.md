@@ -486,3 +486,206 @@ printf("%zu", sizeof(int));  // prints size of int
 * Used to hide functions from other files/modules, preventing name conflicts.
 
 ---
+Alright! Here's a detailed explanation for each of your questions:
+
+---
+
+### 1. How to write your own sizeof operator?
+
+You can mimic `sizeof` using a macro that calculates the difference between two pointers of the same type:
+
+```c
+#define my_sizeof(type) ((char *)(&type + 1) - (char *)(&type))
+```
+
+Explanation:
+
+* `&type` gives address of the variable
+* `&type + 1` points to the next element (like array indexing)
+* Difference gives size in bytes
+
+*Note:* This works for variables, not types directly. For types, you'd do:
+
+```c
+#define my_sizeof(type) ((size_t)(&((type *)0)[1]) - (size_t)(&((type *)0)[0]))
+```
+
+---
+
+### 2. Why is C called a mid-level programming language?
+
+* **Mid-level** because it combines features of both:
+
+  * **Low-level:** Direct access to memory via pointers, hardware manipulation.
+  * **High-level:** Structured programming, functions, abstractions.
+
+Thus, it bridges between machine-level and high-level programming.
+
+---
+
+### 3. Why does `int a = 5 / 2;` give `2` instead of `2.5`?
+
+* Both `5` and `2` are integers.
+* Integer division truncates the decimal part.
+* So, `5 / 2 = 2` (not 2.5).
+* To get float result, cast at least one operand to float:
+
+```c
+float a = 5 / 2.0;  // or float a = (float)5 / 2;
+```
+
+---
+
+### 4. What are preprocessor directives in C?
+
+* Instructions executed **before compilation**.
+* Start with `#`.
+* Examples: `#include`, `#define`, `#ifdef`.
+* Used to include files, macros, conditional compilation.
+
+---
+
+### 5. What are header files and their uses?
+
+* Files containing **function prototypes**, macros, type definitions, constants.
+* Included using `#include`.
+* Helps share declarations across multiple source files.
+
+Example: `stdio.h` declares `printf`, `scanf`.
+
+---
+
+### 6. What is the difference between macro and functions?
+
+| Macro                                       | Function                        |
+| ------------------------------------------- | ------------------------------- |
+| Textual substitution by preprocessor        | Actual code executed at runtime |
+| No type checking                            | Type checked                    |
+| Can cause side effects (if used improperly) | Safer                           |
+| Faster (no function call overhead)          | Slight overhead due to call     |
+| Harder to debug                             | Easier to debug                 |
+
+---
+
+### 7. What is the use of static variables in C?
+
+* Preserve value between function calls.
+* Scope limited to block/function (if local static).
+* Useful for counters or state retention without globals.
+
+---
+
+### 8. What is the difference between pass by value and pass by reference?
+
+* **Pass by value:** Copy of variable passed; changes don’t affect original.
+* **Pass by reference:** Address passed; changes affect original variable.
+
+In C, pass by reference is simulated by passing pointers.
+
+---
+
+### 9. What is an auto keyword?
+
+* Default storage class for local variables.
+* Optional to specify; usually omitted.
+* Variables stored on the stack and have automatic lifetime.
+
+---
+
+### 10. Write a program to print "Hello-World" without using a semicolon.
+
+```c
+#include <stdio.h>
+
+int main() {
+    if (printf("Hello-World\n")) {}
+    return 0;
+}
+```
+
+---
+
+### 11. What is an extern keyword?
+
+* Declares a variable/function defined in another file.
+* Used for global variables shared across files.
+* Tells compiler variable exists but defined elsewhere.
+
+---
+
+### 12. Explain format specifiers.
+
+* Used in `printf` and `scanf` to specify variable type.
+* Examples:
+
+  * `%d` — integer
+  * `%f` — float
+  * `%c` — char
+  * `%s` — string
+  * `%lf` — double
+
+---
+
+### 13. What is the difference between `getc()`, `getchar()`, `getch()` and `getche()`?
+
+| Function    | Description                                                  | Echoes Input?     | Standard C?           |
+| ----------- | ------------------------------------------------------------ | ----------------- | --------------------- |
+| `getc()`    | Reads a character from a file/stream                         | Depends on stream | Yes                   |
+| `getchar()` | Reads a character from `stdin` (equivalent to `getc(stdin)`) | No                | Yes                   |
+| `getch()`   | Reads a character without waiting for Enter, no echo         | No                | No (conio.h, Windows) |
+| `getche()`  | Reads a character without waiting for Enter, echoes input    | Yes               | No (conio.h, Windows) |
+
+---
+
+### 14. Can we declare a function inside another function in C? If not, how do we mimic that behavior?
+
+* **No**, C does not allow nested functions.
+* Mimic using **static helper functions** or function pointers.
+
+---
+
+### 15. What is a syntax error vs a logical error in C?
+
+* **Syntax error:** Violation of language grammar; caught by compiler.
+* **Logical error:** Program compiles but produces incorrect results.
+
+---
+
+### 16. Why does `char c = 65;` print `A`?
+
+* ASCII code for `A` is 65.
+* Assigning 65 to `char` stores ASCII 'A'.
+* Printing `c` with `%c` outputs 'A'.
+
+---
+
+### 17. What are pointers and when should we use pointers?
+
+* Variables that store **memory addresses**.
+* Used for dynamic memory, efficient array handling, function arguments (pass-by-reference), and data structures like linked lists.
+
+---
+
+### 18. What are static and dynamic memory allocations?
+
+* **Static allocation:** Memory allocated at compile time (global/local variables).
+* **Dynamic allocation:** Memory allocated at runtime using `malloc()`, `calloc()`, `realloc()`.
+
+---
+
+### 19. What is the difference between `malloc()` and `calloc()` in C?
+
+| Function   | Initializes Memory?    | Arguments                        |
+| ---------- | ---------------------- | -------------------------------- |
+| `malloc()` | No (garbage values)    | Size in bytes                    |
+| `calloc()` | Yes (initializes to 0) | Number of elements, size of each |
+
+---
+
+### 20. What do you mean by dangling pointers and how are dangling pointers different from memory leaks in C programming?
+
+* **Dangling pointer:** Pointer pointing to memory that has been freed/deallocated. Using it causes undefined behavior.
+* **Memory leak:** Allocated memory that is no longer accessible (no pointers pointing to it), causing wasted memory.
+
+---
+
