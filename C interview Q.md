@@ -966,3 +966,968 @@ printf("%d", *(arr + 1)); // prints 20
 ```
 
 ---
+
+
+### ✅ 1. **What is the purpose of the null character `('\0')` in strings?**
+
+* `'\0'` is the **string terminator** in C.
+* It marks the **end of a string**.
+* C uses this to determine the string’s length and stop reading characters.
+
+```c
+char str[] = "Hello"; // stored as {'H','e','l','l','o','\0'}
+```
+
+---
+
+### ✅ 2. **How are strings stored in memory?**
+
+* As **contiguous** arrays of characters ending with a **null character** (`'\0'`).
+* Each character occupies **1 byte**.
+
+```c
+char str[] = "Cat"; // 'C' | 'a' | 't' | '\0'
+```
+
+---
+
+### ✅ 3. **Standard Library String Functions**
+
+| Function   | Purpose                          |
+| ---------- | -------------------------------- |
+| `strlen()` | Returns length (excluding `'\0`) |
+| `strcpy()` | Copy strings                     |
+| `strcat()` | Concatenate strings              |
+| `strcmp()` | Compare strings                  |
+| `strchr()` | Find character in string         |
+| `strstr()` | Find substring in string         |
+
+---
+
+### ✅ 4. **What happens when you access an array out of bounds?**
+
+* **Undefined behavior** — may crash, access garbage data, or corrupt memory.
+* No bounds checking in C.
+
+---
+
+### ✅ 5. **Difference between `strlen()` and `sizeof()` for strings**
+
+| Function   | Returns                                  |
+| ---------- | ---------------------------------------- |
+| `strlen()` | Number of characters before `'\0'`       |
+| `sizeof()` | Total size (including `'\0'` for arrays) |
+
+```c
+char str[] = "Hi";
+printf("%lu %lu", strlen(str), sizeof(str)); // Output: 2 3
+```
+
+---
+
+### ✅ 6. **How to convert a string to numbers in C**
+
+Use these standard functions:
+
+* `atoi()` – string to `int`
+* `atof()` – string to `float`
+* `strtol()`, `strtod()` – safer versions
+
+Example:
+
+```c
+char s[] = "123";
+int num = atoi(s);  // num = 123
+```
+
+---
+
+### ✅ 7. **Reverse a String in C**
+
+```c
+void reverse(char *str) {
+    int i = 0, j = strlen(str) - 1;
+    while(i < j) {
+        char tmp = str[i];
+        str[i++] = str[j];
+        str[j--] = tmp;
+    }
+}
+```
+
+---
+
+### ✅ 8. **Count Number of Subarrays with Even Sum**
+
+```c
+int countEvenSumSubarrays(int arr[], int n) {
+    int count = 0, sum = 0;
+    int even = 1, odd = 0;
+
+    for(int i = 0; i < n; i++) {
+        sum += arr[i];
+        if(sum % 2 == 0)
+            count += even++;
+        else
+            count += odd++;
+    }
+
+    return count;
+}
+```
+
+---
+
+### ✅ 9. **Reverse Each Word in a Sentence**
+
+```c
+void reverseWord(char *start, char *end) {
+    while(start < end) {
+        char tmp = *start;
+        *start++ = *end;
+        *end-- = tmp;
+    }
+}
+
+void reverseWords(char *str) {
+    char *word_start = NULL;
+    for (int i = 0; ; i++) {
+        if ((str[i] != ' ') && (word_start == NULL))
+            word_start = &str[i];
+        else if ((str[i] == ' ' || str[i] == '\0') && word_start) {
+            reverseWord(word_start, &str[i - 1]);
+            word_start = NULL;
+        }
+        if (str[i] == '\0') break;
+    }
+}
+```
+
+---
+
+### ✅ 10. **Find the Largest Element in an Array**
+
+```c
+int findMax(int arr[], int n) {
+    int max = arr[0];
+    for(int i = 1; i < n; i++)
+        if(arr[i] > max)
+            max = arr[i];
+    return max;
+}
+```
+
+---
+
+### ✅ 11. **Check if a String is a Palindrome**
+
+```c
+int isPalindrome(char *str) {
+    int i = 0, j = strlen(str) - 1;
+    while(i < j)
+        if(str[i++] != str[j--])
+            return 0;
+    return 1;
+}
+```
+
+---
+
+### ✅ 12. **Remove All Duplicate Characters (Keep First Occurrence)**
+
+```c
+void removeDuplicates(char *str) {
+    int hash[256] = {0};
+    int i, j = 0;
+    for(i = 0; str[i]; i++) {
+        if(!hash[(unsigned char)str[i]]) {
+            hash[(unsigned char)str[i]] = 1;
+            str[j++] = str[i];
+        }
+    }
+    str[j] = '\0';
+}
+```
+
+---
+
+### ✅ 13. **Merge Two Arrays into a Third**
+
+```c
+void mergeArrays(int a[], int b[], int m, int n, int res[]) {
+    for(int i = 0; i < m; i++) res[i] = a[i];
+    for(int i = 0; i < n; i++) res[m + i] = b[i];
+}
+```
+
+---
+
+### ✅ 14. **Detect Unique Characters in a String (ASCII)**
+
+```c
+int hasUniqueChars(char *str) {
+    int chars[256] = {0};
+    for(int i = 0; str[i]; i++) {
+        if(chars[(unsigned char)str[i]]++)
+            return 0;  // Duplicate found
+    }
+    return 1;  // All unique
+}
+```
+
+---
+
+### ✅ 15. **Remove All Spaces in a String (In-place)**
+
+```c
+void removeSpaces(char *str) {
+    int i = 0, j = 0;
+    while(str[i]) {
+        if(str[i] != ' ')
+            str[j++] = str[i];
+        i++;
+    }
+    str[j] = '\0';
+}
+```
+
+---
+
+### ✅ 16. **Convert Uppercase to Lowercase (Without Library)**
+
+```c
+void toLowercase(char *str) {
+    for(int i = 0; str[i]; i++)
+        if(str[i] >= 'A' && str[i] <= 'Z')
+            str[i] += 32;
+}
+```
+
+---
+
+### ✅ 17. **Find Length of Longest Common Prefix**
+
+```c
+int longestCommonPrefix(char strs[][100], int n) {
+    if(n == 0) return 0;
+    int i = 0;
+    while(1) {
+        char c = strs[0][i];
+        for(int j = 1; j < n; j++)
+            if(strs[j][i] != c || c == '\0')
+                return i;
+        i++;
+    }
+}
+```
+
+---
+
+### ✅ 18. **Detect Duplicates in Array in O(n) Time (Worst Case)**
+
+Using Hashing:
+
+```c
+int hasDuplicate(int arr[], int n) {
+    int hash[100001] = {0}; // Adjust size if needed
+    for(int i = 0; i < n; i++) {
+        if(hash[arr[i]]++)
+            return 1;
+    }
+    return 0;
+}
+```
+
+---
+
+### ✅ 19. **Find the Second Largest Number**
+
+```c
+int secondLargest(int arr[], int n) {
+    int first = INT_MIN, second = INT_MIN;
+    for(int i = 0; i < n; i++) {
+        if(arr[i] > first) {
+            second = first;
+            first = arr[i];
+        } else if(arr[i] > second && arr[i] != first) {
+            second = arr[i];
+        }
+    }
+    return second;
+}
+```
+
+---
+
+### ✅ 20. **Sort 0s, 1s, and 2s (Dutch National Flag Problem)**
+
+```c
+void sort012(int arr[], int n) {
+    int low = 0, mid = 0, high = n - 1;
+    while(mid <= high) {
+        switch(arr[mid]) {
+            case 0:
+                swap(&arr[low++], &arr[mid++]);
+                break;
+            case 1:
+                mid++;
+                break;
+            case 2:
+                swap(&arr[mid], &arr[high--]);
+                break;
+        }
+    }
+}
+```
+
+---
+
+
+## 1. What is recursion in C and write a recursive code to compute factorial?
+
+**Recursion** is when a function calls itself to solve a smaller instance of the same problem. A recursive function must have:
+
+* A **base case** — a condition under which it stops calling itself.
+* A **recursive step** — the function calls itself with a smaller/simpler argument, moving toward the base case.
+
+**Example: Recursive factorial**
+
+```c
+#include <stdio.h>
+
+// Recursive function to compute factorial of n
+long factorial(int n) {
+    if (n < 0) { 
+        // error case, factorial not defined for negative
+        return -1;
+    }
+    if (n == 0 || n == 1) {  // base case
+        return 1;
+    }
+    return n * factorial(n - 1);  // recursive call
+}
+
+int main() {
+    int num;
+    printf("Enter a non-negative integer: ");
+    if (scanf("%d", &num) != 1) {
+        printf("Invalid input\n");
+        return 1;
+    }
+    long result = factorial(num);
+    if (result < 0) {
+        printf("Factorial not defined for negative numbers\n");
+    } else {
+        printf("Factorial of %d is %ld\n", num, result);
+    }
+    return 0;
+}
+```
+
+---
+
+## 2. What is a stack overflow in recursion? How can it be avoided?
+
+* **Stack overflow** in recursion happens when recursive calls are nested too deeply, consuming more stack memory than is available. Each function call uses some stack space (for parameters, local variables, return address). If recursion never reaches or is too far from its base case, or if too large inputs, the stack may “overflow” → crash / undefined behavior. ([Scaler][1])
+
+**How to avoid stack overflow:**
+
+* Make sure you have a correct **base case** that will be reached.
+* Ensure that recursive calls move towards the base case (argument size reduces).
+* Limit recursion depth; for large inputs use iterative solutions.
+* Use **tail recursion** if possible (some compilers optimize tail recursion to avoid extra stack frames).
+* Increase stack size (platform dependent) if deep recursion is required.
+* Use dynamic data structures or explicit stacks rather than relying solely on function call stack.
+
+---
+
+## 3. Implement structure & union in C
+
+Here are example uses of both:
+
+```c
+#include <stdio.h>
+
+// Define a struct
+struct Person {
+    char name[50];
+    int age;
+    float height;
+};
+
+// Define a union
+union Data {
+    int i;
+    float f;
+    char str[20];
+};
+
+int main() {
+    // Using struct
+    struct Person p1;
+    snprintf(p1.name, sizeof(p1.name), "Alice");
+    p1.age = 30;
+    p1.height = 5.5;
+
+    printf("Person: %s, age %d, height %.1f\n", p1.name, p1.age, p1.height);
+
+    // Using union
+    union Data d;
+
+    d.i = 42;
+    printf("d.i = %d\n", d.i);
+
+    d.f = 3.14159;
+    printf("d.f = %f (Note: d.i is now undefined)\n", d.f);
+
+    // If we write into str
+    strncpy(d.str, "Hello", sizeof(d.str));
+    printf("d.str = %s\n", d.str);
+
+    return 0;
+}
+```
+
+* `struct` allows you to group different data types; each member has its own storage.
+* `union` shares memory: all members overlap; the size of the union is the size of its largest member. Only one member contains a meaningful value at any time.
+
+---
+
+## 4. How do you read a whole text file line by line in C?
+
+You can use `fgets()` in a loop, for example:
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    FILE *fp = fopen("input.txt", "r");
+    if (!fp) {
+        perror("Failed to open file");
+        return 1;
+    }
+
+    // Buffer big enough for one line
+    char buffer[1024];
+    while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+        // buffer contains one line (including newline if fits)
+        printf("%s", buffer);
+    }
+
+    fclose(fp);
+    return 0;
+}
+```
+
+* `fgets(buffer, size, fp)` reads up to size-1 characters or until a newline or EOF, whichever comes first.
+* It ensures you don’t overflow buffer if size is correct.
+
+---
+
+## 5. What is an r-value and l-value?
+
+* **l-value** (locator value): an expression that refers to a memory location. It can appear on the left side of an assignment. Example: `x`, `arr[5]`, `*p` (if `p` points to valid memory), etc.
+* **r-value**: An expression that has a value but does not necessarily refer to a memory location you can assign to. It's used on the right side of assignment. Example: `5`, `x + 3`, function return values (non-reference), etc.
+
+Example:
+
+```c
+int x;
+int *p;
+
+x = 5;   // here x is an l-value; 5 is an r-value
+*p = x;  // *p is an l-value (if p valid)
+```
+
+---
+
+## 6. What is the `sleep()` function?
+
+* `sleep()` is a function (in POSIX systems / Unix / Linux) that pauses the execution of the current thread/process for a number of seconds.
+* Prototype: `unsigned int sleep(unsigned int seconds);`
+* On Windows there’s `Sleep(milliseconds)` in `<windows.h>`.
+* It returns number of seconds left if interrupted, or `0` if complete.
+
+Example:
+
+```c
+#include <unistd.h>  // for POSIX systems
+
+int main() {
+    printf("Sleeping for 3 seconds...\n");
+    sleep(3);
+    printf("Awake!\n");
+    return 0;
+}
+```
+
+---
+
+## 7. What are enumerations?
+
+* `enum` in C is a user-defined type consisting of named integer constants.
+* Helps give meaningful names to integer values.
+
+Example:
+
+```c
+#include <stdio.h>
+
+enum Color { RED, GREEN, BLUE, YELLOW };
+
+int main() {
+    enum Color c = GREEN;
+    printf("c = %d\n", c);  // prints 1 (if RED = 0, GREEN = 1, etc.)
+    return 0;
+}
+```
+
+* You can assign custom integer values:
+
+```c
+enum Fruit { APPLE = 1, BANANA = 4, ORANGE = 10 };
+```
+
+---
+
+## 8. Write a C program to print the Fibonacci series using recursion and without using recursion
+
+**Recursion version:**
+
+```c
+#include <stdio.h>
+
+int fib(int n) {
+    if (n < 0) return -1;  // error
+    if (n == 0) return 0;
+    if (n == 1) return 1;
+    return fib(n - 1) + fib(n - 2);
+}
+
+int main() {
+    int n, i;
+    printf("How many Fibonacci terms? ");
+    scanf("%d", &n);
+    for (i = 0; i < n; ++i) {
+        printf("%d ", fib(i));
+    }
+    printf("\n");
+    return 0;
+}
+```
+
+**Non-recursion (iterative) version:**
+
+```c
+#include <stdio.h>
+
+int main() {
+    int n, i;
+    printf("How many Fibonacci terms? ");
+    if (scanf("%d", &n) != 1) return 1;
+
+    if (n <= 0) return 0;
+    int a = 0, b = 1;
+    printf("%d ", a);
+    if (n > 1) printf("%d ", b);
+
+    for (i = 2; i < n; i++) {
+        int next = a + b;
+        printf("%d ", next);
+        a = b;
+        b = next;
+    }
+    printf("\n");
+    return 0;
+}
+```
+
+---
+
+## 9. Write a C program to check whether a number is prime or not
+
+```c
+#include <stdio.h>
+#include <stdbool.h>
+
+bool isPrime(int n) {
+    if (n <= 1) return false;
+    if (n <= 3) return true;
+    if (n % 2 == 0) return false;
+    for (int i = 3; i * i <= n; i += 2) {
+        if (n % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    int num;
+    printf("Enter an integer: ");
+    if (scanf("%d", &num) != 1) return 1;
+    if (isPrime(num))
+        printf("%d is prime\n", num);
+    else
+        printf("%d is not prime\n", num);
+    return 0;
+}
+```
+
+---
+
+## 10. How is source code different from object code?
+
+* **Source code**: Human-readable code written in a programming language (C, etc.). What you write in `.c` files.
+* **Object code**: The machine-code binary output by the compiler (after compilation), usually `.o` or `.obj` file. It's not human readable and is what gets linked to form the executable.
+
+---
+
+## 11. What will be the output of this code and why? (code snippet with increment function)
+
+You didn’t provide the snippet here. If you share it, I can walk through it.
+
+---
+
+## 12. Explain modifiers
+
+Modifiers in C are keywords that alter the properties of data types. Common modifiers:
+
+* `signed` / `unsigned` — for integer types, to alter whether negative values are allowed.
+* `short`, `long` — to change the size/range of integer types.
+* `const` — variable can’t be changed after initialization.
+* `volatile` — tells compiler variable may change outside of program's normal flow (e.g., hardware interrupts).
+* `static` — multiple uses: for variables (lifetime / linkage), for functions (internal linkage), etc.
+
+Example:
+
+```c
+unsigned long int x;
+const volatile int status;
+```
+
+---
+
+## 13. Write a program to check an Armstrong number
+
+An Armstrong number (in base 10) is one equal to the sum of its own digits each raised to the power of the number of digits. Example: 153 = 1³ + 5³ + 3³.
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int num, original, remainder, n = 0;
+    long sum = 0;
+
+    printf("Enter an integer: ");
+    scanf("%d", &num);
+    original = num;
+
+    // count digits
+    for (original = num; original != 0; original /= 10) {
+        n++;
+    }
+
+    original = num;
+    while (original != 0) {
+        remainder = original % 10;
+        sum += pow(remainder, n);
+        original /= 10;
+    }
+
+    if (sum == num)
+        printf("%d is an Armstrong number.\n", num);
+    else
+        printf("%d is not an Armstrong number.\n", num);
+
+    return 0;
+}
+```
+
+---
+
+## 14. Write a program to reverse a given number
+
+```c
+#include <stdio.h>
+
+int main() {
+    int num, reversed = 0, remainder;
+    printf("Enter an integer: ");
+    if (scanf("%d", &num) != 1) return 1;
+
+    int original = num;
+    // handle negative
+    int negative = 0;
+    if (num < 0) {
+        negative = 1;
+        num = -num;
+    }
+
+    while (num != 0) {
+        remainder = num % 10;
+        reversed = reversed * 10 + remainder;
+        num /= 10;
+    }
+
+    if (negative) reversed = -reversed;
+    printf("Reversed number of %d is %d\n", original, reversed);
+
+    return 0;
+}
+```
+
+---
+
+## 15. Mention file operations in C
+
+Operations related to file I/O using the C standard library:
+
+* Opening a file: `fopen()`
+* Closing a file: `fclose()`
+* Reading from file: `fgetc(), fgets(), fread(), fscanf()`
+* Writing to file: `fputc(), fputs(), fwrite(), fprintf()`
+* Seeking in file: `fseek(), ftell(), rewind()`
+* Error handling: `feof(), ferror()`
+
+---
+
+## 16. Write a Program to check whether a linked list is circular or not
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+int isCircular(Node *head) {
+    if (head == NULL) return 0;
+    Node *slow = head, *fast = head;
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+        if (slow == fast) return 1; // loop exists
+    }
+    return 0;
+}
+
+Node *newNode(int data) {
+    Node *node = malloc(sizeof(Node));
+    node->data = data;
+    node->next = NULL;
+    return node;
+}
+
+int main() {
+    // Example: create circular linked list
+    Node *head = newNode(1);
+    head->next = newNode(2);
+    head->next->next = newNode(3);
+    head->next->next->next = head;  // making it circular
+
+    if (isCircular(head))
+        printf("List is circular\n");
+    else
+        printf("List is not circular\n");
+
+    return 0;
+}
+```
+
+---
+
+## 17. Write a program to Merge two sorted linked lists
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node *newNode(int d) {
+    Node *n = malloc(sizeof(Node));
+    n->data = d;
+    n->next = NULL;
+    return n;
+}
+
+Node *mergeSorted(Node *a, Node *b) {
+    if (a == NULL) return b;
+    if (b == NULL) return a;
+    Node *result = NULL;
+
+    if (a->data <= b->data) {
+        result = a;
+        result->next = mergeSorted(a->next, b);
+    } else {
+        result = b;
+        result->next = mergeSorted(a, b->next);
+    }
+    return result;
+}
+
+void printList(Node *head) {
+    while (head != NULL) {
+        printf("%d ", head->data);
+        head = head->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    // Example usage
+    Node *a = newNode(1);
+    a->next = newNode(3);
+    a->next->next = newNode(5);
+
+    Node *b = newNode(2);
+    b->next = newNode(4);
+    b->next->next = newNode(6);
+
+    Node *merged = mergeSorted(a, b);
+    printList(merged);  // should print: 1 2 3 4 5 6
+
+    return 0;
+}
+```
+
+---
+
+## 18. What is the difference between `fread()` and `fscanf()` in C?
+
+| Feature            | `fread()`                                                                                  | `fscanf()`                                                                       |
+| ------------------ | ------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Purpose            | Reads raw binary data (a block of bytes) from a file into a buffer.                        | Reads formatted text from a file according to a format specifier (like `scanf`). |
+| Data type handling | No type formatting; you deal with raw memory, often with casting or interpreting the data. | Human-readable text parsing, converting text to numbers, strings etc.            |
+| Best for           | Reading images, binary files, structured binary records.                                   | Reading configuration, whitespace‐separated text, parsed input.                  |
+| Speed / overhead   | Usually faster for large binary reads since minimal parsing.                               | Slower due to parsing/formatting overhead.                                       |
+
+Examples:
+
+* Using `fread`:
+
+```c
+FILE *fp = fopen("binary.dat", "rb");
+if (!fp) return 1;
+struct Rec { int id; double value; };
+struct Rec buffer[10];
+size_t elements_read = fread(buffer, sizeof(struct Rec), 10, fp);
+// e.g. use buffer[0]..buffer[elements_read-1]
+fclose(fp);
+```
+
+* Using `fscanf`:
+
+```c
+FILE *fp = fopen("data.txt", "r");
+if (!fp) return 1;
+int a;
+double d;
+while (fscanf(fp, "%d %lf", &a, &d) == 2) {
+    printf("a=%d, d=%.2f\n", a, d);
+}
+fclose(fp);
+```
+
+(These concepts are supported by standards and documented in places like IBM docs for `fread()` etc. ([IBM][2]))
+
+---
+
+## 19. How do you open a file in append mode? What happens if the file doesn't exist?
+
+* Use `fopen()` with `"a"` or `"a+"` mode:
+
+```c
+FILE *fp = fopen("file.txt", "a");  // Append mode
+if (!fp) {
+    perror("Failed to open");
+    return 1;
+}
+```
+
+* `"a"`: Open for writing; data is appended to end. Writes always go to end of file.
+
+* `"a+"`: Open for reading and writing; writing still appends.
+
+* **If the file doesn’t exist**, `fopen(..., "a")` will try to create the file.
+
+---
+
+## 20. What is `typedef` in C?
+
+* `typedef` allows you to define new names (aliases) for existing types. Makes code more readable or portable.
+
+Example:
+
+```c
+typedef unsigned long ulong;
+typedef struct Node {
+    int data;
+    struct Node *next;
+} Node;
+
+Node *head;  // instead of struct Node *head;
+```
+
+---
+
+## 21. How do command-line arguments work in C? Give an example.
+
+* C `main` can take two arguments:
+
+```c
+int main(int argc, char *argv[]) { ... }
+```
+
+* `argc` is the **argument count** (number of command-line tokens including program name).
+* `argv` is array of C‐strings (char pointers), `argv[0]` is program name, `argv[1]` first argument, etc.
+
+**Example:**
+
+```c
+#include <stdio.h>
+
+int main(int argc, char *argv[]) {
+    printf("Number of arguments: %d\n", argc);
+    for (int i = 0; i < argc; i++) {
+        printf("argv[%d] = %s\n", i, argv[i]);
+    }
+    return 0;
+}
+```
+
+If you compile as `prog` and run:
+
+```
+./prog hello world 123
+```
+
+Output:
+
+```
+Number of arguments: 4
+argv[0] = ./prog
+argv[1] = hello
+argv[2] = world
+argv[3] = 123
+```
+
+---
+
+## 22. What happens if you forget to close a file in C?
+
+* The resources (file handles) associated with the file remain allocated until program termination.
+* May result in:
+
+  * File not flushed (buffered data not written) → data loss.
+  * Resource leak (too many open files) → may hit OS limit.
+* Typically, when the program ends, OS reclaims resources, but you shouldn’t rely on that.
+
+---
+
