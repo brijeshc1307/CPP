@@ -687,5 +687,282 @@ int main() {
 * **Dangling pointer:** Pointer pointing to memory that has been freed/deallocated. Using it causes undefined behavior.
 * **Memory leak:** Allocated memory that is no longer accessible (no pointers pointing to it), causing wasted memory.
 
+
 ---
 
+### 1. **What is a memory leak and how to avoid it?**
+
+* **Memory Leak:** Happens when dynamically allocated memory is not freed, causing loss of access to that memory (still reserved but unusable).
+
+  **Example:**
+
+  ```c
+  int *ptr = malloc(sizeof(int) * 100);
+  // Forgot to free(ptr); — this is a memory leak
+  ```
+
+* **How to avoid:**
+
+  * Always use `free()` after `malloc()`/`calloc()` when memory is no longer needed.
+  * Use tools like **Valgrind** to detect leaks.
+  * Set pointers to `NULL` after freeing to avoid dangling pointers.
+
+---
+
+### 2. **What is near, far, and huge pointers in C?**
+
+* **These are specific to old 16-bit DOS compilers (like Turbo C)**
+* **Near:** 16-bit address; points within current segment.
+* **Far:** 32-bit address; can access any memory segment.
+* **Huge:** Like far, but allows pointer arithmetic across segment boundaries.
+
+> **Modern systems (32/64-bit) do not use these distinctions.**
+
+---
+
+### 3. **What is the use of the dereference `*` operator?**
+
+* Used to access the **value** at the address a pointer holds.
+
+```c
+int a = 10;
+int *ptr = &a;
+printf("%d", *ptr);  // Output: 10
+```
+
+---
+
+### 4. **What are NULL pointers in C?**
+
+* A **null pointer** is a pointer that points to **nothing**.
+
+```c
+int *ptr = NULL;
+```
+
+* Helps in error-checking and avoiding dangling references.
+
+---
+
+### 5. **What is the difference between `&` and `*` in C?**
+
+| Symbol | Meaning                        | Example         |
+| ------ | ------------------------------ | --------------- |
+| `&`    | Address-of operator            | `int *p = &x;`  |
+| `*`    | Dereference (value-at-address) | `int val = *p;` |
+
+---
+
+### 6. **What are the four dynamic memory functions in C?**
+
+1. `malloc()` – allocates uninitialized memory
+2. `calloc()` – allocates zero-initialized memory
+3. `realloc()` – changes size of previously allocated memory
+4. `free()` – deallocates memory
+
+---
+
+### 7. **What happens if you don't `free()` dynamically allocated memory?**
+
+* Leads to **memory leaks**.
+* Can cause program to consume more memory over time → performance issues → crash.
+
+---
+
+### 8. **What is a function pointer in C? How is it used?**
+
+* A pointer that points to a function instead of a variable.
+
+```c
+#include <stdio.h>
+
+void greet() {
+    printf("Hello!\n");
+}
+
+int main() {
+    void (*fptr)() = greet; // function pointer
+    fptr(); // calls greet()
+    return 0;
+}
+```
+
+* Useful for **callbacks**, **dynamic dispatch**, etc.
+
+---
+
+### 9. **What is the difference between:**
+
+```c
+const int *ptr;      // (1) pointer to const int
+int * const ptr;     // (2) const pointer to int
+const int * const ptr; // (3) const pointer to const int
+```
+
+| Declaration             | Meaning                                          |
+| ----------------------- | ------------------------------------------------ |
+| `const int *ptr`        | Cannot change the value pointed to.              |
+| `int * const ptr`       | Cannot change the pointer (fixed address).       |
+| `const int * const ptr` | Cannot change value or pointer (fully constant). |
+
+---
+
+### 10. **What are stack and heap areas?**
+
+* **Stack:**
+
+  * Stores local variables, function calls
+  * Fast access, auto memory management
+  * Limited size
+
+* **Heap:**
+
+  * Used for dynamic memory (`malloc`)
+  * Manual management (`free`)
+  * Larger and slower access
+
+---
+
+### 11. **What will be the result when we try to dereference NULL?**
+
+```c
+int *ptr = NULL;
+printf("%d", *ptr);  // UNDEFINED BEHAVIOR – likely a crash
+```
+
+> Dereferencing a NULL pointer causes a **segmentation fault**.
+
+---
+
+### 12. **Write a code to show how one can use double pointers.**
+
+```c
+#include <stdio.h>
+
+int main() {
+    int a = 10;
+    int *p = &a;
+    int **pp = &p;
+
+    printf("Value: %d\n", **pp);
+    return 0;
+}
+```
+
+---
+
+### 13. **Will the below provided code successfully run?**
+
+> (You mentioned code snippet was in original, but it's missing — please share if you'd like an analysis.)
+
+---
+
+### 14. **What will be the output of the below code?**
+
+> (Same as above — please provide the code for specific output.)
+
+---
+
+### 15. **Write the code to show how one can use `realloc()` with `malloc()`:**
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+int main() {
+    int *arr = (int *)malloc(2 * sizeof(int));
+
+    arr[0] = 1;
+    arr[1] = 2;
+
+    // Resize to hold 4 integers
+    arr = (int *)realloc(arr, 4 * sizeof(int));
+    arr[2] = 3;
+    arr[3] = 4;
+
+    for (int i = 0; i < 4; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    free(arr);
+    return 0;
+}
+```
+
+---
+
+### 16. **What is the difference between array and pointer?**
+
+| Array                    | Pointer                           |
+| ------------------------ | --------------------------------- |
+| Fixed size               | Can be dynamically resized        |
+| Name is constant address | Pointer can point to anything     |
+| Stored in stack          | Can point to heap/stack variables |
+
+---
+
+### 17. **Difference between `++*p`, `*p++`, and `*++p`?**
+
+* `++*p`: Increment the value pointed to by `p`.
+* `*p++`: Dereference `p`, then increment the pointer.
+* `*++p`: Increment the pointer, then dereference.
+
+Example:
+
+```c
+int arr[] = {10, 20, 30};
+int *p = arr;
+
+++*p;    // arr[0] becomes 11
+*p++;   // arr[0] (11), then p points to arr[1]
+*++p;   // p now points to arr[2], dereference gives 30
+```
+
+---
+
+### 18. **Explain Deep Copy and Shallow Copy with examples.**
+
+* **Shallow Copy:** Copies address — both variables point to the same data.
+* **Deep Copy:** Copies actual data — independent copies.
+
+**Example:**
+
+```c
+int *a = malloc(sizeof(int));
+*a = 5;
+
+int *shallow = a;         // both point to same memory
+int *deep = malloc(sizeof(int));
+*deep = *a;               // copy the value
+```
+
+---
+
+### 19. **What is the difference between an array and a string in C?**
+
+| Array                   | String                           |
+| ----------------------- | -------------------------------- |
+| Can store any data type | Array of `char` ending with `\0` |
+| Doesn't require null    | Strings must end with `'\0'`     |
+
+Example:
+
+```c
+char arr[5] = {'H', 'e', 'l', 'l', 'o'};
+char str[] = "Hello"; // includes '\0'
+```
+
+---
+
+### 20. **How do arrays work in C?**
+
+* Arrays are **contiguous memory blocks**.
+* The name of the array acts as a pointer to its first element.
+* Accessed via index or pointer arithmetic.
+
+```c
+int arr[3] = {10, 20, 30};
+printf("%d", *(arr + 1)); // prints 20
+```
+
+---
