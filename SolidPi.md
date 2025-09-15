@@ -63,6 +63,7 @@ public:
 ## **O – Open/Closed Principle (OCP)**
 
 > **Code should be open for extension, but closed for modification.**
+
 Systems should be designed so that new functionality can be **added without modifying existing code**, often achieved through abstraction and polymorphism.
 
 ### Simple Idea:
@@ -145,7 +146,8 @@ Separate behavior using interfaces or base classes properly.
 ## **I – Interface Segregation Principle (ISP)**
 
 > **Don’t force a class to implement things it doesn’t use.**
-  Favor **many small, specific interfaces** over one large, general-purpose interface. This helps keep implementations clean and focused.
+
+Favor **many small, specific interfaces** over one large, general-purpose interface. This helps keep implementations clean and focused.
 
 ###  Simple Idea:
 
@@ -198,7 +200,8 @@ public:
 ## **D – Dependency Inversion Principle (DIP)**
 
 > **High-level modules should depend on abstractions, not concrete classes.**
-  Code should depend on **interfaces or abstract classes**, not on concrete implementations. This **reduces tight coupling** and increases flexibility.
+
+Code should depend on **interfaces or abstract classes**, not on concrete implementations. This **reduces tight coupling** and increases flexibility.
 
 ### Simple Idea:
 
