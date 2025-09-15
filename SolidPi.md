@@ -110,6 +110,7 @@ void printArea(Shape* shape) {
 ## **L – Liskov Substitution Principle (LSP)**
 
 > **Subclasses should be usable wherever the base class is expected.**
+
  Objects of a subclass should be able to **replace objects of the superclass** without affecting the program’s behavior. This ensures that inheritance is used correctly.
 
 
