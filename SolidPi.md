@@ -141,6 +141,83 @@ Penguin violates expectations of `Bird`. Code breaks if we assume all birds can 
 ✅ **Fix:**
 Separate behavior using interfaces or base classes properly.
 
+Split the hierarchy into **flying and non-flying birds** using interfaces or abstract base classes:
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <memory>
+
+// General bird interface
+class IBird {
+public:
+    virtual void eat() = 0;
+    virtual ~IBird() {}
+};
+
+// Interface for birds that can fly
+class IFlyingBird : public IBird {
+public:
+    virtual void fly() = 0;
+};
+
+// Sparrow can fly
+class Sparrow : public IFlyingBird {
+public:
+    void eat() override {
+        std::cout << "Sparrow is eating.\n";
+    }
+
+    void fly() override {
+        std::cout << "Sparrow is flying.\n";
+    }
+};
+
+// Penguin cannot fly
+class Penguin : public IBird {
+public:
+    void eat() override {
+        std::cout << "Penguin is eating.\n";
+    }
+
+    // No fly() method — avoids violating LSP
+};
+```
+
+---
+
+### Usage Example:
+
+```cpp
+void makeBirdsFly(std::vector<IFlyingBird*> birds) {
+    for (auto bird : birds) {
+        bird->fly(); // Safe: only flying birds are passed
+    }
+}
+
+int main() {
+    Sparrow sparrow;
+    Penguin penguin;
+
+    // Only pass flying birds to makeBirdsFly
+    std::vector<IFlyingBird*> flyingBirds = { &sparrow };
+    makeBirdsFly(flyingBirds);
+
+    // You can still use penguin elsewhere
+    penguin.eat();
+
+    return 0;
+}
+```
+
+---
+
+### Why This Fix Works:
+
+* Now, only birds that **can actually fly** implement `IFlyingBird`.
+* `Penguin` doesn’t pretend to fly, so no runtime errors or surprises.
+* This design **respects LSP** by keeping behavior predictable and correct.
+
 ---
 
 ## **I – Interface Segregation Principle (ISP)**
