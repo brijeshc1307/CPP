@@ -58,6 +58,60 @@ int main() {
 Size of EmptyClass: 1 byte
 ```
 
+---
+
+### Why Size of EmptyClass: 1 byte
+### Reason: To Ensure Each Object Has a Unique Address
+
+The C++ standard requires that **each object in memory has a unique address**. If an empty class had a size of 0, then two instances of that class could potentially occupy the same memory address, which would break this rule.
+
+#### Example:
+
+```cpp
+class Empty {};
+
+int main() {
+    Empty e1, e2;
+    std::cout << &e1 << "\n";
+    std::cout << &e2 << "\n";
+}
+```
+
+This prints **two different addresses**, so `e1` and `e2` can be treated as distinct objects.
+
+To make this work, the compiler gives every instance of an empty class a **minimum size of 1 byte**—often called a **dummy byte**—even though there's no actual data.
+
+---
+
+###  Special Cases
+
+1. **Empty Base Optimization (EBO)**:
+   When an empty class is used as a **base class**, modern compilers can optimize it out to avoid wasting that 1 byte.
+
+   ```cpp
+   class Empty {};
+   class Derived : public Empty {
+       int x;
+   };
+   ```
+
+   In this case, `sizeof(Derived)` might be just `4` (not `5`), because the compiler applies EBO.
+
+2. **Standard Compliance**:
+   The C++ standard (specifically \[C++11 and later]) allows this optimization for base classes, but still requires that **non-base empty objects must have a size of at least 1**.
+
+---
+
+### Summary
+
+| Concept                   | Value                                    |
+| ------------------------- | ---------------------------------------- |
+| Size of empty class       | 1 byte                                   |
+| Why not 0?                | To give unique addresses to objects      |
+| Can compiler optimize it? | Yes, in case of empty base classes (EBO) |
+
+---
+
 ### Size of a Class with data members
 
 ```cpp
