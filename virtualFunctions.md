@@ -288,6 +288,17 @@ A **`vtable` (virtual table)** is a **compiler-generated** lookup table of funct
 
 The vtable holds addresses of the **virtual functions** that are available for a class.
 
+**VTable (Virtual Table)** एक **compiler द्वारा बनाया गया lookup table** होता है जिसमें **function pointers** (फ़ंक्शनों के पते) होते हैं।
+
+* यदि किसी class में **virtual functions** होते हैं, तो उस class के लिए **एक vtable** बनाई जाती है।
+* यह vtable उस class में उपलब्ध **virtual functions के addresses** को स्टोर करती है।
+
+### सरल शब्दों में:
+
+> VTable एक ऐसी टेबल होती है जो यह बताती है कि किसी class के virtual functions कहाँ (memory में) रखे गए हैं, ताकि runtime पर सही function को call किया जा सके।
+
+
+
 ### Example:
 
 Suppose we have:
@@ -331,6 +342,22 @@ Each **object of a class with virtual functions** contains a hidden pointer call
 
 * Set **automatically by the compiler** during object construction.
 * Ensures that the correct virtual functions are called at runtime.
+
+
+### **vptr (Virtual Pointer) क्या होता है?**
+
+> हर object जो किसी ऐसी class से बना हो जिसमें **virtual functions** हों, उसमें एक **छुपा हुआ pointer** होता है जिसे **vptr (virtual pointer)** कहते हैं।
+
+* यह **vptr उस class की vtable को point करता है**।
+* **Compiler इस vptr को object के construction के दौरान अपने आप set कर देता है।**
+* इसका काम यह **सुनिश्चित करना होता है कि runtime पर सही virtual function call हो।**
+
+
+### सरल शब्दों में:
+
+> जब हम base class का pointer या reference इस्तेमाल करते हैं, तो **vptr यह तय करता है कि actually कौन-सा function run होगा** — चाहे वो derived class में override किया गया हो।
+
+
 
 ### Memory layout (simplified):
 
