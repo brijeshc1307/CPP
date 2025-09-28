@@ -3895,6 +3895,157 @@ arr = nullptr;
 ---
 ##  Q11. What is Multithreading?
 
+---
+
+### **Cybage interview – Technical Round Interview**
+Round 1: 50 min
+
+## Q1. Write 3 functions: `add`, `sub`, `multiply`, each taking 2 parameters and returning an `int`.
+
+```cpp
+int add(int a, int b) {
+    return a + b;
+}
+
+int sub(int a, int b) {
+    return a - b;
+}
+
+int multiply(int a, int b) {
+    return a * b;
+}
+```
+
+---
+
+## Q2. Now call the functions using a loop
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int add(int a, int b);
+int sub(int a, int b);
+int multiply(int a, int b);
+
+int main() {
+    int a = 10, b = 5;
+    int (*operations[3])(int, int) = { add, sub, multiply };
+
+    for (int i = 0; i < 3; i++) {
+        cout << "Result: " << operations[i](a, b) << endl;
+    }
+
+    return 0;
+}
+```
+
+---
+
+## Q3. File Handling Example (write to file and read from file)
+
+```cpp
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+int main() {
+    // Writing to a file
+    ofstream outFile("example.txt");
+    outFile << "Hello from Cybage interview question!" << endl;
+    outFile.close();
+
+    // Reading from a file
+    ifstream inFile("example.txt");
+    string line;
+    while (getline(inFile, line)) {
+        cout << line << endl;
+    }
+    inFile.close();
+
+    return 0;
+}
+```
+
+---
+
+## Q4. Stack Implementation (using STL stack)
+
+```cpp
+#include <iostream>
+#include <stack>
+using namespace std;
+
+int main() {
+    stack<int> s;
+    s.push(10);
+    s.push(20);
+    s.push(30);
+
+    while (!s.empty()) {
+        cout << "Top: " << s.top() << endl;
+        s.pop();
+    }
+
+    return 0;
+}
+```
+
+---
+
+## Q5. Singleton Class
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Singleton {
+private:
+    static Singleton* instance;
+    Singleton() {
+        cout << "Constructor called\n";
+    }
+
+    // Prevent copying
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+public:
+    static Singleton* getInstance() {
+        if (instance == nullptr) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    void show() {
+        cout << "Singleton instance working\n";
+    }
+};
+
+// Initialize static member
+Singleton* Singleton::instance = nullptr;
+```
+
+---
+
+##  Q6. Try to Copy Singleton Object (Copy Constructor)
+
+```cpp
+int main() {
+    Singleton* s1 = Singleton::getInstance();
+    s1->show();
+
+    // This will throw a compile-time error due to deleted copy constructor
+    // Singleton s2 = *s1;  // ❌ Error
+    // Singleton s3(*s1);   // ❌ Error
+
+    return 0;
+}
+```
+
+**Explanation:**
+In the Singleton class, copy constructor and assignment operator are marked as `delete`. If you try to copy like `Singleton s2 = *s1;`, the compiler will throw an error. This enforces the Singleton pattern properly.
 
 ---
 ---
