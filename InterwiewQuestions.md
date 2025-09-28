@@ -4042,12 +4042,93 @@ int main() {
 
     return 0;
 }
+
 ```
 
 **Explanation:**
 In the Singleton class, copy constructor and assignment operator are marked as `delete`. If you try to copy like `Singleton s2 = *s1;`, the compiler will throw an error. This enforces the Singleton pattern properly.
 
+##  Q7. To access a variable (`g_i`) defined in `first.cpp` from `second.cpp`, you need to **declare it as `extern`** in `second.cpp`. This tells the compiler that the variable is defined in another translation unit (another `.cpp` file), and the linker will resolve it during linking.
+
 ---
+
+## Step-by-Step Example
+
+---
+
+### `first.cpp` – Define the variable
+
+```cpp
+// first.cpp
+#include <iostream>
+
+int g_i = 42;  // Global variable definition
+
+void printFirst() {
+    std::cout << "Value of g_i in first.cpp: " << g_i << std::endl;
+}
+```
+
+---
+
+### `second.cpp` – Access the variable using `extern`
+
+```cpp
+// second.cpp
+#include <iostream>
+
+extern int g_i;  // Declaration of the variable defined in first.cpp
+
+void printSecond() {
+    std::cout << "Value of g_i in second.cpp: " << g_i << std::endl;
+
+    g_i = 100;  // Modify the variable
+    std::cout << "Modified g_i in second.cpp: " << g_i << std::endl;
+}
+```
+
+---
+
+### `main.cpp` – Call both functions
+
+```cpp
+// main.cpp
+void printFirst();
+void printSecond();
+
+int main() {
+    printFirst();
+    printSecond();
+    printFirst();  // Show modified value
+    return 0;
+}
+```
+
+---
+
+### Compilation
+
+You must compile all `.cpp` files together so the linker can resolve symbols:
+
+```bash
+g++ first.cpp second.cpp main.cpp -o program
+./program
+```
+
+---
+
+###  Output
+
+```
+Value of g_i in first.cpp: 42
+Value of g_i in second.cpp: 42
+Modified g_i in second.cpp: 100
+Value of g_i in first.cpp: 100
+```
+
+
+---
+
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
