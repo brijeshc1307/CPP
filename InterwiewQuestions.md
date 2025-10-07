@@ -4126,6 +4126,276 @@ Modified g_i in second.cpp: 100
 Value of g_i in first.cpp: 100
 ```
 
+---
+### **Ceipal for Siemens interview – Technical Round Interview**
+Round 1: 30 min
+
+---
+
+### Write all type constructor and given variable
+
+---
+
+### Problem Area:
+
+```cpp
+double &num2 = num;
+```
+
+This line:
+
+* Tries to **initialize a reference** member (`num2`) directly at the point of declaration.
+* This **is not allowed** in C++ because reference members must be initialized in the **constructor initializer list**, not inside the class body.
+
+---
+
+### 🛠️ Solution:
+
+To fix this, you must **use an initializer list** in **all constructors** that involve `num2`. That means:
+
+1. Remove this line from the class body:
+
+```cpp
+double &num2 = num;   //  Remove this
+```
+
+2. Update **each constructor** to initialize `num2` properly using an initializer list.
+
+---
+
+###  Fixed Code:
+
+Here's your **corrected version** of the code:
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Base {
+public:
+    const char* ptr;   // pointer to const char*
+    double num;         // a number
+    string str;         // a string
+    double &num2;       // reference to a double
+
+    // 1. Default Constructor
+    Base() : ptr("Default"), num(0.0), str("None"), num2(num) {
+        cout << "Default Constructor Called" << endl;
+    }
+
+    // 2. Parameterized Constructor
+    Base(const char* _ptr, double num1, string str1, double& num3)
+        : ptr(_ptr), num(num1), str(str1), num2(num3) {
+        cout << "Parameterized Constructor Called" << endl;
+    }
+
+    // 3. Copy Constructor
+    Base(const Base& other)
+        : ptr(other.ptr), num(other.num), str(other.str), num2(other.num2) {
+        cout << "Copy Constructor Called" << endl;
+    }
+
+    // 4. Destructor
+    ~Base() {
+        cout << "Destructor Called" << endl;
+    }
+
+    // Function to display object data
+    void display() {
+        cout << "ptr: " << ptr << endl;
+        cout << "num: " << num << endl;
+        cout << "str: " << str << endl;
+        cout << "num2 points to value: " << num2 << endl;
+    }
+};
+
+// ---------------- MAIN FUNCTION ----------------
+int main() {
+    double n = 50.5;
+
+    // Default constructor
+    Base b1;
+    b1.display();
+
+    cout << "-----------------------------" << endl;
+
+    // Parameterized constructor
+    Base b2("Hello", 10.5, "Brijesh", n);
+    b2.display();
+
+    cout << "-----------------------------" << endl;
+
+    // Copy constructor
+    Base b3 = b2;
+    b3.display();
+
+    return 0;
+}
+```
+
+---
+
+### Notes:
+
+* **Reference members** (`double &num2`) **must be initialized** in the constructor’s initializer list — they cannot be assigned later.
+* Same applies to **`const` data members**.
+* If you ever need to copy reference semantics, remember: the reference will refer to the same original object, not a new one.
+
+---
+
+### Output (expected):
+
+```plaintext
+Default Constructor Called
+ptr: Default
+num: 0
+str: None
+num2 points to value: 0
+-----------------------------
+Parameterized Constructor Called
+ptr: Hello
+num: 10.5
+str: Brijesh
+num2 points to value: 50.5
+-----------------------------
+Copy Constructor Called
+ptr: Hello
+num: 10.5
+str: Brijesh
+num2 points to value: 50.5
+Destructor Called
+Destructor Called
+Destructor Called
+```
+
+
+
+OR
+
+```cpp
+#include <iostream>
+#include <string>
+using namespace std;
+
+class Base {
+public:
+    const char* ptr;   // pointer to const char*
+    double num;         // a number
+    string str;         // a string
+    double* num2;       // pointer instead of reference (old style)
+
+    // 1. Default Constructor
+    Base() {
+        cout << "Default Constructor Called" << endl;
+        ptr = "Default";
+        num = 0.0;
+        str = "None";
+        num2 = &num;
+    }
+
+    // 2. Parameterized Constructor
+    Base(const char* _ptr, double num1, string str1, double& num3) {
+        cout << "Parameterized Constructor Called" << endl;
+        ptr = _ptr;
+        num = num1;
+        str = str1;
+        num2 = &num3;
+    }
+
+    // 3. Copy Constructor
+    Base(const Base& other) {
+        cout << "Copy Constructor Called" << endl;
+        ptr = other.ptr;
+        num = other.num;
+        str = other.str;
+        num2 = other.num2;
+    }
+
+    // 4. Destructor
+    ~Base() {
+        cout << "Destructor Called" << endl;
+    }
+
+    // Function to display object data
+    void display() {
+        cout << "ptr: " << ptr << endl;
+        cout << "num: " << num << endl;
+        cout << "str: " << str << endl;
+        cout << "num2 points to value: " << *num2 << endl;
+    }
+};
+
+// ---------------- MAIN FUNCTION ----------------
+int main() {
+    double n = 50.5;
+
+    // Default constructor
+    Base b1;
+    b1.display();
+
+    cout << "-----------------------------" << endl;
+
+    // Parameterized constructor
+    Base b2("Hello", 10.5, "Brijesh", n);
+    b2.display();
+
+    cout << "-----------------------------" << endl;
+
+    // Copy constructor
+    Base b3 = b2;
+    b3.display();
+
+    return 0;
+}
+```
+
+---
+
+### 🧠 Output:
+
+```
+Default Constructor Called
+ptr: Default
+num: 0
+str: None
+num2 points to value: 0
+-----------------------------
+Parameterized Constructor Called
+ptr: Hello
+num: 10.5
+str: Brijesh
+num2 points to value: 50.5
+-----------------------------
+Copy Constructor Called
+ptr: Hello
+num: 10.5
+str: Brijesh
+num2 points to value: 50.5
+Destructor Called
+Destructor Called
+Destructor Called
+```
+
+---
+Q.2 Lambda function
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a = 5, b = 6;
+    auto add = [a, b](int x, int y) {
+        return a + b + x + y;
+    };
+    
+    cout << add(10, 20);
+    return 0;
+}
+```
+Q3. Multithreading, fuctors
+
+
 
 ---
 
