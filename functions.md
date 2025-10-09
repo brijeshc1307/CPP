@@ -1,7 +1,3 @@
-In C++, **functions** are blocks of code that perform a specific task. Functions help make code modular, reusable, and easier to manage.
-
----
-
 ## **Function Types in C++**
 
 1. **Built-in functions** – Provided by C++ libraries (e.g., `sqrt()`, `pow()`)
