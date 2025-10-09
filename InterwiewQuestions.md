@@ -4395,6 +4395,26 @@ int main() {
 ```
 Q3. Multithreading, fuctors
 
+---
+### **Apexon for Siemens interview – Technical Round Interview**
+Round 1: 40 min
+
+
+
+1. How did you make 32-bit signal support 64-bit signal in your project?
+2. Any issue related to pointer you faced? How did you solve it?
+3. Do you use pointers?
+4. Do you use STL?
+5. Difference between vector and queue?
+6. What is a list?
+7. How do you detect a cycle in a circular linked list?
+8. Difference between singly and doubly linked list?
+9. Do you use multithreading?
+10. Do you use any library for multithreading?
+11. What is synchronization?
+12. What is a mutex?
+13. What is a race condition?
+14. Explain any scenario where you used multithreading.
 
 
 ---
