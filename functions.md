@@ -1,3 +1,9 @@
+A function is a named block of code that takes zero or more inputs (parameters), performs some computation or action, and optionally produces an output (return value).
+Functions let you encapsulate behavior, reuse code, and separate concerns: instead of repeating logic, you call the function wherever that behavior is needed.
+
+>In C++ a function has a signature (return type + name + parameter types) and can have storage/linkage, overloads, templates, or be a member of a class.
+
+
 ## **Function Types in C++**
 
 1. **Built-in functions** – Provided by C++ libraries (e.g., `sqrt()`, `pow()`)
