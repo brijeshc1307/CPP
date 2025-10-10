@@ -255,7 +255,7 @@ hello.cpp
 [Linker] --> hello (Executable)
 ```
 ---
- [Data Types ➡️](/datatypes.md) 
+ [Data Types ➡️](/sql-data-types.md) 
 ---
 
 ## **License**
