@@ -298,7 +298,7 @@ int main() {
 ---
 
 ---
-[⬅️ Basics](/basics.md)        |         [Joins and Subqueries ➡️](/joins-subqueries.md)
+[⬅️ Basics](/basics.md)      |          [Operators ➡️](/Operators.md)
 ---
 
 ## **License**
