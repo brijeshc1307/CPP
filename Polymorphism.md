@@ -289,7 +289,106 @@ int main() {
 }
 ```
 
----
+
+
+OR
+```cpp
+#include <iostream>
+using namespace std;
+
+// Base class
+class Animal {
+public:
+    // Virtual function
+    virtual void sound() {
+        cout << "Animal makes a sound" << endl;
+    }
+};
+
+// Derived class
+class Dog : public Animal {
+public:
+    void sound() override {
+        cout << "Dog barks" << endl;
+    }
+};
+
+// Another derived class
+class Cat : public Animal {
+public:
+    void sound() override {
+        cout << "Cat meows" << endl;
+    }
+};
+
+int main() {
+    Animal* animal;  // Base class pointer
+
+    Dog dog;
+    Cat cat;
+
+    // Pointing to Dog object
+    animal = &dog;
+    animal->sound();  // Output: Dog barks
+
+    // Pointing to Cat object
+    animal = &cat;
+    animal->sound();  // Output: Cat meows
+
+    return 0;
+}
+
+```
+OR
+```cpp
+#include <iostream>
+using namespace std;
+
+// Base class
+class Animal {
+public:
+    // Virtual function
+    virtual void sound() {
+        cout << "Animal makes a sound" << endl;
+    }
+
+    // Virtual destructor to ensure proper cleanup
+    virtual ~Animal() {}
+};
+
+// Derived class
+class Dog : public Animal {
+public:
+    void sound() override {
+        cout << "Dog barks" << endl;
+    }
+};
+
+// Another derived class
+class Cat : public Animal {
+public:
+    void sound() override {
+        cout << "Cat meows" << endl;
+    }
+};
+
+int main() {
+    // Dynamically allocate Dog object
+    Animal* animal1 = new Dog();
+    animal1->sound();  // Output: Dog barks
+
+    // Dynamically allocate Cat object
+    Animal* animal2 = new Cat();
+    animal2->sound();  // Output: Cat meows
+
+    // Free the memory
+    delete animal1;
+    delete animal2;
+
+    return 0;
+}
+
+```
 
 ## Summary
 
