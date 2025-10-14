@@ -1632,8 +1632,8 @@ Output
 ## **Types of Copy (Behavior, not constructor type)**
 
 ### Shallow Copy Constructor
-> **Definition**: Copies all member values as-is, including **pointers**.
-> **Effect**: Both the original and the copy share the **same memory location** for pointer members.
+>* **Definition**: Copies all member values as-is, including **pointers**.
+>* **Effect**: Both the original and the copy share the **same memory location** for pointer members.
 
 A shallow copy creates a new object, but **does not copy the inner (nested) objects**. Instead, it copies references to them.
 * **Result:** Changes to nested objects in the copy **affect the original**.
@@ -1744,7 +1744,7 @@ Modifying one object's pointer affects the other. Also, both will try to `delete
 
 ### Deep Copy Constructor
 >* **Definition**: Copies actual content, allocating new memory for pointer members.
->eedF* **Effect**: Both the original and the copy have **independent copies** of the data.
+>* **Effect**: Both the original and the copy have **independent copies** of the data.
 
 
 A deep copy creates a new object **and** also copies **all nested objects** recursively.
