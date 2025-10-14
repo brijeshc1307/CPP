@@ -1632,6 +1632,9 @@ Output
 ## **Types of Copy (Behavior, not constructor type)**
 
 ### Shallow Copy Constructor
+> **Definition**: Copies all member values as-is, including **pointers**.
+> **Effect**: Both the original and the copy share the **same memory location** for pointer members.
+
 A shallow copy creates a new object, but **does not copy the inner (nested) objects**. Instead, it copies references to them.
 * **Result:** Changes to nested objects in the copy **affect the original**.
 * Only the top-level object is copied.
@@ -1713,8 +1716,37 @@ int main()
  Breadth = 12
  Height = 16
 ```
+Or
+```cpp
+class Shallow {
+public:
+    int* data;
+
+    Shallow(int val) {
+        data = new int(val);
+    }
+
+    // Compiler-generated copy constructor = shallow copy
+};
+
+void exampleShallow() {
+    Shallow a(10);
+    Shallow b = a;  // Shallow copy
+
+    *b.data = 20;
+
+    std::cout << *a.data << std::endl;  // Outputs 20 (because data is shared!)
+}
+```
+####  Problem:
+
+Modifying one object's pointer affects the other. Also, both will try to `delete` the same memory, which causes a crash (double-free).
 
 ### Deep Copy Constructor
+>* **Definition**: Copies actual content, allocating new memory for pointer members.
+>eedF* **Effect**: Both the original and the copy have **independent copies** of the data.
+
+
 A deep copy creates a new object **and** also copies **all nested objects** recursively.
 * **Result:** Changes to nested objects in the copy **do not affect the original**.
 * Both the top-level and inner objects are fully copied.
@@ -1812,6 +1844,51 @@ int main()
  Breadth = 14
  Height = 16
 ```
+Or
+
+```cpp
+class Deep {
+public:
+    int* data;
+
+    Deep(int val) {
+        data = new int(val);
+    }
+
+    // Custom deep copy constructor
+    Deep(const Deep& other) {
+        data = new int(*other.data);  // Deep copy
+    }
+
+    // Destructor to clean up memory
+    ~Deep() {
+        delete data;
+    }
+};
+
+void exampleDeep() {
+    Deep a(10);
+    Deep b = a;  // Deep copy
+
+    *b.data = 20;
+
+    std::cout << *a.data << std::endl;  // Outputs 10 (data is separate)
+}
+```
+
+---
+
+### Summary Table
+
+| Feature         | Shallow Copy                   | Deep Copy                            |
+| --------------- | ------------------------------ | ------------------------------------ |
+| Copies pointers | ✅ Yes (pointer addresses)      | ❌ No (copies actual content)         |
+| Independent?    | ❌ No (share same memory)       | ✅ Yes (separate memory)              |
+| Memory safety   | ⚠️ Risk of double deletion     | ✅ Safe                               |
+| Performance     | ✅ Fast                         | 🐢 Slower (due to memory allocation) |
+| Use case        | When object doesn't own memory | When object manages its own memory   |
+
+
 ---
 
 ### **Copy Assignment Operator**
