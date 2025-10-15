@@ -326,25 +326,25 @@ public:
         cout << "[Parameterized Constructor] Name: " << name << ", Age: " << age << endl;
     }
 
-    // 3. Copy Constructor
+    // 3. Constructor with Default Arguments (different signature)
+    Person(string n) {
+        name = n;
+        age = 100; // default age
+        cout << "[Constructor with Default Argument] Name: " << name << ", Age: " << age << endl;
+    }
+
+    // 4. Copy Constructor
     Person(const Person &p) {
         name = p.name;
         age = p.age;
         cout << "[Copy Constructor] Name: " << name << ", Age: " << age << endl;
     }
 
-    // 4. Move Constructor
+    // 5. Move Constructor
     Person(Person &&p) noexcept {
         name = std::move(p.name);
         age = p.age;
         cout << "[Move Constructor] Name: " << name << ", Age: " << age << endl;
-    }
-
-    // 5. Constructor with Default Arguments
-    Person(string n = "John Doe") {
-        name = n;
-        age = 100;
-        cout << "[Constructor with Default Argument] Name: " << name << ", Age: " << age << endl;
     }
 
     // 6. Delegating Constructor
@@ -352,12 +352,11 @@ public:
         cout << "[Delegating Constructor] ID used as age: " << id << endl;
     }
 
-    // Print details method
+    // Display function
     void display() const {
         cout << ">> Person Info: Name = " << name << ", Age = " << age << endl;
     }
 };
-
 int main() {
     cout << "\n--- Default Constructor ---" << endl;
     Person p1;
@@ -365,37 +364,39 @@ int main() {
     cout << "\n--- Parameterized Constructor ---" << endl;
     Person p2("Alice", 25);
 
+    cout << "\n--- Constructor with Default Argument (only name) ---" << endl;
+    Person p3("Bob"); // uses constructor with one string
+
     cout << "\n--- Copy Constructor ---" << endl;
-    Person p3 = p2; // invokes copy constructor
+    Person p4 = p2;
 
     cout << "\n--- Move Constructor ---" << endl;
-    Person p4 = std::move(p3); // invokes move constructor
-
-    cout << "\n--- Constructor with Default Arguments ---" << endl;
-    Person p5; // calls constructor with default argument
+    Person p5 = std::move(p4);
 
     cout << "\n--- Delegating Constructor ---" << endl;
-    Person p6(42); // calls delegating constructor
+    Person p6(42); // uses int delegating to string+int
 
     return 0;
 }
+
 ```
 Output
 ```
+
 --- Default Constructor ---
 [Default Constructor] Name: Default, Age: 0
 
 --- Parameterized Constructor ---
 [Parameterized Constructor] Name: Alice, Age: 25
 
+--- Constructor with Default Argument (only name) ---
+[Constructor with Default Argument] Name: Bob, Age: 100
+
 --- Copy Constructor ---
 [Copy Constructor] Name: Alice, Age: 25
 
 --- Move Constructor ---
 [Move Constructor] Name: Alice, Age: 25
-
---- Constructor with Default Arguments ---
-[Constructor with Default Argument] Name: John Doe, Age: 100
 
 --- Delegating Constructor ---
 [Parameterized Constructor] Name: Delegated, Age: 42
