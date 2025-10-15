@@ -138,8 +138,71 @@ The output may not be exactly `4 + 8 + 1 = 13` bytes due to padding and alignmen
 
 It will likely be `24 bytes`, depending on the platform and compiler you're using—typically on a 64-bit system with standard alignment rules.
 
+---
+
+### Code:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Animal {
+public:
+    virtual void sound() {}
+};
+
+class Dog : public Animal {
+public:
+    void sound() override {}
+};
+
+class Cat : public Animal {
+public:
+    void sound() override {}
+};
+
+int main() {
+    Animal obj;
+    Dog obj1;
+    Cat obj2;
+
+    cout << "Size of Animal: " << sizeof(obj) << " bytes" << endl;
+    cout << "Size of Dog: " << sizeof(obj1) << " bytes" << endl;
+    cout << "Size of Cat: " << sizeof(obj2) << " bytes" << endl;
+
+// OR
+
+ Animal* obj = new Animal();
+    Dog* obj1 = new Dog();
+    Cat* obj2 = new Cat();
+
+    cout << "Size of Animal: " << sizeof(*obj) << " bytes" << endl;
+    cout << "Size of Dog: " << sizeof(*obj1) << " bytes" << endl;
+    cout << "Size of Cat: " << sizeof(*obj2) << " bytes" << endl;
+
+    // Clean up memory
+    delete obj;
+    delete obj1;
+    delete obj2;
 
 
+    return 0;
+}
+```
+
+---
+
+### Sample Output (on 64-bit system):
+
+```bash
+Size of Animal: 8 bytes
+Size of Dog: 8 bytes
+Size of Cat: 8 bytes
+```
+
+(If you run this on a 32-bit system, you might see `4 bytes` instead.)
+
+---
 
 
 ### Why 24 bytes? Let's break it down:
