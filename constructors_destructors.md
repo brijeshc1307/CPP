@@ -701,10 +701,15 @@ public:
 // Driver code
 int main()
 {
-    Test t1, t2;
-    t2 = t1;
-    Test t3 = t1;
-    getchar();
+	Test t1, t2;          //  Default constructor called for t1 and t2
+
+    t2 = t1;              //  Copy assignment operator is called
+                          // (this is also called an "assignment operator" in general)
+
+    Test t3 = t1;         // Copy constructor is called (initialization from existing object)
+
+   // Test t4(t3);          //  Copy constructor is called (direct initialization)
+
     return 0;
 }
 ```
