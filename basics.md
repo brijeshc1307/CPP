@@ -36,6 +36,20 @@ It supports **procedural**, **object-oriented**, and **generic** programming.
 
 ---
 
+### Version-Wise Feature Table
+
+| C++ Version            | Release Year | Major Features                                                                                                                                                                                                                                                                                                                      |
+| ---------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **C++98 / C++03**      | 1998 / 2003  | - First standardized version<br>- Classes, inheritance, polymorphism<br>- Templates<br>- STL (Standard Template Library)<br>- Exception handling                                                                                                                                                                                    |
+| **C++11**              | 2011         | 🚀 "Modern C++" begins<br>- `auto` keyword<br>- Range-based `for` loop<br>- Lambda expressions<br>- Smart pointers (`unique_ptr`, `shared_ptr`)<br>- `nullptr`<br>- Move semantics (rvalue references)<br>- `constexpr`, `static_assert`<br>- Variadic templates<br>- `enum class`                                                  |
+| **C++14**              | 2014         | 🔧 Minor improvements<br>- Generic lambdas<br>- `decltype(auto)`<br>- Return type deduction<br>- Binary literals (`0b1010`)<br>- `make_unique`                                                                                                                                                                                      |
+| **C++17**              | 2017         | 💪 More powerful syntax<br>- `if constexpr`<br>- Structured bindings (`auto [a, b] = ...`)<br>- Inline variables<br>- Fold expressions (for variadic templates)<br>- `std::optional`, `std::variant`, `std::any`<br>- `std::string_view`<br>- Parallel algorithms<br>- Filesystem library                                           |
+| **C++20**              | 2020         | 🧠 Huge upgrade<br>- Concepts (type constraints)<br>- `ranges` library<br>- Coroutines (`co_await`, `co_yield`, `co_return`)<br>- Modules (replacing headers, still evolving)<br>- `consteval`, `constinit`<br>- `three-way comparison` (`<=>`)<br>- Calendar and time zone library                                                 |
+| **C++23**              | 2023         | 🔄 Usability + performance<br>- `std::expected` (like `optional`, but with error info)<br>- `static operator()` for lambdas<br>- `std::print()` and `std::println()`<br>- `explicit` for operators<br>- `monadic` operations for `optional`, `variant`, etc.<br>- Improved `ranges`, `format` libraries<br>- More constexpr support |
+| **C++26** *(Upcoming)* | ~2026        | 📈 In progress<br>- Executors and networking (likely)<br>- Reflection (compile-time introspection)<br>- Pattern matching (like `match` expressions)<br>- More AI/compiler-related tooling                                                                                                                                           |
+
+---
+
 ## Basic Syntax of C++
 
 Here are the basic components of a C++ program:
