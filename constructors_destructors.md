@@ -677,55 +677,42 @@ ClassName& operator=(const ClassName& other);
 ### **Example:**
 
 ```cpp
+// CPP Program to demonstrate the use of copy constructor
+// and assignment operator
 #include <iostream>
+#include <stdio.h>
 using namespace std;
 
-class Person {
+class Test {
 public:
-    string* name;
-
-    Person(string n) {
-        name = new string(n);
+    Test() {}
+    Test(const Test& t)
+    {
+        cout << "Copy constructor called " << endl;
     }
 
-    // Copy constructor (deep copy)
-    Person(const Person& other) {
-        name = new string(*other.name);
-    }
-
-    // Copy assignment operator (deep copy)
-    Person& operator=(const Person& other) {
-        if (this != &other) {  // Prevent self-assignment
-            delete name;  // Clean up old memory
-            name = new string(*other.name);  // Allocate new memory and copy
-        }
+    Test& operator=(const Test& t)
+    {
+        cout << "Assignment operator called " << endl;
         return *this;
-    }
-
-    void show() {
-        cout << *name << endl;
-    }
-
-    ~Person() {
-        delete name;
     }
 };
 
-int main() {
-    Person p1("John");
-    Person p2("David");
-
-    p2 = p1;  // copy assignment operator called
-
-    *p2.name = "Michael";
-
-    p1.show();  // Output: John
-    p2.show();  // Output: Michael
-
+// Driver code
+int main()
+{
+    Test t1, t2;
+    t2 = t1;
+    Test t3 = t1;
+    getchar();
     return 0;
 }
 ```
-
+Output
+```
+Assignment operator called 
+Copy constructor called 
+```
 ---
 
 ### Key Points:
