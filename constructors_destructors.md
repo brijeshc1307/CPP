@@ -415,16 +415,17 @@ Output
 
 ### Shallow Copy Constructor
 A shallow copy creates a new object, but **does not copy the inner (nested) objects**. Instead, it copies references to them.
-* **Result:** Changes to nested objects in the copy **affect the original**.
 * Only the top-level object is copied.
 * Inner objects are **shared** between original and copy.
 * Default copy constructor also know as Shallow Copy
+* Copies **only the pointer address** (not the actual data).
+* Both objects share the **same memory**.
+* Changes in one affect the other.
 
->Shallow copy एक नया object बनाता है, लेकिन इसके अंदर मौजूद inner (nested) objects की कॉपी नहीं करता। इसके बजाय, वो उनके references (पते) को कॉपी करता है।
->Copy किए गए nested objects में बदलाव करने पर original object भी प्रभावित होता है।
->केवल top-level object की कॉपी बनती है।
->Inner objects original और copy के बीच साझा (shared) रहते हैं।
->C++ में जो default copy constructor होता है, वो आमतौर पर shallow copy करता है।
+
+
+
+
 
 ```cpp
 #include <iostream>
@@ -495,17 +496,44 @@ int main()
  Breadth = 12
  Height = 16
 ```
+OR
+```cpp
+class Shallow {
+public:
+    int* data;
+
+    Shallow(int val) {
+        data = new int(val);
+        cout << "[Shallow Constructor] Allocated " << *data << " at " << data << endl;
+    }
+
+    // Uses default copy constructor (shallow copy)
+
+    ~Shallow() {
+        cout << "[Shallow Destructor] Deleting data at " << data << endl;
+        delete data;
+    }
+};
+
+int main(){
+Shallow obj1(100);
+        Shallow obj2 = obj1; // Default copy constructor (shallow copy)
+        
+        cout << "obj1.data = " << obj1.data << " (" << *obj1.data << ")" << endl;
+        cout << "obj2.data = " << obj2.data << " (" << *obj2.data << ")" << endl;
+
+        // Both objects point to the same memory — will cause double deletion!
+}
+  
+```
 
 ### Deep Copy Constructor
 A deep copy creates a new object **and** also copies **all nested objects** recursively.
-* **Result:** Changes to nested objects in the copy **do not affect the original**.
 * Both the top-level and inner objects are fully copied.
 * Original and copied objects are **independent**.
-
->Deep copy एक नया object बनाता है और उसमें मौजूद सभी nested objects (अंदर के objects) को भी recursively कॉपी करता है।
->Copy किए गए nested objects में बदलाव का असर original object पर नहीं पड़ता।
->Top-level और अंदर के सभी objects की अलग-अलग कॉपी बनती है।
->Original और copied object एक-दूसरे से पूरी तरह स्वतंत्र (independent) होते हैं।
+* Allocates **new memory** and copies the actual data.
+* Each object manages its own memory.
+* Safer for managing dynamic resources.
 
 
 ```cpp
@@ -593,6 +621,39 @@ int main()
  Length = 12
  Breadth = 14
  Height = 16
+```
+
+OR
+```cpp
+class Deep {
+public:
+    int* data;
+
+    Deep(int val) {
+        data = new int(val);
+        cout << "[Deep Constructor] Allocated " << *data << " at " << data << endl;
+    }
+
+    // Custom copy constructor (deep copy)
+    Deep(const Deep& other) {
+        data = new int(*other.data);
+        cout << "[Deep Copy Constructor] Copied value " << *data << " to new address " << data << endl;
+    }
+
+    ~Deep() {
+        cout << "[Deep Destructor] Deleting data at " << data << endl;
+        delete data;
+    }
+};
+int main(){
+Deep obj1(200);
+        Deep obj2 = obj1; // Custom copy constructor (deep copy)
+
+        cout << "obj1.data = " << obj1.data << " (" << *obj1.data << ")" << endl;
+        cout << "obj2.data = " << obj2.data << " (" << *obj2.data << ")" << endl;
+
+        // Each object owns separate memory — safe!
+}
 ```
 ---
 
