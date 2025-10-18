@@ -731,6 +731,15 @@ Copy constructor called
 | Self-assignment check   | `if (this != &other)` is important           |
 
 ---
+1. The copy assignment operator should return a reference to the current object (`T&`).
+2. Returning `void` disables assignment chaining like `a = b = c`, which is common in C++
+   OR
+   Using `void` as the return type for the copy assignment operator breaks assignment chaining like `a = b = c`..
+3. Chaining works because `b = c` returns `b`, which can be used in `a = b`.
+4. Returning `*this` (a reference to the current object) enables this behavior.
+5. It also matches standard library expectations and avoids unnecessary copies.
+
+---
 
 ## **2. Destructor in C++**  
 A **destructor** is a special function that cleans up an object before it is destroyed.  
