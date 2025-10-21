@@ -980,7 +980,91 @@ public:
 | Rule of 5 | + Move ctor, move assignment     | C++11+            | Avoid unnecessary deep copies      |
 
 ---
+## Constructor Initializer List
+>A **constructor initializer list** in C++ is a feature that lets you **initialize class members before the constructor body runs**.
 
+It looks like this:
+
+```cpp
+class Example {
+    int a;
+    int b;
+
+public:
+    Example(int x, int y) : a(x), b(y) {   // ← initializer list
+        cout << "Constructor called" << endl;
+    }
+
+    void display() {
+        cout << "a = " << a << ", b = " << b << endl;
+    }
+};
+
+int main() {
+    Example obj(10, 20);
+    obj.display();
+    return 0;
+}
+```
+
+### Key Points
+
+1. **Syntax**:
+
+   ```cpp
+   ConstructorName(parameters) : member1(value1), member2(value2) { ... }
+   ```
+
+2. **Used to initialize:**
+
+   * `const` data members
+   * Reference members (`&`)
+   * Base class constructors
+   * Members that don’t have a default constructor
+
+3. **Why use it?**
+
+   * More **efficient** (avoids default construction + assignment)
+   * **Required** for const/reference members
+   * Useful for **initializing base classes** in inheritance
+
+### Example with const and reference:
+
+```cpp
+class Demo {
+    const int x;
+    int &y;
+
+public:
+    Demo(int a, int &b) : x(a), y(b) {
+        cout << "x = " << x << ", y = " << y << endl;
+    }
+};
+
+int main() {
+    int val = 5;
+    Demo d(10, val);
+    return 0;
+}
+```
+
+### Example with inheritance:
+
+```cpp
+class Base {
+public:
+    Base(int x) { cout << "Base constructor: " << x << endl; }
+};
+
+class Derived : public Base {
+public:
+    Derived(int x, int y) : Base(x) {
+        cout << "Derived constructor: " << y << endl;
+    }
+};
+```
+
+---
 ## **3.Encapsulation in C++**
 
 ---
