@@ -4419,6 +4419,206 @@ Round 1: 40 min
 
 ---
 
+### **Delta IoT - John Deere interview – Technical Round Interview MFC**
+Round 1: 35 min
+---
+
+1. How to achieve **abstraction** in C++
+2. What is a **pure virtual function**
+3. **Runtime polymorphism** (related)
+4. **Rule of Five** in C++
+5. **Shallow copy** and **deep copy** – with examples
+6. What is **multithreading** in C++
+7. How to **prevent deadlock**
+8. What is **STL**
+9. Write a program to store values, and display them in **vector**?
+10. Difference between **list** and **vector**
+11. What are **design patterns**
+12. **Singleton class** program in C++
+13. **Pointer vs Reference**
+14. **Smart pointers** – `unique_ptr`, `shared_ptr`, `weak_ptr`
+15. **Shallow copy** and **deep copy** – with examples
+16. Combined program showing **shallow copy vs deep copy**
+
+---
+Round 2: 35 min
+
+
+1. What are the pros and cons of using `std::list` and `std::vector` in C++?
+2. Write a C++ class that contains one integer member and one pointer member. Implement the following:
+
+   * Default constructor
+   * Copy constructor
+   * Assignment operator
+   * Destructor
+
+   * Why do we use `return *this;` in the last line of the assignment operator function?
+   * When do we use `void` as a return type instead of returning `*this`?
+   * What is **chaining assignment** in C++?
+7. Explain **constructor initializer list** and its advantages.
+8. Explain **runtime polymorphism** in C++.
+
+---
+
+
+
+### **Areteminds interview – Technical Round Interview MFC**
+Round 1: 30 min
+
+
+---
+
+### **1 Explain how message maps work in MFC**
+
+**Answer:**
+In **MFC (Microsoft Foundation Class)**, **message maps** are used to connect Windows messages (like button clicks, mouse moves, etc.) to specific **member functions** in a class.
+
+* Instead of writing a long `switch` statement (like in Win32 API), MFC uses **macros** to map messages to handlers.
+* The `BEGIN_MESSAGE_MAP` and `END_MESSAGE_MAP` macros define the mapping.
+* When a message is received, MFC checks the map and calls the corresponding handler.
+
+**Example:**
+
+```cpp
+BEGIN_MESSAGE_MAP(CMyWnd, CFrameWnd)
+    ON_WM_PAINT()       // Maps WM_PAINT to OnPaint()
+    ON_WM_DESTROY()     // Maps WM_DESTROY to OnDestroy()
+END_MESSAGE_MAP()
+```
+
+Here:
+
+* `WM_PAINT` → calls `CMyWnd::OnPaint()`
+* `WM_DESTROY` → calls `CMyWnd::OnDestroy()`
+
+**In short:**
+Message maps in MFC replace manual message handling (using `GetMessage`/`DispatchMessage`) with an **automatic mapping system** that makes code cleaner and easier to maintain.
+
+---
+
+### **2 What is the purpose of the message loop in a Win32 or MFC application?**
+
+**Explain how `GetMessage()`, `TranslateMessage()`, and `DispatchMessage()` work together.**
+
+**Answer:**
+The **message loop** (also called **event loop**) is the heart of any Windows or MFC application.
+It continuously retrieves messages from the **message queue**, processes them, and sends them to the appropriate **window procedure**.
+
+**Purpose:**
+It keeps the application **responsive** to user input (mouse, keyboard, system events).
+
+**Typical loop:**
+
+```cpp
+MSG msg;
+while (GetMessage(&msg, NULL, 0, 0)) {
+    TranslateMessage(&msg);
+    DispatchMessage(&msg);
+}
+```
+
+**Explanation of functions:**
+
+* � **GetMessage()**
+
+  * Retrieves the next message from the queue.
+  * Returns `FALSE` when `WM_QUIT` is received (causes loop to end).
+
+*  **TranslateMessage()**
+
+  * Converts virtual-key messages (like keyboard input) into character messages (WM_CHAR).
+  * It helps text input work properly.
+
+*  **DispatchMessage()**
+
+  * Sends the message to the **Window Procedure (WndProc)** for handling (e.g., WM_PAINT, WM_DESTROY).
+
+---
+
+### **3 Minimal C++ Win32 Program**
+
+This program:
+ Creates a window titled “MFC/Win32 Demo”
+ Draws text “Hello from Win32!” on WM_PAINT
+ Closes gracefully when the user clicks the X button
+
+```cpp
+#include <windows.h>
+
+// Window procedure declaration
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+
+// Entry point
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE, LPSTR, int nCmdShow) {
+    const char CLASS_NAME[] = "Win32DemoClass";
+
+    // Define window class
+    WNDCLASS wc = {};
+    wc.lpfnWndProc   = WndProc;
+    wc.hInstance     = hInstance;
+    wc.lpszClassName = CLASS_NAME;
+
+    RegisterClass(&wc);
+
+    // Create window
+    HWND hwnd = CreateWindowEx(
+        0,
+        CLASS_NAME,
+        "MFC/Win32 Demo",
+        WS_OVERLAPPEDWINDOW,
+        CW_USEDEFAULT, CW_USEDEFAULT, 400, 300,
+        NULL, NULL, hInstance, NULL
+    );
+
+    if (!hwnd) return 0;
+
+    ShowWindow(hwnd, nCmdShow);
+
+    // Message loop
+    MSG msg = {};
+    while (GetMessage(&msg, NULL, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+
+    return (int)msg.wParam;
+}
+
+// Window procedure
+LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    switch (msg) {
+    case WM_PAINT: {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hwnd, &ps);
+        TextOut(hdc, 50, 50, "Hello from Win32!", 17);
+        EndPaint(hwnd, &ps);
+        break;
+    }
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hwnd, msg, wParam, lParam);
+    }
+    return 0;
+}
+```
+
+---
+
+**Summary:**
+
+| Topic                        | Key Idea                                                    |
+| ---------------------------- | ----------------------------------------------------------- |
+| **Message Map (MFC)**        | Maps Windows messages to class member functions             |
+| **Message Loop (Win32/MFC)** | Retrieves and dispatches system messages                    |
+| **Core Functions**           | `GetMessage()` → `TranslateMessage()` → `DispatchMessage()` |
+| **Win32 Example**            | Simple window drawing "Hello from Win32!"                   |
+
+---
+
+
+
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
