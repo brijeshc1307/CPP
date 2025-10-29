@@ -39,7 +39,6 @@ int main() {
 Constructor called! a = 10
 ```
 ---
----
 
 ##  Constructor Initializer List
 
