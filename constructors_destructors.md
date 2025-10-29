@@ -49,7 +49,7 @@ It’s used to *initialize member variables* *before* the body of the constructo
 
 ###  Basic Syntax
 
-cpp
+```cpp
 class Example {
     int x;
     int y;
@@ -59,7 +59,7 @@ public:
     }
 };
 
-
+```
 Here:
 
 * x and y are initialized before the constructor body runs.
@@ -73,7 +73,7 @@ Here:
 
 If you assign inside the constructor body, the members are first *default-initialized, then **assigned* — that’s two steps.
 
-cpp
+```cpp
 class Bad {
     int x;
 public:
@@ -81,18 +81,18 @@ public:
         x = val;  //  first default initialize x, then assign
     }
 };
-
+```
 
 Using an initializer list initializes directly — one step.
 
-cpp
+```cpp
 class Good {
     int x;
 public:
     Good(int val) : x(val) {}  //  direct initialization
 };
 
-
+```
 ---
 
 ###  2. Required for *const* and *reference* members
@@ -104,7 +104,7 @@ You *must* use an initializer list when your class has:
 
 Because these *cannot be assigned to* — they must be *initialized*.
 
-cpp
+```cpp
 class Test {
     const int c;
     int& ref;
@@ -114,14 +114,14 @@ public:
     }
 };
 
-
+```
 ---
 
 ###  3. Needed for Base Class Initialization
 
 If your class inherits from another class, you use an initializer list to *call the base class constructor*.
 
-cpp
+```cpp
 class Base {
 public:
     Base(int x) { /*...*/ }
@@ -133,7 +133,7 @@ public:
     Derived(int a, int b) : Base(a), y(b) {  //  base initialized here
     }
 };
-
+```
 
 If you don’t explicitly call it, the *base’s default constructor* is used (if available).
 
@@ -143,7 +143,7 @@ If you don’t explicitly call it, the *base’s default constructor* is used (i
 
 If a member is a class type (like std::string, std::vector, etc.), initializing in the initializer list avoids constructing a default object and then reassigning it.
 
-cpp
+```cpp
 class Person {
     std::string name;
 public:
@@ -158,21 +158,21 @@ Person(const std::string& n) {
     name = n; //  creates an empty string first, then copies n
 }
 
-
+```
 ---
 
 ##  Order of Initialization
 
  Important: Members are *initialized in the order they are declared* in the class, *not* in the order in the initializer list.
 
-cpp
+```cpp
 class Example {
     int a;
     int b;
 public:
     Example(int x) : b(x), a(b) {}  //  'a' initialized before 'b'
 };
-
+```
 
 Here, even though b appears first in the initializer list, a is declared first — so it’s initialized first (with an *undefined* b value).
 
