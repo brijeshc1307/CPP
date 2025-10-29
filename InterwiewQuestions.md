@@ -4678,6 +4678,17 @@ int main() {
 3. What is an access specifier in C++?
 4. What is the difference between an iterator and recursion?
 5. What is encapsulation in object-oriented programming?
+6. What is GitHub and how is it used in software development?
+2. How do clients request changes or updates in your project, and how do you manage those requests?
+3. How do you check, install, or update packages in a GitHub repository?
+4. What is the MDF4 format and where is it used?
+5. What are the main differences between the C and C++ programming languages?
+6. Explain the difference between call by value and call by reference in C or C++.
+7. Describe a major problem or challenge you faced in your project and how you solved it.
+8. How many modules does your project have, and what are their main functions?
+9. What is the difference between a primary key and a unique key in databases, Table, Data?
+10. Explain the difference between pre-increment (++i) and post-increment (i++).
+11. Recursion, Inline.
 
 ---
 ### **nCircle – Technical Round Interview **
@@ -4861,26 +4872,6 @@ int main() {
 · "Linked list reversal algorithms"
 · "Polymorphism types and implementations"
 ---
----
-
-##  **Interview / Viva Questions (Rewritten Clearly)**
-
-1. What is GitHub and how is it used in software development?
-2. How do clients request changes or updates in your project, and how do you manage those requests?
-3. How do you check, install, or update packages in a GitHub repository?
-4. What is the MDF4 format and where is it used?
-5. What are the main differences between the C and C++ programming languages?
-6. Explain the difference between call by value and call by reference in C or C++.
-7. Describe a major problem or challenge you faced in your project and how you solved it.
-8. How many modules does your project have, and what are their main functions?
-9. What is the difference between a primary key and a unique key in databases, Table, Data?
-10. Explain the difference between pre-increment (++i) and post-increment (i++).
-11. Recursion, Inline.
-
-
-
----
-
 
 ---
 
