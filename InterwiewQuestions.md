@@ -4671,7 +4671,196 @@ int main() {
     return 0;
 }
 ```
+---
 
+1. Write the algorithm for your daily routine in your project.
+2. Describe your roles and responsibilities in the project.
+3. What is an access specifier in C++?
+4. What is the difference between an iterator and recursion?
+5. What is encapsulation in object-oriented programming?
+
+---
+### **nCircle – Technical Round Interview **
+Round 1: 45 min
+---
+
+### **1️⃣ Sum of Digits**
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+int SumOfDigits(int a) {
+    int sum = 0;
+    while (a > 0) {
+        sum += a % 10;
+        a /= 10;
+    }
+    return sum;
+}
+
+int main() {
+    int a = 123;
+    cout << "Sum of digits: " << SumOfDigits(a);
+    return 0;
+}
+```
+
+---
+
+### **2️⃣ Reverse a Linked List (GeeksforGeeks Problem)**
+
+📎 Reference: [Reverse a Linked List | GFG](https://www.geeksforgeeks.org/problems/reverse-a-linked-list/1)
+
+```cpp
+struct Node {
+    int data;
+    Node* next;
+    
+    Node(int x) {
+        data = x;
+        next = nullptr;
+    }
+};
+
+Node* reverseList(Node* head) {
+    Node* prev = nullptr;
+    Node* curr = head;
+    Node* next = nullptr;
+    
+    while (curr != nullptr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    return prev;
+}
+```
+
+---
+
+### **3️⃣ Operator Overloading Example**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Vector2D {
+public:
+    int x, y;
+
+    Vector2D(int x = 0, int y = 0) : x(x), y(y) {}
+
+    Vector2D operator+(const Vector2D& obj) {
+        return Vector2D(x + obj.x, y + obj.y);
+    }
+};
+
+int main() {
+    Vector2D v1(3, 4);
+    Vector2D v2(1, 2);
+    Vector2D v3 = v1 + v2;
+
+    cout << "Resultant Vector: (" << v3.x << ", " << v3.y << ")";
+    return 0;
+}
+```
+
+---
+
+### **4️⃣ const and Reference Example**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+void SetValue(const int& value) {
+    cout << "Value: " << value << endl;
+}
+
+int main() {
+    int i = 10;
+    SetValue(i);
+    SetValue(10);
+    return 0;
+}
+```
+
+---
+
+### **5️⃣ Pointers with const**
+
+```cpp
+int x = 20;
+int c = 30;
+const int* a;     // pointer to const int (you cannot modify *a)
+int const* b;     // same as above
+int* const d = &x; // constant pointer (cannot change address stored)
+
+a = &x;   // OK
+//*a = 5; // ❌ Error: *a is const
+a = &c;   // OK
+
+*d = 25;  // OK: can change value through pointer
+//d = &c; // ❌ Error: d is a const pointer
+```
+
+---
+
+### **6️⃣ Singleton Design Pattern**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Singleton {
+private:
+    static Singleton* instance;
+    Singleton() {
+        cout << "Singleton created\n";
+    }
+
+    // Prevent copying
+    Singleton(const Singleton&) = delete;
+    Singleton& operator=(const Singleton&) = delete;
+
+public:
+    static Singleton* getInstance() {
+        if (instance == nullptr) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+};
+
+// Initialize static member
+Singleton* Singleton::instance = nullptr;
+
+int main() {
+    Singleton* o = Singleton::getInstance();
+    Singleton* o1 = Singleton::getInstance();
+
+    if (o == o1) {
+        cout << "Both objects are the same instance.\n";
+    } else {
+        cout << "Different instances (something went wrong).\n";
+    }
+
+    return 0;
+}
+```
+---
+
+· "Can constructors be virtual?" - No, with explanation why
+· "Difference between static and dynamic linking"
+· "How to implement a singleton pattern"
+· "Deep copy vs shallow copy with examples"
+· "Smart pointers and their use cases"
+· "const placement with pointers"
+· "Linked list reversal algorithms"
+· "Polymorphism types and implementations"
+---
 ---
 
 ##  **Interview / Viva Questions (Rewritten Clearly)**
