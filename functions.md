@@ -228,6 +228,147 @@ Here is your comparison in a neatly formatted table:
 | **Memory location**             | Actual and formal parameters are stored in **different** memory locations. | Actual and formal parameters share the **same** memory location.             |
 | **Memory efficiency**           | Slightly **less memory efficient** due to duplication.                     | Slightly **more memory efficient** as no duplication of data occurs.         |
 
+---
+
+
+## Function Calling in C++
+---
+
+##  2. Call by Value
+
+###  Concept
+
+When a function is **called by value**, the **function parameters are copies** of the original arguments.
+That means any modification inside the function **does not affect** the original variable.
+
+###  Memory-level Understanding
+
+Suppose:
+
+```cpp
+void modify(int x) {
+    x = 10;
+}
+
+int main() {
+    int a = 5;
+    modify(a);
+    cout << a;
+}
+```
+
+
+
+
+---
+
+##  3. Call by Reference
+
+Passes the *address* (or a reference) of the arguments, not their value.
+
+There are **two forms** of call by reference in C++:
+
+1. Using **pointers** (`int*`)
+2. Using **reference variables** (`int&`)
+
+Both pass the **address** of the variable, so the function can modify the caller’s variable directly.
+
+---
+
+### (A) Using Pointers
+
+```cpp
+void modify(int* x) {
+    *x = 10;
+}
+
+int main() {
+    int a = 5;
+    modify(&a);
+    cout << a;
+}
+```
+
+**Output:** `10`
+
+#### Memory Visualization:
+
+| Variable | Address | Value                              |
+| -------- | ------- | ---------------------------------- |
+| `a`      | `0x100` | 5                                  |
+| `x`      | `0x200` | `0x100` (address of `a`)           |
+| `*x`     | —       | modifies value at `0x100` → now 10 |
+
+**Important:** Function changes the original variable.
+
+---
+
+### (B) Using References (Preferred)
+
+```cpp
+void modify(int &x) {
+    x = 10;
+}
+
+int main() {
+    int a = 5;
+    modify(a);
+    cout << a;
+}
+```
+
+**Output:** `10`
+
+#### Memory Visualization:
+
+| Variable | Address   | Value         | Comment                           |
+| -------- | --------- | ------------- | --------------------------------- |
+| `a`      | `0x100`   | 5             | main variable                     |
+| `x`      | — (alias) | refers to `a` | `x` and `a` share the same memory |
+
+No new variable or copy is made — `x` is literally another name for `a`.
+
+---
+
+## 5. When to Use What
+
+| Situation                                                      | Recommended Passing Style                                   |
+| -------------------------------------------------------------- | ----------------------------------------------------------- |
+| Simple types (int, double, char) and no modification needed    | Call by Value                                               |
+| Large objects or structs (to avoid copies) but no modification | Call by Reference **to const** → `void f(const MyObj& obj)` |
+| Need to modify caller’s variable                               | Call by Reference                                           |
+
+---
+
+## 6. Deep Dive: Call by Reference to const
+
+Sometimes you don’t want to modify the object but also don’t want to copy it:
+
+```cpp
+void print(const string &name) {
+    cout << name;
+}
+```
+
+* **`const &`** avoids copying large objects.
+* Prevents accidental modification.
+
+---
+
+
+
+---
+
+## 8. Behind the Scenes (Assembly / Machine level)
+
+* **Call by Value:** Compiler pushes **copy** of the variable onto the stack.
+* **Call by Reference:** Compiler pushes the **address** (pointer) of the variable.
+* Reference parameters are often just implemented as **hidden pointers** by the compiler.
+
+---
+
+
+
 
 
 ---
