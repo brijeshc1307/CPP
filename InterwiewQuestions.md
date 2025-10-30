@@ -412,6 +412,17 @@ Value at p: 42
 
 ---
 ### **HCL - Interview Questions**
+
+Round 1: 35 min, 
+
+1. OOPs concepts
+1. Function Overriding explain write a program
+2. Operator Overloading (`+` operator) explain write a program
+3. **Smart Pointers** (`unique_ptr`, `shared_ptr`, and `weak_ptr`) explain write a program.
+4. Desgine Pattern Solid principle, singleton class
+
+---
+
 Round 1: 20 MCQ, 1 Program for 1hr
 ---
 
