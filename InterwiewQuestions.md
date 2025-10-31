@@ -412,7 +412,143 @@ Value at p: 42
 
 ---
 ### **HCL - Interview Questions**
+Round 1: 50 min
 
+### **Q1.**
+
+```cpp
+int a = 5;
+int b[a];
+```
+
+#### What happens here?
+
+* In **C99 (and later)**: Variable-Length Arrays (VLAs) are allowed — so this is **valid in C**, if `a` is not a constant expression.
+* In **C++**: This is **invalid**, because the size of an array must be a **compile-time constant**.
+
+**Correct C++ version:**
+
+```cpp
+const int a = 5;
+int b[a];  // valid, because a is const
+```
+
+---
+
+### **Q2.**
+
+```cpp
+A a;
+a += a;
+```
+
+#### Explanation:
+
+* This means you’re using the **operator `+=`** on an object of class `A`.
+* So, for this to work, you must **overload** the operator `+=`.
+
+**Example:**
+
+```cpp
+class A {
+public:
+    int x;
+    A(int val = 0) : x(val) {}
+
+    A& operator+=(const A& other) {
+        x += other.x;
+        return *this;
+    }
+};
+
+int main() {
+    A a(5);
+    a += a;  // now works, x = 10
+}
+```
+
+---
+
+### **Q3. Singleton class**
+
+A **Singleton** is a class that allows only **one instance** of itself.
+
+ **Example in C++:**
+
+```cpp
+class Singleton {
+private:
+    static Singleton* instance;
+    Singleton() {}  // private constructor
+
+public:
+    static Singleton* getInstance() {
+        if (!instance)
+            instance = new Singleton();
+        return instance;
+    }
+};
+
+// initialize static member
+Singleton* Singleton::instance = nullptr;
+```
+
+Usage:
+
+```cpp
+Singleton* obj = Singleton::getInstance();
+```
+
+---
+
+### **Q4.**
+
+> Write array input random 0–9, with **odd numbers first, even numbers next (in-place)**
+
+ **Example in C++:**
+
+```cpp
+#include <iostream>
+#include <vector>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+int main() {
+    srand(time(0));
+    int n = 10;
+    vector<int> arr(n);
+
+    // random fill 0–9
+    for (int i = 0; i < n; i++)
+        arr[i] = rand() % 10;
+
+    cout << "Original: ";
+    for (int x : arr) cout << x << " ";
+    cout << endl;
+
+    // partition: odds first, evens later
+    int left = 0, right = n - 1;
+    while (left < right) {
+        while (left < n && arr[left] % 2 == 1) left++;
+        while (right >= 0 && arr[right] % 2 == 0) right--;
+        if (left < right) swap(arr[left], arr[right]);
+    }
+
+    cout << "Rearranged: ";
+    for (int x : arr) cout << x << " ";
+    cout << endl;
+}
+```
+
+✅ **Output example:**
+
+```
+Original: 4 7 2 9 3 8 5 0 1 6
+Rearranged: 1 7 5 9 3 8 2 0 4 6
+```
+
+---
 Round 1: 35 min, 
 
 1. OOPs concepts
