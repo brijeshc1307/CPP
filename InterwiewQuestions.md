@@ -5018,8 +5018,134 @@ int main() {
 · "const placement with pointers"
 · "Linked list reversal algorithms"
 · "Polymorphism types and implementations"
+
+---
+L&T (Larsen & Toubro) interview
+Round 1: 45 min
+
+---
+L&T (Larsen & Toubro) interview
+Round 1: 20 min
+1. How is dynamic memory allocated in C and C++?
+2. What is STL?
+3. What is the difference between `list` and `vector` in C++?
+4. What is the use case of STL in your project?
+5. What are the use cases of `vector`, `map`, and `list` in your project?
+6. Can you explain the four pillars of C++?
+7. What are the embedded concepts of C?
+8. How would you rate yourself in C? (7/10)
+9. How would you rate yourself in C++? (8/10)
+10. What do you know about multithreading?
+11. Do you have experience in SQL?
+12. Can you give an example of a mutex?
+13. Virtual fuction
+
+
+---
+Tietoevry interview Questions
+Round 1: 45 min
+
+### ** Base and Derived Class Example**
+
+**(Constructor initialization + member initialization + output explanation)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class Base {
+    int id1;
+    int id2;
+public:
+    Base(int i, int j) : id2(j), id1(i) {
+        cout << "Base class\n";
+    }
+};
+
+class Derived : public Base {
+    int id3;
+    int id4;
+public:
+ //Derived(int a, int b, int c, int d) :  id3(c), id4(d + id3), Base(a, b) {
+    Derived(int a, int b, int c, int d) : Base(a, b), id3(c), id4(d + id3) {
+        cout << "Derived class\n";
+    }
+
+    void getVal() {
+        cout << id3 << " " << id4 << "\n";
+    }
+};
+
+int main() {
+    Derived d(10, 20, 30, 40);
+    d.getVal();
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Base class
+Derived class
+30 70
+```
+
 ---
 
+4. Explain the flow of constructor calls in inheritance Simple Runtime Polymorphism Example.
+    **(Demonstrates `virtual`, `override`, and `const` initialization)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+    const int x;
+    A(int val) : x(val) {}
+
+    virtual void show() {
+        cout << "Class A" << endl;
+    }
+};
+
+class B : public A {
+public:
+    B(int val) : A(val) {}
+
+    void show() override {
+        cout << "Class B" << endl;
+    }
+};
+
+int main() {
+    A* obj = new B(10);
+    obj->show();   // Runtime polymorphism
+    delete obj;
+    return 0;
+}
+```
+
+**Output:**
+
+```
+Class B
+```
+
+---
+7. Input string: `"This is my text"` → Output string: `"text my is This"` — explain or implement.
+9. Explain the use of `const int` in a class and how to initialize it.
+10. Write a simple runtime polymorphism code using base and derived classes.
+11. What is the use of the `override` keyword in C++?
+12. What is the purpose of the `final` keyword in C++?
+13. What are the advantages of using the `override` keyword?
+14. How do you initialize a constant data member inside a class?
+
+
+---
+
+---
 ---
 
 इंटरव्यू के अंत में जब इंटरव्यूअर आपसे पूछे, "Do you have any questions for us?" — तब आपके द्वारा पूछे गए सवाल आपकी curiosity, seriousness और कंपनी में genuine interest को दर्शाते हैं। नीचे कुछ बेहतरीन और **प्रभावशाली सवाल** दिए गए हैं जो आप इंटरव्यू के अंत में पूछ सकते हैं:
