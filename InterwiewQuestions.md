@@ -5300,6 +5300,332 @@ Class B
 
 
 ---
+##Tech Mahindra interview Questions
+Round 1: 30 min
+
+### **Q1. Print the following pattern (n = 5):**
+
+```
+    *
+   **
+  ***
+ ****
+*****
+```
+
+### **Solution (C++)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    for(int i = 0; i < n; i++) {
+
+        // print spaces
+        for(int j = i; j < n - 1; j++) {
+            cout << " ";
+        }
+
+        // print stars
+        for(int k = 0; k <= i; k++) {
+            cout << "*";
+        }
+
+        cout << endl;
+    }
+
+    return 0;
+}
+```
+
+---
+
+### **Q2. What are OOPs Concepts?**
+
+**Answer:**
+OOP (Object-Oriented Programming) is a programming paradigm based on **objects** and **classes**.
+The four main concepts are:
+
+1. **Encapsulation** – Binding data and functions together, and restricting direct access to data.
+2. **Abstraction** – Showing only necessary details and hiding internal implementation.
+3. **Inheritance** – Acquiring properties and behaviors of one class into another.
+4. **Polymorphism** – One interface, many implementations (function overloading & overriding).
+
+---
+
+### **Q3. What is a Constructor?**
+
+**Answer:**
+A **constructor** is a special member function of a class that is automatically executed when an object is created.
+
+* It has the **same name** as the class.
+* It **does not have a return type** (not even void).
+
+**Example:**
+
+```cpp
+class A {
+public:
+    A() {   // Constructor
+        cout << "Constructor Called";
+    }
+};
+```
+
+---
+
+### **Q4. Check if a string is Palindrome (C++ Without STL Functions)**
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    char str[100];
+    cin >> str;
+
+    int i = 0;
+    int j = 0;
+
+    // Find length
+    while(str[j] != '\0') {
+        j++;
+    }
+    j--; // move j to last index
+
+    int flag = 1;
+
+    while(i < j) {
+        if(str[i] != str[j]) {
+            flag = 0;
+            break;
+        }
+        i++;
+        j--;
+    }
+
+    if(flag == 1)
+        cout << "Palindrome";
+    else
+        cout << "Not Palindrome";
+
+    return 0;
+}
+```
+### **Q5. inline function 
+### **Q6. call by value vs call by refrence
+### **Q7. scope resolution operator
+---
+### **Q1. Oops concepts in cpp
+### **Q2. Why we have virtual destructor but not virtual constructor in cpp
+### **Q3. Why virtual destructor is required
+### **Q4. Why Can we not overload destructor in cpp
+### **Q5. Why destructor no parameters
+### **Q6. What are the cpp scenario when copy constructor is called
+### **Q7. What happen when we don't use & in copy constructor
+What is shallow and deep copy
+When we need shallow or deep copy
+Up casting
+down casting
+Virtual inheritance
+virtaul functin , vtable, vptr
+Q. We have num 1 array is 1 2 3 0 0 0 Array 2 is 2 5 6 The repale 0 0 0 with 2 5 5 Then sort the final output will be 1 2 2 3 5 6
+Q. Role and resposbilities in this project
+Q. daily basis work
+---
+
+### **Q1. What are OOP Concepts in C++?**
+
+**Answer:**
+OOP organizes code into **classes and objects**.
+Main concepts:
+
+1. **Encapsulation:** Binding data and methods (using private/public).
+2. **Abstraction:** Hiding internal implementation.
+3. **Inheritance:** Reusing features of one class into another.
+4. **Polymorphism:** Same function behaving differently (overloading & overriding).
+
+---
+
+### **Q2. Why do we have a virtual destructor but not a virtual constructor?**
+
+**Answer:**
+
+* **Virtual Destructor:** Ensures **derived destructor runs** when deleting via base pointer.
+* **Constructor cannot be virtual** because **object type must be known before creation**, and virtual dispatch works **after creation**.
+
+---
+
+### **Q3. Why is a virtual destructor required?**
+
+**Answer:**
+To **avoid memory leaks**; ensures **derived class destructor** executes first when deleting through a **base class pointer**.
+
+---
+
+### **Q4. Why can't we overload a destructor in C++?**
+
+**Answer:**
+A class has **only one destructor** `~ClassName()` and it **cannot take parameters**, so **overloading is not possible**.
+
+---
+
+### **Q5. Why does destructor have no parameters?**
+
+**Answer:**
+Destructor is called **automatically** by compiler.
+Allowing parameters would **break automatic cleanup**.
+
+---
+
+### **Q6. When is the copy constructor called?**
+
+**Answer:**
+Copy constructor is called when:
+
+1. `A obj2 = obj1;` (initialization)
+2. Passing object **by value**
+3. Returning object **by value**
+4. Explicit copy `A obj2(obj1);`
+
+---
+
+### **Q7. What happens if we don’t use `&` in copy constructor?**
+
+**Answer:**
+It leads to **infinite recursion** because passing by value requires another copy → compiler error or program crash.
+
+---
+
+### **Q8. What is Shallow Copy and Deep Copy?**
+
+| Type             | Definition                                                     |
+| ---------------- | -------------------------------------------------------------- |
+| **Shallow Copy** | Copies pointer value only → both objects share **same memory** |
+| **Deep Copy**    | Copies **actual data** → objects have **separate memory**      |
+
+---
+
+### **Q9. When do we need Shallow or Deep Copy?**
+
+* Use **Shallow Copy** when **no dynamic memory** is used.
+* Use **Deep Copy** when **class contains pointers / heap memory**.
+
+---
+
+### **Q10. What is Upcasting?**
+
+**Answer:**
+Converting **Derived class object** to **Base class pointer/reference**.
+Safe and automatic.
+
+```cpp
+Base *ptr = new Derived();
+```
+
+---
+
+### **Q11. What is Downcasting?**
+
+**Answer:**
+Converting **Base pointer** back to **Derived pointer**.
+Done manually using `dynamic_cast`.
+
+```cpp
+Derived *d = dynamic_cast<Derived*>(ptr);
+```
+
+---
+
+### **Q12. What is Virtual Inheritance?**
+
+**Answer:**
+Used to **avoid diamond problem** by ensuring **only one copy** of the base class exists.
+
+```cpp
+class B : virtual public A {};
+class C : virtual public A {};
+```
+
+---
+
+### **Q13. What is Virtual Function, vtable, and vptr?**
+
+| Term                 | Definition                                                      |
+| -------------------- | --------------------------------------------------------------- |
+| **Virtual Function** | Allows **runtime polymorphism** (function resolved at runtime). |
+| **vtable**           | Table storing addresses of virtual functions.                   |
+| **vptr**             | Pointer inside each object pointing to its **vtable**.          |
+
+---
+
+### **Q14. Replace zeros and sort the final array**
+
+**Array 1:** `1 2 3 0 0 0`
+**Array 2:** `2 5 6`
+
+**Step 1:** Replace zeros → `1 2 3 2 5 6`
+**Step 2:** Sort → `1 2 2 3 5 6`
+
+**Final Output:**
+
+```
+1 2 2 3 5 6
+```
+
+**Program:**
+
+```cpp
+int arr1[6] = {1,2,3,0,0,0};
+int arr2[3] = {2,5,6};
+int j = 0;
+
+for(int i = 0; i < 6; i++) {
+    if(arr1[i] == 0) {
+        arr1[i] = arr2[j++];
+    }
+}
+
+for(int i = 0; i < 6; i++) {
+    for(int k = i+1; k < 6; k++) {
+        if(arr1[i] > arr1[k]) {
+            int t = arr1[i];
+            arr1[i] = arr1[k];
+            arr1[k] = t;
+        }
+    }
+}
+```
+
+---
+
+### **Q15. What were your Roles and Responsibilities in this project?**
+
+**Answer:**
+
+* Worked on **maintenance and feature enhancement** of CCD (Can Compress Data) tool.
+* Analyzed **signal data** (pressure, temperature, speed) and implemented **compression logic** improvements.
+* Used **C/C++** for development and debugging in a **Linux** environment.
+* Performed **code optimization** to improve compression speed and memory usage.
+* Wrote **unit test cases**, performed functional testing and fixed bugs raised by QA.
+* Collaborated with **cross-functional teams** to understand requirements and deliver updates.
+
+---
+
+### **Q16. What was your daily work / day-to-day activities?**
+
+**Answer:**
+
+* Attended **daily stand-up** to discuss progress and blockers.
+* Picked tasks/bugs from **Jira** and worked on **code changes** in C++.
+* Did **code review** and followed coding standards.
+* Ran **test cases**, validated compression accuracy, and fixed issues.
+* Coordinated with **QA team** to reproduce and resolve defects.
+* Documented code changes and prepared **build releases**.
 
 ---
 ---
