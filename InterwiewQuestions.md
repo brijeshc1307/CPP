@@ -434,7 +434,92 @@ int b[a];  // valid, because a is const
 ```
 
 ---
+### **Q2. **We use **`virtual`** to enable **runtime polymorphism**, also called **dynamic binding**.
+Without `virtual`, **compile-time (static) binding** happens.
 
+---
+
+###  Case 1: **Using `virtual`**
+
+```cpp
+class A {
+public:
+    virtual void show() {  // virtual
+        cout << "A";
+    }
+};
+
+class B : public A {
+public:
+    void show() override {
+        cout << "B";
+    }
+};
+
+int main() {
+    A *obj = new B();
+    obj->show();
+}
+```
+
+**Output:**
+
+```
+B
+```
+
+#### **Why?**
+
+* `virtual` makes the function **dynamic**.
+* The actual object type at **runtime** is `B`.
+* So it calls **B::show()**.
+
+This is **Runtime Polymorphism**.
+
+---
+
+###  Case 2: **Not using `virtual`**
+
+```cpp
+class A {
+public:
+    void show() {   // NOT virtual
+        cout << "A";
+    }
+};
+
+class B : public A {
+public:
+    void show() {   // overrides but not virtual
+        cout << "B";
+    }
+};
+
+int main() {
+    A *obj = new B();
+    obj->show();
+}
+```
+
+**Output:**
+
+```
+A
+```
+
+#### **Why?**
+
+* Without `virtual`, the function call is bound at **compile time** (static binding).
+* Compiler sees pointer type `A*` so it calls **A::show()**, not B.
+
+---
+
+###  Simple Definition to Remember
+
+> **`virtual` tells C++ to choose the function based on the actual object, not the pointer type.**
+
+
+---
 ### **Q2.**
 
 ```cpp
