@@ -1139,6 +1139,77 @@ int a = 5;
 int&& r2 = std::move(a);  // OK: std::move converts lvalue to rvalue
 ```
 ---
+
+
+## **Q1: What is the issue in the following code?**
+
+```cpp
+void createMemory() {
+    int* p = new int[100];    
+}
+ 
+int main() {
+    for (int i = 0; i < 1000; ++i) {
+        createMemory();
+    }
+    return 0;
+}
+```
+
+### **Answer:**
+
+This code has a **memory leak**.
+Inside `createMemory()`, memory is allocated using `new int[100]`, but it is **never freed** using `delete[]`.
+When the function ends, the pointer `p` goes out of scope, and the allocated memory becomes unreachable, causing memory leakage.
+
+### **Corrected Code:**
+
+```cpp
+void createMemory() {
+    int* p = new int[100];
+    delete[] p; // memory freed properly
+}
+```
+
+### **Best Practice (Avoid Raw Pointers):**
+
+```cpp
+#include <vector>
+void createMemory() {
+    std::vector<int> p(100); // no delete needed, memory auto-managed
+}
+```
+
+---
+
+## **Q2: What will happen if we accidentally increment the wrong loop variable?**
+
+### **Corrected Code:**
+
+```cpp
+int n = 5;
+for(int i = n; i > 0; i--) {
+    for(int j = 0; j < i; j++) {   
+        cout << " ";
+    }
+    for(int k = 0; k < n; k++) {
+        cout << "*" << " ";
+    }
+    cout << endl;
+}
+```
+
+### **Correct Output (for n = 5):**
+
+```
+     * * * * *
+    * * * * *
+   * * * * *
+  * * * * *
+ * * * * *
+```
+---
+
 ### **Gentrack.com - Interview Questions**
 ---
 ### ** STL Containers Comparison Table**
