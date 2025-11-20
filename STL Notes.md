@@ -215,22 +215,145 @@ STL provides powerful algorithms for manipulating data in containers.
 ---
 
 ### **3. STL Iterators**  
-- Used to traverse elements in containers.
 
-Iterators are used to traverse through elements in containers.
+An **iterator** in STL is an object (like a pointer) that is used to traverse elements of a container (vector, list, set, map, etc.).
 
-| Operation        | Description                              |
-| ---------------- | ---------------------------------------- |
-| `begin()`        | Returns iterator to first element        |
-| `end()`          | Returns iterator to past-the-end element |
-| `rbegin()`       | Reverse begin                            |
-| `rend()`         | Reverse end                              |
-| `advance(it, n)` | Moves iterator forward by `n` steps      |
-| `next(it)`       | Returns iterator advanced by one         |
-| `prev(it)`       | Returns iterator moved back by one       |
+> **Iterator = Generalized pointer to access container elements.**
 
+They allow:
+
+* Traversing container elements (sequential or bidirectional)
+* Reading and modifying values (except in read-only containers like `set`)
+* Interface uniformity — works same way across containers
 
 ---
+
+##� Syntax Example
+
+```cpp
+vector<int> v = {10, 20, 30};
+
+for (vector<int>::iterator it = v.begin(); it != v.end(); ++it) {
+    cout << *it << " ";   // dereference to access value
+}
+```
+
+Output:
+
+```
+10 20 30
+```
+
+---
+
+##  Why Iterators?
+
+| Reason                | Meaning                                           |
+| --------------------- | ------------------------------------------------- |
+| Generic Programming   | Same code works for `vector`, `list`, `map`, etc. |
+| Pointer-like behavior | Use `*it`, `it++`, `it--`                         |
+| Abstraction           | User doesn't care about storage layout            |
+
+---
+
+# Types of Iterators (Very Important for Interviews)
+
+| Iterator Type              | Supported Operations                          | Containers                             |
+| -------------------------- | --------------------------------------------- | -------------------------------------- |
+| **Input Iterator**         | Read, one-way                                 | `istream_iterator`                     |
+| **Output Iterator**        | Write only                                    | `ostream_iterator`                     |
+| **Forward Iterator**       | Read/Write, forward only                      | `forward_list`, unordered containers   |
+| **Bidirectional Iterator** | forward + backward                            | `list`, `set`, `map`, `multimap`, etc. |
+| **Random Access Iterator** | all above + arithmetic (`it + 5`, comparison) | `vector`, `deque`, `array`             |
+
+---
+
+
+# Iterator Use Cases with Different Containers
+
+### Vector (Supports random access operations)
+
+```cpp
+vector<int> v = {1,2,3,4};
+auto it = v.begin();
+cout << *(it + 2); // prints 3
+```
+
+---
+
+### List (Only Bidirectional)
+
+```cpp
+list<int> l = {10,20,30};
+auto it = l.begin();
+++it;  // OK
+// it + 1 or it[0] ❌ NOT allowed
+```
+
+---
+
+### Map (Iterator returns `pair<key, value>`)
+
+```cpp
+map<int, string> m = {{1,"A"}, {2,"B"}};
+
+for (auto it = m.begin(); it != m.end(); ++it) {
+    cout << it->first << " : " << it->second << endl;
+}
+```
+
+---
+
+---
+
+#  Special Iterators
+
+| Iterator    | Meaning                                  |
+| ----------- | ---------------------------------------- |
+| `begin()`   | points to first element                  |
+| `end()`     | points to one position past last element |
+| `rbegin()`  | reverse begin (last element)             |
+| `rend()`    | reverse end (before first element)       |
+| `cbegin()`  | constant iterator (read-only)            |
+| `crbegin()` | constant reverse iterator                |
+
+Example:
+
+```cpp
+vector<int> v = {1,2,3};
+
+for(auto it = v.rbegin(); it != v.rend(); ++it)
+    cout << *it << " ";  // prints: 3 2 1
+```
+
+---
+
+#  Iterator Invalidation (Important for Big Companies)
+
+Iterators may become invalid after modifying a container.
+
+| Container Operation    | Iterator Invalidation                              |
+| ---------------------- | -------------------------------------------------- |
+| `vector insert/erase`  | yes (reallocation possible)                        |
+| `list insert/erase`    | no (safe)                                          |
+| `map/set insert/erase` | Insert safe, erase invalidates only erased element |
+| `unordered_map`        | rehash may invalidate                              |
+
+ **Reason:** vector stores memory contiguously.
+
+---
+
+#  Time Complexity Relation with Iterators
+
+| Operation              | Complexity (depends on iterator type) |
+| ---------------------- | ------------------------------------- |
+| Random access `it + n` | O(1) only in random access containers |
+| Increment `++it`       | O(1) in all                           |
+| Decrement `--it`       | O(1) except forward iterator          |
+
+---
+
+
 
 ### **4. STL Functors (Function Objects)**  
 - Objects that behave like functions and can be passed as arguments to algorithms.
