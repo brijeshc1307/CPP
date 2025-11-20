@@ -1,8 +1,6 @@
 ##Q1. Write all operation in vector and its time complexity (Tech mahindra) vector<int> 
 v={1,2,3,4}; 
 
-##  **Vector in C++ — Deep Explanation**
-
 A `vector` in C++ is a **dynamic array** provided by STL. Unlike raw arrays, it can **automatically resize** when needed.
 
 Internally, vector maintains:
@@ -1089,6 +1087,156 @@ void print(const string& s) {
 ```
 
 ---
+## Q16. using namespace std; explain 
+
+
+#  What is `using namespace std;` in C++?
+
+`std` is the **standard namespace** in C++ where all the identifiers (names) from the **C++ Standard Library** are stored.
+
+Examples inside `std` namespace include:
+
+* `cout`, `cin`, `endl`
+* `string`, `vector`, `map`, `set`
+* `sort`, `find`, `pair`
+
+### Namespace Meaning:
+
+A **namespace** prevents name conflicts in large programs.
+
+---
+
+###  Without using namespace std:
+
+```cpp
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World" << std::endl;
+    return 0;
+}
+```
+
+###  With using namespace std:
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    cout << "Hello World" << endl;
+    return 0;
+}
+```
+
+📌 `using namespace std;` allows us to access names **without writing `std::` prefix**.
+
+---
+
+# Why do namespaces exist?
+
+Imagine two libraries defining a function `sort()`.
+
+```
+Library A → sort()
+Library B → sort()
+```
+
+Without namespaces, compiler cannot decide which one to call → **name collision**.
+
+So, namespaces help avoid clashes:
+
+```cpp
+namespace A {
+    void sort() { }
+}
+
+namespace B {
+    void sort() { }
+}
+```
+
+Usage:
+
+```cpp
+A::sort();
+B::sort();
+```
+
+➡️ So, `std::cout` means:
+
+> Use `cout` defined inside **C++ Standard Namespace (`std`)**.
+
+---
+
+#  Should We Always Use `using namespace std;`?
+
+Not always.
+
+### ✔ Good in:
+
+| Case                    | Reason         |
+| ----------------------- | -------------- |
+| Small demos             | Saves typing   |
+| Competitive programming | Faster coding  |
+| Learning stage          | Simpler syntax |
+
+---
+
+###  Avoid in:
+
+| Situation                     | Reason                                                               |
+| ----------------------------- | -------------------------------------------------------------------- |
+| Large enterprise projects     | May cause naming conflicts                                           |
+| When using multiple libraries | Two identifiers may clash (e.g., `std::distance`, `boost::distance`) |
+| Header files                  | Can unintentionally expose namespace pollution                       |
+
+---
+
+---
+
+# ⚠ Example of Naming Conflict
+
+```cpp
+#include <iostream>
+using namespace std;
+
+int count = 10;
+
+int main() {
+    cout << count << endl;   // ok
+}
+```
+
+But if another library also defines `count`, you get ambiguity.
+
+---
+
+
+#  Better and Safer Alternatives
+
+###  Use selective using-declarations
+
+```cpp
+using std::cout;
+using std::endl;
+
+cout << "Hello" << endl;
+```
+
+Only exposes specific names—not whole library.
+
+---
+
+###  Use alias (important in modern C++)
+
+```cpp
+namespace fs = std::filesystem;
+```
+
+---
+
+
 
 
 
